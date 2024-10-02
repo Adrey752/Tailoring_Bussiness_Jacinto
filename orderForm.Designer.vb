@@ -239,7 +239,7 @@ Partial Class orderForm
         Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         Name = "orderForm"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Order"
+        Text = "other"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         CType(PictureBoxLogo, ComponentModel.ISupportInitialize).EndInit()
