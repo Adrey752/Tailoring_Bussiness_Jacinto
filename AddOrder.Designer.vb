@@ -86,7 +86,7 @@ Partial Class AddOrder
         ' btnOrderSave
         ' 
         btnOrderSave.Anchor = AnchorStyles.None
-        btnOrderSave.BackColor = Color.SandyBrown
+        btnOrderSave.BackColor = Color.SeaShell
         btnOrderSave.Location = New Point(795, 547)
         btnOrderSave.Name = "btnOrderSave"
         btnOrderSave.Size = New Size(104, 41)

@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel.Design
 
-Public Class orderForm
+Public Class AddClientForm
     Dim _home As Home
     Dim _client As Client
     Public Sub New(homeInstance As Home, client As Client)
@@ -14,23 +14,97 @@ Public Class orderForm
 
 
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub Btn_Save(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim name As String = tbName.Text
         Dim address As String = tbAddress.Text
         Dim contact As String = tbNumber.Text
 
-        Dim insertClient As String = "INSERT INTO client (name, contact, address) VALUES (@name, @contact, @address);"
 
-        Dim parameters As New Dictionary(Of String, Object)
-        parameters.Add("@name", name)
-        parameters.Add("@contact", contact)
-        parameters.Add("@address", address)
 
-        MySQLModule.ExecuteNonQuery(insertClient, parameters)
+        ' Step 1: Insert Client into the database and retrieve client_id
+        Dim clientId As Integer = InsertClientToDB(_client)
+
+
+        ' Step 2: Insert each Order for the client and retrieve order_id
+        For Each order As Order In _client.Orders
+            Dim orderId As Integer = InsertOrder(order, clientId)
+
+            ' Step 3: Insert each DressMeasurement (Size) for the order
+            For Each size As DressMeasurement In order.Sizes
+                InsertSize(size, orderId)
+            Next
+        Next
+
+
         _home.loadDatabase()
         Me.Close()
 
     End Sub
+    Public Function InsertClientToDB(client As Client) As Integer
+        Dim clientQuery As String = "INSERT INTO client (Name, Address, Contact, Status) VALUES (@Name, @Address, @Contact, @Status); SELECT LAST_INSERT_ID();"
+        Dim clientParams As New Dictionary(Of String, Object) From {
+        {"@Name", client.Name},
+        {"@Address", client.Address},
+        {"@Contact", client.Contact},
+        {"@Status", client.Status}
+    }
+
+        ' Return the newly inserted client_id
+        Return Convert.ToInt32(MySQLModule.ExecuteScalar(clientQuery, clientParams))
+
+    End Function
+    Public Function InsertOrder(order As Order, clientId As Integer) As Integer
+        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, garment_type, description, price, done) VALUES (@ClientId, @OrderName, @Type, @GarmentType, @Description, @Price, @Done); SELECT LAST_INSERT_ID();"
+        Dim orderParams As New Dictionary(Of String, Object) From {
+        {"@ClientId", clientId},
+        {"@OrderName", order.OrderName},
+        {"@Type", order.Type},
+        {"@GarmentType", order.GarmentType},
+        {"@Description", order.Description},
+        {"@Price", order.Price},
+        {"@Done", order.Done}
+    }
+
+        ' Return the newly inserted order_id
+        Return Convert.ToInt32(MySQLModule.ExecuteScalar(orderQuery, orderParams))
+    End Function
+    Public Sub InsertSize(size As DressMeasurement, orderId As Integer)
+        Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit)"
+        Dim sizeParams As New Dictionary(Of String, Object) From {
+        {"@OrderId", orderId},
+        {"@TypeId", GetTypeId(size.PartMeasurement)}, ' Get type_id for the measurement type
+        {"@SizeValue", size.Value},
+        {"@SizeUnit", size.Unit}
+    }
+
+        MySQLModule.ExecuteNonQuery(sizeQuery, sizeParams)
+    End Sub
+
+
+    Private Sub btnAddOrder_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
+        Dim name = tbName.Text
+        Dim address = tbAddress.Text
+        Dim number = tbNumber.Text
+
+        _client.Name = name
+        _client.Address = address
+        _client.Contact = number
+
+        Dim addOrder = New AddOrder(_client, Me)
+        addOrder.Show()
+    End Sub
+
+    Public Function GetTypeId(partMeasurement As String) As Integer
+        Dim query As String = "SELECT type_id FROM size_types WHERE types = @PartMeasurement"
+        Dim parameters As New Dictionary(Of String, Object) From {{"@PartMeasurement", partMeasurement}}
+    Dim result As Object = MySQLModule.ExecuteScalar(query, parameters)
+
+    If result IsNot Nothing Then
+    Return Convert.ToInt32(result)
+    Else
+    Throw New Exception("Invalid measurement type: " & partMeasurement)
+    End If
+    End Function
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Hide()
@@ -87,21 +161,6 @@ Public Class orderForm
         projectDetailsForm.Show()
     End Sub
 
-
-
-    Private Sub btnAddOrder_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
-        Dim name = tbName.Text
-        Dim address = tbAddress.Text
-        Dim number = tbNumber.Text
-
-        _client.Name = name
-        _client.Address = address
-        _client.Contact = number
-
-        Dim addOrder = New AddOrder(_client, Me)
-        addOrder.Show()
-    End Sub
-
     Private Sub orderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -135,7 +194,7 @@ Public Class orderForm
         sender.Region = New Region(DGP)
     End Sub
 
-    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles lblTask.Click
+    Private Sub fpTask_Paint(sender As Object, e As PaintEventArgs) Handles fpTask.Paint
 
     End Sub
 End Class

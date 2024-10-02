@@ -27,9 +27,6 @@
 
 
     End Sub
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btnSetNew.Click
-
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Not pnLogout.Visible Then
@@ -59,7 +56,7 @@
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
         Dim newClient = New Client("", "", -1)
-        Dim addOrder As New orderForm(Me, newClient)
+        Dim addOrder As New AddClientForm(Me, newClient)
         addOrder.Show()
     End Sub
 
@@ -109,11 +106,4 @@
         _login.Close()
     End Sub
 
-    Private Sub lblTitel_Click(sender As Object, e As EventArgs) Handles lblTitel.Click
-
-    End Sub
-
-    Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
-
-    End Sub
 End Class

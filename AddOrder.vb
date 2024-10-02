@@ -3,16 +3,16 @@
 Public Class AddOrder
     Dim client As Client
     Dim order As Order
-    Dim _orderForm As orderForm
+    Dim _orderForm As AddClientForm
 
-    Public Sub New(client As Client, orderForm As orderForm)
+    Public Sub New(client As Client, orderForm As AddClientForm)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         Me.client = client
-        Me.order = New Order("", "", "", "", 1)
+        Me.order = New Order("", "", "", "", 0)
         Me._orderForm = orderForm
         LoadMeasurementsType()
 
@@ -20,8 +20,8 @@ Public Class AddOrder
 
     Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        lblAddMoreOrders.ForeColor = Color.FromArgb(163, 120, 81)
-        Me.BackColor = Color.FromArgb(9, 11, 23)
+        'lblAddMoreOrders.ForeColor = Color.FromArgb(163, 120, 81)
+        'Me.BackColor = Color.FromArgb(9, 11, 23)
     End Sub
 
 
@@ -47,6 +47,7 @@ Public Class AddOrder
         order.Description = description
         order.Price = price
         order.GarmentType = garmentType
+        client.addOrder(order)
 
         _orderForm.AddProjectPanel(orderName, order.Type, order.GarmentType, order.Description)
         Me.Close()

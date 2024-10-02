@@ -4,7 +4,7 @@
     Public Property GarmentType As String
     Public Property Description As String
     Public Property Price As Decimal
-    Public Property Done As String
+    Public Property Done As Boolean
     Public Property Sizes As List(Of DressMeasurement)
 
 
@@ -14,6 +14,7 @@
         Me.GarmentType = garmentType
         Me.Description = description
         Me.Price = price
+        Me.Done = False
         Sizes = New List(Of DressMeasurement)()
     End Sub
 
