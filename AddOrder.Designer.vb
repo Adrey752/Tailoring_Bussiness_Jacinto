@@ -98,6 +98,7 @@ Partial Class AddOrder
         ' 
         nudValue.Anchor = AnchorStyles.None
         nudValue.Location = New Point(260, 566)
+        nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudValue.Name = "nudValue"
         nudValue.Size = New Size(120, 23)
         nudValue.TabIndex = 18
@@ -191,6 +192,7 @@ Partial Class AddOrder
         ' tbOrderName
         ' 
         tbOrderName.Location = New Point(105, 16)
+        tbOrderName.MaxLength = 150
         tbOrderName.Name = "tbOrderName"
         tbOrderName.PlaceholderText = "Enter Order Name"
         tbOrderName.Size = New Size(207, 23)
@@ -222,6 +224,7 @@ Partial Class AddOrder
         ' 
         rbDescription.Anchor = AnchorStyles.None
         rbDescription.Location = New Point(3, 145)
+        rbDescription.MaxLength = 20000
         rbDescription.Name = "rbDescription"
         rbDescription.ScrollBars = RichTextBoxScrollBars.Vertical
         rbDescription.Size = New Size(616, 210)
@@ -285,6 +288,7 @@ Partial Class AddOrder
         ' 
         nudPrice.Anchor = AnchorStyles.None
         nudPrice.Location = New Point(780, 83)
+        nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
         nudPrice.Name = "nudPrice"
         nudPrice.Size = New Size(120, 23)
         nudPrice.TabIndex = 19
@@ -315,6 +319,7 @@ Partial Class AddOrder
         ' 
         nudPayment.Anchor = AnchorStyles.None
         nudPayment.Location = New Point(781, 48)
+        nudPayment.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudPayment.Name = "nudPayment"
         nudPayment.Size = New Size(120, 23)
         nudPayment.TabIndex = 22
