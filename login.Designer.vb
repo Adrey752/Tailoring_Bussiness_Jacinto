@@ -35,7 +35,7 @@ Partial Class login
         ' tbPassword
         ' 
         tbPassword.Anchor = AnchorStyles.None
-        tbPassword.Location = New Point(389, 314)
+        tbPassword.Location = New Point(504, 411)
         tbPassword.Margin = New Padding(0)
         tbPassword.Name = "tbPassword"
         tbPassword.Size = New Size(281, 23)
@@ -46,7 +46,7 @@ Partial Class login
         ' 
         tbEnter.Anchor = AnchorStyles.None
         tbEnter.FlatAppearance.BorderSize = 0
-        tbEnter.Location = New Point(463, 356)
+        tbEnter.Location = New Point(578, 453)
         tbEnter.Name = "tbEnter"
         tbEnter.Size = New Size(160, 38)
         tbEnter.TabIndex = 2
@@ -57,7 +57,7 @@ Partial Class login
         ' 
         Label3.Anchor = AnchorStyles.None
         Label3.AutoSize = True
-        Label3.Location = New Point(454, 210)
+        Label3.Location = New Point(569, 307)
         Label3.Name = "Label3"
         Label3.Size = New Size(87, 15)
         Label3.TabIndex = 5
@@ -67,7 +67,7 @@ Partial Class login
         ' 
         PictureBox1.Anchor = AnchorStyles.None
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(379, 62)
+        PictureBox1.Location = New Point(494, 159)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(324, 233)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
@@ -76,9 +76,10 @@ Partial Class login
         ' 
         ' PbshowPassword
         ' 
+        PbshowPassword.Anchor = AnchorStyles.None
         PbshowPassword.BackColor = Color.White
         PbshowPassword.Image = My.Resources.Resources.eye
-        PbshowPassword.Location = New Point(671, 314)
+        PbshowPassword.Location = New Point(752, 411)
         PbshowPassword.Margin = New Padding(1)
         PbshowPassword.Name = "PbshowPassword"
         PbshowPassword.Size = New Size(33, 23)
@@ -88,10 +89,10 @@ Partial Class login
         ' 
         ' login
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New Size(1057, 442)
+        ClientSize = New Size(1287, 636)
         Controls.Add(PbshowPassword)
         Controls.Add(PictureBox1)
         Controls.Add(Label3)
