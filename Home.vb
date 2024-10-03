@@ -141,4 +141,8 @@
     Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
 
     End Sub
+
+    Private Sub Panel1_Paint_1(sender As Object, e As PaintEventArgs)
+
+    End Sub
 End Class

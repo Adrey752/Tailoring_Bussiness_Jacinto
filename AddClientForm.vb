@@ -174,7 +174,7 @@ Public Class AddClientForm
     End Sub
     Private Sub btnAddrOrder_Paint(sender As Object, e As PaintEventArgs) Handles btnSave.Paint, btnCancel.Paint
         'sender = FormBorderStyle.Non
-        sender.BackColor = Color.PaleTurquoise
+        sender.BackColor = Color.FromArgb(184, 115, 51)
 
 
         Dim DGP As New Drawing2D.GraphicsPath
@@ -241,6 +241,15 @@ Public Class AddClientForm
         End If
     End Function
 
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
 
+    End Sub
 
+    Private Sub lblAddOrderTitle_Click(sender As Object, e As EventArgs) Handles lblAddOrderTitle.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class

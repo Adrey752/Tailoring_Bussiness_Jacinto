@@ -4,8 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <StartupObject>Tailoring_Bussiness_Jacinto.My.MyApplication</StartupObject>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>True</UseWindowsForms>
     <MyType>WindowsForms</MyType>
+    <UseWPF>False</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>

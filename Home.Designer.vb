@@ -56,15 +56,15 @@ Partial Class Home
         ' 
         ' DataGridOrders
         ' 
-        DataGridOrders.Anchor = AnchorStyles.None
-        DataGridOrders.BackgroundColor = Color.FromArgb(CByte(30), CByte(30), CByte(30))
+        DataGridOrders.Anchor = AnchorStyles.Left Or AnchorStyles.Right
+        DataGridOrders.BackgroundColor = Color.White
         DataGridOrders.BorderStyle = BorderStyle.None
         DataGridOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridOrders.Columns.AddRange(New DataGridViewColumn() {btDetails, colId, colName, colAddress, colContNumber, colStatus, colPrice, colPay, colStartedDate, colDueDate})
         DataGridOrders.GridColor = SystemColors.MenuHighlight
-        DataGridOrders.Location = New Point(322, 255)
+        DataGridOrders.Location = New Point(386, 279)
         DataGridOrders.Name = "DataGridOrders"
-        DataGridOrders.Size = New Size(924, 385)
+        DataGridOrders.Size = New Size(1365, 616)
         DataGridOrders.TabIndex = 1
         ' 
         ' btDetails
@@ -157,11 +157,11 @@ Partial Class Home
         ' 
         ' Button1
         ' 
-        Button1.Anchor = AnchorStyles.None
+        Button1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Button1.BackColor = Color.Transparent
         Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), Image)
         Button1.BackgroundImageLayout = ImageLayout.Stretch
-        Button1.Location = New Point(1226, 12)
+        Button1.Location = New Point(1802, 12)
         Button1.Name = "Button1"
         Button1.Size = New Size(42, 36)
         Button1.TabIndex = 2
@@ -169,10 +169,11 @@ Partial Class Home
         ' 
         ' pnLogout
         ' 
+        pnLogout.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         pnLogout.BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         pnLogout.Controls.Add(btnSetNew)
         pnLogout.Controls.Add(btnLogOut)
-        pnLogout.Location = New Point(1159, 54)
+        pnLogout.Location = New Point(1737, 54)
         pnLogout.Name = "pnLogout"
         pnLogout.Size = New Size(122, 105)
         pnLogout.TabIndex = 3
@@ -202,12 +203,12 @@ Partial Class Home
         ' 
         ' btnAddrOrder
         ' 
-        btnAddrOrder.Anchor = AnchorStyles.None
+        btnAddrOrder.AutoSize = True
         btnAddrOrder.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         btnAddrOrder.FlatAppearance.BorderSize = 0
         btnAddrOrder.FlatStyle = FlatStyle.Flat
         btnAddrOrder.ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
-        btnAddrOrder.Location = New Point(560, 205)
+        btnAddrOrder.Location = New Point(622, 204)
         btnAddrOrder.Margin = New Padding(0)
         btnAddrOrder.Name = "btnAddrOrder"
         btnAddrOrder.RightToLeft = RightToLeft.No
@@ -218,12 +219,11 @@ Partial Class Home
         ' 
         ' lblTitel
         ' 
-        lblTitel.Anchor = AnchorStyles.None
         lblTitel.AutoSize = True
         lblTitel.BackColor = Color.Transparent
         lblTitel.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTitel.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblTitel.Location = New Point(322, 199)
+        lblTitel.Location = New Point(384, 198)
         lblTitel.Name = "lblTitel"
         lblTitel.Size = New Size(121, 45)
         lblTitel.TabIndex = 6
@@ -231,12 +231,12 @@ Partial Class Home
         ' 
         ' btnSort
         ' 
-        btnSort.Anchor = AnchorStyles.None
+        btnSort.AutoSize = True
         btnSort.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         btnSort.FlatAppearance.BorderSize = 0
         btnSort.FlatStyle = FlatStyle.Flat
         btnSort.ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
-        btnSort.Location = New Point(457, 205)
+        btnSort.Location = New Point(519, 204)
         btnSort.Margin = New Padding(0)
         btnSort.Name = "btnSort"
         btnSort.RightToLeft = RightToLeft.No
@@ -254,7 +254,7 @@ Partial Class Home
         Panel1.Controls.Add(PictureBox2)
         Panel1.Location = New Point(1, -1)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(284, 756)
+        Panel1.Size = New Size(284, 1066)
         Panel1.TabIndex = 8
         ' 
         ' Button4
@@ -297,7 +297,7 @@ Partial Class Home
         ' 
         PictureBox2.Anchor = AnchorStyles.None
         PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
-        PictureBox2.Location = New Point(35, 100)
+        PictureBox2.Location = New Point(35, 82)
         PictureBox2.Name = "PictureBox2"
         PictureBox2.Size = New Size(203, 143)
         PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
@@ -306,17 +306,19 @@ Partial Class Home
         ' 
         ' TextBox1
         ' 
+        TextBox1.Anchor = AnchorStyles.None
         TextBox1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.Location = New Point(444, 25)
+        TextBox1.Location = New Point(756, 43)
         TextBox1.Name = "TextBox1"
         TextBox1.Size = New Size(637, 29)
         TextBox1.TabIndex = 9
         ' 
         ' Button5
         ' 
+        Button5.Anchor = AnchorStyles.None
         Button5.BackColor = Color.Transparent
         Button5.Image = CType(resources.GetObject("Button5.Image"), Image)
-        Button5.Location = New Point(1030, 25)
+        Button5.Location = New Point(1342, 43)
         Button5.Name = "Button5"
         Button5.Size = New Size(51, 30)
         Button5.TabIndex = 10
@@ -328,7 +330,7 @@ Partial Class Home
         AutoScaleMode = AutoScaleMode.Font
         AutoValidate = AutoValidate.EnableAllowFocusChange
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New Size(1280, 674)
+        ClientSize = New Size(1856, 1061)
         Controls.Add(Button5)
         Controls.Add(TextBox1)
         Controls.Add(Panel1)
