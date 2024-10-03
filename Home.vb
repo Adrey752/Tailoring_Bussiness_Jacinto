@@ -68,7 +68,7 @@
         e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
 
         ' Set background color
-        sender.BackColor = Color.PaleTurquoise
+        sender.BackColor = Color.FromArgb(184, 115, 51)
 
         ' Define corner radius for rounded edges
         Dim cornerRadius As Integer = 15
@@ -106,4 +106,39 @@
         _login.Close()
     End Sub
 
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+
+    End Sub
+
+    Private Sub lblTitel_Click(sender As Object, e As EventArgs) Handles lblTitel.Click
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+    End Sub
+
+    Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
+
+    End Sub
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel.Design
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class AddClientForm
     Dim _home As Home
@@ -15,29 +16,33 @@ Public Class AddClientForm
 
     End Sub
     Private Sub Btn_Save(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim name As String = tbName.Text
-        Dim address As String = tbAddress.Text
-        Dim contact As String = tbNumber.Text
+
+        If ValidateFields() Then
+
+            Dim name As String = tbName.Text
+            Dim address As String = tbAddress.Text
+            Dim contact As String = tbNumber.Text
 
 
 
-        ' Step 1: Insert Client into the database and retrieve client_id
-        Dim clientId As Integer = InsertClientToDB(_client)
+            ' Step 1: Insert Client into the database and retrieve client_id
+            Dim clientId As Integer = InsertClientToDB(_client)
 
 
-        ' Step 2: Insert each Order for the client and retrieve order_id
-        For Each order As Order In _client.Orders
-            Dim orderId As Integer = InsertOrder(order, clientId)
+            ' Step 2: Insert each Order for the client and retrieve order_id
+            For Each order As Order In _client.Orders
+                Dim orderId As Integer = InsertOrder(order, clientId)
 
-            ' Step 3: Insert each DressMeasurement (Size) for the order
-            For Each size As DressMeasurement In order.Sizes
-                InsertSize(size, orderId)
+                ' Step 3: Insert each DressMeasurement (Size) for the order
+                For Each size As DressMeasurement In order.Sizes
+                    InsertSize(size, orderId)
+                Next
             Next
-        Next
 
 
-        _home.loadDatabase()
-        Me.Close()
+            _home.loadDatabase()
+            Me.Close()
+        End If
 
     End Sub
     Public Function InsertClientToDB(client As Client) As Integer
@@ -97,13 +102,12 @@ Public Class AddClientForm
     Public Function GetTypeId(partMeasurement As String) As Integer
         Dim query As String = "SELECT type_id FROM size_types WHERE types = @PartMeasurement"
         Dim parameters As New Dictionary(Of String, Object) From {{"@PartMeasurement", partMeasurement}}
-    Dim result As Object = MySQLModule.ExecuteScalar(query, parameters)
-
-    If result IsNot Nothing Then
-    Return Convert.ToInt32(result)
-    Else
-    Throw New Exception("Invalid measurement type: " & partMeasurement)
-    End If
+        Dim result As Object = MySQLModule.ExecuteScalar(query, parameters)
+        If result IsNot Nothing Then
+            Return Convert.ToInt32(result)
+        Else
+            Throw New Exception("Invalid measurement type: " & partMeasurement)
+        End If
     End Function
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -197,4 +201,46 @@ Public Class AddClientForm
     Private Sub fpTask_Paint(sender As Object, e As PaintEventArgs) Handles fpTask.Paint
 
     End Sub
+
+    Private Sub tbNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbNumber.KeyPress
+        If Not Char.IsDigit(e.KeyChar) AndAlso Not e.KeyChar = ChrW(Keys.Back) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Function ValidateFields() As Boolean
+        Dim emptyFields As New List(Of String) ' Initialize the list
+
+        ' Check if each TextBox is empty and add its name to the list
+        If String.IsNullOrEmpty(tbName.Text) Then
+            emptyFields.Add("Name")
+        End If
+        If String.IsNullOrEmpty(tbAddress.Text) Then
+            emptyFields.Add("Address")
+        End If
+        If String.IsNullOrEmpty(tbNumber.Text) Then
+            emptyFields.Add("Number")
+        End If
+
+        ' If there are any empty fields, show a warning and set focus
+        If emptyFields.Count > 0 Then
+            MessageBox.Show("The following fields cannot be blank: " & String.Join(", ", emptyFields), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            ' Set focus to the first empty field
+            If emptyFields.Contains("Name") Then
+                tbName.Focus()
+            ElseIf emptyFields.Contains("Address") Then
+                tbAddress.Focus()
+            ElseIf emptyFields.Contains("Number") Then
+                tbNumber.Focus()
+            End If
+            Return False ' Validation failed
+        Else
+            ' All fields are valid
+            MessageBox.Show("All inputs are valid.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return True ' Validation succeeded
+        End If
+    End Function
+
+
+
 End Class

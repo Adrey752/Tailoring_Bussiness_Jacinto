@@ -134,6 +134,7 @@ Partial Class AddClientForm
         ' 
         tbNumber.BackColor = Color.White
         tbNumber.Location = New Point(523, 86)
+        tbNumber.MaxLength = 11
         tbNumber.Name = "tbNumber"
         tbNumber.PlaceholderText = "Enter Text"
         tbNumber.Size = New Size(283, 23)
@@ -143,6 +144,7 @@ Partial Class AddClientForm
         ' 
         tbAddress.BackColor = Color.White
         tbAddress.Location = New Point(156, 133)
+        tbAddress.MaxLength = 150
         tbAddress.Name = "tbAddress"
         tbAddress.PlaceholderText = "Enter Address"
         tbAddress.Size = New Size(172, 23)
@@ -152,6 +154,7 @@ Partial Class AddClientForm
         ' 
         tbName.BackColor = Color.White
         tbName.Location = New Point(156, 86)
+        tbName.MaxLength = 150
         tbName.Name = "tbName"
         tbName.PlaceholderText = "Enter Client Name"
         tbName.Size = New Size(172, 23)
@@ -225,7 +228,7 @@ Partial Class AddClientForm
         PictureBoxLogo.TabIndex = 3
         PictureBoxLogo.TabStop = False
         ' 
-        ' orderForm
+        ' AddClientForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -237,9 +240,9 @@ Partial Class AddClientForm
         Controls.Add(Panel1)
         Controls.Add(btnSave)
         Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Name = "orderForm"
+        Name = "AddClientForm"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "other"
+        Text = "Add Client"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         CType(PictureBoxLogo, ComponentModel.ISupportInitialize).EndInit()

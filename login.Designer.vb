@@ -27,15 +27,18 @@ Partial Class login
         tbEnter = New Button()
         Label3 = New Label()
         PictureBox1 = New PictureBox()
+        PbshowPassword = New PictureBox()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PbshowPassword, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' tbPassword
         ' 
         tbPassword.Anchor = AnchorStyles.None
-        tbPassword.Location = New Point(418, 293)
+        tbPassword.Location = New Point(389, 314)
+        tbPassword.Margin = New Padding(0)
         tbPassword.Name = "tbPassword"
-        tbPassword.Size = New Size(236, 23)
+        tbPassword.Size = New Size(281, 23)
         tbPassword.TabIndex = 1
         tbPassword.UseSystemPasswordChar = True
         ' 
@@ -43,9 +46,9 @@ Partial Class login
         ' 
         tbEnter.Anchor = AnchorStyles.None
         tbEnter.FlatAppearance.BorderSize = 0
-        tbEnter.Location = New Point(454, 341)
+        tbEnter.Location = New Point(463, 356)
         tbEnter.Name = "tbEnter"
-        tbEnter.Size = New Size(160, 23)
+        tbEnter.Size = New Size(160, 38)
         tbEnter.TabIndex = 2
         tbEnter.Text = "Enter"
         tbEnter.UseVisualStyleBackColor = True
@@ -64,19 +67,32 @@ Partial Class login
         ' 
         PictureBox1.Anchor = AnchorStyles.None
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(418, 90)
+        PictureBox1.Location = New Point(379, 62)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(236, 169)
+        PictureBox1.Size = New Size(324, 233)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 7
         PictureBox1.TabStop = False
         ' 
+        ' PbshowPassword
+        ' 
+        PbshowPassword.BackColor = Color.White
+        PbshowPassword.Image = My.Resources.Resources.eye
+        PbshowPassword.Location = New Point(671, 314)
+        PbshowPassword.Margin = New Padding(1)
+        PbshowPassword.Name = "PbshowPassword"
+        PbshowPassword.Size = New Size(33, 23)
+        PbshowPassword.SizeMode = PictureBoxSizeMode.StretchImage
+        PbshowPassword.TabIndex = 8
+        PbshowPassword.TabStop = False
+        ' 
         ' login
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
+        BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         ClientSize = New Size(1057, 442)
+        Controls.Add(PbshowPassword)
         Controls.Add(PictureBox1)
         Controls.Add(Label3)
         Controls.Add(tbEnter)
@@ -85,6 +101,7 @@ Partial Class login
         StartPosition = FormStartPosition.CenterScreen
         Text = "Login"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(PbshowPassword, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -92,5 +109,6 @@ Partial Class login
     Friend WithEvents tbEnter As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PbshowPassword As PictureBox
 
 End Class

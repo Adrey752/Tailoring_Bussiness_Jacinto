@@ -5,7 +5,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Public Class login
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tbPassword.Focus()
-        Me.BackColor = Color.FromArgb(9, 11, 23)
+        Me.BackColor = Color.FromArgb(226, 217, 185)
 
 
     End Sub
@@ -64,5 +64,15 @@ Public Class login
 
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub PbshowPassword_Click(sender As Object, e As EventArgs) Handles PbshowPassword.Click
+        If tbPassword.UseSystemPasswordChar Then
+            tbPassword.UseSystemPasswordChar = False
+            PbshowPassword.Image = My.Resources.show
+        Else
+            tbPassword.UseSystemPasswordChar = True
+            PbshowPassword.Image = My.Resources.eye
+        End If
     End Sub
 End Class
