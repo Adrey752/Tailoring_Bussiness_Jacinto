@@ -22,36 +22,49 @@ Partial Class Home
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Home))
         DataGridOrders = New DataGridView()
         btDetails = New DataGridViewButtonColumn()
         colId = New DataGridViewTextBoxColumn()
-        colName = New DataGridViewButtonColumn()
-        colAddress = New DataGridViewButtonColumn()
-        colContNumber = New DataGridViewButtonColumn()
-        colStatus = New DataGridViewButtonColumn()
-        colPrice = New DataGridViewButtonColumn()
+        colName = New DataGridViewTextBoxColumn()
+        colAddress = New DataGridViewTextBoxColumn()
+        colContNumber = New DataGridViewTextBoxColumn()
+        colStatus = New DataGridViewTextBoxColumn()
+        colPrice = New DataGridViewTextBoxColumn()
         colPay = New DataGridViewTextBoxColumn()
         colStartedDate = New DataGridViewTextBoxColumn()
         colDueDate = New DataGridViewTextBoxColumn()
-        Button1 = New Button()
+        btnToggle = New Button()
         pnLogout = New Panel()
         btnSetNew = New Button()
         btnLogOut = New Button()
         btnAddrOrder = New Button()
-        lblTitel = New Label()
+        lblOrders = New Label()
         btnSort = New Button()
-        Panel1 = New Panel()
-        Button4 = New Button()
-        Button3 = New Button()
-        Button2 = New Button()
-        PictureBox2 = New PictureBox()
+        pnNavigation = New Panel()
+        btnSettings = New Button()
+        btnSearch = New Button()
+        btnHome = New Button()
+        pbTailoringJacinto = New PictureBox()
         TextBox1 = New TextBox()
-        Button5 = New Button()
+        PictureBox1 = New PictureBox()
         CType(DataGridOrders, ComponentModel.ISupportInitialize).BeginInit()
         pnLogout.SuspendLayout()
-        Panel1.SuspendLayout()
-        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
+        pnNavigation.SuspendLayout()
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' DataGridOrders
@@ -59,18 +72,43 @@ Partial Class Home
         DataGridOrders.Anchor = AnchorStyles.Left Or AnchorStyles.Right
         DataGridOrders.BackgroundColor = Color.White
         DataGridOrders.BorderStyle = BorderStyle.None
+        DataGridOrders.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(36), CByte(36), CByte(36))
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 12F)
+        DataGridViewCellStyle1.ForeColor = Color.White
+        DataGridViewCellStyle1.Padding = New Padding(0, 8, 0, 8)
+        DataGridViewCellStyle1.SelectionBackColor = Color.White
+        DataGridViewCellStyle1.SelectionForeColor = Color.Black
+        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
+        DataGridOrders.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         DataGridOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridOrders.Columns.AddRange(New DataGridViewColumn() {btDetails, colId, colName, colAddress, colContNumber, colStatus, colPrice, colPay, colStartedDate, colDueDate})
-        DataGridOrders.GridColor = SystemColors.MenuHighlight
-        DataGridOrders.Location = New Point(386, 279)
+        DataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = Color.FromArgb(CByte(33), CByte(33), CByte(33))
+        DataGridViewCellStyle12.Font = New Font("Segoe UI", 9F)
+        DataGridViewCellStyle12.ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
+        DataGridViewCellStyle12.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = DataGridViewTriState.False
+        DataGridOrders.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridOrders.EnableHeadersVisualStyles = False
+        DataGridOrders.GridColor = Color.Gray
+        DataGridOrders.Location = New Point(313, 210)
         DataGridOrders.Name = "DataGridOrders"
-        DataGridOrders.Size = New Size(1365, 616)
+        DataGridOrders.Size = New Size(846, 439)
         DataGridOrders.TabIndex = 1
         ' 
         ' btDetails
         ' 
         btDetails.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle2.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle2.ForeColor = Color.White
+        btDetails.DefaultCellStyle = DataGridViewCellStyle2
         btDetails.FillWeight = 48.07692F
+        btDetails.FlatStyle = FlatStyle.Flat
         btDetails.HeaderText = "View Details"
         btDetails.Name = "btDetails"
         btDetails.Resizable = DataGridViewTriState.True
@@ -81,60 +119,104 @@ Partial Class Home
         ' 
         colId.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
         colId.DataPropertyName = "client_id"
+        DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle3.ForeColor = Color.White
+        DataGridViewCellStyle3.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle3.SelectionForeColor = Color.White
+        colId.DefaultCellStyle = DataGridViewCellStyle3
         colId.FillWeight = 48.07692F
         colId.HeaderText = "id"
         colId.Name = "colId"
-        colId.Width = 42
+        colId.Width = 47
         ' 
         ' colName
         ' 
         colName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         colName.DataPropertyName = "name"
+        DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle4.ForeColor = Color.White
+        DataGridViewCellStyle4.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle4.SelectionForeColor = Color.White
+        colName.DefaultCellStyle = DataGridViewCellStyle4
         colName.HeaderText = "Name"
         colName.Name = "colName"
-        colName.Width = 45
+        colName.Resizable = DataGridViewTriState.True
+        colName.SortMode = DataGridViewColumnSortMode.NotSortable
+        colName.Width = 57
         ' 
         ' colAddress
         ' 
         colAddress.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         colAddress.DataPropertyName = "address"
+        DataGridViewCellStyle5.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle5.ForeColor = Color.White
+        DataGridViewCellStyle5.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle5.SelectionForeColor = Color.White
+        colAddress.DefaultCellStyle = DataGridViewCellStyle5
         colAddress.HeaderText = "Address"
         colAddress.Name = "colAddress"
-        colAddress.Width = 55
+        colAddress.Resizable = DataGridViewTriState.True
+        colAddress.SortMode = DataGridViewColumnSortMode.NotSortable
+        colAddress.Width = 71
         ' 
         ' colContNumber
         ' 
         colContNumber.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         colContNumber.DataPropertyName = "contact"
+        DataGridViewCellStyle6.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle6.ForeColor = Color.White
+        DataGridViewCellStyle6.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle6.SelectionForeColor = Color.White
+        colContNumber.DefaultCellStyle = DataGridViewCellStyle6
         colContNumber.FillWeight = 48.07692F
         colContNumber.HeaderText = "ContactNumber"
         colContNumber.MinimumWidth = 120
         colContNumber.Name = "colContNumber"
+        colContNumber.Resizable = DataGridViewTriState.True
+        colContNumber.SortMode = DataGridViewColumnSortMode.NotSortable
         colContNumber.Width = 120
         ' 
         ' colStatus
         ' 
         colStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         colStatus.DataPropertyName = "status"
+        DataGridViewCellStyle7.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle7.ForeColor = Color.White
+        DataGridViewCellStyle7.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle7.SelectionForeColor = Color.White
+        colStatus.DefaultCellStyle = DataGridViewCellStyle7
         colStatus.HeaderText = "Status"
         colStatus.MinimumWidth = 60
         colStatus.Name = "colStatus"
+        colStatus.Resizable = DataGridViewTriState.True
+        colStatus.SortMode = DataGridViewColumnSortMode.NotSortable
         colStatus.Width = 60
         ' 
         ' colPrice
         ' 
         colPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         colPrice.DataPropertyName = "price"
+        DataGridViewCellStyle8.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle8.ForeColor = Color.White
+        DataGridViewCellStyle8.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle8.SelectionForeColor = Color.White
+        colPrice.DefaultCellStyle = DataGridViewCellStyle8
         colPrice.FillWeight = 48.07692F
         colPrice.HeaderText = "Price"
         colPrice.MinimumWidth = 73
         colPrice.Name = "colPrice"
-        colPrice.Text = ""
+        colPrice.Resizable = DataGridViewTriState.True
+        colPrice.SortMode = DataGridViewColumnSortMode.NotSortable
         ' 
         ' colPay
         ' 
         colPay.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         colPay.DataPropertyName = "payment"
+        DataGridViewCellStyle9.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle9.ForeColor = Color.White
+        DataGridViewCellStyle9.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle9.SelectionForeColor = Color.White
+        colPay.DefaultCellStyle = DataGridViewCellStyle9
         colPay.FillWeight = 50F
         colPay.HeaderText = "Payment"
         colPay.MinimumWidth = 65
@@ -143,6 +225,11 @@ Partial Class Home
         ' 
         ' colStartedDate
         ' 
+        DataGridViewCellStyle10.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle10.ForeColor = Color.White
+        DataGridViewCellStyle10.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle10.SelectionForeColor = Color.White
+        colStartedDate.DefaultCellStyle = DataGridViewCellStyle10
         colStartedDate.HeaderText = "Started Date"
         colStartedDate.MinimumWidth = 77
         colStartedDate.Name = "colStartedDate"
@@ -150,22 +237,27 @@ Partial Class Home
         ' 
         ' colDueDate
         ' 
+        DataGridViewCellStyle11.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle11.ForeColor = Color.White
+        DataGridViewCellStyle11.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle11.SelectionForeColor = Color.White
+        colDueDate.DefaultCellStyle = DataGridViewCellStyle11
         colDueDate.HeaderText = "Due Date"
         colDueDate.MinimumWidth = 80
         colDueDate.Name = "colDueDate"
         colDueDate.Width = 160
         ' 
-        ' Button1
+        ' btnToggle
         ' 
-        Button1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        Button1.BackColor = Color.Transparent
-        Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), Image)
-        Button1.BackgroundImageLayout = ImageLayout.Stretch
-        Button1.Location = New Point(1802, 12)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(42, 36)
-        Button1.TabIndex = 2
-        Button1.UseVisualStyleBackColor = False
+        btnToggle.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        btnToggle.BackColor = Color.Transparent
+        btnToggle.BackgroundImage = CType(resources.GetObject("btnToggle.BackgroundImage"), Image)
+        btnToggle.BackgroundImageLayout = ImageLayout.Stretch
+        btnToggle.Location = New Point(1117, 30)
+        btnToggle.Name = "btnToggle"
+        btnToggle.Size = New Size(42, 36)
+        btnToggle.TabIndex = 2
+        btnToggle.UseVisualStyleBackColor = False
         ' 
         ' pnLogout
         ' 
@@ -173,7 +265,7 @@ Partial Class Home
         pnLogout.BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         pnLogout.Controls.Add(btnSetNew)
         pnLogout.Controls.Add(btnLogOut)
-        pnLogout.Location = New Point(1737, 54)
+        pnLogout.Location = New Point(1050, 71)
         pnLogout.Name = "pnLogout"
         pnLogout.Size = New Size(122, 105)
         pnLogout.TabIndex = 3
@@ -208,7 +300,7 @@ Partial Class Home
         btnAddrOrder.FlatAppearance.BorderSize = 0
         btnAddrOrder.FlatStyle = FlatStyle.Flat
         btnAddrOrder.ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
-        btnAddrOrder.Location = New Point(622, 204)
+        btnAddrOrder.Location = New Point(522, 160)
         btnAddrOrder.Margin = New Padding(0)
         btnAddrOrder.Name = "btnAddrOrder"
         btnAddrOrder.RightToLeft = RightToLeft.No
@@ -217,112 +309,111 @@ Partial Class Home
         btnAddrOrder.Text = "Add order"
         btnAddrOrder.UseVisualStyleBackColor = False
         ' 
-        ' lblTitel
+        ' lblOrders
         ' 
-        lblTitel.AutoSize = True
-        lblTitel.BackColor = Color.Transparent
-        lblTitel.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTitel.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblTitel.Location = New Point(384, 198)
-        lblTitel.Name = "lblTitel"
-        lblTitel.Size = New Size(121, 45)
-        lblTitel.TabIndex = 6
-        lblTitel.Text = "Orders"
+        lblOrders.AutoSize = True
+        lblOrders.BackColor = Color.Transparent
+        lblOrders.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrders.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblOrders.Location = New Point(313, 152)
+        lblOrders.Name = "lblOrders"
+        lblOrders.Size = New Size(121, 45)
+        lblOrders.TabIndex = 6
+        lblOrders.Text = "Orders"
         ' 
         ' btnSort
         ' 
         btnSort.AutoSize = True
-        btnSort.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnSort.BackColor = Color.Transparent
+        btnSort.BackgroundImage = My.Resources.Resources.sort
+        btnSort.BackgroundImageLayout = ImageLayout.Stretch
         btnSort.FlatAppearance.BorderSize = 0
         btnSort.FlatStyle = FlatStyle.Flat
         btnSort.ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
-        btnSort.Location = New Point(519, 204)
+        btnSort.Location = New Point(449, 165)
         btnSort.Margin = New Padding(0)
         btnSort.Name = "btnSort"
         btnSort.RightToLeft = RightToLeft.No
-        btnSort.Size = New Size(91, 37)
+        btnSort.Size = New Size(41, 32)
         btnSort.TabIndex = 7
-        btnSort.Text = "Sort By"
         btnSort.UseVisualStyleBackColor = False
         ' 
-        ' Panel1
+        ' pnNavigation
         ' 
-        Panel1.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
-        Panel1.Controls.Add(Button4)
-        Panel1.Controls.Add(Button3)
-        Panel1.Controls.Add(Button2)
-        Panel1.Controls.Add(PictureBox2)
-        Panel1.Location = New Point(1, -1)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(284, 1066)
-        Panel1.TabIndex = 8
+        pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(btnSettings)
+        pnNavigation.Controls.Add(btnSearch)
+        pnNavigation.Controls.Add(btnHome)
+        pnNavigation.Controls.Add(pbTailoringJacinto)
+        pnNavigation.Location = New Point(1, -1)
+        pnNavigation.Name = "pnNavigation"
+        pnNavigation.Size = New Size(284, 1066)
+        pnNavigation.TabIndex = 8
         ' 
-        ' Button4
+        ' btnSettings
         ' 
-        Button4.BackColor = Color.BurlyWood
-        Button4.Location = New Point(3, 363)
-        Button4.Name = "Button4"
-        Button4.Padding = New Padding(30, 0, 0, 0)
-        Button4.Size = New Size(281, 45)
-        Button4.TabIndex = 11
-        Button4.Text = "Settings"
-        Button4.TextAlign = ContentAlignment.MiddleLeft
-        Button4.UseVisualStyleBackColor = False
+        btnSettings.BackColor = Color.BurlyWood
+        btnSettings.Location = New Point(3, 363)
+        btnSettings.Name = "btnSettings"
+        btnSettings.Padding = New Padding(30, 0, 0, 0)
+        btnSettings.Size = New Size(281, 45)
+        btnSettings.TabIndex = 11
+        btnSettings.Text = "Settings"
+        btnSettings.TextAlign = ContentAlignment.MiddleLeft
+        btnSettings.UseVisualStyleBackColor = False
         ' 
-        ' Button3
+        ' btnSearch
         ' 
-        Button3.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        Button3.Location = New Point(3, 322)
-        Button3.Name = "Button3"
-        Button3.Padding = New Padding(30, 0, 0, 0)
-        Button3.Size = New Size(281, 45)
-        Button3.TabIndex = 10
-        Button3.Text = "Search"
-        Button3.TextAlign = ContentAlignment.MiddleLeft
-        Button3.UseVisualStyleBackColor = False
+        btnSearch.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        btnSearch.Location = New Point(3, 322)
+        btnSearch.Name = "btnSearch"
+        btnSearch.Padding = New Padding(30, 0, 0, 0)
+        btnSearch.Size = New Size(281, 45)
+        btnSearch.TabIndex = 10
+        btnSearch.Text = "Search"
+        btnSearch.TextAlign = ContentAlignment.MiddleLeft
+        btnSearch.UseVisualStyleBackColor = False
         ' 
-        ' Button2
+        ' btnHome
         ' 
-        Button2.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
-        Button2.Location = New Point(3, 280)
-        Button2.Name = "Button2"
-        Button2.Padding = New Padding(30, 0, 0, 0)
-        Button2.Size = New Size(281, 45)
-        Button2.TabIndex = 9
-        Button2.Text = "Home"
-        Button2.TextAlign = ContentAlignment.MiddleLeft
-        Button2.UseVisualStyleBackColor = False
+        btnHome.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
+        btnHome.Location = New Point(3, 280)
+        btnHome.Name = "btnHome"
+        btnHome.Padding = New Padding(30, 0, 0, 0)
+        btnHome.Size = New Size(281, 45)
+        btnHome.TabIndex = 9
+        btnHome.Text = "Home"
+        btnHome.TextAlign = ContentAlignment.MiddleLeft
+        btnHome.UseVisualStyleBackColor = False
         ' 
-        ' PictureBox2
+        ' pbTailoringJacinto
         ' 
-        PictureBox2.Anchor = AnchorStyles.None
-        PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
-        PictureBox2.Location = New Point(35, 82)
-        PictureBox2.Name = "PictureBox2"
-        PictureBox2.Size = New Size(203, 143)
-        PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
-        PictureBox2.TabIndex = 9
-        PictureBox2.TabStop = False
+        pbTailoringJacinto.Anchor = AnchorStyles.None
+        pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
+        pbTailoringJacinto.Location = New Point(35, 82)
+        pbTailoringJacinto.Name = "pbTailoringJacinto"
+        pbTailoringJacinto.Size = New Size(203, 143)
+        pbTailoringJacinto.SizeMode = PictureBoxSizeMode.StretchImage
+        pbTailoringJacinto.TabIndex = 9
+        pbTailoringJacinto.TabStop = False
         ' 
         ' TextBox1
         ' 
-        TextBox1.Anchor = AnchorStyles.None
-        TextBox1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.Location = New Point(756, 43)
+        TextBox1.Location = New Point(449, 38)
         TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(637, 29)
+        TextBox1.Size = New Size(440, 23)
         TextBox1.TabIndex = 9
         ' 
-        ' Button5
+        ' PictureBox1
         ' 
-        Button5.Anchor = AnchorStyles.None
-        Button5.BackColor = Color.Transparent
-        Button5.Image = CType(resources.GetObject("Button5.Image"), Image)
-        Button5.Location = New Point(1342, 43)
-        Button5.Name = "Button5"
-        Button5.Size = New Size(51, 30)
-        Button5.TabIndex = 10
-        Button5.UseVisualStyleBackColor = False
+        PictureBox1.BackColor = Color.White
+        PictureBox1.Image = My.Resources.Resources.search_interface_symbol
+        PictureBox1.Location = New Point(895, 38)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(26, 23)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 10
+        PictureBox1.TabStop = False
         ' 
         ' Home
         ' 
@@ -330,14 +421,14 @@ Partial Class Home
         AutoScaleMode = AutoScaleMode.Font
         AutoValidate = AutoValidate.EnableAllowFocusChange
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New Size(1856, 1061)
-        Controls.Add(Button5)
+        ClientSize = New Size(1184, 661)
+        Controls.Add(PictureBox1)
         Controls.Add(TextBox1)
-        Controls.Add(Panel1)
+        Controls.Add(pnNavigation)
         Controls.Add(btnSort)
-        Controls.Add(lblTitel)
+        Controls.Add(lblOrders)
         Controls.Add(btnAddrOrder)
-        Controls.Add(Button1)
+        Controls.Add(btnToggle)
         Controls.Add(pnLogout)
         Controls.Add(DataGridOrders)
         ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
@@ -347,34 +438,35 @@ Partial Class Home
         Text = "Home"
         CType(DataGridOrders, ComponentModel.ISupportInitialize).EndInit()
         pnLogout.ResumeLayout(False)
-        Panel1.ResumeLayout(False)
-        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
+        pnNavigation.ResumeLayout(False)
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
     Friend WithEvents DataGridOrders As DataGridView
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnToggle As Button
     Friend WithEvents pnLogout As Panel
     Friend WithEvents btnSetNew As Button
     Friend WithEvents btnLogOut As Button
     Friend WithEvents btnAddrOrder As Button
-    Friend WithEvents lblTitel As Label
+    Friend WithEvents lblOrders As Label
     Friend WithEvents btnSort As Button
+    Friend WithEvents pnNavigation As Panel
+    Friend WithEvents pbTailoringJacinto As PictureBox
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnHome As Button
+    Friend WithEvents btnSettings As Button
     Friend WithEvents btDetails As DataGridViewButtonColumn
     Friend WithEvents colId As DataGridViewTextBoxColumn
-    Friend WithEvents colName As DataGridViewButtonColumn
-    Friend WithEvents colAddress As DataGridViewButtonColumn
-    Friend WithEvents colContNumber As DataGridViewButtonColumn
-    Friend WithEvents colStatus As DataGridViewButtonColumn
-    Friend WithEvents colPrice As DataGridViewButtonColumn
+    Friend WithEvents colName As DataGridViewTextBoxColumn
+    Friend WithEvents colAddress As DataGridViewTextBoxColumn
+    Friend WithEvents colContNumber As DataGridViewTextBoxColumn
+    Friend WithEvents colStatus As DataGridViewTextBoxColumn
+    Friend WithEvents colPrice As DataGridViewTextBoxColumn
     Friend WithEvents colPay As DataGridViewTextBoxColumn
     Friend WithEvents colStartedDate As DataGridViewTextBoxColumn
     Friend WithEvents colDueDate As DataGridViewTextBoxColumn
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button4 As Button
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Button5 As Button
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

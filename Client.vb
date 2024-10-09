@@ -19,4 +19,7 @@
     Public Sub addOrder(order As Order)
         Orders.Add(order)
     End Sub
+    Public Sub RemoveOrder(orderToRemove As Order)
+        Orders.Remove(orderToRemove)
+    End Sub
 End Class

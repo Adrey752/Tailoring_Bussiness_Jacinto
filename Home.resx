@@ -148,7 +148,7 @@
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Button1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnToggle.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAArVJREFUWEftmOGRUzEMhFMCJVACJVACJdAB1wF0AB1AB9AB1wElQAeUAP4mJ2Zn
@@ -166,7 +166,7 @@
         RU5ErkJggg==
 </value>
   </data>
-  <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbTailoringJacinto.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAhsAAAFdCAYAAACqzq9RAAAABGdBTUEAALGPC/xhBQAA/8dJREFUeF7s
         XQecJUXx7twz897bcIEDRMCsqKigIlFU/BNEwYAJAcmIYEAERFAkKMGIAipJERUFiQKS8wEHB3dczjmH
@@ -1411,17 +1411,6 @@
         EREREREREREREREREREREREREREREREREREREREREREREREREREREREREdEk4sJwERERERERERERERER
         EREREREREREREREREREREREREREREREREQHRoSwiIiIiIiIiImK9RiTEEREREREREREREc0gMuqIiIiI
         iIiIiIiIiIiIiHUKY/4/O7FBNQcl9MMAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="Button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABYAAAATCAYAAACUef2IAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAATVJREFUOE+tlG3RwkAMhPujXz8rAQlIQAISkFAHbx1QB+AAHBQHSEACEnifhYS5
-        GQ56he7MDiXZ7F2Tu2YRNHme/5VleYAXsSiKAfbkFg/JRJjh7RNZYIe0eVQkQAVeXFXVif9tXdcrkecN
-        8aPn4YWScXOEz52y687CL2DB1nXwYOG3WKSYOkJz9CsLvwLB2oW8dtJwaM1Ven410DgQdGasviUBrfdb
-        g4yD5GRj2jGMGmvqJrrxd2orNhaKogmEg8XeAt3zBI3OJHKMYgXawNZ1KSfoDsTea1HXeAdbYw/vbxXw
-        TFnaFadYN0zfh9AgpHJdsIgGnmYuaKC0p6dwL+pZMUtrA0uZfmU+Bg3Oze0N1pb6HaG5LdBaahY0mJ7d
-        XJ9ei88DdquZ+M6XFp4HmOrEcBuz7B/pF3LrhUiXiAAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

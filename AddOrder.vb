@@ -49,7 +49,7 @@ Public Class AddOrder
         order.GarmentType = garmentType
         client.addOrder(order)
 
-        _orderForm.AddProjectPanel(orderName, order.Type, order.GarmentType, order.Description)
+        _orderForm.AddProjectPanel(orderName, order.Type, order.GarmentType, order.Description, order)
         Me.Close()
 
     End Sub
@@ -58,39 +58,13 @@ Public Class AddOrder
         Dim measurementType = sbMType.Text
         Dim value = nudValue.Value
         Dim unit = cbUnit.Text
-        Dim measurement = New DressMeasurement(measurementType, value, unit)
+        Dim garment = cbGarment.Text
+        Dim measurement = New DressMeasurement(measurementType, value, unit, garment)
 
         order.AddSize(measurement)
 
-        dgMeasurements.Rows.Add(measurementType, value, unit)
+        dgMeasurements.Rows.Add(measurementType, (value & unit), garment)
     End Sub
 
 
-    Private Sub lblAdd_Click(sender As Object, e As EventArgs) Handles lblAddMoreOrders.Click
-
-    End Sub
-
-    Private Sub nudValue_ValueChanged(sender As Object, e As EventArgs) Handles nudValue.ValueChanged
-
-    End Sub
-
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub nudPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPrice.ValueChanged
-
-    End Sub
-
-    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles lblPayment.Click
-
-    End Sub
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles lblDesc.Click
-
-    End Sub
-
-    Private Sub pnAddOrders_Paint(sender As Object, e As PaintEventArgs) Handles pnAddOrders.Paint
-
-    End Sub
 End Class

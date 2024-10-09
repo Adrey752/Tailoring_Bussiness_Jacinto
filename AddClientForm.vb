@@ -59,12 +59,11 @@ Public Class AddClientForm
 
     End Function
     Public Function InsertOrder(order As Order, clientId As Integer) As Integer
-        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, garment_type, description, price, done) VALUES (@ClientId, @OrderName, @Type, @GarmentType, @Description, @Price, @Done); SELECT LAST_INSERT_ID();"
+        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, done) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done); SELECT LAST_INSERT_ID();"
         Dim orderParams As New Dictionary(Of String, Object) From {
         {"@ClientId", clientId},
         {"@OrderName", order.OrderName},
         {"@Type", order.Type},
-        {"@GarmentType", order.GarmentType},
         {"@Description", order.Description},
         {"@Price", order.Price},
         {"@Done", order.Done}
@@ -74,10 +73,11 @@ Public Class AddClientForm
         Return Convert.ToInt32(MySQLModule.ExecuteScalar(orderQuery, orderParams))
     End Function
     Public Sub InsertSize(size As DressMeasurement, orderId As Integer)
-        Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit)"
+        Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_type) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment)"
         Dim sizeParams As New Dictionary(Of String, Object) From {
         {"@OrderId", orderId},
         {"@TypeId", GetTypeId(size.PartMeasurement)}, ' Get type_id for the measurement type
+        {"@garment", size.garment},
         {"@SizeValue", size.Value},
         {"@SizeUnit", size.Unit}
     }
@@ -114,48 +114,47 @@ Public Class AddClientForm
         Me.Hide()
     End Sub
 
-    Public Sub AddProjectPanel(orderName As String, serviceType As String, garmentType As String, description As String)
-        ' Create a new panel
+    Public Sub AddProjectPanel(orderName As String, serviceType As String, garmentType As String, description As String, order As Order)
 
         Dim projectPanel As New Panel
-        projectPanel.Height = 200
-        projectPanel.Width = 800
-        projectPanel.BackColor = Color.LightGray
+        projectPanel.Height = 80
+        projectPanel.Width = 200
         projectPanel.Margin = New Padding(10)
 
-        ' Add labels for the project details
-        Dim lblServiceName As New Label
-        lblServiceName.Text = "Service Type: " & orderName
-        lblServiceName.Location = New Point(10, 10)
+        Dim lblOrderName As New Label
+        lblOrderName.Text = "Order Name: " & orderName
+        lblOrderName.Location = New Point(10, 10)
 
         Dim lblServiceType As New Label
         lblServiceType.Text = "Service Type: " & serviceType
-        lblServiceType.Location = New Point(10, 10)
+        lblServiceType.Location = New Point(10, 30)
 
         Dim lblGarmentType As New Label
         lblGarmentType.Text = "Garment Type: " & garmentType
-        lblGarmentType.Location = New Point(10, 30)
+        lblGarmentType.Location = New Point(10, 50)
 
-        Dim lblDescription As New Label
-        lblDescription.Text = "Description: " & description
-        lblDescription.Location = New Point(10, 50)
+        Dim checkBox As New CheckBox
+        checkBox.Location = New Point(projectPanel.Width - 40, 30)  ' Positioned to the right
+        checkBox.Tag = order ' Associate the checkbox with the Order object
+
         lblServiceType.AutoSize = True
         lblGarmentType.AutoSize = True
-        lblDescription.AutoSize = True
+        lblOrderName.AutoSize = True
 
-        ' Add the labels to the panel
+        projectPanel.Controls.Add(lblOrderName)
         projectPanel.Controls.Add(lblServiceType)
         projectPanel.Controls.Add(lblGarmentType)
-        projectPanel.Controls.Add(lblDescription)
-        projectPanel.BackColor = Color.Black
-        projectPanel.ForeColor = Color.White
+        projectPanel.Controls.Add(checkBox)
 
-        ' Add click event handler for panel click
+        projectPanel.BackColor = Color.FromArgb(217, 185, 155)
+        projectPanel.ForeColor = Color.Black
+
         AddHandler projectPanel.Click, AddressOf ProjectPanel_Click
 
-        ' Add the project panel to a FlowLayoutPanel for dynamic UI
         fpTask.Controls.Add(projectPanel)
     End Sub
+
+
 
     Private Sub ProjectPanel_Click(sender As Object, e As EventArgs)
         Dim clickedPanel As Panel = DirectCast(sender, Panel)
@@ -198,7 +197,7 @@ Public Class AddClientForm
         sender.Region = New Region(DGP)
     End Sub
 
-    Private Sub fpTask_Paint(sender As Object, e As PaintEventArgs) Handles fpTask.Paint
+    Private Sub fpTask_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -241,15 +240,28 @@ Public Class AddClientForm
         End If
     End Function
 
-    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+    Private Sub btnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
+        ' Use a reverse loop to avoid index shifting while removing controls
+        For i As Integer = fpTask.Controls.Count - 1 To 0 Step -1
+            ' Get the control, assume it is a Panel
+            Dim panel As Panel = TryCast(fpTask.Controls(i), Panel)
+            If panel IsNot Nothing Then
+                ' Find the checkbox and check if it is checked
+                Dim checkBox As CheckBox = TryCast(panel.Controls.OfType(Of CheckBox)().FirstOrDefault(), CheckBox)
+                If checkBox IsNot Nothing AndAlso checkBox.Checked Then
+                    ' Retrieve the Order object from the Tag
+                    Dim orderToRemove As Order = TryCast(checkBox.Tag, Order)
 
+                    ' Remove the order from the client.Orders list
+                    If orderToRemove IsNot Nothing Then
+                        _client.Orders.Remove(orderToRemove)
+                    End If
+
+                    ' Remove the panel from the FlowLayoutPanel
+                    fpTask.Controls.Remove(panel)
+                End If
+            End If
+        Next
     End Sub
 
-    Private Sub lblAddOrderTitle_Click(sender As Object, e As EventArgs) Handles lblAddOrderTitle.Click
-
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
 End Class
