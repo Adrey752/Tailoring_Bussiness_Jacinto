@@ -457,6 +457,8 @@ Partial Class Home
     Friend WithEvents btnSearch As Button
     Friend WithEvents btnHome As Button
     Friend WithEvents btnSettings As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btDetails As DataGridViewButtonColumn
     Friend WithEvents colId As DataGridViewTextBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
@@ -467,6 +469,4 @@ Partial Class Home
     Friend WithEvents colPay As DataGridViewTextBoxColumn
     Friend WithEvents colStartedDate As DataGridViewTextBoxColumn
     Friend WithEvents colDueDate As DataGridViewTextBoxColumn
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents PictureBox1 As PictureBox
 End Class

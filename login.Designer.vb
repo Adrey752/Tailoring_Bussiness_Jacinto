@@ -79,7 +79,7 @@ Partial Class login
         PbshowPassword.Anchor = AnchorStyles.None
         PbshowPassword.BackColor = Color.White
         PbshowPassword.Image = My.Resources.Resources.eye
-        PbshowPassword.Location = New Point(752, 411)
+        PbshowPassword.Location = New Point(800, 411)
         PbshowPassword.Margin = New Padding(1)
         PbshowPassword.Name = "PbshowPassword"
         PbshowPassword.Size = New Size(33, 23)

@@ -56,6 +56,7 @@ Partial Class AddOrder
         Button3 = New Button()
         Button2 = New Button()
         PictureBox2 = New PictureBox()
+        Timer1 = New Timer(components)
         CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
@@ -163,7 +164,6 @@ Partial Class AddOrder
         cbStype.Name = "cbStype"
         cbStype.Size = New Size(121, 23)
         cbStype.TabIndex = 1
-        cbStype.Text = "Repair"
         ' 
         ' Label2
         ' 
@@ -468,4 +468,5 @@ Partial Class AddOrder
     Friend WithEvents size_type As DataGridViewTextBoxColumn
     Friend WithEvents measurement As DataGridViewTextBoxColumn
     Friend WithEvents GarmentType As DataGridViewTextBoxColumn
+    Friend WithEvents Timer1 As Timer
 End Class

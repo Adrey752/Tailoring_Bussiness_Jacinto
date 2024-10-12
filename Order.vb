@@ -1,7 +1,7 @@
 ﻿Public Class Order
     Public Property OrderName As String
     Public Property Type As String
-    Public Property GarmentType As String
+
     Public Property Description As String
     Public Property Price As Decimal
     Public Property Done As Boolean
@@ -11,7 +11,6 @@
     Public Sub New(orderName As String, serviceType As String, garmentType As String, description As String, price As Decimal)
         Me.OrderName = orderName
         Me.Type = serviceType
-        Me.GarmentType = garmentType
         Me.Description = description
         Me.Price = price
         Me.Done = False

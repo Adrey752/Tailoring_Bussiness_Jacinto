@@ -29,6 +29,7 @@ Partial Class AddClientForm
         btnRemoveTask = New Button()
         btnAddTask = New Button()
         lblTask = New Label()
+        btnCancel = New Button()
         tbNumber = New TextBox()
         tbAddress = New TextBox()
         tbName = New TextBox()
@@ -36,7 +37,6 @@ Partial Class AddClientForm
         lblContactNumber = New Label()
         LblName = New Label()
         lblCustomerDetails = New Label()
-        btnCancel = New Button()
         Button1 = New Button()
         pnLogout = New Panel()
         btnSetNew = New Button()
@@ -128,6 +128,20 @@ Partial Class AddClientForm
         lblTask.TabIndex = 7
         lblTask.Text = "Tasks"
         ' 
+        ' btnCancel
+        ' 
+        btnCancel.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnCancel.FlatAppearance.BorderSize = 0
+        btnCancel.FlatStyle = FlatStyle.Flat
+        btnCancel.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        btnCancel.ForeColor = Color.White
+        btnCancel.Location = New Point(827, 77)
+        btnCancel.Name = "btnCancel"
+        btnCancel.Size = New Size(91, 38)
+        btnCancel.TabIndex = 3
+        btnCancel.Text = "Cancel"
+        btnCancel.UseVisualStyleBackColor = False
+        ' 
         ' tbNumber
         ' 
         tbNumber.BackColor = Color.White
@@ -207,20 +221,6 @@ Partial Class AddClientForm
         lblCustomerDetails.Size = New Size(199, 27)
         lblCustomerDetails.TabIndex = 0
         lblCustomerDetails.Text = " Customer Details"
-        ' 
-        ' btnCancel
-        ' 
-        btnCancel.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        btnCancel.FlatAppearance.BorderSize = 0
-        btnCancel.FlatStyle = FlatStyle.Flat
-        btnCancel.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnCancel.ForeColor = Color.White
-        btnCancel.Location = New Point(827, 77)
-        btnCancel.Name = "btnCancel"
-        btnCancel.Size = New Size(91, 38)
-        btnCancel.TabIndex = 3
-        btnCancel.Text = "Cancel"
-        btnCancel.UseVisualStyleBackColor = False
         ' 
         ' Button1
         ' 

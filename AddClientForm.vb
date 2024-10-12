@@ -42,6 +42,7 @@ Public Class AddClientForm
 
             _home.loadDatabase()
             Me.Close()
+            _home.Show()
         End If
 
     End Sub
@@ -96,6 +97,7 @@ Public Class AddClientForm
         _client.Contact = number
 
         Dim addOrder = New AddOrder(_client, Me)
+        Me.Hide()
         addOrder.Show()
     End Sub
 
@@ -114,7 +116,7 @@ Public Class AddClientForm
         Me.Hide()
     End Sub
 
-    Public Sub AddProjectPanel(orderName As String, serviceType As String, garmentType As String, description As String, order As Order)
+    Public Sub AddProjectPanel(orderName As String, serviceType As String, description As String, order As Order)
 
         Dim projectPanel As New Panel
         projectPanel.Height = 80
@@ -129,27 +131,27 @@ Public Class AddClientForm
         lblServiceType.Text = "Service Type: " & serviceType
         lblServiceType.Location = New Point(10, 30)
 
-        Dim lblGarmentType As New Label
-        lblGarmentType.Text = "Garment Type: " & garmentType
-        lblGarmentType.Location = New Point(10, 50)
+
 
         Dim checkBox As New CheckBox
         checkBox.Location = New Point(projectPanel.Width - 40, 30)  ' Positioned to the right
         checkBox.Tag = order ' Associate the checkbox with the Order object
 
         lblServiceType.AutoSize = True
-        lblGarmentType.AutoSize = True
         lblOrderName.AutoSize = True
 
         projectPanel.Controls.Add(lblOrderName)
         projectPanel.Controls.Add(lblServiceType)
-        projectPanel.Controls.Add(lblGarmentType)
         projectPanel.Controls.Add(checkBox)
 
         projectPanel.BackColor = Color.FromArgb(217, 185, 155)
         projectPanel.ForeColor = Color.Black
 
         AddHandler projectPanel.Click, AddressOf ProjectPanel_Click
+        AddHandler lblOrderName.Click, AddressOf ProjectPanel_Click
+        AddHandler lblServiceType.Click, AddressOf ProjectPanel_Click
+        AddHandler checkBox.Click, AddressOf ProjectPanel_Click
+
 
         fpTask.Controls.Add(projectPanel)
     End Sub
@@ -157,12 +159,23 @@ Public Class AddClientForm
 
 
     Private Sub ProjectPanel_Click(sender As Object, e As EventArgs)
-        Dim clickedPanel As Panel = DirectCast(sender, Panel)
+        ' Attempt to get the clicked Panel. If the sender is not a Panel, find the parent Panel.
+        Dim clickedPanel As Panel = TryCast(sender, Panel)
 
-        ' Display full project details when clicked (e.g., open a new form)
-        Dim projectDetailsForm As New ProjectDetailsForm()
-        projectDetailsForm.Show()
+        If clickedPanel Is Nothing Then
+            ' If sender is not a Panel, look for the parent Panel
+            Dim control As Control = DirectCast(sender, Control) ' Cast sender to Control
+            clickedPanel = control.Parent ' Get the parent control, which should be the Panel
+        End If
+
+        ' Check if clickedPanel is still Nothing; if so, exit the method
+        If clickedPanel IsNot Nothing Then
+            ' Display full project details when clicked (e.g., open a new form)
+            Dim orderDisplay As OrderDisplay = New OrderDisplay()
+            orderDisplay.Show()
+        End If
     End Sub
+
 
     Private Sub orderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -263,5 +276,6 @@ Public Class AddClientForm
             End If
         Next
     End Sub
+
 
 End Class

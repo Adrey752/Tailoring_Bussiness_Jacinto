@@ -1,65 +1,50 @@
 ﻿Public Class ProjectDetailsForm
-    Private Sub lblContactNumber_Click(sender As Object, e As EventArgs) Handles lblContactNumber.Click
+
+    Dim id As Integer
+    Dim client As Client
+
+    Public Sub New(id As Integer)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Me.id = id
+        LoadClient(id)
+
+        tbName.Text = client.Name
+        tbAddress.Text = client.Address
+        tbNumber.Text = client.Contact
+        tbStatus.Text = client.Status
+        nudOrders.Value = client.Quantity
+        nudPayment.Value = client.Payment
+        nudPrice.Value = client.Price
+
 
     End Sub
-
-    Private Sub lblTask_Click(sender As Object, e As EventArgs) Handles lblTask.Click
-
-    End Sub
-
-    Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub LoadClient(id As Integer)
+        Dim query As String = "SELECT * FROM client WHERE client_id = @client_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+            {"@client_id", id}
+            }
+        Dim dataTable = MySQLModule.ExecuteQuery(query, parameter)
+        Dim row = dataTable.Rows(0)
 
+        Dim name As String = Convert.ToString(row("name"))
+        Dim address As String = Convert.ToString(row("address"))
+        Dim contact As String = Convert.ToString(row("contact"))
+        Dim status As String = Convert.ToBoolean(row("status"))
+        Dim price As String = Convert.ToDecimal(row("price"))
+        Dim payment As String = Convert.ToDecimal(row("payment"))
+        Dim quantity As String = Convert.ToDecimal(row("quantity"))
+
+
+        client = New Client(name, address, contact, status, price, payment, quantity)
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs)
 
-    End Sub
-
-    Private Sub Label2_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
-    Private Sub Label1_Click_1(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
-
-    Private Sub btnSort_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-
-    End Sub
 End Class

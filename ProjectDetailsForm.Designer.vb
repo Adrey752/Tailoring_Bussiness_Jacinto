@@ -35,17 +35,18 @@ Partial Class ProjectDetailsForm
         Column3 = New DataGridViewTextBoxColumn()
         Label1 = New Label()
         ComboBox1 = New ComboBox()
-        ComboBox2 = New ComboBox()
-        ComboBox3 = New ComboBox()
-        Label2 = New Label()
-        Panel1 = New Panel()
         nudPayment = New NumericUpDown()
         lblPayment = New Label()
         nudPrice = New NumericUpDown()
         Label3 = New Label()
+        Label2 = New Label()
+        nudOrders = New NumericUpDown()
+        tbStatus = New TextBox()
+        Label4 = New Label()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPayment, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
+        CType(nudOrders, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' lblTask
@@ -54,7 +55,7 @@ Partial Class ProjectDetailsForm
         lblTask.BackColor = Color.Transparent
         lblTask.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTask.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblTask.Location = New Point(104, 140)
+        lblTask.Location = New Point(118, 376)
         lblTask.Name = "lblTask"
         lblTask.Size = New Size(99, 36)
         lblTask.TabIndex = 14
@@ -63,10 +64,11 @@ Partial Class ProjectDetailsForm
         ' tbNumber
         ' 
         tbNumber.BackColor = Color.White
-        tbNumber.Location = New Point(1013, 27)
+        tbNumber.Location = New Point(223, 153)
         tbNumber.MaxLength = 11
         tbNumber.Name = "tbNumber"
         tbNumber.PlaceholderText = "Enter Text"
+        tbNumber.ReadOnly = True
         tbNumber.Size = New Size(133, 23)
         tbNumber.TabIndex = 13
         ' 
@@ -74,10 +76,11 @@ Partial Class ProjectDetailsForm
         ' 
         tbAddress.BackColor = Color.White
         tbAddress.ForeColor = Color.BurlyWood
-        tbAddress.Location = New Point(104, 74)
+        tbAddress.Location = New Point(145, 102)
         tbAddress.MaxLength = 150
         tbAddress.Name = "tbAddress"
         tbAddress.PlaceholderText = "Enter Address"
+        tbAddress.ReadOnly = True
         tbAddress.Size = New Size(379, 23)
         tbAddress.TabIndex = 12
         ' 
@@ -85,10 +88,11 @@ Partial Class ProjectDetailsForm
         ' 
         tbName.BackColor = Color.White
         tbName.ForeColor = Color.BurlyWood
-        tbName.Location = New Point(104, 29)
+        tbName.Location = New Point(145, 57)
         tbName.MaxLength = 150
         tbName.Name = "tbName"
         tbName.PlaceholderText = "Enter Client Name"
+        tbName.ReadOnly = True
         tbName.Size = New Size(379, 23)
         tbName.TabIndex = 11
         ' 
@@ -98,7 +102,7 @@ Partial Class ProjectDetailsForm
         lblAddress.BackColor = Color.Transparent
         lblAddress.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAddress.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblAddress.Location = New Point(12, 72)
+        lblAddress.Location = New Point(53, 100)
         lblAddress.Name = "lblAddress"
         lblAddress.Size = New Size(86, 22)
         lblAddress.TabIndex = 10
@@ -110,7 +114,7 @@ Partial Class ProjectDetailsForm
         lblContactNumber.BackColor = Color.Transparent
         lblContactNumber.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblContactNumber.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblContactNumber.Location = New Point(842, 27)
+        lblContactNumber.Location = New Point(52, 153)
         lblContactNumber.Name = "lblContactNumber"
         lblContactNumber.Size = New Size(165, 22)
         lblContactNumber.TabIndex = 9
@@ -122,7 +126,7 @@ Partial Class ProjectDetailsForm
         LblName.BackColor = Color.Transparent
         LblName.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LblName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        LblName.Location = New Point(12, 27)
+        LblName.Location = New Point(53, 55)
         LblName.Name = "LblName"
         LblName.Size = New Size(72, 22)
         LblName.TabIndex = 8
@@ -133,7 +137,7 @@ Partial Class ProjectDetailsForm
         DataGridView1.AllowUserToOrderColumns = True
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridView1.Columns.AddRange(New DataGridViewColumn() {Tasks, Column2, Column3})
-        DataGridView1.Location = New Point(104, 225)
+        DataGridView1.Location = New Point(118, 418)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.Size = New Size(945, 61)
         DataGridView1.TabIndex = 20
@@ -162,7 +166,7 @@ Partial Class ProjectDetailsForm
         Label1.BackColor = Color.Transparent
         Label1.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label1.Location = New Point(104, 490)
+        Label1.Location = New Point(776, 124)
         Label1.Name = "Label1"
         Label1.Size = New Size(133, 36)
         Label1.TabIndex = 21
@@ -171,56 +175,19 @@ Partial Class ProjectDetailsForm
         ' ComboBox1
         ' 
         ComboBox1.FormattingEnabled = True
-        ComboBox1.Location = New Point(323, 196)
+        ComboBox1.Location = New Point(445, 389)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New Size(121, 23)
         ComboBox1.TabIndex = 22
         ComboBox1.Text = "Sort By"
         ' 
-        ' ComboBox2
-        ' 
-        ComboBox2.FormattingEnabled = True
-        ComboBox2.Location = New Point(624, 196)
-        ComboBox2.Name = "ComboBox2"
-        ComboBox2.Size = New Size(121, 23)
-        ComboBox2.TabIndex = 23
-        ComboBox2.Text = "Sort By"
-        ' 
-        ' ComboBox3
-        ' 
-        ComboBox3.FormattingEnabled = True
-        ComboBox3.Location = New Point(928, 196)
-        ComboBox3.Name = "ComboBox3"
-        ComboBox3.Size = New Size(121, 23)
-        ComboBox3.TabIndex = 24
-        ComboBox3.Text = "Sort By"
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.BackColor = Color.Transparent
-        Label2.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label2.Location = New Point(104, 322)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(94, 36)
-        Label2.TabIndex = 26
-        Label2.Text = "Tasks"
-        ' 
-        ' Panel1
-        ' 
-        Panel1.BackColor = SystemColors.ActiveCaptionText
-        Panel1.Location = New Point(104, 370)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(952, 93)
-        Panel1.TabIndex = 27
-        ' 
         ' nudPayment
         ' 
         nudPayment.Anchor = AnchorStyles.None
-        nudPayment.Location = New Point(296, 584)
+        nudPayment.Location = New Point(877, 212)
         nudPayment.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudPayment.Name = "nudPayment"
+        nudPayment.ReadOnly = True
         nudPayment.Size = New Size(120, 23)
         nudPayment.TabIndex = 29
         ' 
@@ -229,7 +196,7 @@ Partial Class ProjectDetailsForm
         lblPayment.Anchor = AnchorStyles.None
         lblPayment.AutoSize = True
         lblPayment.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblPayment.Location = New Point(204, 589)
+        lblPayment.Location = New Point(785, 217)
         lblPayment.Name = "lblPayment"
         lblPayment.Size = New Size(80, 15)
         lblPayment.TabIndex = 28
@@ -238,9 +205,10 @@ Partial Class ProjectDetailsForm
         ' nudPrice
         ' 
         nudPrice.Anchor = AnchorStyles.None
-        nudPrice.Location = New Point(296, 544)
+        nudPrice.Location = New Point(877, 172)
         nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
         nudPrice.Name = "nudPrice"
+        nudPrice.ReadOnly = True
         nudPrice.Size = New Size(120, 23)
         nudPrice.TabIndex = 30
         ' 
@@ -249,25 +217,67 @@ Partial Class ProjectDetailsForm
         Label3.Anchor = AnchorStyles.None
         Label3.AutoSize = True
         Label3.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label3.Location = New Point(205, 546)
+        Label3.Location = New Point(786, 174)
         Label3.Name = "Label3"
         Label3.Size = New Size(75, 15)
         Label3.TabIndex = 31
         Label3.Text = "Amount Due"
         ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.BackColor = Color.Transparent
+        Label2.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label2.Location = New Point(55, 211)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(177, 22)
+        Label2.TabIndex = 32
+        Label2.Text = "Number of Orders:"
+        ' 
+        ' nudOrders
+        ' 
+        nudOrders.Location = New Point(250, 211)
+        nudOrders.Name = "nudOrders"
+        nudOrders.ReadOnly = True
+        nudOrders.Size = New Size(120, 23)
+        nudOrders.TabIndex = 33
+        ' 
+        ' tbStatus
+        ' 
+        tbStatus.BackColor = Color.White
+        tbStatus.Location = New Point(877, 54)
+        tbStatus.MaxLength = 11
+        tbStatus.Name = "tbStatus"
+        tbStatus.ReadOnly = True
+        tbStatus.Size = New Size(133, 23)
+        tbStatus.TabIndex = 35
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.BackColor = Color.Transparent
+        Label4.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label4.Location = New Point(779, 55)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(61, 22)
+        Label4.TabIndex = 34
+        Label4.Text = "Status"
+        ' 
         ' ProjectDetailsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1169, 756)
+        ClientSize = New Size(1169, 749)
+        Controls.Add(tbStatus)
+        Controls.Add(Label4)
+        Controls.Add(nudOrders)
+        Controls.Add(Label2)
         Controls.Add(nudPrice)
         Controls.Add(Label3)
         Controls.Add(nudPayment)
         Controls.Add(lblPayment)
-        Controls.Add(Panel1)
-        Controls.Add(Label2)
-        Controls.Add(ComboBox3)
-        Controls.Add(ComboBox2)
         Controls.Add(ComboBox1)
         Controls.Add(Label1)
         Controls.Add(DataGridView1)
@@ -283,6 +293,7 @@ Partial Class ProjectDetailsForm
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         CType(nudPayment, ComponentModel.ISupportInitialize).EndInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
+        CType(nudOrders, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -300,12 +311,12 @@ Partial Class ProjectDetailsForm
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Label1 As Label
     Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents nudPayment As NumericUpDown
     Friend WithEvents lblPayment As Label
     Friend WithEvents nudPrice As NumericUpDown
     Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents nudOrders As NumericUpDown
+    Friend WithEvents tbStatus As TextBox
+    Friend WithEvents Label4 As Label
 End Class

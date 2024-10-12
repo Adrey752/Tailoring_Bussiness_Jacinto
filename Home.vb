@@ -5,8 +5,9 @@
 
         ' This call is required by the designer.
         InitializeComponent()
-        _login = login
+
         ' Add any initialization after the InitializeComponent() call.
+        Me._login = login
 
     End Sub
     Public Sub Home_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -55,9 +56,11 @@
 
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
-        Dim newClient = New Client("", "", -1)
+        Dim newClient = New Client("", "", -1, False, 0, 0, 0)
         Dim addOrder As New AddClientForm(Me, newClient)
+
         addOrder.Show()
+
     End Sub
 
     Private Sub btnAddrOrder_Paint(sender As Object, e As PaintEventArgs) Handles btnAddrOrder.Paint
@@ -107,7 +110,14 @@
         _login.Close()
     End Sub
 
+    Private Sub DataGridOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOrders.CellContentClick
+        If e.ColumnIndex = DataGridOrders.Columns("btDetails").Index AndAlso e.RowIndex >= 0 Then
+            Dim clickedRow As DataGridViewRow = DataGridOrders.Rows(e.RowIndex)
+            Dim client_id As Integer = Convert.ToInt32(clickedRow.Cells("colId").Value)
 
+            Dim projectDetails = New ProjectDetailsForm(client_id)
+            projectDetails.Show()
 
-
+        End If
+    End Sub
 End Class

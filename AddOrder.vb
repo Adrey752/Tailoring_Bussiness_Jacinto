@@ -19,11 +19,15 @@ Public Class AddOrder
     End Sub
 
     Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Start()
 
         'lblAddMoreOrders.ForeColor = Color.FromArgb(163, 120, 81)
         'Me.BackColor = Color.FromArgb(9, 11, 23)
     End Sub
-
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        tbOrderName.Focus() ' Set focus to the TextBox
+        Timer1.Stop() ' Stop the timer after setting focus
+    End Sub
 
     Private Sub LoadMeasurementsType()
         Dim query = "SELECT types FROM size_types"
@@ -41,16 +45,15 @@ Public Class AddOrder
         Dim serviceType = cbStype.Text
         Dim description = rbDescription.Text
         Dim price = nudPrice.Value
-        Dim garmentType = cbGarment.Text
         order.OrderName = orderName
         order.Type = serviceType
         order.Description = description
         order.Price = price
-        order.GarmentType = garmentType
         client.addOrder(order)
 
-        _orderForm.AddProjectPanel(orderName, order.Type, order.GarmentType, order.Description, order)
+        _orderForm.AddProjectPanel(orderName, order.Type, order.Description, order)
         Me.Close()
+        _orderForm.Show()
 
     End Sub
 
