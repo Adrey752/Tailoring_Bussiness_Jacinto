@@ -120,4 +120,78 @@
 
         End If
     End Sub
+
+    Private Sub DataGridOrders_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridOrders.KeyDown
+        If e.KeyCode = Keys.Delete Then
+            If DataGridOrders.SelectedRows.Count > 0 Then
+                Dim verify As DialogResult = MessageBox.Show("Are you sure you want to delete this items?")
+                If verify = DialogResult.OK Then
+                    For Each row As DataGridViewRow In DataGridOrders.SelectedRows
+                        Dim id As Integer = Convert.ToInt64(row.Cells("client_id").Value)
+                        MessageBox.Show($"Client ID to delete: {id}")
+                        DeleteClient(id)
+                        DataGridOrders.Rows.Remove(row)
+
+                    Next
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub DeleteClient(client_id As Integer)
+
+        Dim deleteClient As String = "DELETE FROM client WHERE client_id = @client_id"
+        Dim delClientParam As New Dictionary(Of String, Object) From {
+        {"client_id", client_id}
+        }
+
+
+        Dim ListOrder As List(Of Integer) = GetOrderIds(client_id)
+        If ListOrder.Count > 0 Then
+            For Each orderId As Integer In ListOrder
+                DeleteSizesFromDatabase(orderId)
+            Next
+            Dim delOrder As String = "DELETE FROM client_order WHERE client_id = @client_id"
+            Dim delOrderParam As New Dictionary(Of String, Object) From {
+            {"client_id", client_id}
+            }
+            MySQLModule.ExecuteNonQuery(delOrder, delOrderParam)
+            MySQLModule.ExecuteNonQuery(deleteClient, delClientParam)
+
+        Else
+            MySQLModule.ExecuteNonQuery(deleteClient, delClientParam)
+        End If
+
+    End Sub
+
+    Private Function GetOrderIds(client_id As Integer) As List(Of Integer)
+        Dim listOfIds As New List(Of Integer)
+
+        Dim query As String = "SELECT order_id FROM client_order WHERE client_id = @client_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"client_id", client_id}
+        }
+
+        Dim resultTable As DataTable = MySQLModule.ExecuteQuery(query, parameter)
+
+        If resultTable.Rows.Count > 0 Then
+
+            For Each row As DataRow In resultTable.Rows
+                Dim id As Integer = Convert.ToInt64(row(0))
+                listOfIds.Add(id)
+            Next
+        End If
+
+        Return listOfIds
+
+    End Function
+
+    Private Sub DeleteSizesFromDatabase(orderId As Integer)
+        Dim query As String = "DELETE FROM size_values WHERE order_id = @order_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"order_id", orderId}
+        }
+        MySQLModule.ExecuteNonQuery(query, parameter)
+
+    End Sub
 End Class

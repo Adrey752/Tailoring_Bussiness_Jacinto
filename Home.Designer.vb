@@ -24,6 +24,7 @@ Partial Class Home
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Home))
         Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
@@ -34,18 +35,7 @@ Partial Class Home
         Dim DataGridViewCellStyle9 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Home))
         DataGridOrders = New DataGridView()
-        btDetails = New DataGridViewButtonColumn()
-        colId = New DataGridViewTextBoxColumn()
-        colName = New DataGridViewTextBoxColumn()
-        colAddress = New DataGridViewTextBoxColumn()
-        colContNumber = New DataGridViewTextBoxColumn()
-        colStatus = New DataGridViewTextBoxColumn()
-        colPrice = New DataGridViewTextBoxColumn()
-        colPay = New DataGridViewTextBoxColumn()
-        colStartedDate = New DataGridViewTextBoxColumn()
-        colDueDate = New DataGridViewTextBoxColumn()
         btnToggle = New Button()
         pnLogout = New Panel()
         btnSetNew = New Button()
@@ -60,6 +50,16 @@ Partial Class Home
         pbTailoringJacinto = New PictureBox()
         TextBox1 = New TextBox()
         PictureBox1 = New PictureBox()
+        btDetails = New DataGridViewButtonColumn()
+        client_id = New DataGridViewTextBoxColumn()
+        colName = New DataGridViewTextBoxColumn()
+        colAddress = New DataGridViewTextBoxColumn()
+        colContNumber = New DataGridViewTextBoxColumn()
+        colStatus = New DataGridViewTextBoxColumn()
+        colPrice = New DataGridViewTextBoxColumn()
+        colPay = New DataGridViewTextBoxColumn()
+        colStartedDate = New DataGridViewTextBoxColumn()
+        colDueDate = New DataGridViewTextBoxColumn()
         CType(DataGridOrders, ComponentModel.ISupportInitialize).BeginInit()
         pnLogout.SuspendLayout()
         pnNavigation.SuspendLayout()
@@ -83,7 +83,7 @@ Partial Class Home
         DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
         DataGridOrders.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         DataGridOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridOrders.Columns.AddRange(New DataGridViewColumn() {btDetails, colId, colName, colAddress, colContNumber, colStatus, colPrice, colPay, colStartedDate, colDueDate})
+        DataGridOrders.Columns.AddRange(New DataGridViewColumn() {btDetails, client_id, colName, colAddress, colContNumber, colStatus, colPrice, colPay, colStartedDate, colDueDate})
         DataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle12.BackColor = Color.FromArgb(CByte(33), CByte(33), CByte(33))
         DataGridViewCellStyle12.Font = New Font("Segoe UI", 9F)
@@ -98,154 +98,6 @@ Partial Class Home
         DataGridOrders.Name = "DataGridOrders"
         DataGridOrders.Size = New Size(846, 439)
         DataGridOrders.TabIndex = 1
-        ' 
-        ' btDetails
-        ' 
-        btDetails.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle2.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        DataGridViewCellStyle2.ForeColor = Color.White
-        btDetails.DefaultCellStyle = DataGridViewCellStyle2
-        btDetails.FillWeight = 48.07692F
-        btDetails.FlatStyle = FlatStyle.Flat
-        btDetails.HeaderText = "View Details"
-        btDetails.Name = "btDetails"
-        btDetails.Resizable = DataGridViewTriState.True
-        btDetails.Text = "Details"
-        btDetails.UseColumnTextForButtonValue = True
-        ' 
-        ' colId
-        ' 
-        colId.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
-        colId.DataPropertyName = "client_id"
-        DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle3.ForeColor = Color.White
-        DataGridViewCellStyle3.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle3.SelectionForeColor = Color.White
-        colId.DefaultCellStyle = DataGridViewCellStyle3
-        colId.FillWeight = 48.07692F
-        colId.HeaderText = "id"
-        colId.Name = "colId"
-        colId.Width = 47
-        ' 
-        ' colName
-        ' 
-        colName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        colName.DataPropertyName = "name"
-        DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle4.ForeColor = Color.White
-        DataGridViewCellStyle4.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle4.SelectionForeColor = Color.White
-        colName.DefaultCellStyle = DataGridViewCellStyle4
-        colName.HeaderText = "Name"
-        colName.Name = "colName"
-        colName.Resizable = DataGridViewTriState.True
-        colName.SortMode = DataGridViewColumnSortMode.NotSortable
-        colName.Width = 57
-        ' 
-        ' colAddress
-        ' 
-        colAddress.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        colAddress.DataPropertyName = "address"
-        DataGridViewCellStyle5.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle5.ForeColor = Color.White
-        DataGridViewCellStyle5.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle5.SelectionForeColor = Color.White
-        colAddress.DefaultCellStyle = DataGridViewCellStyle5
-        colAddress.HeaderText = "Address"
-        colAddress.Name = "colAddress"
-        colAddress.Resizable = DataGridViewTriState.True
-        colAddress.SortMode = DataGridViewColumnSortMode.NotSortable
-        colAddress.Width = 71
-        ' 
-        ' colContNumber
-        ' 
-        colContNumber.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        colContNumber.DataPropertyName = "contact"
-        DataGridViewCellStyle6.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle6.ForeColor = Color.White
-        DataGridViewCellStyle6.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle6.SelectionForeColor = Color.White
-        colContNumber.DefaultCellStyle = DataGridViewCellStyle6
-        colContNumber.FillWeight = 48.07692F
-        colContNumber.HeaderText = "ContactNumber"
-        colContNumber.MinimumWidth = 120
-        colContNumber.Name = "colContNumber"
-        colContNumber.Resizable = DataGridViewTriState.True
-        colContNumber.SortMode = DataGridViewColumnSortMode.NotSortable
-        colContNumber.Width = 120
-        ' 
-        ' colStatus
-        ' 
-        colStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        colStatus.DataPropertyName = "status"
-        DataGridViewCellStyle7.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle7.ForeColor = Color.White
-        DataGridViewCellStyle7.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle7.SelectionForeColor = Color.White
-        colStatus.DefaultCellStyle = DataGridViewCellStyle7
-        colStatus.HeaderText = "Status"
-        colStatus.MinimumWidth = 60
-        colStatus.Name = "colStatus"
-        colStatus.Resizable = DataGridViewTriState.True
-        colStatus.SortMode = DataGridViewColumnSortMode.NotSortable
-        colStatus.Width = 60
-        ' 
-        ' colPrice
-        ' 
-        colPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        colPrice.DataPropertyName = "price"
-        DataGridViewCellStyle8.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle8.ForeColor = Color.White
-        DataGridViewCellStyle8.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle8.SelectionForeColor = Color.White
-        colPrice.DefaultCellStyle = DataGridViewCellStyle8
-        colPrice.FillWeight = 48.07692F
-        colPrice.HeaderText = "Price"
-        colPrice.MinimumWidth = 73
-        colPrice.Name = "colPrice"
-        colPrice.Resizable = DataGridViewTriState.True
-        colPrice.SortMode = DataGridViewColumnSortMode.NotSortable
-        ' 
-        ' colPay
-        ' 
-        colPay.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        colPay.DataPropertyName = "payment"
-        DataGridViewCellStyle9.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle9.ForeColor = Color.White
-        DataGridViewCellStyle9.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle9.SelectionForeColor = Color.White
-        colPay.DefaultCellStyle = DataGridViewCellStyle9
-        colPay.FillWeight = 50F
-        colPay.HeaderText = "Payment"
-        colPay.MinimumWidth = 65
-        colPay.Name = "colPay"
-        colPay.Width = 65
-        ' 
-        ' colStartedDate
-        ' 
-        DataGridViewCellStyle10.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle10.ForeColor = Color.White
-        DataGridViewCellStyle10.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle10.SelectionForeColor = Color.White
-        colStartedDate.DefaultCellStyle = DataGridViewCellStyle10
-        colStartedDate.HeaderText = "Started Date"
-        colStartedDate.MinimumWidth = 77
-        colStartedDate.Name = "colStartedDate"
-        colStartedDate.Width = 159
-        ' 
-        ' colDueDate
-        ' 
-        DataGridViewCellStyle11.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
-        DataGridViewCellStyle11.ForeColor = Color.White
-        DataGridViewCellStyle11.SelectionBackColor = Color.Gray
-        DataGridViewCellStyle11.SelectionForeColor = Color.White
-        colDueDate.DefaultCellStyle = DataGridViewCellStyle11
-        colDueDate.HeaderText = "Due Date"
-        colDueDate.MinimumWidth = 80
-        colDueDate.Name = "colDueDate"
-        colDueDate.Width = 160
         ' 
         ' btnToggle
         ' 
@@ -415,6 +267,154 @@ Partial Class Home
         PictureBox1.TabIndex = 10
         PictureBox1.TabStop = False
         ' 
+        ' btDetails
+        ' 
+        btDetails.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle2.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle2.ForeColor = Color.White
+        btDetails.DefaultCellStyle = DataGridViewCellStyle2
+        btDetails.FillWeight = 48.07692F
+        btDetails.FlatStyle = FlatStyle.Flat
+        btDetails.HeaderText = "View Details"
+        btDetails.Name = "btDetails"
+        btDetails.Resizable = DataGridViewTriState.True
+        btDetails.Text = "Details"
+        btDetails.UseColumnTextForButtonValue = True
+        ' 
+        ' client_id
+        ' 
+        client_id.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
+        client_id.DataPropertyName = "client_id"
+        DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle3.ForeColor = Color.White
+        DataGridViewCellStyle3.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle3.SelectionForeColor = Color.White
+        client_id.DefaultCellStyle = DataGridViewCellStyle3
+        client_id.FillWeight = 48.07692F
+        client_id.HeaderText = "id"
+        client_id.Name = "client_id"
+        client_id.Width = 47
+        ' 
+        ' colName
+        ' 
+        colName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        colName.DataPropertyName = "name"
+        DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle4.ForeColor = Color.White
+        DataGridViewCellStyle4.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle4.SelectionForeColor = Color.White
+        colName.DefaultCellStyle = DataGridViewCellStyle4
+        colName.HeaderText = "Name"
+        colName.Name = "colName"
+        colName.Resizable = DataGridViewTriState.True
+        colName.SortMode = DataGridViewColumnSortMode.NotSortable
+        colName.Width = 57
+        ' 
+        ' colAddress
+        ' 
+        colAddress.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        colAddress.DataPropertyName = "address"
+        DataGridViewCellStyle5.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle5.ForeColor = Color.White
+        DataGridViewCellStyle5.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle5.SelectionForeColor = Color.White
+        colAddress.DefaultCellStyle = DataGridViewCellStyle5
+        colAddress.HeaderText = "Address"
+        colAddress.Name = "colAddress"
+        colAddress.Resizable = DataGridViewTriState.True
+        colAddress.SortMode = DataGridViewColumnSortMode.NotSortable
+        colAddress.Width = 71
+        ' 
+        ' colContNumber
+        ' 
+        colContNumber.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        colContNumber.DataPropertyName = "contact"
+        DataGridViewCellStyle6.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle6.ForeColor = Color.White
+        DataGridViewCellStyle6.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle6.SelectionForeColor = Color.White
+        colContNumber.DefaultCellStyle = DataGridViewCellStyle6
+        colContNumber.FillWeight = 48.07692F
+        colContNumber.HeaderText = "ContactNumber"
+        colContNumber.MinimumWidth = 120
+        colContNumber.Name = "colContNumber"
+        colContNumber.Resizable = DataGridViewTriState.True
+        colContNumber.SortMode = DataGridViewColumnSortMode.NotSortable
+        colContNumber.Width = 120
+        ' 
+        ' colStatus
+        ' 
+        colStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        colStatus.DataPropertyName = "status"
+        DataGridViewCellStyle7.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle7.ForeColor = Color.White
+        DataGridViewCellStyle7.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle7.SelectionForeColor = Color.White
+        colStatus.DefaultCellStyle = DataGridViewCellStyle7
+        colStatus.HeaderText = "Status"
+        colStatus.MinimumWidth = 60
+        colStatus.Name = "colStatus"
+        colStatus.Resizable = DataGridViewTriState.True
+        colStatus.SortMode = DataGridViewColumnSortMode.NotSortable
+        colStatus.Width = 60
+        ' 
+        ' colPrice
+        ' 
+        colPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        colPrice.DataPropertyName = "price"
+        DataGridViewCellStyle8.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle8.ForeColor = Color.White
+        DataGridViewCellStyle8.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle8.SelectionForeColor = Color.White
+        colPrice.DefaultCellStyle = DataGridViewCellStyle8
+        colPrice.FillWeight = 48.07692F
+        colPrice.HeaderText = "Price"
+        colPrice.MinimumWidth = 73
+        colPrice.Name = "colPrice"
+        colPrice.Resizable = DataGridViewTriState.True
+        colPrice.SortMode = DataGridViewColumnSortMode.NotSortable
+        ' 
+        ' colPay
+        ' 
+        colPay.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        colPay.DataPropertyName = "payment"
+        DataGridViewCellStyle9.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle9.ForeColor = Color.White
+        DataGridViewCellStyle9.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle9.SelectionForeColor = Color.White
+        colPay.DefaultCellStyle = DataGridViewCellStyle9
+        colPay.FillWeight = 50F
+        colPay.HeaderText = "Payment"
+        colPay.MinimumWidth = 65
+        colPay.Name = "colPay"
+        colPay.Width = 65
+        ' 
+        ' colStartedDate
+        ' 
+        DataGridViewCellStyle10.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle10.ForeColor = Color.White
+        DataGridViewCellStyle10.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle10.SelectionForeColor = Color.White
+        colStartedDate.DefaultCellStyle = DataGridViewCellStyle10
+        colStartedDate.HeaderText = "Started Date"
+        colStartedDate.MinimumWidth = 77
+        colStartedDate.Name = "colStartedDate"
+        colStartedDate.Width = 159
+        ' 
+        ' colDueDate
+        ' 
+        DataGridViewCellStyle11.BackColor = Color.FromArgb(CByte(56), CByte(56), CByte(56))
+        DataGridViewCellStyle11.ForeColor = Color.White
+        DataGridViewCellStyle11.SelectionBackColor = Color.Gray
+        DataGridViewCellStyle11.SelectionForeColor = Color.White
+        colDueDate.DefaultCellStyle = DataGridViewCellStyle11
+        colDueDate.HeaderText = "Due Date"
+        colDueDate.MinimumWidth = 80
+        colDueDate.Name = "colDueDate"
+        colDueDate.Width = 160
+        ' 
         ' Home
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -460,7 +460,7 @@ Partial Class Home
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btDetails As DataGridViewButtonColumn
-    Friend WithEvents colId As DataGridViewTextBoxColumn
+    Friend WithEvents client_id As DataGridViewTextBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colAddress As DataGridViewTextBoxColumn
     Friend WithEvents colContNumber As DataGridViewTextBoxColumn
