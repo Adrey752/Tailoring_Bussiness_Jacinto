@@ -34,7 +34,7 @@ Public Class AddClientForm
                 Dim orderId As Integer = InsertOrder(order, clientId)
 
                 ' Step 3: Insert each DressMeasurement (Size) for the order
-                For Each size As DressMeasurement In order.Sizes
+                For Each size As Size In order.Sizes
                     InsertSize(size, orderId)
                 Next
             Next
@@ -73,12 +73,12 @@ Public Class AddClientForm
         ' Return the newly inserted order_id
         Return Convert.ToInt32(MySQLModule.ExecuteScalar(orderQuery, orderParams))
     End Function
-    Public Sub InsertSize(size As DressMeasurement, orderId As Integer)
-        Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_type) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment)"
+    Public Sub InsertSize(size As Size, orderId As Integer)
+        Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_id) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment_id)"
         Dim sizeParams As New Dictionary(Of String, Object) From {
         {"@OrderId", orderId},
         {"@TypeId", GetTypeId(size.PartMeasurement)}, ' Get type_id for the measurement type
-        {"@garment", size.garment},
+        {"@garment_id", GetGarmentId(size.garment)},
         {"@SizeValue", size.Value},
         {"@SizeUnit", size.Unit}
     }
@@ -101,14 +101,28 @@ Public Class AddClientForm
         addOrder.Show()
     End Sub
 
-    Public Function GetTypeId(partMeasurement As String) As Integer
+    Public Shared Function GetTypeId(partMeasurement As String) As Integer
         Dim query As String = "SELECT type_id FROM size_types WHERE types = @PartMeasurement"
         Dim parameters As New Dictionary(Of String, Object) From {{"@PartMeasurement", partMeasurement}}
         Dim result As Object = MySQLModule.ExecuteScalar(query, parameters)
         If result IsNot Nothing Then
-            Return Convert.ToInt32(result)
+            Return Convert.ToInt64(result)
         Else
             Throw New Exception("Invalid measurement type: " & partMeasurement)
+        End If
+    End Function
+
+    Public Shared Function GetGarmentId(garment As String)
+        Dim query As String = "SELECT garment_id FROM garment_types WHERE garment_type = @garment_type"
+        Dim parament As New Dictionary(Of String, Object) From {
+        {"garment_type", garment}
+        }
+        Dim result As Object = MySQLModule.ExecuteScalar(query, parament)
+
+        If result IsNot Nothing Then
+            Return Convert.ToInt64(result)
+        Else
+            Throw New Exception("Invalid garment Type" & garment)
         End If
     End Function
 

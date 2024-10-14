@@ -1,4 +1,4 @@
-﻿Public Class DressMeasurement
+﻿Public Class Size
     Public Property PartMeasurement As String
     Public Property Value As Decimal
     Public Property Unit As String

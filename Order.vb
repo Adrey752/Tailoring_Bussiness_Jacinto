@@ -5,7 +5,7 @@
     Public Property Description As String
     Public Property Price As Decimal
     Public Property Done As Boolean
-    Public Property Sizes As List(Of DressMeasurement)
+    Public Property Sizes As List(Of Size)
 
 
     Public Sub New(orderName As String, serviceType As String, garmentType As String, description As String, price As Decimal)
@@ -14,10 +14,10 @@
         Me.Description = description
         Me.Price = price
         Me.Done = False
-        Sizes = New List(Of DressMeasurement)()
+        Sizes = New List(Of Size)()
     End Sub
 
-    Public Sub AddSize(size As DressMeasurement)
+    Public Sub AddSize(size As Size)
         Sizes.Add(size)
     End Sub
 

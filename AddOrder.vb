@@ -38,6 +38,17 @@ Public Class AddOrder
         Next
     End Sub
 
+    Private Sub LoadGarmentTypes()
+        Dim query As String = "SELECT garment_type FROM garment_types"
+        Dim parameter As New Dictionary(Of String, Object)
+        Dim datatable As DataTable = MySQLModule.ExecuteQuery(query, parameter)
+
+        For Each row As DataRow In datatable.Rows
+            cbGarment.Items.Add(row("garment_type").ToString())
+        Next
+
+    End Sub
+
 
 
     Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
@@ -62,7 +73,7 @@ Public Class AddOrder
         Dim value = nudValue.Value
         Dim unit = cbUnit.Text
         Dim garment = cbGarment.Text
-        Dim measurement = New DressMeasurement(measurementType, value, unit, garment)
+        Dim measurement = New Size(measurementType, value, unit, garment)
 
         order.AddSize(measurement)
 

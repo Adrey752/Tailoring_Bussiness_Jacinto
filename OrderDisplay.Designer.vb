@@ -52,7 +52,7 @@ Partial Class OrderDisplay
         Label1.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(21, 43)
         Label1.Name = "Label1"
-        Label1.Size = New Size(104, 21)
+        Label1.Size = New Drawing.Size(104, 21)
         Label1.TabIndex = 0
         Label1.Text = "Order Name: "
         ' 
@@ -61,7 +61,7 @@ Partial Class OrderDisplay
         TextBox1.Enabled = False
         TextBox1.Location = New Point(131, 45)
         TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(165, 23)
+        TextBox1.Size = New Drawing.Size(165, 23)
         TextBox1.TabIndex = 1
         ' 
         ' btnSave
@@ -69,7 +69,7 @@ Partial Class OrderDisplay
         btnSave.Enabled = False
         btnSave.Location = New Point(533, 21)
         btnSave.Name = "btnSave"
-        btnSave.Size = New Size(75, 23)
+        btnSave.Size = New Drawing.Size(75, 23)
         btnSave.TabIndex = 2
         btnSave.Text = "Save"
         btnSave.UseVisualStyleBackColor = True
@@ -78,7 +78,7 @@ Partial Class OrderDisplay
         ' 
         btnEdit.Location = New Point(614, 21)
         btnEdit.Name = "btnEdit"
-        btnEdit.Size = New Size(75, 23)
+        btnEdit.Size = New Drawing.Size(75, 23)
         btnEdit.TabIndex = 3
         btnEdit.Text = "Edit"
         btnEdit.UseVisualStyleBackColor = True
@@ -87,7 +87,7 @@ Partial Class OrderDisplay
         ' 
         btnClose.Location = New Point(696, 21)
         btnClose.Name = "btnClose"
-        btnClose.Size = New Size(75, 23)
+        btnClose.Size = New Drawing.Size(75, 23)
         btnClose.TabIndex = 4
         btnClose.Text = "Close"
         btnClose.UseVisualStyleBackColor = True
@@ -98,7 +98,7 @@ Partial Class OrderDisplay
         Label2.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label2.Location = New Point(21, 97)
         Label2.Name = "Label2"
-        Label2.Size = New Size(98, 21)
+        Label2.Size = New Drawing.Size(98, 21)
         Label2.TabIndex = 5
         Label2.Text = "Order Type:  "
         ' 
@@ -108,7 +108,7 @@ Partial Class OrderDisplay
         Label3.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label3.Location = New Point(21, 144)
         Label3.Name = "Label3"
-        Label3.Size = New Size(44, 21)
+        Label3.Size = New Drawing.Size(44, 21)
         Label3.TabIndex = 6
         Label3.Text = "Price"
         ' 
@@ -118,7 +118,7 @@ Partial Class OrderDisplay
         Label4.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label4.Location = New Point(21, 193)
         Label4.Name = "Label4"
-        Label4.Size = New Size(59, 21)
+        Label4.Size = New Drawing.Size(59, 21)
         Label4.TabIndex = 7
         Label4.Text = "Status: "
         ' 
@@ -128,7 +128,7 @@ Partial Class OrderDisplay
         Label5.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label5.Location = New Point(131, 193)
         Label5.Name = "Label5"
-        Label5.Size = New Size(47, 21)
+        Label5.Size = New Drawing.Size(47, 21)
         Label5.TabIndex = 8
         Label5.Text = "Done"
         ' 
@@ -138,7 +138,7 @@ Partial Class OrderDisplay
         ComboBox1.FormattingEnabled = True
         ComboBox1.Location = New Point(131, 99)
         ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(165, 23)
+        ComboBox1.Size = New Drawing.Size(165, 23)
         ComboBox1.TabIndex = 9
         ' 
         ' Label6
@@ -147,7 +147,7 @@ Partial Class OrderDisplay
         Label6.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label6.Location = New Point(12, 242)
         Label6.Name = "Label6"
-        Label6.Size = New Size(92, 21)
+        Label6.Size = New Drawing.Size(92, 21)
         Label6.TabIndex = 10
         Label6.Text = "Description:"
         ' 
@@ -156,7 +156,7 @@ Partial Class OrderDisplay
         RichTextBox1.Enabled = False
         RichTextBox1.Location = New Point(73, 297)
         RichTextBox1.Name = "RichTextBox1"
-        RichTextBox1.Size = New Size(264, 124)
+        RichTextBox1.Size = New Drawing.Size(264, 124)
         RichTextBox1.TabIndex = 11
         RichTextBox1.Text = ""
         ' 
@@ -166,7 +166,7 @@ Partial Class OrderDisplay
         DataGridView1.Columns.AddRange(New DataGridViewColumn() {colBodyPart, colMeasurement, colGarment})
         DataGridView1.Location = New Point(443, 297)
         DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(328, 124)
+        DataGridView1.Size = New Drawing.Size(328, 124)
         DataGridView1.TabIndex = 12
         ' 
         ' colBodyPart
@@ -189,7 +189,7 @@ Partial Class OrderDisplay
         NumericUpDown1.Enabled = False
         NumericUpDown1.Location = New Point(131, 147)
         NumericUpDown1.Name = "NumericUpDown1"
-        NumericUpDown1.Size = New Size(120, 23)
+        NumericUpDown1.Size = New Drawing.Size(120, 23)
         NumericUpDown1.TabIndex = 13
         ' 
         ' lblMeasurements
@@ -197,7 +197,7 @@ Partial Class OrderDisplay
         lblMeasurements.AutoSize = True
         lblMeasurements.Location = New Point(443, 260)
         lblMeasurements.Name = "lblMeasurements"
-        lblMeasurements.Size = New Size(85, 15)
+        lblMeasurements.Size = New Drawing.Size(85, 15)
         lblMeasurements.TabIndex = 14
         lblMeasurements.Text = "Measurements"
         ' 
@@ -205,7 +205,7 @@ Partial Class OrderDisplay
         ' 
         PictureBox1.Location = New Point(498, 66)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(273, 171)
+        PictureBox1.Size = New Drawing.Size(273, 171)
         PictureBox1.TabIndex = 15
         PictureBox1.TabStop = False
         ' 
@@ -213,7 +213,7 @@ Partial Class OrderDisplay
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Drawing.Size(800, 450)
         Controls.Add(PictureBox1)
         Controls.Add(lblMeasurements)
         Controls.Add(NumericUpDown1)

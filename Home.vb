@@ -111,9 +111,11 @@
     End Sub
 
     Private Sub DataGridOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOrders.CellContentClick
-        If e.ColumnIndex = DataGridOrders.Columns("btDetails").Index AndAlso e.RowIndex >= 0 Then
-            Dim clickedRow As DataGridViewRow = DataGridOrders.Rows(e.RowIndex)
-            Dim client_id As Integer = Convert.ToInt32(clickedRow.Cells("colId").Value)
+
+
+        Dim clickedRow As DataGridViewRow = DataGridOrders.Rows(e.RowIndex)
+        If e.ColumnIndex = DataGridOrders.Columns("btDetails").Index AndAlso e.RowIndex >= 0 AndAlso Not IsDBNull(clickedRow.Cells("client_id").Value) Then
+            Dim client_id As Integer = Convert.ToInt32(clickedRow.Cells("client_id").Value)
 
             Dim projectDetails = New ProjectDetailsForm(client_id)
             projectDetails.Show()
@@ -123,19 +125,26 @@
 
     Private Sub DataGridOrders_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridOrders.KeyDown
         If e.KeyCode = Keys.Delete Then
+            If DataGridOrders.SelectedRows.Count = 1 AndAlso IsDBNull(DataGridOrders.SelectedRows(0).Cells("client_id").Value) Then
+                Exit Sub
+            End If
             If DataGridOrders.SelectedRows.Count > 0 Then
-                Dim verify As DialogResult = MessageBox.Show("Are you sure you want to delete this items?")
-                If verify = DialogResult.OK Then
-                    For Each row As DataGridViewRow In DataGridOrders.SelectedRows
-                        Dim id As Integer = Convert.ToInt64(row.Cells("client_id").Value)
-                        MessageBox.Show($"Client ID to delete: {id}")
-                        DeleteClient(id)
-                        DataGridOrders.Rows.Remove(row)
 
-                    Next
+                    Dim verify As DialogResult = MessageBox.Show("Are you sure you want to delete this items?")
+                    If verify = DialogResult.OK Then
+                        For Each row As DataGridViewRow In DataGridOrders.SelectedRows
+                            If IsDBNull(row.Cells("client_id").Value) Then
+                                Continue For
+                            End If
+                            Dim id As Integer = Convert.ToInt64(row.Cells("client_id").Value)
+                            MessageBox.Show($"Client ID to delete: {id}")
+                            DeleteClient(id)
+                            DataGridOrders.Rows.Remove(row)
+
+                        Next
+                    End If
                 End If
             End If
-        End If
     End Sub
 
     Private Sub DeleteClient(client_id As Integer)

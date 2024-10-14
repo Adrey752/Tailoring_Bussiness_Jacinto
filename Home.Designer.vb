@@ -96,7 +96,7 @@ Partial Class Home
         DataGridOrders.GridColor = Color.Gray
         DataGridOrders.Location = New Point(313, 210)
         DataGridOrders.Name = "DataGridOrders"
-        DataGridOrders.Size = New Size(846, 439)
+        DataGridOrders.Size = New Drawing.Size(846, 439)
         DataGridOrders.TabIndex = 1
         ' 
         ' btnToggle
@@ -107,7 +107,7 @@ Partial Class Home
         btnToggle.BackgroundImageLayout = ImageLayout.Stretch
         btnToggle.Location = New Point(1117, 30)
         btnToggle.Name = "btnToggle"
-        btnToggle.Size = New Size(42, 36)
+        btnToggle.Size = New Drawing.Size(42, 36)
         btnToggle.TabIndex = 2
         btnToggle.UseVisualStyleBackColor = False
         ' 
@@ -119,7 +119,7 @@ Partial Class Home
         pnLogout.Controls.Add(btnLogOut)
         pnLogout.Location = New Point(1050, 71)
         pnLogout.Name = "pnLogout"
-        pnLogout.Size = New Size(122, 105)
+        pnLogout.Size = New Drawing.Size(122, 105)
         pnLogout.TabIndex = 3
         pnLogout.Visible = False
         ' 
@@ -129,7 +129,7 @@ Partial Class Home
         btnSetNew.FlatStyle = FlatStyle.Flat
         btnSetNew.Location = New Point(18, 55)
         btnSetNew.Name = "btnSetNew"
-        btnSetNew.Size = New Size(91, 37)
+        btnSetNew.Size = New Drawing.Size(91, 37)
         btnSetNew.TabIndex = 1
         btnSetNew.Text = "Set New password"
         btnSetNew.UseVisualStyleBackColor = False
@@ -140,7 +140,7 @@ Partial Class Home
         btnLogOut.FlatStyle = FlatStyle.Flat
         btnLogOut.Location = New Point(18, 12)
         btnLogOut.Name = "btnLogOut"
-        btnLogOut.Size = New Size(91, 37)
+        btnLogOut.Size = New Drawing.Size(91, 37)
         btnLogOut.TabIndex = 0
         btnLogOut.Text = "Logout"
         btnLogOut.UseVisualStyleBackColor = False
@@ -156,7 +156,7 @@ Partial Class Home
         btnAddrOrder.Margin = New Padding(0)
         btnAddrOrder.Name = "btnAddrOrder"
         btnAddrOrder.RightToLeft = RightToLeft.No
-        btnAddrOrder.Size = New Size(91, 37)
+        btnAddrOrder.Size = New Drawing.Size(91, 37)
         btnAddrOrder.TabIndex = 5
         btnAddrOrder.Text = "Add order"
         btnAddrOrder.UseVisualStyleBackColor = False
@@ -169,7 +169,7 @@ Partial Class Home
         lblOrders.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblOrders.Location = New Point(313, 152)
         lblOrders.Name = "lblOrders"
-        lblOrders.Size = New Size(121, 45)
+        lblOrders.Size = New Drawing.Size(121, 45)
         lblOrders.TabIndex = 6
         lblOrders.Text = "Orders"
         ' 
@@ -186,7 +186,7 @@ Partial Class Home
         btnSort.Margin = New Padding(0)
         btnSort.Name = "btnSort"
         btnSort.RightToLeft = RightToLeft.No
-        btnSort.Size = New Size(41, 32)
+        btnSort.Size = New Drawing.Size(41, 32)
         btnSort.TabIndex = 7
         btnSort.UseVisualStyleBackColor = False
         ' 
@@ -199,7 +199,7 @@ Partial Class Home
         pnNavigation.Controls.Add(pbTailoringJacinto)
         pnNavigation.Location = New Point(1, -1)
         pnNavigation.Name = "pnNavigation"
-        pnNavigation.Size = New Size(284, 1066)
+        pnNavigation.Size = New Drawing.Size(284, 1066)
         pnNavigation.TabIndex = 8
         ' 
         ' btnSettings
@@ -208,7 +208,7 @@ Partial Class Home
         btnSettings.Location = New Point(3, 363)
         btnSettings.Name = "btnSettings"
         btnSettings.Padding = New Padding(30, 0, 0, 0)
-        btnSettings.Size = New Size(281, 45)
+        btnSettings.Size = New Drawing.Size(281, 45)
         btnSettings.TabIndex = 11
         btnSettings.Text = "Settings"
         btnSettings.TextAlign = ContentAlignment.MiddleLeft
@@ -220,7 +220,7 @@ Partial Class Home
         btnSearch.Location = New Point(3, 322)
         btnSearch.Name = "btnSearch"
         btnSearch.Padding = New Padding(30, 0, 0, 0)
-        btnSearch.Size = New Size(281, 45)
+        btnSearch.Size = New Drawing.Size(281, 45)
         btnSearch.TabIndex = 10
         btnSearch.Text = "Search"
         btnSearch.TextAlign = ContentAlignment.MiddleLeft
@@ -232,7 +232,7 @@ Partial Class Home
         btnHome.Location = New Point(3, 280)
         btnHome.Name = "btnHome"
         btnHome.Padding = New Padding(30, 0, 0, 0)
-        btnHome.Size = New Size(281, 45)
+        btnHome.Size = New Drawing.Size(281, 45)
         btnHome.TabIndex = 9
         btnHome.Text = "Home"
         btnHome.TextAlign = ContentAlignment.MiddleLeft
@@ -244,7 +244,7 @@ Partial Class Home
         pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
         pbTailoringJacinto.Location = New Point(35, 82)
         pbTailoringJacinto.Name = "pbTailoringJacinto"
-        pbTailoringJacinto.Size = New Size(203, 143)
+        pbTailoringJacinto.Size = New Drawing.Size(203, 143)
         pbTailoringJacinto.SizeMode = PictureBoxSizeMode.StretchImage
         pbTailoringJacinto.TabIndex = 9
         pbTailoringJacinto.TabStop = False
@@ -253,7 +253,7 @@ Partial Class Home
         ' 
         TextBox1.Location = New Point(449, 38)
         TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(440, 23)
+        TextBox1.Size = New Drawing.Size(440, 23)
         TextBox1.TabIndex = 9
         ' 
         ' PictureBox1
@@ -262,7 +262,7 @@ Partial Class Home
         PictureBox1.Image = My.Resources.Resources.search_interface_symbol
         PictureBox1.Location = New Point(895, 38)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(26, 23)
+        PictureBox1.Size = New Drawing.Size(26, 23)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 10
         PictureBox1.TabStop = False
@@ -421,7 +421,7 @@ Partial Class Home
         AutoScaleMode = AutoScaleMode.Font
         AutoValidate = AutoValidate.EnableAllowFocusChange
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New Size(1184, 661)
+        ClientSize = New Drawing.Size(1184, 661)
         Controls.Add(PictureBox1)
         Controls.Add(TextBox1)
         Controls.Add(pnNavigation)
@@ -432,7 +432,7 @@ Partial Class Home
         Controls.Add(pnLogout)
         Controls.Add(DataGridOrders)
         ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
-        MinimumSize = New Size(1000, 700)
+        MinimumSize = New Drawing.Size(1000, 700)
         Name = "Home"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Home"

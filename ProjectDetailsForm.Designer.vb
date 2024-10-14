@@ -57,7 +57,7 @@ Partial Class ProjectDetailsForm
         lblTask.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblTask.Location = New Point(118, 376)
         lblTask.Name = "lblTask"
-        lblTask.Size = New Size(99, 36)
+        lblTask.Size = New Drawing.Size(99, 36)
         lblTask.TabIndex = 14
         lblTask.Text = "Order"
         ' 
@@ -69,7 +69,7 @@ Partial Class ProjectDetailsForm
         tbNumber.Name = "tbNumber"
         tbNumber.PlaceholderText = "Enter Text"
         tbNumber.ReadOnly = True
-        tbNumber.Size = New Size(133, 23)
+        tbNumber.Size = New Drawing.Size(133, 23)
         tbNumber.TabIndex = 13
         ' 
         ' tbAddress
@@ -81,7 +81,7 @@ Partial Class ProjectDetailsForm
         tbAddress.Name = "tbAddress"
         tbAddress.PlaceholderText = "Enter Address"
         tbAddress.ReadOnly = True
-        tbAddress.Size = New Size(379, 23)
+        tbAddress.Size = New Drawing.Size(379, 23)
         tbAddress.TabIndex = 12
         ' 
         ' tbName
@@ -93,7 +93,7 @@ Partial Class ProjectDetailsForm
         tbName.Name = "tbName"
         tbName.PlaceholderText = "Enter Client Name"
         tbName.ReadOnly = True
-        tbName.Size = New Size(379, 23)
+        tbName.Size = New Drawing.Size(379, 23)
         tbName.TabIndex = 11
         ' 
         ' lblAddress
@@ -104,7 +104,7 @@ Partial Class ProjectDetailsForm
         lblAddress.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblAddress.Location = New Point(53, 100)
         lblAddress.Name = "lblAddress"
-        lblAddress.Size = New Size(86, 22)
+        lblAddress.Size = New Drawing.Size(86, 22)
         lblAddress.TabIndex = 10
         lblAddress.Text = "Address:"
         ' 
@@ -116,7 +116,7 @@ Partial Class ProjectDetailsForm
         lblContactNumber.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblContactNumber.Location = New Point(52, 153)
         lblContactNumber.Name = "lblContactNumber"
-        lblContactNumber.Size = New Size(165, 22)
+        lblContactNumber.Size = New Drawing.Size(165, 22)
         lblContactNumber.TabIndex = 9
         lblContactNumber.Text = "Contact Number: "
         ' 
@@ -128,7 +128,7 @@ Partial Class ProjectDetailsForm
         LblName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         LblName.Location = New Point(53, 55)
         LblName.Name = "LblName"
-        LblName.Size = New Size(72, 22)
+        LblName.Size = New Drawing.Size(72, 22)
         LblName.TabIndex = 8
         LblName.Text = "Name: "
         ' 
@@ -139,7 +139,7 @@ Partial Class ProjectDetailsForm
         DataGridView1.Columns.AddRange(New DataGridViewColumn() {Tasks, Column2, Column3})
         DataGridView1.Location = New Point(118, 418)
         DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(945, 61)
+        DataGridView1.Size = New Drawing.Size(945, 61)
         DataGridView1.TabIndex = 20
         ' 
         ' Tasks
@@ -168,7 +168,7 @@ Partial Class ProjectDetailsForm
         Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         Label1.Location = New Point(776, 124)
         Label1.Name = "Label1"
-        Label1.Size = New Size(133, 36)
+        Label1.Size = New Drawing.Size(133, 36)
         Label1.TabIndex = 21
         Label1.Text = "Payment"
         ' 
@@ -177,7 +177,7 @@ Partial Class ProjectDetailsForm
         ComboBox1.FormattingEnabled = True
         ComboBox1.Location = New Point(445, 389)
         ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(121, 23)
+        ComboBox1.Size = New Drawing.Size(121, 23)
         ComboBox1.TabIndex = 22
         ComboBox1.Text = "Sort By"
         ' 
@@ -188,7 +188,7 @@ Partial Class ProjectDetailsForm
         nudPayment.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudPayment.Name = "nudPayment"
         nudPayment.ReadOnly = True
-        nudPayment.Size = New Size(120, 23)
+        nudPayment.Size = New Drawing.Size(120, 23)
         nudPayment.TabIndex = 29
         ' 
         ' lblPayment
@@ -198,7 +198,7 @@ Partial Class ProjectDetailsForm
         lblPayment.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblPayment.Location = New Point(785, 217)
         lblPayment.Name = "lblPayment"
-        lblPayment.Size = New Size(80, 15)
+        lblPayment.Size = New Drawing.Size(80, 15)
         lblPayment.TabIndex = 28
         lblPayment.Text = " Amount Paid"
         ' 
@@ -209,7 +209,7 @@ Partial Class ProjectDetailsForm
         nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
         nudPrice.Name = "nudPrice"
         nudPrice.ReadOnly = True
-        nudPrice.Size = New Size(120, 23)
+        nudPrice.Size = New Drawing.Size(120, 23)
         nudPrice.TabIndex = 30
         ' 
         ' Label3
@@ -219,7 +219,7 @@ Partial Class ProjectDetailsForm
         Label3.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         Label3.Location = New Point(786, 174)
         Label3.Name = "Label3"
-        Label3.Size = New Size(75, 15)
+        Label3.Size = New Drawing.Size(75, 15)
         Label3.TabIndex = 31
         Label3.Text = "Amount Due"
         ' 
@@ -231,7 +231,7 @@ Partial Class ProjectDetailsForm
         Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         Label2.Location = New Point(55, 211)
         Label2.Name = "Label2"
-        Label2.Size = New Size(177, 22)
+        Label2.Size = New Drawing.Size(177, 22)
         Label2.TabIndex = 32
         Label2.Text = "Number of Orders:"
         ' 
@@ -240,7 +240,7 @@ Partial Class ProjectDetailsForm
         nudOrders.Location = New Point(250, 211)
         nudOrders.Name = "nudOrders"
         nudOrders.ReadOnly = True
-        nudOrders.Size = New Size(120, 23)
+        nudOrders.Size = New Drawing.Size(120, 23)
         nudOrders.TabIndex = 33
         ' 
         ' tbStatus
@@ -250,7 +250,7 @@ Partial Class ProjectDetailsForm
         tbStatus.MaxLength = 11
         tbStatus.Name = "tbStatus"
         tbStatus.ReadOnly = True
-        tbStatus.Size = New Size(133, 23)
+        tbStatus.Size = New Drawing.Size(133, 23)
         tbStatus.TabIndex = 35
         ' 
         ' Label4
@@ -261,7 +261,7 @@ Partial Class ProjectDetailsForm
         Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         Label4.Location = New Point(779, 55)
         Label4.Name = "Label4"
-        Label4.Size = New Size(61, 22)
+        Label4.Size = New Drawing.Size(61, 22)
         Label4.TabIndex = 34
         Label4.Text = "Status"
         ' 
@@ -269,7 +269,7 @@ Partial Class ProjectDetailsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1169, 749)
+        ClientSize = New Drawing.Size(1169, 749)
         Controls.Add(tbStatus)
         Controls.Add(Label4)
         Controls.Add(nudOrders)
