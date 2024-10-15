@@ -12,7 +12,7 @@ Public Class AddOrder
 
         ' Add any initialization after the InitializeComponent() call.
         Me.client = client
-        Me.order = New Order("", "", "", "", 0)
+        Me.order = New Order("", "", "", 0, False, New List(Of Size), "Pending")
         Me._orderForm = orderForm
         LoadMeasurementsType()
 

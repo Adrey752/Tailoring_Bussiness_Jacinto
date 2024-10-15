@@ -22,6 +22,8 @@ Partial Class ProjectDetailsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         lblTask = New Label()
         tbNumber = New TextBox()
         tbAddress = New TextBox()
@@ -29,10 +31,7 @@ Partial Class ProjectDetailsForm
         lblAddress = New Label()
         lblContactNumber = New Label()
         LblName = New Label()
-        DataGridView1 = New DataGridView()
-        Tasks = New DataGridViewCheckBoxColumn()
-        Column2 = New DataGridViewCheckBoxColumn()
-        Column3 = New DataGridViewTextBoxColumn()
+        dgSortOrders = New DataGridView()
         lblHeaderPayment = New Label()
         cbSort = New ComboBox()
         nudPayment = New NumericUpDown()
@@ -43,7 +42,12 @@ Partial Class ProjectDetailsForm
         nudOrders = New NumericUpDown()
         lblHeaderOrder = New Label()
         btnAddOrder = New Button()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        pendingCheckBox = New DataGridViewCheckBoxColumn()
+        pending = New DataGridViewTextBoxColumn()
+        finishedCheckBox = New DataGridViewCheckBoxColumn()
+        finished = New DataGridViewTextBoxColumn()
+        claimed = New DataGridViewTextBoxColumn()
+        CType(dgSortOrders, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPayment, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).BeginInit()
@@ -132,45 +136,18 @@ Partial Class ProjectDetailsForm
         LblName.TabIndex = 8
         LblName.Text = "Name: "
         ' 
-        ' DataGridView1
+        ' dgSortOrders
         ' 
-        DataGridView1.AllowUserToAddRows = False
-        DataGridView1.AllowUserToDeleteRows = False
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Columns.AddRange(New DataGridViewColumn() {Tasks, Column2, Column3})
-        DataGridView1.Location = New Point(555, 159)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.ReadOnly = True
-        DataGridView1.Size = New System.Drawing.Size(644, 443)
-        DataGridView1.TabIndex = 20
-        ' 
-        ' Tasks
-        ' 
-        Tasks.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        Tasks.HeaderText = "Pending Tasks"
-        Tasks.Name = "Tasks"
-        Tasks.ReadOnly = True
-        Tasks.Resizable = DataGridViewTriState.True
-        Tasks.SortMode = DataGridViewColumnSortMode.Automatic
-        Tasks.Width = 200
-        ' 
-        ' Column2
-        ' 
-        Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        Column2.HeaderText = "Finished"
-        Column2.Name = "Column2"
-        Column2.ReadOnly = True
-        Column2.Resizable = DataGridViewTriState.True
-        Column2.SortMode = DataGridViewColumnSortMode.Automatic
-        Column2.Width = 200
-        ' 
-        ' Column3
-        ' 
-        Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        Column3.HeaderText = "Claimed"
-        Column3.Name = "Column3"
-        Column3.ReadOnly = True
-        Column3.Width = 200
+        dgSortOrders.AllowUserToAddRows = False
+        dgSortOrders.AllowUserToDeleteRows = False
+        dgSortOrders.CellBorderStyle = DataGridViewCellBorderStyle.Raised
+        dgSortOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgSortOrders.Columns.AddRange(New DataGridViewColumn() {pendingCheckBox, pending, finishedCheckBox, finished, claimed})
+        dgSortOrders.Location = New Point(520, 159)
+        dgSortOrders.Name = "dgSortOrders"
+        dgSortOrders.ReadOnly = True
+        dgSortOrders.Size = New System.Drawing.Size(679, 443)
+        dgSortOrders.TabIndex = 20
         ' 
         ' lblHeaderPayment
         ' 
@@ -279,6 +256,56 @@ Partial Class ProjectDetailsForm
         btnAddOrder.Text = "Add Order"
         btnAddOrder.UseVisualStyleBackColor = True
         ' 
+        ' pendingCheckBox
+        ' 
+        pendingCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pendingCheckBox.HeaderText = ""
+        pendingCheckBox.MinimumWidth = 35
+        pendingCheckBox.Name = "pendingCheckBox"
+        pendingCheckBox.ReadOnly = True
+        pendingCheckBox.Width = 35
+        ' 
+        ' pending
+        ' 
+        pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pending.DataPropertyName = "pending"
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        pending.DefaultCellStyle = DataGridViewCellStyle1
+        pending.HeaderText = "Pending Orders"
+        pending.Name = "pending"
+        pending.ReadOnly = True
+        pending.Resizable = DataGridViewTriState.True
+        pending.Width = 200
+        ' 
+        ' finishedCheckBox
+        ' 
+        finishedCheckBox.HeaderText = ""
+        finishedCheckBox.MinimumWidth = 35
+        finishedCheckBox.Name = "finishedCheckBox"
+        finishedCheckBox.ReadOnly = True
+        finishedCheckBox.Width = 35
+        ' 
+        ' finished
+        ' 
+        finished.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        finished.DataPropertyName = "finished"
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        finished.DefaultCellStyle = DataGridViewCellStyle2
+        finished.HeaderText = "Finished"
+        finished.Name = "finished"
+        finished.ReadOnly = True
+        finished.Resizable = DataGridViewTriState.True
+        finished.Width = 200
+        ' 
+        ' claimed
+        ' 
+        claimed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        claimed.DataPropertyName = "claimed"
+        claimed.HeaderText = "Claimed"
+        claimed.Name = "claimed"
+        claimed.ReadOnly = True
+        claimed.Width = 200
+        ' 
         ' ProjectDetailsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -294,7 +321,7 @@ Partial Class ProjectDetailsForm
         Controls.Add(lblPayment)
         Controls.Add(cbSort)
         Controls.Add(lblHeaderPayment)
-        Controls.Add(DataGridView1)
+        Controls.Add(dgSortOrders)
         Controls.Add(lblTask)
         Controls.Add(tbNumber)
         Controls.Add(tbAddress)
@@ -306,7 +333,7 @@ Partial Class ProjectDetailsForm
         Name = "ProjectDetailsForm"
         StartPosition = FormStartPosition.CenterScreen
         Text = "ProjectDetailsForm"
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgSortOrders, ComponentModel.ISupportInitialize).EndInit()
         CType(nudPayment, ComponentModel.ISupportInitialize).EndInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).EndInit()
@@ -321,7 +348,7 @@ Partial Class ProjectDetailsForm
     Friend WithEvents lblAddress As Label
     Friend WithEvents lblContactNumber As Label
     Friend WithEvents LblName As Label
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgSortOrders As DataGridView
     Friend WithEvents lblHeaderPayment As Label
     Friend WithEvents cbSort As ComboBox
     Friend WithEvents nudPayment As NumericUpDown
@@ -332,7 +359,9 @@ Partial Class ProjectDetailsForm
     Friend WithEvents nudOrders As NumericUpDown
     Friend WithEvents lblHeaderOrder As Label
     Friend WithEvents btnAddOrder As Button
-    Friend WithEvents Tasks As DataGridViewCheckBoxColumn
-    Friend WithEvents Column2 As DataGridViewCheckBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents pendingCheckBox As DataGridViewCheckBoxColumn
+    Friend WithEvents pending As DataGridViewTextBoxColumn
+    Friend WithEvents finishedCheckBox As DataGridViewCheckBoxColumn
+    Friend WithEvents finished As DataGridViewTextBoxColumn
+    Friend WithEvents claimed As DataGridViewTextBoxColumn
 End Class

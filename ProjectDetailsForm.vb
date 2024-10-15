@@ -46,6 +46,22 @@ Public Class ProjectDetailsForm
 
 
         client = New Client(name, address, contact, status, price, payment, quantity)
+        Dim orderList = GetOrdersFromDatabase(id)
+        Dim pendingOrders = orderList.Where(Function(o) o.Status = "Pending").ToList()
+        Dim finishedOrders = orderList.Where(Function(o) o.Status = "Finished").ToList()
+        Dim claimedOrders = orderList.Where(Function(o) o.Status = "Claimed").ToList()
+
+        Dim maxRow = Math.Max(Math.Max(pendingOrders.Count, finishedOrders.Count), claimedOrders.Count)
+
+        For i As Integer = 0 To maxRow - 1
+            Dim pending = If(i < pendingOrders.Count, pendingOrders(i).OrderName, "")
+            Dim finished = If(i < finishedOrders.Count, finishedOrders(i).OrderName, "")
+            Dim claimed = If(i < claimedOrders.Count, claimedOrders(i).OrderName, "")
+
+            dgSortOrders.Rows.Add(False, pending, False, finished, claimed)
+
+        Next
+
     End Sub
 
     Private Shared Function GetOrdersFromDatabase(client_id As Integer) As List(Of Order)
@@ -66,8 +82,8 @@ Public Class ProjectDetailsForm
             Dim price As Decimal = row.Field(Of Decimal)("price")
             Dim done As Boolean = row.Field(Of Boolean)("done")
             Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
-
-            OrderList.Add(New Order(OrderName, OrderType, description, price, done, sizes))
+            Dim status As String = row.Field(Of String)("status")
+            OrderList.Add(New Order(OrderName, OrderType, description, price, done, sizes, status))
         Next
 
         Return OrderList
@@ -110,7 +126,7 @@ Public Class ProjectDetailsForm
     Private Shared Function GetGarmentType(garment_id As Integer) As String
         Dim query = "SELECT (garment_type) FROM garment_types WHERE garment_id = @garment_id"
         Dim parameter As New Dictionary(Of String, Object) From {
-        {"garment_type", garment_id}
+        {"garment_id", garment_id}
         }
 
         Dim result = MySQLModule.ExecuteScalar(query, parameter).ToString
