@@ -77,7 +77,7 @@ Public Class AddClientForm
         Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_id) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment_id)"
         Dim sizeParams As New Dictionary(Of String, Object) From {
         {"@OrderId", orderId},
-        {"@TypeId", GetTypeId(size.PartMeasurement)}, ' Get type_id for the measurement type
+        {"@TypeId", GetTypeId(size.BodyPart)}, ' Get type_id for the measurement type
         {"@garment_id", GetGarmentId(size.garment)},
         {"@SizeValue", size.Value},
         {"@SizeUnit", size.Unit}

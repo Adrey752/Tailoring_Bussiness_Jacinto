@@ -136,9 +136,8 @@
                             If IsDBNull(row.Cells("client_id").Value) Then
                                 Continue For
                             End If
-                            Dim id As Integer = Convert.ToInt64(row.Cells("client_id").Value)
-                            MessageBox.Show($"Client ID to delete: {id}")
-                            DeleteClient(id)
+                        Dim id As Integer = Convert.ToInt64(row.Cells("client_id").Value)
+                        DeleteClient(id)
                             DataGridOrders.Rows.Remove(row)
 
                         Next

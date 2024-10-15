@@ -8,13 +8,13 @@
     Public Property Sizes As List(Of Size)
 
 
-    Public Sub New(orderName As String, serviceType As String, garmentType As String, description As String, price As Decimal)
+    Public Sub New(orderName As String, serviceType As String, description As String, price As Decimal, done As Boolean, sizes As List(Of Size))
         Me.OrderName = orderName
         Me.Type = serviceType
         Me.Description = description
         Me.Price = price
-        Me.Done = False
-        Sizes = New List(Of Size)()
+        Me.Done = done
+        Me.Sizes = sizes
     End Sub
 
     Public Sub AddSize(size As Size)
