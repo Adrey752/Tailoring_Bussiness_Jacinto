@@ -48,8 +48,9 @@ Partial Class AddNewOrder
         cbStype = New ComboBox()
         lblServiceType = New Label()
         fPanelOrders = New FlowLayoutPanel()
+        LbSuggestions = New ListBox()
         lblOrders = New Label()
-        TextBox1 = New TextBox()
+        txtSearch = New TextBox()
         PictureBox2 = New PictureBox()
         pnAddOrders.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -118,7 +119,7 @@ Partial Class AddNewOrder
         lblOrderDetails.BackColor = Color.WhiteSmoke
         lblOrderDetails.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblOrderDetails.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblOrderDetails.Location = New Point(-2, 27)
+        lblOrderDetails.Location = New Point(28, 31)
         lblOrderDetails.Name = "lblOrderDetails"
         lblOrderDetails.Size = New System.Drawing.Size(168, 32)
         lblOrderDetails.TabIndex = 23
@@ -129,9 +130,9 @@ Partial Class AddNewOrder
         PictureBox1.Anchor = AnchorStyles.None
         PictureBox1.ErrorImage = My.Resources.Resources.eye
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(509, 22)
+        PictureBox1.Location = New Point(521, 31)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New System.Drawing.Size(413, 190)
+        PictureBox1.Size = New System.Drawing.Size(413, 230)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 12
         PictureBox1.TabStop = False
@@ -150,7 +151,7 @@ Partial Class AddNewOrder
         ' nudPrice
         ' 
         nudPrice.Anchor = AnchorStyles.None
-        nudPrice.Location = New Point(170, 195)
+        nudPrice.Location = New Point(180, 197)
         nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
         nudPrice.Name = "nudPrice"
         nudPrice.Size = New System.Drawing.Size(120, 23)
@@ -161,7 +162,7 @@ Partial Class AddNewOrder
         lblPrice.Anchor = AnchorStyles.None
         lblPrice.AutoSize = True
         lblPrice.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblPrice.Location = New Point(67, 197)
+        lblPrice.Location = New Point(77, 199)
         lblPrice.Name = "lblPrice"
         lblPrice.Size = New System.Drawing.Size(33, 15)
         lblPrice.TabIndex = 20
@@ -170,7 +171,7 @@ Partial Class AddNewOrder
         ' btnaddMeasurement
         ' 
         btnaddMeasurement.Anchor = AnchorStyles.None
-        btnaddMeasurement.Location = New Point(387, 535)
+        btnaddMeasurement.Location = New Point(416, 535)
         btnaddMeasurement.Name = "btnaddMeasurement"
         btnaddMeasurement.Size = New System.Drawing.Size(75, 23)
         btnaddMeasurement.TabIndex = 17
@@ -180,7 +181,7 @@ Partial Class AddNewOrder
         ' nudValue
         ' 
         nudValue.Anchor = AnchorStyles.None
-        nudValue.Location = New Point(124, 535)
+        nudValue.Location = New Point(153, 534)
         nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudValue.Name = "nudValue"
         nudValue.Size = New System.Drawing.Size(102, 23)
@@ -191,7 +192,7 @@ Partial Class AddNewOrder
         dgMeasurements.Anchor = AnchorStyles.None
         dgMeasurements.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgMeasurements.Columns.AddRange(New DataGridViewColumn() {size_type, measurement, GarmentType})
-        dgMeasurements.Location = New Point(16, 291)
+        dgMeasurements.Location = New Point(45, 291)
         dgMeasurements.Name = "dgMeasurements"
         dgMeasurements.Size = New System.Drawing.Size(446, 216)
         dgMeasurements.TabIndex = 10
@@ -219,7 +220,7 @@ Partial Class AddNewOrder
         cbUnit.Anchor = AnchorStyles.None
         cbUnit.FormattingEnabled = True
         cbUnit.Items.AddRange(New Object() {"cm", "inches", "meters"})
-        cbUnit.Location = New Point(232, 535)
+        cbUnit.Location = New Point(261, 535)
         cbUnit.Name = "cbUnit"
         cbUnit.Size = New System.Drawing.Size(77, 23)
         cbUnit.TabIndex = 16
@@ -229,7 +230,7 @@ Partial Class AddNewOrder
         ' 
         rbDescription.Anchor = AnchorStyles.None
         rbDescription.BackColor = Color.FromArgb(CByte(194), CByte(194), CByte(194))
-        rbDescription.Location = New Point(509, 291)
+        rbDescription.Location = New Point(521, 334)
         rbDescription.MaxLength = 20000
         rbDescription.Name = "rbDescription"
         rbDescription.ScrollBars = RichTextBoxScrollBars.Vertical
@@ -243,7 +244,7 @@ Partial Class AddNewOrder
         lblSize.AutoSize = True
         lblSize.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblSize.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblSize.Location = New Point(-2, 256)
+        lblSize.Location = New Point(28, 256)
         lblSize.Name = "lblSize"
         lblSize.Size = New System.Drawing.Size(57, 32)
         lblSize.TabIndex = 9
@@ -256,7 +257,7 @@ Partial Class AddNewOrder
         lblDesc.BackColor = Color.WhiteSmoke
         lblDesc.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDesc.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblDesc.Location = New Point(509, 256)
+        lblDesc.Location = New Point(521, 278)
         lblDesc.Name = "lblDesc"
         lblDesc.Size = New System.Drawing.Size(137, 32)
         lblDesc.TabIndex = 7
@@ -285,7 +286,7 @@ Partial Class AddNewOrder
         ' 
         sbMType.Anchor = AnchorStyles.None
         sbMType.FormattingEnabled = True
-        sbMType.Location = New Point(16, 534)
+        sbMType.Location = New Point(45, 533)
         sbMType.Name = "sbMType"
         sbMType.Size = New System.Drawing.Size(102, 23)
         sbMType.TabIndex = 12
@@ -295,7 +296,7 @@ Partial Class AddNewOrder
         ' 
         cbGarment.FormattingEnabled = True
         cbGarment.Items.AddRange(New Object() {"Cotton", "Silk", "Leather"})
-        cbGarment.Location = New Point(353, 535)
+        cbGarment.Location = New Point(344, 534)
         cbGarment.Name = "cbGarment"
         cbGarment.Size = New System.Drawing.Size(66, 23)
         cbGarment.TabIndex = 3
@@ -322,11 +323,22 @@ Partial Class AddNewOrder
         ' 
         ' fPanelOrders
         ' 
+        fPanelOrders.AutoScroll = True
         fPanelOrders.BackColor = SystemColors.ActiveCaption
-        fPanelOrders.Location = New Point(1014, 87)
+        fPanelOrders.Location = New Point(1013, 87)
         fPanelOrders.Name = "fPanelOrders"
-        fPanelOrders.Size = New System.Drawing.Size(208, 555)
+        fPanelOrders.Size = New System.Drawing.Size(208, 504)
         fPanelOrders.TabIndex = 4
+        ' 
+        ' LbSuggestions
+        ' 
+        LbSuggestions.FormattingEnabled = True
+        LbSuggestions.ItemHeight = 15
+        LbSuggestions.Location = New Point(1014, 83)
+        LbSuggestions.Name = "LbSuggestions"
+        LbSuggestions.Size = New System.Drawing.Size(168, 49)
+        LbSuggestions.TabIndex = 26
+        LbSuggestions.Visible = False
         ' 
         ' lblOrders
         ' 
@@ -341,12 +353,12 @@ Partial Class AddNewOrder
         lblOrders.TabIndex = 8
         lblOrders.Text = "Orders ng Whatt?"
         ' 
-        ' TextBox1
+        ' txtSearch
         ' 
-        TextBox1.Location = New Point(1014, 58)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New System.Drawing.Size(171, 23)
-        TextBox1.TabIndex = 9
+        txtSearch.Location = New Point(1014, 58)
+        txtSearch.Name = "txtSearch"
+        txtSearch.Size = New System.Drawing.Size(171, 23)
+        txtSearch.TabIndex = 9
         ' 
         ' PictureBox2
         ' 
@@ -363,8 +375,9 @@ Partial Class AddNewOrder
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New System.Drawing.Size(1246, 654)
+        Controls.Add(LbSuggestions)
         Controls.Add(PictureBox2)
-        Controls.Add(TextBox1)
+        Controls.Add(txtSearch)
         Controls.Add(lblOrders)
         Controls.Add(fPanelOrders)
         Controls.Add(pnAddOrders)
@@ -406,8 +419,9 @@ Partial Class AddNewOrder
     Friend WithEvents lblServiceType As Label
     Friend WithEvents fPanelOrders As FlowLayoutPanel
     Friend WithEvents lblOrders As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtSearch As TextBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents LbSuggestions As ListBox
 End Class

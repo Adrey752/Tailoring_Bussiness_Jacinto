@@ -6,7 +6,7 @@
     Public Property garment As String
 
 
-    Public Sub New(SisBodyPart As String, value As Decimal, unit As String, garment As String)
+    Public Sub New(BodyPart As String, value As Decimal, unit As String, garment As String)
 
         Me.BodyPart = BodyPart
         Me.Value = value
