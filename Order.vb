@@ -1,4 +1,6 @@
 ﻿Public Class Order
+
+    Public Property OrderId As Integer
     Public Property OrderName As String
     Public Property Type As String
 
@@ -9,7 +11,8 @@
     Public Property Status As String
 
 
-    Public Sub New(orderName As String, serviceType As String, description As String, price As Decimal, done As Boolean, sizes As List(Of Size), status As String)
+    Public Sub New(OrderId As Integer, orderName As String, serviceType As String, description As String, price As Decimal, done As Boolean, sizes As List(Of Size), status As String)
+        Me.OrderId = OrderId
         Me.OrderName = orderName
         Me.Type = serviceType
         Me.Description = description

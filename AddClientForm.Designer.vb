@@ -61,7 +61,7 @@ Partial Class AddClientForm
         btnSave.ForeColor = Color.White
         btnSave.Location = New Point(720, 77)
         btnSave.Name = "btnSave"
-        btnSave.Size = New Drawing.Size(91, 38)
+        btnSave.Size = New System.Drawing.Size(91, 38)
         btnSave.TabIndex = 1
         btnSave.Text = "Save"
         btnSave.UseVisualStyleBackColor = False
@@ -85,7 +85,7 @@ Partial Class AddClientForm
         Panel1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Panel1.Location = New Point(290, 3)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Drawing.Size(1009, 746)
+        Panel1.Size = New System.Drawing.Size(1009, 746)
         Panel1.TabIndex = 2
         ' 
         ' fpTask
@@ -93,7 +93,7 @@ Partial Class AddClientForm
         fpTask.AutoScroll = True
         fpTask.Location = New Point(41, 267)
         fpTask.Name = "fpTask"
-        fpTask.Size = New Drawing.Size(877, 202)
+        fpTask.Size = New System.Drawing.Size(877, 202)
         fpTask.TabIndex = 12
         ' 
         ' btnRemoveTask
@@ -101,7 +101,7 @@ Partial Class AddClientForm
         btnRemoveTask.BackColor = Color.White
         btnRemoveTask.Location = New Point(827, 505)
         btnRemoveTask.Name = "btnRemoveTask"
-        btnRemoveTask.Size = New Drawing.Size(91, 38)
+        btnRemoveTask.Size = New System.Drawing.Size(91, 38)
         btnRemoveTask.TabIndex = 11
         btnRemoveTask.Text = "Remove Task"
         btnRemoveTask.UseVisualStyleBackColor = False
@@ -111,7 +111,7 @@ Partial Class AddClientForm
         btnAddTask.BackColor = Color.White
         btnAddTask.Location = New Point(720, 505)
         btnAddTask.Name = "btnAddTask"
-        btnAddTask.Size = New Drawing.Size(91, 38)
+        btnAddTask.Size = New System.Drawing.Size(91, 38)
         btnAddTask.TabIndex = 9
         btnAddTask.Text = "Add Task"
         btnAddTask.UseVisualStyleBackColor = False
@@ -124,7 +124,7 @@ Partial Class AddClientForm
         lblTask.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblTask.Location = New Point(41, 216)
         lblTask.Name = "lblTask"
-        lblTask.Size = New Drawing.Size(71, 27)
+        lblTask.Size = New System.Drawing.Size(71, 27)
         lblTask.TabIndex = 7
         lblTask.Text = "Tasks"
         ' 
@@ -137,7 +137,7 @@ Partial Class AddClientForm
         btnCancel.ForeColor = Color.White
         btnCancel.Location = New Point(827, 77)
         btnCancel.Name = "btnCancel"
-        btnCancel.Size = New Drawing.Size(91, 38)
+        btnCancel.Size = New System.Drawing.Size(91, 38)
         btnCancel.TabIndex = 3
         btnCancel.Text = "Cancel"
         btnCancel.UseVisualStyleBackColor = False
@@ -149,7 +149,7 @@ Partial Class AddClientForm
         tbNumber.MaxLength = 11
         tbNumber.Name = "tbNumber"
         tbNumber.PlaceholderText = "Enter Text"
-        tbNumber.Size = New Drawing.Size(322, 23)
+        tbNumber.Size = New System.Drawing.Size(322, 23)
         tbNumber.TabIndex = 6
         ' 
         ' tbAddress
@@ -160,7 +160,7 @@ Partial Class AddClientForm
         tbAddress.MaxLength = 150
         tbAddress.Name = "tbAddress"
         tbAddress.PlaceholderText = "Enter Address"
-        tbAddress.Size = New Drawing.Size(379, 23)
+        tbAddress.Size = New System.Drawing.Size(379, 23)
         tbAddress.TabIndex = 5
         ' 
         ' tbName
@@ -171,7 +171,7 @@ Partial Class AddClientForm
         tbName.MaxLength = 150
         tbName.Name = "tbName"
         tbName.PlaceholderText = "Enter Client Name"
-        tbName.Size = New Drawing.Size(379, 23)
+        tbName.Size = New System.Drawing.Size(379, 23)
         tbName.TabIndex = 4
         ' 
         ' lblAddress
@@ -182,7 +182,7 @@ Partial Class AddClientForm
         lblAddress.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblAddress.Location = New Point(41, 116)
         lblAddress.Name = "lblAddress"
-        lblAddress.Size = New Drawing.Size(86, 22)
+        lblAddress.Size = New System.Drawing.Size(86, 22)
         lblAddress.TabIndex = 3
         lblAddress.Text = "Address:"
         ' 
@@ -194,7 +194,7 @@ Partial Class AddClientForm
         lblContactNumber.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblContactNumber.Location = New Point(41, 160)
         lblContactNumber.Name = "lblContactNumber"
-        lblContactNumber.Size = New Drawing.Size(165, 22)
+        lblContactNumber.Size = New System.Drawing.Size(165, 22)
         lblContactNumber.TabIndex = 2
         lblContactNumber.Text = "Contact Number: "
         ' 
@@ -206,7 +206,7 @@ Partial Class AddClientForm
         LblName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         LblName.Location = New Point(41, 84)
         LblName.Name = "LblName"
-        LblName.Size = New Drawing.Size(72, 22)
+        LblName.Size = New System.Drawing.Size(72, 22)
         LblName.TabIndex = 1
         LblName.Text = "Name: "
         ' 
@@ -218,7 +218,7 @@ Partial Class AddClientForm
         lblCustomerDetails.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblCustomerDetails.Location = New Point(447, 23)
         lblCustomerDetails.Name = "lblCustomerDetails"
-        lblCustomerDetails.Size = New Drawing.Size(199, 27)
+        lblCustomerDetails.Size = New System.Drawing.Size(199, 27)
         lblCustomerDetails.TabIndex = 0
         lblCustomerDetails.Text = " Customer Details"
         ' 
@@ -230,7 +230,7 @@ Partial Class AddClientForm
         Button1.BackgroundImageLayout = ImageLayout.Stretch
         Button1.Location = New Point(2039, 21)
         Button1.Name = "Button1"
-        Button1.Size = New Drawing.Size(42, 36)
+        Button1.Size = New System.Drawing.Size(42, 36)
         Button1.TabIndex = 11
         Button1.UseVisualStyleBackColor = False
         ' 
@@ -242,7 +242,7 @@ Partial Class AddClientForm
         pnLogout.Controls.Add(btnLogOut)
         pnLogout.Location = New Point(1975, 63)
         pnLogout.Name = "pnLogout"
-        pnLogout.Size = New Drawing.Size(122, 105)
+        pnLogout.Size = New System.Drawing.Size(122, 105)
         pnLogout.TabIndex = 12
         pnLogout.Visible = False
         ' 
@@ -252,7 +252,7 @@ Partial Class AddClientForm
         btnSetNew.FlatStyle = FlatStyle.Flat
         btnSetNew.Location = New Point(18, 55)
         btnSetNew.Name = "btnSetNew"
-        btnSetNew.Size = New Drawing.Size(91, 38)
+        btnSetNew.Size = New System.Drawing.Size(91, 38)
         btnSetNew.TabIndex = 1
         btnSetNew.Text = "Set New password"
         btnSetNew.UseVisualStyleBackColor = False
@@ -263,7 +263,7 @@ Partial Class AddClientForm
         btnLogOut.FlatStyle = FlatStyle.Flat
         btnLogOut.Location = New Point(18, 12)
         btnLogOut.Name = "btnLogOut"
-        btnLogOut.Size = New Drawing.Size(91, 38)
+        btnLogOut.Size = New System.Drawing.Size(91, 38)
         btnLogOut.TabIndex = 0
         btnLogOut.Text = "Logout"
         btnLogOut.UseVisualStyleBackColor = False
@@ -277,7 +277,7 @@ Partial Class AddClientForm
         Panel2.Controls.Add(PictureBox2)
         Panel2.Location = New Point(0, 3)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Drawing.Size(284, 1066)
+        Panel2.Size = New System.Drawing.Size(284, 1066)
         Panel2.TabIndex = 15
         ' 
         ' Button4
@@ -286,7 +286,7 @@ Partial Class AddClientForm
         Button4.Location = New Point(3, 363)
         Button4.Name = "Button4"
         Button4.Padding = New Padding(29, 0, 0, 0)
-        Button4.Size = New Drawing.Size(281, 45)
+        Button4.Size = New System.Drawing.Size(281, 45)
         Button4.TabIndex = 11
         Button4.Text = "Settings"
         Button4.TextAlign = ContentAlignment.MiddleLeft
@@ -298,7 +298,7 @@ Partial Class AddClientForm
         Button3.Location = New Point(3, 322)
         Button3.Name = "Button3"
         Button3.Padding = New Padding(29, 0, 0, 0)
-        Button3.Size = New Drawing.Size(281, 45)
+        Button3.Size = New System.Drawing.Size(281, 45)
         Button3.TabIndex = 10
         Button3.Text = "Search"
         Button3.TextAlign = ContentAlignment.MiddleLeft
@@ -310,7 +310,7 @@ Partial Class AddClientForm
         Button2.Location = New Point(3, 280)
         Button2.Name = "Button2"
         Button2.Padding = New Padding(29, 0, 0, 0)
-        Button2.Size = New Drawing.Size(281, 45)
+        Button2.Size = New System.Drawing.Size(281, 45)
         Button2.TabIndex = 9
         Button2.Text = "Home"
         Button2.TextAlign = ContentAlignment.MiddleLeft
@@ -322,7 +322,7 @@ Partial Class AddClientForm
         PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
         PictureBox2.Location = New Point(43, 62)
         PictureBox2.Name = "PictureBox2"
-        PictureBox2.Size = New Drawing.Size(203, 142)
+        PictureBox2.Size = New System.Drawing.Size(203, 142)
         PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox2.TabIndex = 9
         PictureBox2.TabStop = False
@@ -332,7 +332,7 @@ Partial Class AddClientForm
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New Drawing.Size(1300, 749)
+        ClientSize = New System.Drawing.Size(1300, 749)
         Controls.Add(Panel1)
         Controls.Add(Panel2)
         Controls.Add(Button1)

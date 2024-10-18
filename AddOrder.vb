@@ -12,7 +12,7 @@ Public Class AddOrder
 
         ' Add any initialization after the InitializeComponent() call.
         Me.client = client
-        Me.order = New Order("", "", "", 0, False, New List(Of Size), "Pending")
+        Me.order = New Order(0, "", "", "", 0, False, New List(Of Size), "Pending")
         Me._orderForm = orderForm
         LoadMeasurementsType()
 
@@ -80,5 +80,7 @@ Public Class AddOrder
         dgMeasurements.Rows.Add(measurementType, (value & unit), garment)
     End Sub
 
+    Private Sub cbGarment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGarment.SelectedIndexChanged
 
+    End Sub
 End Class

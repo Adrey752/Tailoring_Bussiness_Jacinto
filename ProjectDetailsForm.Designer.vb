@@ -32,6 +32,11 @@ Partial Class ProjectDetailsForm
         lblContactNumber = New Label()
         LblName = New Label()
         dgSortOrders = New DataGridView()
+        pendingCheckBox = New DataGridViewCheckBoxColumn()
+        pending = New DataGridViewTextBoxColumn()
+        finishedCheckBox = New DataGridViewCheckBoxColumn()
+        finished = New DataGridViewTextBoxColumn()
+        claimed = New DataGridViewTextBoxColumn()
         lblHeaderPayment = New Label()
         cbSort = New ComboBox()
         nudPayment = New NumericUpDown()
@@ -42,11 +47,6 @@ Partial Class ProjectDetailsForm
         nudOrders = New NumericUpDown()
         lblHeaderOrder = New Label()
         btnAddOrder = New Button()
-        pendingCheckBox = New DataGridViewCheckBoxColumn()
-        pending = New DataGridViewTextBoxColumn()
-        finishedCheckBox = New DataGridViewCheckBoxColumn()
-        finished = New DataGridViewTextBoxColumn()
-        claimed = New DataGridViewTextBoxColumn()
         CType(dgSortOrders, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPayment, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
@@ -138,8 +138,10 @@ Partial Class ProjectDetailsForm
         ' 
         ' dgSortOrders
         ' 
+        dgSortOrders.AllowDrop = True
         dgSortOrders.AllowUserToAddRows = False
         dgSortOrders.AllowUserToDeleteRows = False
+        dgSortOrders.AllowUserToOrderColumns = True
         dgSortOrders.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         dgSortOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgSortOrders.Columns.AddRange(New DataGridViewColumn() {pendingCheckBox, pending, finishedCheckBox, finished, claimed})
@@ -148,6 +150,56 @@ Partial Class ProjectDetailsForm
         dgSortOrders.ReadOnly = True
         dgSortOrders.Size = New System.Drawing.Size(679, 443)
         dgSortOrders.TabIndex = 20
+        ' 
+        ' pendingCheckBox
+        ' 
+        pendingCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pendingCheckBox.HeaderText = ""
+        pendingCheckBox.MinimumWidth = 35
+        pendingCheckBox.Name = "pendingCheckBox"
+        pendingCheckBox.ReadOnly = True
+        pendingCheckBox.Width = 35
+        ' 
+        ' pending
+        ' 
+        pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pending.DataPropertyName = "pending"
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        pending.DefaultCellStyle = DataGridViewCellStyle1
+        pending.HeaderText = "Pending Orders"
+        pending.Name = "pending"
+        pending.ReadOnly = True
+        pending.Resizable = DataGridViewTriState.True
+        pending.Width = 200
+        ' 
+        ' finishedCheckBox
+        ' 
+        finishedCheckBox.HeaderText = ""
+        finishedCheckBox.MinimumWidth = 35
+        finishedCheckBox.Name = "finishedCheckBox"
+        finishedCheckBox.ReadOnly = True
+        finishedCheckBox.Width = 35
+        ' 
+        ' finished
+        ' 
+        finished.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        finished.DataPropertyName = "finished"
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        finished.DefaultCellStyle = DataGridViewCellStyle2
+        finished.HeaderText = "Finished"
+        finished.Name = "finished"
+        finished.ReadOnly = True
+        finished.Resizable = DataGridViewTriState.True
+        finished.Width = 200
+        ' 
+        ' claimed
+        ' 
+        claimed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        claimed.DataPropertyName = "claimed"
+        claimed.HeaderText = "Claimed"
+        claimed.Name = "claimed"
+        claimed.ReadOnly = True
+        claimed.Width = 200
         ' 
         ' lblHeaderPayment
         ' 
@@ -255,56 +307,6 @@ Partial Class ProjectDetailsForm
         btnAddOrder.Tag = ""
         btnAddOrder.Text = "Add Order"
         btnAddOrder.UseVisualStyleBackColor = True
-        ' 
-        ' pendingCheckBox
-        ' 
-        pendingCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        pendingCheckBox.HeaderText = ""
-        pendingCheckBox.MinimumWidth = 35
-        pendingCheckBox.Name = "pendingCheckBox"
-        pendingCheckBox.ReadOnly = True
-        pendingCheckBox.Width = 35
-        ' 
-        ' pending
-        ' 
-        pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        pending.DataPropertyName = "pending"
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        pending.DefaultCellStyle = DataGridViewCellStyle1
-        pending.HeaderText = "Pending Orders"
-        pending.Name = "pending"
-        pending.ReadOnly = True
-        pending.Resizable = DataGridViewTriState.True
-        pending.Width = 200
-        ' 
-        ' finishedCheckBox
-        ' 
-        finishedCheckBox.HeaderText = ""
-        finishedCheckBox.MinimumWidth = 35
-        finishedCheckBox.Name = "finishedCheckBox"
-        finishedCheckBox.ReadOnly = True
-        finishedCheckBox.Width = 35
-        ' 
-        ' finished
-        ' 
-        finished.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        finished.DataPropertyName = "finished"
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
-        finished.DefaultCellStyle = DataGridViewCellStyle2
-        finished.HeaderText = "Finished"
-        finished.Name = "finished"
-        finished.ReadOnly = True
-        finished.Resizable = DataGridViewTriState.True
-        finished.Width = 200
-        ' 
-        ' claimed
-        ' 
-        claimed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        claimed.DataPropertyName = "claimed"
-        claimed.HeaderText = "Claimed"
-        claimed.Name = "claimed"
-        claimed.ReadOnly = True
-        claimed.Width = 200
         ' 
         ' ProjectDetailsForm
         ' 

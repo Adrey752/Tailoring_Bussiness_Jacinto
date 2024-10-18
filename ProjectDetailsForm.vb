@@ -3,7 +3,7 @@ Imports Mysqlx.Resultset
 
 Public Class ProjectDetailsForm
 
-    Dim id As Integer
+    Dim clientId As Integer
     Dim client As Client
 
     Public Sub New(id As Integer)
@@ -12,8 +12,8 @@ Public Class ProjectDetailsForm
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.id = id
-        LoadClient(id)
+        Me.clientId = id
+        LoadClient(clientId)
 
         tbName.Text = client.Name
         tbAddress.Text = client.Address
@@ -46,22 +46,119 @@ Public Class ProjectDetailsForm
 
 
         client = New Client(name, address, contact, status, price, payment, quantity)
-        Dim orderList = GetOrdersFromDatabase(id)
+        LoadOrders(clientId)
+
+
+    End Sub
+
+    Private Sub LoadOrders(client_id As Integer)
+        Dim orderList = GetOrdersFromDatabase(client_id)
         Dim pendingOrders = orderList.Where(Function(o) o.Status = "Pending").ToList()
         Dim finishedOrders = orderList.Where(Function(o) o.Status = "Finished").ToList()
         Dim claimedOrders = orderList.Where(Function(o) o.Status = "Claimed").ToList()
 
         Dim maxRow = Math.Max(Math.Max(pendingOrders.Count, finishedOrders.Count), claimedOrders.Count)
 
-        For i As Integer = 0 To maxRow - 1
-            Dim pending = If(i < pendingOrders.Count, pendingOrders(i).OrderName, "")
-            Dim finished = If(i < finishedOrders.Count, finishedOrders(i).OrderName, "")
-            Dim claimed = If(i < claimedOrders.Count, claimedOrders(i).OrderName, "")
+        For i As Integer = 0 To maxRow
 
-            dgSortOrders.Rows.Add(False, pending, False, finished, claimed)
+            ' Get the order names if available, otherwise use an empty string
+            Dim pendingOrder = If(i < pendingOrders.Count, pendingOrders(i), Nothing)
+            Dim finishedOrder = If(i < finishedOrders.Count, finishedOrders(i), Nothing)
+            Dim claimedOrder = If(i < claimedOrders.Count, claimedOrders(i), Nothing)
 
+            ' Add a new row to the DataGridView
+            Dim rowIndex = dgSortOrders.Rows.Add(False,
+                                             If(pendingOrder IsNot Nothing, pendingOrder.OrderName, ""),
+                                             False,
+                                             If(finishedOrder IsNot Nothing, finishedOrder.OrderName, ""),
+                                             If(claimedOrder IsNot Nothing, claimedOrder.OrderName, ""))
+
+            ' Tag each row with the corresponding order object (if available)
+            If pendingOrder IsNot Nothing Then dgSortOrders.Rows(rowIndex).Cells(1).Tag = pendingOrder
+            If finishedOrder IsNot Nothing Then dgSortOrders.Rows(rowIndex).Cells(3).Tag = finishedOrder
+            If claimedOrder IsNot Nothing Then dgSortOrders.Rows(rowIndex).Cells(4).Tag = claimedOrder
+            'dgSortOrders.Rows.Add(Nothing, "", Nothing, "", "")
         Next
+    End Sub
+    Private Sub dgSortOrders_MouseDown(sender As Object, e As MouseEventArgs) Handles dgSortOrders.MouseDown
+        Dim hit As DataGridView.HitTestInfo = dgSortOrders.HitTest(e.X, e.Y)
 
+        If hit.RowIndex >= 0 AndAlso hit.ColumnIndex >= 0 Then
+            ' Get the order object stored in the tag
+            Dim order = TryCast(dgSortOrders.Rows(hit.RowIndex).Cells(hit.ColumnIndex).Tag, Order)
+
+            ' Only start drag if the order is not Nothing
+            If order IsNot Nothing Then
+                dgSortOrders.DoDragDrop(order, DragDropEffects.Move)
+            End If
+        End If
+    End Sub
+
+    Private Sub dgSortOrders_DragEnter(sender As Object, e As DragEventArgs) Handles dgSortOrders.DragEnter
+        ' Allow the drop if it's a valid move operation
+        If e.Data.GetDataPresent(GetType(Order)) Then
+            e.Effect = DragDropEffects.Move
+        Else
+            e.Effect = DragDropEffects.None
+        End If
+    End Sub
+
+    Private Sub dgSortOrders_DragDrop(sender As Object, e As DragEventArgs) Handles dgSortOrders.DragDrop
+
+        Dim droppedOrder As Order = CType(e.Data.GetData(GetType(Order)), Order)
+        Dim clientPoint As Point = dgSortOrders.PointToClient(New Point(e.X, e.Y))
+        Dim hit As DataGridView.HitTestInfo = dgSortOrders.HitTest(clientPoint.X, clientPoint.Y)
+
+        If hit.RowIndex >= 0 AndAlso hit.ColumnIndex >= 0 Then
+            Dim Status = ""
+            Dim order_id = droppedOrder.OrderId
+            Select Case hit.ColumnIndex
+                Case 1
+                    Status = "Pending"
+                Case 3
+                    Status = "Finished"
+                Case 4
+                    Status = "Claimed"
+            End Select
+            UpdateOrderStatus(order_id, Status)
+            dgSortOrders.Rows.Clear()
+            LoadOrders(clientId)
+        End If
+    End Sub
+
+
+    Private Sub dgSortOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgSortOrders.CellContentClick
+
+        Dim columnIndex = e.ColumnIndex
+        If columnIndex = 0 Or columnIndex = 2 AndAlso e.RowIndex >= 0 Then
+
+            Dim order As Order = CType(dgSortOrders.Rows(e.RowIndex).Cells(columnIndex + 1).Tag, Order)
+
+            If order IsNot Nothing Then
+                Dim status As String = ""
+                Dim order_id = order.OrderId
+                Select Case order.Status
+                    Case "Pending"
+                        status = "Finished"
+                    Case "Finished"
+                        status = "Claimed"
+                End Select
+                UpdateOrderStatus(order_id, status)
+
+                dgSortOrders.Rows.Clear()
+                LoadOrders(clientId)
+            End If
+        End If
+    End Sub
+
+    Private Sub UpdateOrderStatus(order_id As Integer, status As String)
+        Dim query = "UPDATE client_order SET status = @status WHERE order_id = @order_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"@status", status},
+        {"@order_id", order_id}
+        }
+
+        MySQLModule.ExecuteNonQuery(query, parameter)
     End Sub
 
     Private Shared Function GetOrdersFromDatabase(client_id As Integer) As List(Of Order)
@@ -76,6 +173,7 @@ Public Class ProjectDetailsForm
 
 
         For Each row As DataRow In datatable.Rows
+            Dim OrderId As Integer = row.Field(Of Integer)("order_id")
             Dim OrderName As String = row.Field(Of String)("order_name")
             Dim OrderType As String = row.Field(Of String)("type")
             Dim description As String = row.Field(Of String)("description")
@@ -83,7 +181,7 @@ Public Class ProjectDetailsForm
             Dim done As Boolean = row.Field(Of Boolean)("done")
             Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
             Dim status As String = row.Field(Of String)("status")
-            OrderList.Add(New Order(OrderName, OrderType, description, price, done, sizes, status))
+            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, done, sizes, status))
         Next
 
         Return OrderList
@@ -137,4 +235,9 @@ Public Class ProjectDetailsForm
             Throw New Exception("garment_id doesn't exist ni whattt")
         End If
     End Function
+
+    Private Sub btnAddOrder_Click(sender As Object, e As EventArgs) Handles btnAddOrder.Click
+        Dim AddNewOrderForm As New AddNewOrder(clientId)
+        AddNewOrderForm.Show()
+    End Sub
 End Class
