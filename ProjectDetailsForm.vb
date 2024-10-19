@@ -5,14 +5,16 @@ Public Class ProjectDetailsForm
 
     Dim clientId As Integer
     Dim client As Client
+    Dim _HomeForm As Home
 
-    Public Sub New(id As Integer)
+    Public Sub New(id As Integer, _home As Home)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         Me.clientId = id
+        Me._HomeForm = _home
         LoadClient(clientId)
 
         tbName.Text = client.Name
@@ -24,9 +26,7 @@ Public Class ProjectDetailsForm
 
 
     End Sub
-    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 
     Private Sub LoadClient(id As Integer)
         Dim query As String = "SELECT * FROM client WHERE client_id = @client_id"
@@ -237,7 +237,16 @@ Public Class ProjectDetailsForm
     End Function
 
     Private Sub btnAddOrder_Click(sender As Object, e As EventArgs) Handles btnAddOrder.Click
-        Dim AddNewOrderForm As New AddNewOrder(clientId)
+        Dim AddNewOrderForm As New AddNewOrder(clientId, Me)
+        Me.Hide()
         AddNewOrderForm.Show()
+    End Sub
+
+    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub ProjectDetailsForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        _HomeForm.Show()
     End Sub
 End Class

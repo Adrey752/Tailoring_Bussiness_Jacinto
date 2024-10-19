@@ -58,7 +58,7 @@
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
         Dim newClient = New Client("", "", -1, False, 0, 0, 0)
         Dim addOrder As New AddClientForm(Me, newClient)
-
+        Me.Hide()
         addOrder.Show()
 
     End Sub
@@ -117,7 +117,8 @@
         If e.ColumnIndex = DataGridOrders.Columns("btDetails").Index AndAlso e.RowIndex >= 0 AndAlso Not IsDBNull(clickedRow.Cells("client_id").Value) Then
             Dim client_id As Integer = Convert.ToInt32(clickedRow.Cells("client_id").Value)
 
-            Dim projectDetails = New ProjectDetailsForm(client_id)
+            Dim projectDetails = New ProjectDetailsForm(client_id, Me)
+            Me.Hide()
             projectDetails.Show()
 
         End If
