@@ -152,7 +152,7 @@ Partial Class AddNewOrder
         nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
         nudPrice.Name = "nudPrice"
         nudPrice.Size = New System.Drawing.Size(120, 23)
-        nudPrice.TabIndex = 19
+        nudPrice.TabIndex = 2
         ' 
         ' lblPrice
         ' 
@@ -171,7 +171,7 @@ Partial Class AddNewOrder
         btnaddMeasurement.Location = New Point(430, 306)
         btnaddMeasurement.Name = "btnaddMeasurement"
         btnaddMeasurement.Size = New System.Drawing.Size(75, 23)
-        btnaddMeasurement.TabIndex = 17
+        btnaddMeasurement.TabIndex = 7
         btnaddMeasurement.Text = "Add Size"
         btnaddMeasurement.UseVisualStyleBackColor = True
         ' 
@@ -182,7 +182,7 @@ Partial Class AddNewOrder
         nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudValue.Name = "nudValue"
         nudValue.Size = New System.Drawing.Size(102, 23)
-        nudValue.TabIndex = 18
+        nudValue.TabIndex = 4
         ' 
         ' dgMeasurements
         ' 
@@ -222,7 +222,7 @@ Partial Class AddNewOrder
         cbUnit.Location = New Point(254, 305)
         cbUnit.Name = "cbUnit"
         cbUnit.Size = New System.Drawing.Size(77, 23)
-        cbUnit.TabIndex = 16
+        cbUnit.TabIndex = 5
         cbUnit.Text = "inches"
         ' 
         ' rbDescription
@@ -279,7 +279,7 @@ Partial Class AddNewOrder
         tbOrderName.Name = "tbOrderName"
         tbOrderName.PlaceholderText = "Enter Order Name"
         tbOrderName.Size = New System.Drawing.Size(121, 23)
-        tbOrderName.TabIndex = 4
+        tbOrderName.TabIndex = 0
         ' 
         ' sbMType
         ' 
@@ -288,7 +288,7 @@ Partial Class AddNewOrder
         sbMType.Location = New Point(38, 305)
         sbMType.Name = "sbMType"
         sbMType.Size = New System.Drawing.Size(102, 23)
-        sbMType.TabIndex = 12
+        sbMType.TabIndex = 3
         sbMType.Text = "Waist"
         ' 
         ' cbGarment
@@ -298,7 +298,7 @@ Partial Class AddNewOrder
         cbGarment.Location = New Point(337, 306)
         cbGarment.Name = "cbGarment"
         cbGarment.Size = New System.Drawing.Size(66, 23)
-        cbGarment.TabIndex = 3
+        cbGarment.TabIndex = 6
         cbGarment.Text = "Cotton"
         ' 
         ' cbStype
@@ -327,7 +327,7 @@ Partial Class AddNewOrder
         fPanelOrders.Location = New Point(1013, 87)
         fPanelOrders.Name = "fPanelOrders"
         fPanelOrders.Size = New System.Drawing.Size(208, 504)
-        fPanelOrders.TabIndex = 4
+        fPanelOrders.TabIndex = 0
         ' 
         ' LbSuggestions
         ' 

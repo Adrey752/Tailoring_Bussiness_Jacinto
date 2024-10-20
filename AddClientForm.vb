@@ -22,11 +22,11 @@ Public Class AddClientForm
     End Sub
     Private Sub Btn_Save(sender As Object, e As EventArgs) Handles btnSave.Click
 
-        If ValidateFields() Then
+        If ValidateFields() = True Then
 
-            Dim name As String = tbName.Text
-            Dim address As String = tbAddress.Text
-            Dim contact As String = tbNumber.Text
+            _client.Name = tbName.Text
+            _client.Address = tbAddress.Text
+            _client.Contact = tbNumber.Text
 
 
 
@@ -51,7 +51,31 @@ Public Class AddClientForm
         End If
 
     End Sub
-
+    Private Function ValidateFields() As Boolean
+        Dim emptyFields As New List(Of String)
+        If String.IsNullOrEmpty(tbName.Text) Then
+            emptyFields.Add("Name")
+        End If
+        If String.IsNullOrEmpty(tbAddress.Text) Then
+            emptyFields.Add("Address")
+        End If
+        If String.IsNullOrEmpty(tbNumber.Text) Then
+            emptyFields.Add("Number")
+        End If
+        If emptyFields.Count > 0 Then
+            MessageBox.Show("The following fields cannot be blank: " & String.Join(", ", emptyFields), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            If emptyFields.Contains("Name") Then
+                tbName.Focus()
+            ElseIf emptyFields.Contains("Address") Then
+                tbAddress.Focus()
+            ElseIf emptyFields.Contains("Number") Then
+                tbNumber.Focus()
+            End If
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 
     Private Sub btnAddOrder_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
         Dim name = tbName.Text
@@ -155,6 +179,7 @@ Public Class AddClientForm
         _home.Show()
     End Sub
     Private Sub AddClientForm_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        fpTask.Controls.Clear()
         If Client_Orders.Count > 0 Then
             For Each order As Order In Client_Orders
                 AddProjectPanel(order)
@@ -190,38 +215,7 @@ Public Class AddClientForm
 
         sender.Region = New Region(DGP)
     End Sub
-    Private Function ValidateFields() As Boolean
-        Dim emptyFields As New List(Of String) ' Initialize the list
 
-        ' Check if each TextBox is empty and add its name to the list
-        If String.IsNullOrEmpty(tbName.Text) Then
-            emptyFields.Add("Name")
-        End If
-        If String.IsNullOrEmpty(tbAddress.Text) Then
-            emptyFields.Add("Address")
-        End If
-        If String.IsNullOrEmpty(tbNumber.Text) Then
-            emptyFields.Add("Number")
-        End If
-
-        ' If there are any empty fields, show a warning and set focus
-        If emptyFields.Count > 0 Then
-            MessageBox.Show("The following fields cannot be blank: " & String.Join(", ", emptyFields), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            ' Set focus to the first empty field
-            If emptyFields.Contains("Name") Then
-                tbName.Focus()
-            ElseIf emptyFields.Contains("Address") Then
-                tbAddress.Focus()
-            ElseIf emptyFields.Contains("Number") Then
-                tbNumber.Focus()
-            End If
-            Return False ' Validation failed
-        Else
-            ' All fields are valid
-            MessageBox.Show("All inputs are valid.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Return True ' Validation succeeded
-        End If
-    End Function
 
     ' ********* SQL Functions Helper ko *********
     Public Shared Function GetTypeId(partMeasurement As String) As Integer

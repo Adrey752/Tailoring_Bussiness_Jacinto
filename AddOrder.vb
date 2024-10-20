@@ -4,6 +4,7 @@ Public Class AddOrder
     Dim client As Client
     Dim order As Order
     Dim _addClientForm As AddClientForm
+    Private selectedPanelIndex As Integer = -1
 
 
     Private ReadOnly Property AllPanelsInFlowPane As List(Of Panel)
@@ -22,7 +23,16 @@ Public Class AddOrder
             Return orders
         End Get
     End Property
-
+    Private ReadOnly Property ListSizes As List(Of Size)
+        Get
+            Dim sizes As New List(Of Size)
+            For Each row As DataGridViewRow In dgMeasurements.Rows
+                Dim size = CType(row.Cells(0).Tag, Size)
+                sizes.Add(size)
+            Next
+            Return sizes
+        End Get
+    End Property
     Public Sub New(client As Client, orderForm As AddClientForm)
 
         ' This call is required by the designer.
@@ -43,6 +53,8 @@ Public Class AddOrder
         order.Price = nudPrice.Value
         order.Description = rbDescription.Text
         AddOrderToFlowPane(order)
+        order.Sizes = ListSizes
+        dgMeasurements.Rows.Clear()
         Me.order = New Order(1, "", "", "", 1, False, New List(Of Size), "Pending")
     End Sub
 
@@ -87,10 +99,13 @@ Public Class AddOrder
         Dim garment = cbGarment.Text
         Dim measurement = New Size(measurementType, value, unit, garment)
 
-        order.AddSize(measurement)
+        'order.AddSize(measurement)
 
-        dgMeasurements.Rows.Add(measurementType, (value & unit), garment)
+        Dim rowIndex = dgMeasurements.Rows.Add(measurementType, (value & unit), garment)
+        dgMeasurements.Rows(rowIndex).Cells(0).Tag = measurement
     End Sub
+
+
     Public Sub AddOrderToFlowPane(order As Order)
 
         Dim projectPanel As New Panel
@@ -115,6 +130,10 @@ Public Class AddOrder
         lblServiceType.AutoSize = True
         lblOrderName.AutoSize = True
 
+        lblOrderName.Enabled = False
+        lblServiceType.Enabled = False
+
+
         projectPanel.Controls.Add(lblOrderName)
         projectPanel.Controls.Add(lblServiceType)
         projectPanel.Controls.Add(checkBox)
@@ -122,36 +141,15 @@ Public Class AddOrder
         projectPanel.BackColor = Color.FromArgb(217, 185, 155)
         projectPanel.ForeColor = Color.Black
 
-        AddHandler projectPanel.Click, AddressOf ProjectPanel_Click
-        AddHandler lblOrderName.Click, AddressOf ProjectPanel_Click
-        AddHandler lblServiceType.Click, AddressOf ProjectPanel_Click
+
+        AddHandler projectPanel.Click, AddressOf Order_Panel_Click
 
         fPanelOrders.Controls.Add(projectPanel)
-    End Sub
-    Private Sub ProjectPanel_Click(sender As Object, e As EventArgs)
-        ' Attempt to get the clicked Panel. If the sender is not a Panel, find the parent Panel.
-        Dim clickedPanel As Panel = TryCast(sender, Panel)
-
-        If clickedPanel Is Nothing Then
-            ' If sender is not a Panel, look for the parent Panel
-            Dim control As Control = DirectCast(sender, Control) ' Cast sender to Control
-            clickedPanel = control.Parent ' Get the parent control, which should be the Panel
-        End If
-
-        ' Check if clickedPanel is still Nothing; if so, exit the method
-        If clickedPanel IsNot Nothing Then
-            ' Display full project details when clicked (e.g., open a new form)
-            Dim orderDisplay As OrderDisplay = New OrderDisplay()
-            orderDisplay.Show()
-        End If
     End Sub
 
     '********** HELPLER FUNCTIONS NI Adrial ***********
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        tbOrderName.Focus() ' Set focus to the TextBox
-        Timer1.Stop() ' Stop the timer after setting focus
-    End Sub
+
 
     Private Sub LoadMeasurementsType()
         Dim query = "SELECT types FROM size_types"
@@ -177,7 +175,57 @@ Public Class AddOrder
         _addClientForm.Show()
     End Sub
 
-    Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim selected = True
+    Private Sub SelectPanel(index As Integer)
+        ' Deselect previous panel
+        If selectedPanelIndex >= 0 AndAlso selectedPanelIndex < fPanelOrders.Controls.Count Then
+            fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.FromArgb(217, 185, 155)
+        End If
+
+        ' Select the new panel
+        If index = selectedPanelIndex Then
+            If selected Then
+                fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.FromArgb(217, 185, 155)
+                selected = False
+            Else
+                fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.Gray
+                selected = True
+            End If
+            Exit Sub
+        End If
+        selectedPanelIndex = index
+
+        Dim panel = fPanelOrders.Controls(selectedPanelIndex)
+        Dim objectTaged = panel.Tag
+        panel.BackColor = Color.Gray
+    End Sub
+
+    Private Sub Order_Panel_Click(sender As Object, e As EventArgs)
+        Dim Panel = TryCast(sender, Panel)
+        If Panel IsNot Nothing Then
+            Dim panelIndex = fPanelOrders.Controls.GetChildIndex(Panel)
+            SelectPanel(panelIndex)
+        End If
+    End Sub
+
+    Private Sub ShowOrderDetailsn(order As Order)
+        tbOrderName.Text = order.OrderName
+        cbStype.Text = order.Type
+        nudPrice.Value = order.Price
+        rbDescription.Text = order.Description
+        AddMeasurementsToDatagrid(order.Sizes)
 
     End Sub
+
+    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Size))
+        For Each size As Size In sizes
+            dgMeasurements.Rows.Add(size.BodyPart, (size.Value & size.Unit), size.garment)
+        Next
+    End Sub
+
+    Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Focus
+    End Sub
+
+
 End Class

@@ -45,6 +45,8 @@ Partial Class AddOrder
         Label3 = New Label()
         nudPrice = New NumericUpDown()
         pnAddOrders = New Panel()
+        ComboBox1 = New ComboBox()
+        Label2 = New Label()
         btnCancel = New Button()
         btnAdd = New Button()
         Label4 = New Label()
@@ -129,6 +131,7 @@ Partial Class AddOrder
         ' 
         ' cbStype
         ' 
+        cbStype.CausesValidation = False
         cbStype.FormattingEnabled = True
         cbStype.Items.AddRange(New Object() {"Repair", "Resize"})
         cbStype.Location = New Point(153, 142)
@@ -153,7 +156,7 @@ Partial Class AddOrder
         tbOrderName.Name = "tbOrderName"
         tbOrderName.PlaceholderText = "Enter Order Name"
         tbOrderName.Size = New System.Drawing.Size(121, 23)
-        tbOrderName.TabIndex = 4
+        tbOrderName.TabIndex = 0
         ' 
         ' lblorderName
         ' 
@@ -251,13 +254,15 @@ Partial Class AddOrder
         nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
         nudPrice.Name = "nudPrice"
         nudPrice.Size = New System.Drawing.Size(120, 23)
-        nudPrice.TabIndex = 19
+        nudPrice.TabIndex = 2
         ' 
         ' pnAddOrders
         ' 
         pnAddOrders.Anchor = AnchorStyles.None
         pnAddOrders.AutoSizeMode = AutoSizeMode.GrowAndShrink
         pnAddOrders.BackColor = Color.White
+        pnAddOrders.Controls.Add(ComboBox1)
+        pnAddOrders.Controls.Add(Label2)
         pnAddOrders.Controls.Add(btnCancel)
         pnAddOrders.Controls.Add(btnAdd)
         pnAddOrders.Controls.Add(Label4)
@@ -282,6 +287,28 @@ Partial Class AddOrder
         pnAddOrders.Name = "pnAddOrders"
         pnAddOrders.Size = New System.Drawing.Size(998, 653)
         pnAddOrders.TabIndex = 2
+        ' 
+        ' ComboBox1
+        ' 
+        ComboBox1.Anchor = AnchorStyles.None
+        ComboBox1.FormattingEnabled = True
+        ComboBox1.Items.AddRange(New Object() {"Small T-Shirt", "Large T-Shirt", "X-Large T-Shirt"})
+        ComboBox1.Location = New Point(235, 267)
+        ComboBox1.Name = "ComboBox1"
+        ComboBox1.Size = New System.Drawing.Size(109, 23)
+        ComboBox1.TabIndex = 27
+        ComboBox1.Text = "Small T-Shirt"
+        ' 
+        ' Label2
+        ' 
+        Label2.Anchor = AnchorStyles.None
+        Label2.AutoSize = True
+        Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label2.Location = New Point(91, 270)
+        Label2.Name = "Label2"
+        Label2.Size = New System.Drawing.Size(130, 15)
+        Label2.TabIndex = 26
+        Label2.Text = "Custom Measurements"
         ' 
         ' btnCancel
         ' 
@@ -349,7 +376,7 @@ Partial Class AddOrder
         fPanelOrders.Location = New Point(1017, 89)
         fPanelOrders.Name = "fPanelOrders"
         fPanelOrders.Size = New System.Drawing.Size(208, 564)
-        fPanelOrders.TabIndex = 24
+        fPanelOrders.TabIndex = 0
         ' 
         ' lblOrders
         ' 
@@ -426,4 +453,6 @@ Partial Class AddOrder
     Friend WithEvents size_type As DataGridViewTextBoxColumn
     Friend WithEvents measurement As DataGridViewTextBoxColumn
     Friend WithEvents GarmentType As DataGridViewTextBoxColumn
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label2 As Label
 End Class
