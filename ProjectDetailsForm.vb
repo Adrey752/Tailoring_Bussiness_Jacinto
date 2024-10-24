@@ -28,7 +28,7 @@ Public Class ProjectDetailsForm
     End Sub
 
 
-    Private Sub LoadClient(id As Integer)
+    Public Sub LoadClient(id As Integer)
         Dim query As String = "SELECT * FROM client WHERE client_id = @client_id"
         Dim parameter As New Dictionary(Of String, Object) From {
             {"@client_id", id}
@@ -107,11 +107,14 @@ Public Class ProjectDetailsForm
 
         Dim droppedOrder As Order = CType(e.Data.GetData(GetType(Order)), Order)
         Dim clientPoint As Point = dgSortOrders.PointToClient(New Point(e.X, e.Y))
-        Dim hit As DataGridView.HitTestInfo = dgSortOrders.HitTest(clientPoint.X, clientPoint.Y)
 
-        If hit.RowIndex >= 0 AndAlso hit.ColumnIndex >= 0 Then
+        Dim hit As DataGridView.HitTestInfo = dgSortOrders.HitTest(clientPoint.X, clientPoint.Y)
+        If hit.RowIndex >= 0 AndAlso hit.ColumnIndex > 0 AndAlso hit.ColumnIndex <> -1 AndAlso
+           (hit.ColumnIndex = 1 Or hit.ColumnIndex = 3 Or hit.ColumnIndex = 4) Then
+
             Dim Status = ""
             Dim order_id = droppedOrder.OrderId
+
             Select Case hit.ColumnIndex
                 Case 1
                     Status = "Pending"
@@ -120,10 +123,13 @@ Public Class ProjectDetailsForm
                 Case 4
                     Status = "Claimed"
             End Select
+
             UpdateOrderStatus(order_id, Status)
             dgSortOrders.Rows.Clear()
             LoadOrders(clientId)
         End If
+
+
     End Sub
 
 
@@ -242,11 +248,12 @@ Public Class ProjectDetailsForm
         AddNewOrderForm.Show()
     End Sub
 
-    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 
     Private Sub ProjectDetailsForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         _HomeForm.Show()
+    End Sub
+
+    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
