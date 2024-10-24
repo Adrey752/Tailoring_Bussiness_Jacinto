@@ -49,6 +49,7 @@ Public Class AddOrder
         If SelectedOrder IsNot Nothing Then
             Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
             SaveEdit(SelectedOrder, SelectedPanel)
+            UnselectMethod(SelectedPanel)
 
         Else
             AddOrder()
@@ -96,18 +97,15 @@ Public Class AddOrder
         OrderToEdit.Price = nudPrice.Value
         OrderToEdit.Description = rbDescription.Text
 
-        order.Sizes.Clear()
+        OrderToEdit.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
             If row.Tag IsNot Nothing Then
                 Dim size As Size = CType(row.Tag, Size)
-                order.Sizes.Add(size)
+                OrderToEdit.Sizes.Add(size)
+
             End If
         Next
         PanelToEdit.UpdateUI()
-        SelectPanel(selectedPanelIndex)
-        SelectedOrder = Nothing
-        ClearForm()
-
     End Sub
 
     Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
@@ -144,38 +142,55 @@ Public Class AddOrder
         End If
     End Sub
     Private Sub SelectPanel(index As Integer)
+        Dim OrderPanelsCount = fPanelOrders.Controls.Count
 
-        If selectedPanelIndex >= 0 AndAlso selectedPanelIndex < fPanelOrders.Controls.Count Then
-            fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.FromArgb(217, 185, 155)
-            btnAdd.Text = "Add +"
+        ' unselect previously selected panel if it's not the same as current clicked panel
+        If ValidIndexRange(selectedPanelIndex, OrderPanelsCount) AndAlso index <> selectedPanelIndex Then
+            Dim previousSelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+            UnselectMethod(previousSelectedPanel)
         End If
 
-        Dim selectedPanel = fPanelOrders.Controls(selectedPanelIndex)
-        SelectedOrder = selectedPanel.Tag
+        If ValidIndexRange(index, OrderPanelsCount) Then
 
-        If index = selectedPanelIndex Then
-            If selected Then 'UNSELECT MO 
-                selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
-                selected = False
-                btnAdd.Text = "Add +"
-                ClearForm()
+            Dim panelClicked = fPanelOrders.Controls(index)
+            SelectedOrder = panelClicked.Tag
+            'When clicking the same panel
+            If selectedPanelIndex = index Then
+                If selected Then
+                    UnselectMethod(panelClicked)
+
+                Else
+                    SelectMethod(panelClicked, SelectedOrder)
+
+                End If
             Else
-                selectedPanel.BackColor = Color.Gray
-                ShowOrderDetails(SelectedOrder)
-                btnAdd.Text = "Save Edit"
-                selected = True
-
+                ' when clicking different panel
+                SelectMethod(panelClicked, SelectedOrder)
+                selectedPanelIndex = index
             End If
-            Exit Sub
         End If
-        selectedPanelIndex = index
 
-        Dim panel = fPanelOrders.Controls(selectedPanelIndex)
-        Dim objectTaged = panel.Tag
-        panel.BackColor = Color.Gray
-        ShowOrderDetails(SelectedOrder)
+    End Sub
+
+    Private Shared Function ValidIndexRange(index As Integer, upperLimit As Integer) As Boolean
+        If index >= upperLimit Or index < 0 Then
+            Return False
+        End If
+        Return True
+    End Function
+
+    Private Sub SelectMethod(selectedPanel As Panel, selectedOrder As Order)
+        selectedPanel.BackColor = Color.Gray
+        ShowOrderDetails(selectedOrder)
         btnAdd.Text = "Save Edit"
-
+        selected = True
+    End Sub
+    Private Sub UnselectMethod(selectedPanel As Panel)
+        selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
+        selected = False
+        btnAdd.Text = "Add +"
+        SelectedOrder = Nothing
+        ClearForm()
     End Sub
 
     ' ******* Helper Functions *******

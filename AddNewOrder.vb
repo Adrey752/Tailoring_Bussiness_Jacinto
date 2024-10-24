@@ -47,8 +47,8 @@ Public Class AddNewOrder
                 InsertSize(Size, orderId)
             Next
         Next
-        _ProjectDetailsForm.LoadClient(client_id)
         _ProjectDetailsForm.dgSortOrders.Rows.Clear()
+        _ProjectDetailsForm.LoadClient(client_id)
         Me.Close()
 
     End Sub
@@ -59,6 +59,7 @@ Public Class AddNewOrder
         If SelectedOrder IsNot Nothing Then
             Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
             SaveEdit(SelectedOrder, SelectedPanel)
+            UnselectMethod(SelectedPanel)
 
         Else
             AddOrder()
@@ -72,18 +73,14 @@ Public Class AddNewOrder
         OrderToEdit.Type = cbStype.Text
         OrderToEdit.Price = nudPrice.Value
         OrderToEdit.Description = rbDescription.Text
-
-        order.Sizes.Clear()
+        OrderToEdit.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
             If row.Tag IsNot Nothing Then
                 Dim size As Size = CType(row.Tag, Size)
-                order.Sizes.Add(size)
+                OrderToEdit.Sizes.Add(size)
             End If
         Next
         PanelToEdit.UpdateUI()
-        'SelectPanel(selectedPanelIndex)
-        SelectedOrder = Nothing
-        ClearForm()
 
     End Sub
     Private Sub AddOrder()
@@ -123,20 +120,23 @@ Public Class AddNewOrder
             Dim previousSelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
             UnselectMethod(previousSelectedPanel)
         End If
+
         If ValidIndexRange(index, OrderPanelsCount) Then
 
             Dim panelClicked = fPanelOrders.Controls(index)
-            Dim selectedOrder = panelClicked.Tag
+            SelectedOrder = panelClicked.Tag
             'When clicking the same panel
             If selectedPanelIndex = index Then
                 If selected Then
                     UnselectMethod(panelClicked)
+
                 Else
-                    SelectMethod(panelClicked, selectedOrder)
+                    SelectMethod(panelClicked, SelectedOrder)
+
                 End If
             Else
                 ' when clicking different panel
-                SelectMethod(panelClicked, selectedOrder)
+                SelectMethod(panelClicked, SelectedOrder)
                 selectedPanelIndex = index
             End If
         End If
@@ -160,6 +160,7 @@ Public Class AddNewOrder
         selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
         selected = False
         btnAdd.Text = "Add +"
+        SelectedOrder = Nothing
         ClearForm()
     End Sub
 
@@ -177,6 +178,9 @@ Public Class AddNewOrder
     '   ****** Setting Up Functions *******
 
     Private Sub AddMeasurementsToDatagrid(sizes As List(Of Size))
+        If sizes.Count = 0 Then
+            MessageBox.Show("empty sizes")
+        End If
         For Each size As Size In sizes
             Dim rowIndex As Integer = dgMeasurements.Rows.Add(size.BodyPart, (size.Value & " " & size.Unit), size.garment)
             dgMeasurements.Rows(rowIndex).Tag = size
