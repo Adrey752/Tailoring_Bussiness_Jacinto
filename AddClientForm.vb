@@ -9,14 +9,14 @@ Public Class AddClientForm
             Return _client.Orders
         End Get
     End Property
-    Public Sub New(homeInstance As Home, client As Client)
+    Public Sub New(homeInstance As Home)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         _home = homeInstance
-        _client = client
+        _client = New Client("", "", -1, False, 0, 0, 0)
 
 
     End Sub
@@ -282,5 +282,7 @@ Public Class AddClientForm
         MySQLModule.ExecuteNonQuery(sizeQuery, sizeParams)
     End Sub
 
+    Private Sub AddClientForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

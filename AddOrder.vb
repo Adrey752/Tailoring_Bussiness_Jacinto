@@ -1,10 +1,15 @@
-﻿Imports Mysqlx.XDevAPI
+﻿Imports System.Net.NetworkInformation
+Imports Mysqlx.XDevAPI
+Imports Windows.Win32.UI.Input
 
 Public Class AddOrder
     Dim client As Client
     Dim order As Order
     Dim _addClientForm As AddClientForm
-    Private selectedPanelIndex As Integer = -1
+    Dim SelectedOrder As Order
+    Private selectedPanelIndex As Integer
+    Dim selected = False
+
 
 
     Private ReadOnly Property AllPanelsInFlowPane As List(Of Panel)
@@ -23,16 +28,8 @@ Public Class AddOrder
             Return orders
         End Get
     End Property
-    Private ReadOnly Property ListSizes As List(Of Size)
-        Get
-            Dim sizes As New List(Of Size)
-            For Each row As DataGridViewRow In dgMeasurements.Rows
-                Dim size = CType(row.Cells(0).Tag, Size)
-                sizes.Add(size)
-            Next
-            Return sizes
-        End Get
-    End Property
+
+
     Public Sub New(client As Client, orderForm As AddClientForm)
 
         ' This call is required by the designer.
@@ -46,52 +43,42 @@ Public Class AddOrder
 
     End Sub
 
+    ' ****** Buttons or Input Handlers  ********
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If SelectedOrder IsNot Nothing Then
+            Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+            SaveEdit(SelectedOrder, SelectedPanel)
+
+        Else
+            AddOrder()
+
+        End If
+
+
+    End Sub
+
+    Private Sub AddOrder()
         order.OrderName = tbOrderName.Text
         order.Type = cbStype.Text
         order.Price = nudPrice.Value
         order.Description = rbDescription.Text
-        AddOrderToFlowPane(order)
-        order.Sizes = ListSizes
-        dgMeasurements.Rows.Clear()
-        Me.order = New Order(1, "", "", "", 1, False, New List(Of Size), "Pending")
-    End Sub
 
-
-    Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
-        For Each order In ListOrders
-            client.addOrder(order)
+        order.Sizes.Clear()
+        For Each row As DataGridViewRow In dgMeasurements.Rows
+            If row.Tag IsNot Nothing Then
+                Dim size As Size = CType(row.Tag, Size)
+                order.Sizes.Add(size)
+            End If
         Next
-        Me.Close()
+
+        Dim OrderPanel = New OrderPanel(order)
+        AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
+        fPanelOrders.Controls.Add(OrderPanel)
+
+        Me.order = New Order(0, "", "", "", 0, False, New List(Of Size), "Pending")
+        ClearForm()
     End Sub
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        Dim AllPanelsInFlowPane = fPanelOrders.Controls.OfType(Of Panel).ToList()
-        Dim searchText As String = txtSearch.Text.ToLower()
-        Dim suggestions = AllPanelsInFlowPane.Where(Function(p) CType(p.Tag, Order).OrderName.ToLower().Contains(searchText)).ToList()
-
-        ' Update ListBox with matching tags
-        LbSuggestions.Items.Clear()
-        LbSuggestions.Items.AddRange(suggestions.Select(Function(p) CType(p.Tag, Order).OrderName).ToArray())
-        LbSuggestions.Visible = LbSuggestions.Items.Count > 0
-    End Sub
-
-    ' Step 3: Move the selected panel to the top when a suggestion is clicked
-    Private Sub LbSuggestions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbSuggestions.SelectedIndexChanged
-        Dim selectedTag = CStr(LbSuggestions.SelectedItem)
-
-        ' Find the matching panel by its tag
-        Dim panelToMove = AllPanelsInFlowPane.FirstOrDefault(Function(p) CType(p.Tag, Order).OrderName = selectedTag)
-        If panelToMove IsNot Nothing Then
-            ' Move the panel to the top of the FlowLayoutPanel
-            fPanelOrders.Controls.SetChildIndex(panelToMove, 0)
-        End If
-
-        ' Hide the suggestions after selection
-        txtSearch.Clear()
-        LbSuggestions.Visible = False
-    End Sub
-
     Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click
         Dim measurementType = sbMType.Text
         Dim value = nudValue.Value
@@ -99,57 +86,150 @@ Public Class AddOrder
         Dim garment = cbGarment.Text
         Dim measurement = New Size(measurementType, value, unit, garment)
 
-        'order.AddSize(measurement)
+        ' Add row to DataGridView with Size Tag 
+        Dim rowIndex As Integer = dgMeasurements.Rows.Add(measurementType, (value & " " & unit), garment)
+        dgMeasurements.Rows(rowIndex).Tag = measurement
+    End Sub
+    Private Sub SaveEdit(OrderToEdit As Order, PanelToEdit As OrderPanel)
+        OrderToEdit.OrderName = tbOrderName.Text
+        OrderToEdit.Type = cbStype.Text
+        OrderToEdit.Price = nudPrice.Value
+        OrderToEdit.Description = rbDescription.Text
 
-        Dim rowIndex = dgMeasurements.Rows.Add(measurementType, (value & unit), garment)
-        dgMeasurements.Rows(rowIndex).Cells(0).Tag = measurement
+        order.Sizes.Clear()
+        For Each row As DataGridViewRow In dgMeasurements.Rows
+            If row.Tag IsNot Nothing Then
+                Dim size As Size = CType(row.Tag, Size)
+                order.Sizes.Add(size)
+            End If
+        Next
+        PanelToEdit.UpdateUI()
+        SelectPanel(selectedPanelIndex)
+        SelectedOrder = Nothing
+        ClearForm()
+
+    End Sub
+
+    Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
+        For Each order In ListOrders
+            client.addOrder(order)
+        Next
+        Me.Close()
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Dim AllPanelsInFlowPane = fPanelOrders.Controls.OfType(Of Panel).ToList()
+        Dim searchText As String = txtSearch.Text.ToLower()
+        Dim suggestions = AllPanelsInFlowPane.Where(Function(p) CType(p.Tag, Order).OrderName.ToLower().Contains(searchText)).ToList()
+
+
+        LbSuggestions.Items.Clear()
+        LbSuggestions.Items.AddRange(suggestions.Select(Function(p) CType(p.Tag, Order).OrderName).ToArray())
+        LbSuggestions.Visible = LbSuggestions.Items.Count > 0
+    End Sub
+
+    Private Sub AddOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        _addClientForm.Show()
     End Sub
 
 
-    Public Sub AddOrderToFlowPane(order As Order)
 
-        Dim projectPanel As New Panel
-        projectPanel.Height = 80
-        projectPanel.Width = 200
-        projectPanel.Margin = New Padding(10)
+    Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
+        Dim Panel = TryCast(sender, Panel)
+        If Panel IsNot Nothing Then
+            Dim panelIndex = fPanelOrders.Controls.GetChildIndex(Panel)
 
-        Dim lblOrderName As New Label
-        lblOrderName.Text = "Order Name: " & order.OrderName
-        lblOrderName.Location = New Point(10, 10)
+            SelectPanel(panelIndex)
 
-        Dim lblServiceType As New Label
-        lblServiceType.Text = "Service Type: " & order.Type
-        lblServiceType.Location = New Point(10, 30)
+        End If
+    End Sub
+    Private Sub SelectPanel(index As Integer)
 
+        If selectedPanelIndex >= 0 AndAlso selectedPanelIndex < fPanelOrders.Controls.Count Then
+            fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.FromArgb(217, 185, 155)
+            btnAdd.Text = "Add +"
+        End If
 
+        Dim selectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+        SelectedOrder = selectedPanel.Tag
 
-        Dim checkBox As New CheckBox
-        checkBox.Location = New Point(projectPanel.Width - 40, 30)
-        projectPanel.Tag = order
+        If index = selectedPanelIndex Then
+            If selected Then 'UNSELECT MO 
+                selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
+                selected = False
+                btnAdd.Text = "Add +"
+                ClearForm()
+            Else
+                selectedPanel.BackColor = Color.Gray
+                ShowOrderDetails(SelectedOrder)
+                btnAdd.Text = "Save Edit"
+                selected = True
 
-        lblServiceType.AutoSize = True
-        lblOrderName.AutoSize = True
+            End If
+            Exit Sub
+        End If
+        selectedPanelIndex = index
 
-        lblOrderName.Enabled = False
-        lblServiceType.Enabled = False
+        Dim panel = fPanelOrders.Controls(selectedPanelIndex)
+        Dim objectTaged = panel.Tag
+        panel.BackColor = Color.Gray
+        ShowOrderDetails(SelectedOrder)
+        btnAdd.Text = "Save Edit"
 
-
-        projectPanel.Controls.Add(lblOrderName)
-        projectPanel.Controls.Add(lblServiceType)
-        projectPanel.Controls.Add(checkBox)
-
-        projectPanel.BackColor = Color.FromArgb(217, 185, 155)
-        projectPanel.ForeColor = Color.Black
-
-
-        AddHandler projectPanel.Click, AddressOf Order_Panel_Click
-
-        fPanelOrders.Controls.Add(projectPanel)
     End Sub
 
-    '********** HELPLER FUNCTIONS NI Adrial ***********
+    ' ******* Helper Functions *******
+    Private Sub ClearForm()
+        tbOrderName.Clear()
+        nudPrice.Value = 0
+        rbDescription.Clear()
+        nudValue.Value = 0
+        dgMeasurements.Rows.Clear()
+    End Sub
 
 
+    Private Sub LbSuggestions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbSuggestions.SelectedIndexChanged
+
+        Dim selectedTag = CStr(LbSuggestions.SelectedItem)
+
+        ' Find matching panel by it's tag
+        Dim panelToMove = AllPanelsInFlowPane.FirstOrDefault(Function(p) CType(p.Tag, Order).OrderName = selectedTag)
+        'isang pitik sa itlog pag may nakita kang bug
+        If panelToMove IsNot Nothing Then
+            ' Move the panel to top of the FlowLayoutPanel
+            fPanelOrders.Controls.SetChildIndex(panelToMove, 0)
+        End If
+
+        ' Hide suggestions after selection
+        txtSearch.Clear()
+        LbSuggestions.Visible = False
+    End Sub
+
+    Private Sub ShowOrderDetails(order As Order)
+
+        tbOrderName.Text = order.OrderName
+        cbStype.Text = order.Type
+        nudPrice.Value = order.Price
+        rbDescription.Text = order.Description
+        AddMeasurementsToDatagrid(order.Sizes)
+
+    End Sub
+
+
+    '   ****** Setting Up Functions *******
+
+    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Size))
+        For Each size As Size In sizes
+            Dim rowIndex As Integer = dgMeasurements.Rows.Add(size.BodyPart, (size.Value & " " & size.Unit), size.garment)
+            dgMeasurements.Rows(rowIndex).Tag = size
+        Next
+    End Sub
+
+
+
+
+
+    '********** SQl FUNCTIONS NI Adrial ***********
 
     Private Sub LoadMeasurementsType()
         Dim query = "SELECT types FROM size_types"
@@ -171,61 +251,52 @@ Public Class AddOrder
 
     End Sub
 
-    Private Sub AddOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        _addClientForm.Show()
-    End Sub
 
-    Dim selected = True
-    Private Sub SelectPanel(index As Integer)
-        ' Deselect previous panel
-        If selectedPanelIndex >= 0 AndAlso selectedPanelIndex < fPanelOrders.Controls.Count Then
-            fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.FromArgb(217, 185, 155)
-        End If
 
-        ' Select the new panel
-        If index = selectedPanelIndex Then
-            If selected Then
-                fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.FromArgb(217, 185, 155)
-                selected = False
-            Else
-                fPanelOrders.Controls(selectedPanelIndex).BackColor = Color.Gray
-                selected = True
-            End If
-            Exit Sub
-        End If
-        selectedPanelIndex = index
+    '********** Di ko narin yata to gagamitin yung mga ito pero itatabi ko lang ********
 
-        Dim panel = fPanelOrders.Controls(selectedPanelIndex)
-        Dim objectTaged = panel.Tag
-        panel.BackColor = Color.Gray
-    End Sub
+    'Public Sub AddOrderToFlowPane(order As Order)
 
-    Private Sub Order_Panel_Click(sender As Object, e As EventArgs)
-        Dim Panel = TryCast(sender, Panel)
-        If Panel IsNot Nothing Then
-            Dim panelIndex = fPanelOrders.Controls.GetChildIndex(Panel)
-            SelectPanel(panelIndex)
-        End If
-    End Sub
+    '    Dim projectPanel As New Panel
+    '    projectPanel.Height = 80
+    '    projectPanel.Width = 200
+    '    projectPanel.Margin = New Padding(10)
 
-    Private Sub ShowOrderDetailsn(order As Order)
-        tbOrderName.Text = order.OrderName
-        cbStype.Text = order.Type
-        nudPrice.Value = order.Price
-        rbDescription.Text = order.Description
-        AddMeasurementsToDatagrid(order.Sizes)
+    '    Dim lblOrderName As New Label
+    '    lblOrderName.Text = "Order Name: " & order.OrderName
+    '    lblOrderName.Location = New Point(10, 10)
 
-    End Sub
+    '    Dim lblServiceType As New Label
+    '    lblServiceType.Text = "Service Type: " & order.Type
+    '    lblServiceType.Location = New Point(10, 30)
 
-    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Size))
-        For Each size As Size In sizes
-            dgMeasurements.Rows.Add(size.BodyPart, (size.Value & size.Unit), size.garment)
-        Next
-    End Sub
 
-    Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Focus
-    End Sub
+
+    '    Dim checkBox As New CheckBox
+    '    checkBox.Location = New Point(projectPanel.Width - 40, 30)
+    '    projectPanel.Tag = order
+
+    '    lblServiceType.AutoSize = True
+    '    lblOrderName.AutoSize = True
+
+    '    lblOrderName.Enabled = False
+    '    lblServiceType.Enabled = False
+
+
+    '    projectPanel.Controls.Add(lblOrderName)
+    '    projectPanel.Controls.Add(lblServiceType)
+    '    projectPanel.Controls.Add(checkBox)
+
+    '    projectPanel.BackColor = Color.FromArgb(217, 185, 155)
+    '    projectPanel.ForeColor = Color.Black
+
+
+    '    AddHandler projectPanel.Click, AddressOf Order_Panel_Click
+
+    '    fPanelOrders.Controls.Add(projectPanel)
+    'End Sub
+
+
 
 
 End Class

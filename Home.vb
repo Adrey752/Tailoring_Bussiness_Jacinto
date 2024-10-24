@@ -56,8 +56,8 @@
 
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
-        Dim newClient = New Client("", "", -1, False, 0, 0, 0)
-        Dim addOrder As New AddClientForm(Me, newClient)
+
+        Dim addOrder As New AddClientForm(Me)
         Me.Hide()
         addOrder.Show()
 

@@ -8,6 +8,7 @@
     Public Property Price As Decimal
     Public Property Done As Boolean
     Public Property Sizes As List(Of Size)
+
     Public Property Status As String
 
 

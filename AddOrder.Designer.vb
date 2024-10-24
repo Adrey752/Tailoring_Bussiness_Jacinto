@@ -71,7 +71,7 @@ Partial Class AddOrder
         btnOrderSave.Location = New Point(687, 578)
         btnOrderSave.Name = "btnOrderSave"
         btnOrderSave.Size = New System.Drawing.Size(104, 41)
-        btnOrderSave.TabIndex = 3
+        btnOrderSave.TabIndex = 11
         btnOrderSave.Text = "Save"
         btnOrderSave.UseVisualStyleBackColor = False
         ' 
@@ -82,7 +82,7 @@ Partial Class AddOrder
         nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudValue.Name = "nudValue"
         nudValue.Size = New System.Drawing.Size(102, 23)
-        nudValue.TabIndex = 18
+        nudValue.TabIndex = 5
         ' 
         ' btnaddMeasurement
         ' 
@@ -90,7 +90,7 @@ Partial Class AddOrder
         btnaddMeasurement.Location = New Point(430, 307)
         btnaddMeasurement.Name = "btnaddMeasurement"
         btnaddMeasurement.Size = New System.Drawing.Size(75, 23)
-        btnaddMeasurement.TabIndex = 17
+        btnaddMeasurement.TabIndex = 8
         btnaddMeasurement.Text = "Add Size"
         btnaddMeasurement.UseVisualStyleBackColor = True
         ' 
@@ -102,7 +102,7 @@ Partial Class AddOrder
         cbUnit.Location = New Point(264, 306)
         cbUnit.Name = "cbUnit"
         cbUnit.Size = New System.Drawing.Size(77, 23)
-        cbUnit.TabIndex = 16
+        cbUnit.TabIndex = 6
         cbUnit.Text = "inches"
         ' 
         ' sbMType
@@ -112,7 +112,7 @@ Partial Class AddOrder
         sbMType.Location = New Point(39, 307)
         sbMType.Name = "sbMType"
         sbMType.Size = New System.Drawing.Size(102, 23)
-        sbMType.TabIndex = 12
+        sbMType.TabIndex = 4
         sbMType.Text = "Waist"
         ' 
         ' ErrorProvider1
@@ -133,11 +133,12 @@ Partial Class AddOrder
         ' 
         cbStype.CausesValidation = False
         cbStype.FormattingEnabled = True
-        cbStype.Items.AddRange(New Object() {"Repair", "Resize"})
+        cbStype.Items.AddRange(New Object() {"Custom Tailoring", "Repair", "Resize"})
         cbStype.Location = New Point(153, 142)
         cbStype.Name = "cbStype"
         cbStype.Size = New System.Drawing.Size(121, 23)
         cbStype.TabIndex = 1
+        cbStype.Text = "Custom Tailoring"
         ' 
         ' cbGarment
         ' 
@@ -146,7 +147,7 @@ Partial Class AddOrder
         cbGarment.Location = New Point(347, 308)
         cbGarment.Name = "cbGarment"
         cbGarment.Size = New System.Drawing.Size(66, 23)
-        cbGarment.TabIndex = 3
+        cbGarment.TabIndex = 7
         cbGarment.Text = "Cotton"
         ' 
         ' tbOrderName
@@ -190,7 +191,7 @@ Partial Class AddOrder
         rbDescription.Name = "rbDescription"
         rbDescription.ScrollBars = RichTextBoxScrollBars.Vertical
         rbDescription.Size = New System.Drawing.Size(438, 112)
-        rbDescription.TabIndex = 8
+        rbDescription.TabIndex = 9
         rbDescription.Text = ""
         ' 
         ' lblSize
@@ -296,7 +297,7 @@ Partial Class AddOrder
         ComboBox1.Location = New Point(235, 267)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New System.Drawing.Size(109, 23)
-        ComboBox1.TabIndex = 27
+        ComboBox1.TabIndex = 3
         ComboBox1.Text = "Small T-Shirt"
         ' 
         ' Label2
@@ -307,7 +308,7 @@ Partial Class AddOrder
         Label2.Location = New Point(91, 270)
         Label2.Name = "Label2"
         Label2.Size = New System.Drawing.Size(130, 15)
-        Label2.TabIndex = 26
+        Label2.TabIndex = 3
         Label2.Text = "Custom Measurements"
         ' 
         ' btnCancel
@@ -317,7 +318,7 @@ Partial Class AddOrder
         btnCancel.Location = New Point(797, 578)
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New System.Drawing.Size(104, 41)
-        btnCancel.TabIndex = 25
+        btnCancel.TabIndex = 12
         btnCancel.Text = "Cancel"
         btnCancel.UseVisualStyleBackColor = False
         ' 
@@ -328,7 +329,7 @@ Partial Class AddOrder
         btnAdd.Location = New Point(560, 578)
         btnAdd.Name = "btnAdd"
         btnAdd.Size = New System.Drawing.Size(104, 41)
-        btnAdd.TabIndex = 24
+        btnAdd.TabIndex = 10
         btnAdd.Text = "Add+"
         btnAdd.UseVisualStyleBackColor = False
         ' 
@@ -365,9 +366,6 @@ Partial Class AddOrder
         LbSuggestions.Size = New System.Drawing.Size(207, 49)
         LbSuggestions.TabIndex = 27
         LbSuggestions.Visible = False
-        ' 
-        ' Timer1
-        ' 
         ' 
         ' fPanelOrders
         ' 

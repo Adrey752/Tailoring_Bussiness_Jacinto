@@ -1,9 +1,13 @@
-﻿Imports Mysqlx.XDevAPI
+﻿Imports System.ComponentModel.Design.ObjectSelectorEditor
+Imports Mysqlx.XDevAPI
 
 Public Class AddNewOrder
     Dim client_id As Integer
     Dim order As Order
     Dim _ProjectDetailsForm As ProjectDetailsForm
+    Dim SelectedOrder As Order
+    Private selectedPanelIndex As Integer
+    Dim selected = False
     Private ReadOnly Property allPanels As List(Of Panel)
         Get
             Return fPanelOrders.Controls.OfType(Of Panel).ToList()
@@ -43,84 +47,149 @@ Public Class AddNewOrder
                 InsertSize(Size, orderId)
             Next
         Next
+        _ProjectDetailsForm.LoadClient(client_id)
+        _ProjectDetailsForm.dgSortOrders.Rows.Clear()
         Me.Close()
 
     End Sub
-    Private Sub LoadMeasurementsType()
-        Dim query = "SELECT types FROM size_types"
-        Dim dataTable = MySQLModule.ExecuteQuery(query, New Dictionary(Of String, Object))
 
-        For Each row As DataRow In dataTable.Rows
-            sbMType.Items.Add(row("types").ToString())
-        Next
-    End Sub
 
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If SelectedOrder IsNot Nothing Then
+            Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+            SaveEdit(SelectedOrder, SelectedPanel)
+
+        Else
+            AddOrder()
+
+        End If
+
+
+    End Sub
+    Private Sub SaveEdit(OrderToEdit As Order, PanelToEdit As OrderPanel)
+        OrderToEdit.OrderName = tbOrderName.Text
+        OrderToEdit.Type = cbStype.Text
+        OrderToEdit.Price = nudPrice.Value
+        OrderToEdit.Description = rbDescription.Text
+
+        order.Sizes.Clear()
+        For Each row As DataGridViewRow In dgMeasurements.Rows
+            If row.Tag IsNot Nothing Then
+                Dim size As Size = CType(row.Tag, Size)
+                order.Sizes.Add(size)
+            End If
+        Next
+        PanelToEdit.UpdateUI()
+        'SelectPanel(selectedPanelIndex)
+        SelectedOrder = Nothing
+        ClearForm()
+
+    End Sub
+    Private Sub AddOrder()
         order.OrderName = tbOrderName.Text
         order.Type = cbStype.Text
         order.Price = nudPrice.Value
         order.Description = rbDescription.Text
-        AddOrderToFlowPane(order)
-        Me.order = New Order(1, "", "", "", 1, False, New List(Of Size), "Pending")
 
+        order.Sizes.Clear()
+        For Each row As DataGridViewRow In dgMeasurements.Rows
+            If row.Tag IsNot Nothing Then
+                Dim size As Size = CType(row.Tag, Size)
+                order.Sizes.Add(size)
+            End If
+        Next
+
+        Dim OrderPanel = New OrderPanel(order)
+        AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
+        fPanelOrders.Controls.Add(OrderPanel)
+
+        Me.order = New Order(0, "", "", "", 0, False, New List(Of Size), "Pending")
+        ClearForm()
     End Sub
-    Public Sub AddOrderToFlowPane(order As Order)
+    Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
+        Dim Panel = TryCast(sender, Panel)
+        If Panel IsNot Nothing Then
+            Dim panelIndex = fPanelOrders.Controls.GetChildIndex(Panel)
+            SelectPanel(panelIndex)
 
-        Dim projectPanel As New Panel
-        projectPanel.Height = 80
-        projectPanel.Width = 200
-        projectPanel.Margin = New Padding(10)
-
-        Dim lblOrderName As New Label
-        lblOrderName.Text = "Order Name: " & order.OrderName
-        lblOrderName.Location = New Point(10, 10)
-
-        Dim lblServiceType As New Label
-        lblServiceType.Text = "Service Type: " & order.Type
-        lblServiceType.Location = New Point(10, 30)
-
-
-
-        Dim checkBox As New CheckBox
-        checkBox.Location = New Point(projectPanel.Width - 40, 30)
-        projectPanel.Tag = order
-
-        lblServiceType.AutoSize = True
-        lblOrderName.AutoSize = True
-
-        projectPanel.Controls.Add(lblOrderName)
-        projectPanel.Controls.Add(lblServiceType)
-        projectPanel.Controls.Add(checkBox)
-
-        projectPanel.BackColor = Color.FromArgb(217, 185, 155)
-        projectPanel.ForeColor = Color.Black
-
-        AddHandler projectPanel.Click, AddressOf ProjectPanel_Click
-        AddHandler lblOrderName.Click, AddressOf ProjectPanel_Click
-        AddHandler lblServiceType.Click, AddressOf ProjectPanel_Click
-
-        fPanelOrders.Controls.Add(projectPanel)
-    End Sub
-
-    Private Sub ProjectPanel_Click(sender As Object, e As EventArgs)
-        ' Attempt to get the clicked Panel. If the sender is not a Panel, find the parent Panel.
-        Dim clickedPanel As Panel = TryCast(sender, Panel)
-
-        If clickedPanel Is Nothing Then
-            ' If sender is not a Panel, look for the parent Panel
-            Dim control As Control = DirectCast(sender, Control) ' Cast sender to Control
-            clickedPanel = control.Parent ' Get the parent control, which should be the Panel
-        End If
-
-        ' Check if clickedPanel is still Nothing; if so, exit the method
-        If clickedPanel IsNot Nothing Then
-            ' Display full project details when clicked (e.g., open a new form)
-            Dim orderDisplay As OrderDisplay = New OrderDisplay()
-            orderDisplay.Show()
         End If
     End Sub
+    Private Sub SelectPanel(index As Integer)
+        Dim OrderPanelsCount = fPanelOrders.Controls.Count
 
+        ' unselect previously selected panel if it's not the same as current clicked panel
+        If ValidIndexRange(selectedPanelIndex, OrderPanelsCount) AndAlso index <> selectedPanelIndex Then
+            Dim previousSelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+            UnselectMethod(previousSelectedPanel)
+        End If
+        If ValidIndexRange(index, OrderPanelsCount) Then
+
+            Dim panelClicked = fPanelOrders.Controls(index)
+            Dim selectedOrder = panelClicked.Tag
+            'When clicking the same panel
+            If selectedPanelIndex = index Then
+                If selected Then
+                    UnselectMethod(panelClicked)
+                Else
+                    SelectMethod(panelClicked, selectedOrder)
+                End If
+            Else
+                ' when clicking different panel
+                SelectMethod(panelClicked, selectedOrder)
+                selectedPanelIndex = index
+            End If
+        End If
+
+    End Sub
+
+    Private Shared Function ValidIndexRange(index As Integer, upperLimit As Integer) As Boolean
+        If index >= upperLimit Or index < 0 Then
+            Return False
+        End If
+        Return True
+    End Function
+
+    Private Sub SelectMethod(selectedPanel As Panel, selectedOrder As Order)
+        selectedPanel.BackColor = Color.Gray
+        ShowOrderDetails(selectedOrder)
+        btnAdd.Text = "Save Edit"
+        selected = True
+    End Sub
+    Private Sub UnselectMethod(selectedPanel As Panel)
+        selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
+        selected = False
+        btnAdd.Text = "Add +"
+        ClearForm()
+    End Sub
+
+    Private Sub ShowOrderDetails(order As Order)
+
+        tbOrderName.Text = order.OrderName
+        cbStype.Text = order.Type
+        nudPrice.Value = order.Price
+        rbDescription.Text = order.Description
+        AddMeasurementsToDatagrid(order.Sizes)
+
+    End Sub
+
+
+    '   ****** Setting Up Functions *******
+
+    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Size))
+        For Each size As Size In sizes
+            Dim rowIndex As Integer = dgMeasurements.Rows.Add(size.BodyPart, (size.Value & " " & size.Unit), size.garment)
+            dgMeasurements.Rows(rowIndex).Tag = size
+        Next
+    End Sub
+    ' ******* Helper Functions *******
+    Private Sub ClearForm()
+        tbOrderName.Clear()
+        nudPrice.Value = 0
+        rbDescription.Clear()
+        nudValue.Value = 0
+        dgMeasurements.Rows.Clear()
+    End Sub
 
 
 
@@ -172,16 +241,7 @@ Public Class AddNewOrder
     Private Sub AddNewOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         _ProjectDetailsForm.Show()
     End Sub
-    Private Sub LoadGarmentTypes()
-        Dim query As String = "SELECT garment_type FROM garment_types"
-        Dim parameter As New Dictionary(Of String, Object)
-        Dim datatable As DataTable = MySQLModule.ExecuteQuery(query, parameter)
 
-        For Each row As DataRow In datatable.Rows
-            cbGarment.Items.Add(row("garment_type").ToString())
-        Next
-
-    End Sub
 
     Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click
         Dim measurementType = sbMType.Text
@@ -190,23 +250,11 @@ Public Class AddNewOrder
         Dim garment = cbGarment.Text
         Dim measurement = New Size(measurementType, value, unit, garment)
 
-        order.AddSize(measurement)
-
-        dgMeasurements.Rows.Add(measurementType, (value & unit), garment)
+        Dim rowIndex As Integer = dgMeasurements.Rows.Add(measurementType, (value & " " & unit), garment)
+        dgMeasurements.Rows(rowIndex).Tag = measurement
     End Sub
-    Public Shared Function GetGarmentId(garment As String)
-        Dim query As String = "SELECT garment_id FROM garment_types WHERE garment_type = @garment_type"
-        Dim parament As New Dictionary(Of String, Object) From {
-        {"garment_type", garment}
-        }
-        Dim result As Object = MySQLModule.ExecuteScalar(query, parament)
 
-        If result IsNot Nothing Then
-            Return Convert.ToInt64(result)
-        Else
-            Throw New Exception("Invalid garment Type" & garment)
-        End If
-    End Function
+
     Public Function InsertOrder(order As Order, clientId As Integer) As Integer
         Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, done) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done); SELECT LAST_INSERT_ID();"
         Dim orderParams As New Dictionary(Of String, Object) From {
@@ -244,5 +292,36 @@ Public Class AddNewOrder
         End If
     End Function
 
+    Public Shared Function GetGarmentId(garment As String)
+        Dim query As String = "SELECT garment_id FROM garment_types WHERE garment_type = @garment_type"
+        Dim parament As New Dictionary(Of String, Object) From {
+        {"garment_type", garment}
+        }
+        Dim result As Object = MySQLModule.ExecuteScalar(query, parament)
+
+        If result IsNot Nothing Then
+            Return Convert.ToInt64(result)
+        Else
+            Throw New Exception("Invalid garment Type" & garment)
+        End If
+    End Function
+    Private Sub LoadMeasurementsType()
+        Dim query = "SELECT types FROM size_types"
+        Dim dataTable = MySQLModule.ExecuteQuery(query, New Dictionary(Of String, Object))
+
+        For Each row As DataRow In dataTable.Rows
+            sbMType.Items.Add(row("types").ToString())
+        Next
+    End Sub
+    Private Sub LoadGarmentTypes()
+        Dim query As String = "SELECT garment_type FROM garment_types"
+        Dim parameter As New Dictionary(Of String, Object)
+        Dim datatable As DataTable = MySQLModule.ExecuteQuery(query, parameter)
+
+        For Each row As DataRow In datatable.Rows
+            cbGarment.Items.Add(row("garment_type").ToString())
+        Next
+
+    End Sub
 
 End Class
