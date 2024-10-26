@@ -1,4 +1,7 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.IO
+Imports System.Net.Http
+Imports System.Reflection.Metadata
+Imports MySql.Data.MySqlClient
 Imports Mysqlx.Resultset
 
 Public Class ProjectDetailsForm
@@ -185,12 +188,22 @@ Public Class ProjectDetailsForm
             Dim description As String = row.Field(Of String)("description")
             Dim price As Decimal = row.Field(Of Decimal)("price")
             Dim done As Boolean = row.Field(Of Boolean)("done")
+
+            Dim imageByte As Byte() = row.Field(Of Byte())("image")
+            Dim image As Image = ByteArrayToImage(imageByte)
+            Dim OrderDate As DateTime = row.Field(Of DateTime)("date")
             Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
             Dim status As String = row.Field(Of String)("status")
-            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, done, sizes, status))
-        Next
 
+            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, done, image, OrderDate, sizes, status))
+        Next
         Return OrderList
+    End Function
+
+    Private Shared Function ByteArrayToImage(bytes As Byte()) As Image
+        Using ms As New MemoryStream(bytes)
+            Return Image.FromStream(ms)
+        End Using
     End Function
 
     Private Shared Function GetSize(order_id As Integer) As List(Of Size)

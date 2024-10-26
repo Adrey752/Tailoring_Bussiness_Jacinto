@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel.Design
+Imports System.IO
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class AddClientForm
@@ -256,18 +257,27 @@ Public Class AddClientForm
 
     End Function
     Public Function InsertOrder(order As Order, clientId As Integer) As Integer
-        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, done) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done); SELECT LAST_INSERT_ID();"
+        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, done, image, date) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done, @image, @date); SELECT LAST_INSERT_ID();"
         Dim orderParams As New Dictionary(Of String, Object) From {
-        {"@ClientId", clientId},
-        {"@OrderName", order.OrderName},
-        {"@Type", order.Type},
-        {"@Description", order.Description},
-        {"@Price", order.Price},
-        {"@Done", order.Done}
-    }
+    {"@ClientId", clientId},
+    {"@OrderName", order.OrderName},
+    {"@Type", order.Type},
+    {"@Description", order.Description},
+    {"@Price", order.Price},
+    {"@Done", order.Done},
+    {"@image", ImageToBinary(order.OrderImage)},
+    {"@date", order.DateOrdered}
+}
 
         ' Return the newly inserted order_id
         Return Convert.ToInt32(MySQLModule.ExecuteScalar(orderQuery, orderParams))
+    End Function
+
+    Private Function ImageToBinary(image As Image) As Byte()
+        Using ms As New MemoryStream
+            image.Save(ms, image.RawFormat)
+            Return ms.ToArray()
+        End Using
     End Function
     Public Sub InsertSize(size As Size, orderId As Integer)
         Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_id) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment_id)"
@@ -282,7 +292,4 @@ Public Class AddClientForm
         MySQLModule.ExecuteNonQuery(sizeQuery, sizeParams)
     End Sub
 
-    Private Sub AddClientForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class

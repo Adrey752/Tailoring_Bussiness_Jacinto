@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel.Design.ObjectSelectorEditor
+Imports System.IO
+Imports Microsoft.VisualBasic.ApplicationServices
 Imports Mysqlx.XDevAPI
 
 Public Class AddNewOrder
@@ -32,7 +34,7 @@ Public Class AddNewOrder
         ' Add any initialization after the InitializeComponent() call.
         Me.client_id = client_id
         Me._ProjectDetailsForm = _ProjectForm
-        Me.order = New Order(1, "", "", "", 1, False, New List(Of Size), "Pending")
+        Me.order = New Order(1, "", "", "", 1, False, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
 
     End Sub
     Private Sub AddNewOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -88,6 +90,8 @@ Public Class AddNewOrder
         order.Type = cbStype.Text
         order.Price = nudPrice.Value
         order.Description = rbDescription.Text
+        order.OrderImage = OrderPicturebox.Image
+        order.DateOrdered = dtpOrderDate.Value
 
         order.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
@@ -101,7 +105,7 @@ Public Class AddNewOrder
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
         fPanelOrders.Controls.Add(OrderPanel)
 
-        Me.order = New Order(0, "", "", "", 0, False, New List(Of Size), "Pending")
+        Me.order = New Order(0, "", "", "", 0, False, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
         ClearForm()
     End Sub
     Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
@@ -260,19 +264,29 @@ Public Class AddNewOrder
 
 
     Public Function InsertOrder(order As Order, clientId As Integer) As Integer
-        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, done) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done); SELECT LAST_INSERT_ID();"
+        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, done, image, date) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done, @image, @date); SELECT LAST_INSERT_ID();"
         Dim orderParams As New Dictionary(Of String, Object) From {
     {"@ClientId", clientId},
     {"@OrderName", order.OrderName},
     {"@Type", order.Type},
     {"@Description", order.Description},
     {"@Price", order.Price},
-    {"@Done", order.Done}
+    {"@Done", order.Done},
+    {"@image", ImageToBinary(order.OrderImage)},
+    {"@date", order.DateOrdered}
 }
 
         ' Return the newly inserted order_id
         Return Convert.ToInt32(MySQLModule.ExecuteScalar(orderQuery, orderParams))
     End Function
+
+    Private Function ImageToBinary(image As Image) As Byte()
+        Using ms As New MemoryStream
+            image.Save(ms, image.RawFormat)
+            Return ms.ToArray()
+        End Using
+    End Function
+
     Public Sub InsertSize(size As Size, orderId As Integer)
         Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_id) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment_id)"
         Dim sizeParams As New Dictionary(Of String, Object) From {
@@ -327,5 +341,22 @@ Public Class AddNewOrder
         Next
 
     End Sub
+
+    Private Sub btnAddImage_Click(sender As Object, e As EventArgs) Handles btnAddImage.Click
+        Dim OpenFileDialog = New OpenFileDialog
+        OpenFileDialog.Filter = "Image ile |*.jpg;, *.jpeg;, *.png;, *.svg; *.bmp;"
+        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+            OrderPicturebox.Image = Image.FromFile(OpenFileDialog.FileName)
+        End If
+    End Sub
+
+    Private Sub btnRemoveImage_Click(sender As Object, e As EventArgs) Handles btnRemoveImage.Click
+        OrderPicturebox.Image = My.Resources.noImageIcon
+    End Sub
+
+    Private Sub pnAddOrders_Paint(sender As Object, e As PaintEventArgs) Handles pnAddOrders.Paint
+
+    End Sub
+
 
 End Class

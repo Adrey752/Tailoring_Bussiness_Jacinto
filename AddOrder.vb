@@ -37,7 +37,7 @@ Public Class AddOrder
 
         ' Add any initialization after the InitializeComponent() call.
         Me.client = client
-        Me.order = New Order(0, "", "", "", 0, False, New List(Of Size), "Pending")
+        Me.order = New Order(0, "", "", "", 0, False, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
         Me._addClientForm = orderForm
         LoadMeasurementsType()
 
@@ -64,6 +64,8 @@ Public Class AddOrder
         order.Type = cbStype.Text
         order.Price = nudPrice.Value
         order.Description = rbDescription.Text
+        order.OrderImage = OrderPicturebox.Image
+        order.DateOrdered = dtpOrderDate.Value
 
         order.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
@@ -76,8 +78,7 @@ Public Class AddOrder
         Dim OrderPanel = New OrderPanel(order)
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
         fPanelOrders.Controls.Add(OrderPanel)
-
-        Me.order = New Order(0, "", "", "", 0, False, New List(Of Size), "Pending")
+        Me.order = New Order(0, "", "", "", 0, False, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
         ClearForm()
     End Sub
     Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click
@@ -88,7 +89,7 @@ Public Class AddOrder
         Dim measurement = New Size(measurementType, value, unit, garment)
 
         ' Add row to DataGridView with Size Tag 
-        Dim rowIndex As Integer = dgMeasurements.Rows.Add(measurementType, (value & " " & unit), garment)
+        Dim rowIndex = dgMeasurements.Rows.Add(measurementType, value & " " & unit, garment)
         dgMeasurements.Rows(rowIndex).Tag = measurement
     End Sub
     Private Sub SaveEdit(OrderToEdit As Order, PanelToEdit As OrderPanel)
@@ -96,6 +97,8 @@ Public Class AddOrder
         OrderToEdit.Type = cbStype.Text
         OrderToEdit.Price = nudPrice.Value
         OrderToEdit.Description = rbDescription.Text
+        OrderToEdit.OrderImage = OrderPicturebox.Image
+        OrderToEdit.DateOrdered = dtpOrderDate.Value
 
         OrderToEdit.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
@@ -200,6 +203,7 @@ Public Class AddOrder
         rbDescription.Clear()
         nudValue.Value = 0
         dgMeasurements.Rows.Clear()
+        OrderPicturebox.Image = My.Resources.noImageIcon
     End Sub
 
 
@@ -226,7 +230,9 @@ Public Class AddOrder
         cbStype.Text = order.Type
         nudPrice.Value = order.Price
         rbDescription.Text = order.Description
+        OrderPicturebox.Image = order.OrderImage
         AddMeasurementsToDatagrid(order.Sizes)
+
 
     End Sub
 
@@ -265,6 +271,23 @@ Public Class AddOrder
         Next
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnAddImage.Click
+        Dim openFileDialog = New OpenFileDialog
+        openFileDialog.Filter = "Image File |*.jpg;, *.png;, *.jpeg;, *.bmp;"
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            OrderPicturebox.Image = Image.FromFile(openFileDialog.FileName)
+        End If
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles OrderPicturebox.Click
+
+    End Sub
+
+    Private Sub btnRemoveImage_Click(sender As Object, e As EventArgs) Handles btnRemoveImage.Click
+        OrderPicturebox.Image = My.Resources.noImageIcon
+    End Sub
+
 
 
 
