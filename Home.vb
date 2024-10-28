@@ -10,24 +10,7 @@
         Me._login = login
 
     End Sub
-    Public Sub Home_Load(sender As Object, e As EventArgs) Handles Me.Load
-        loadDatabase()
 
-
-        'Designs
-        DataGridOrders.EnableHeadersVisualStyles = False
-        DataGridOrders.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(222, 184, 135)
-
-        With DataGridOrders.ColumnHeadersDefaultCellStyle
-            .BackColor = Color.FromArgb(9, 11, 23)
-            .ForeColor = Color.White
-            .Font = New Font("Arial", 10, FontStyle.Bold)
-            .Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        End With
-
-
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnToggle.Click
         If Not pnLogout.Visible Then
@@ -44,8 +27,7 @@
 
 
     Public Sub loadDatabase()
-        Dim tableQuery = "SELECT client.client_id, client.name, client.address, client.contact, client.status, price, payment" &
-    " FROM client"
+        Dim tableQuery = "SELECT client_id, name, date, quantity, order_status, payment_status  FROM CLIENT"
 
         Dim parameter As New Dictionary(Of String, Object)()
 
@@ -202,5 +184,9 @@
         }
         MySQLModule.ExecuteNonQuery(query, parameter)
 
+    End Sub
+
+    Private Sub Home_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        loadDatabase()
     End Sub
 End Class

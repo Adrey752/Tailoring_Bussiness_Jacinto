@@ -42,13 +42,13 @@ Public Class ProjectDetailsForm
         Dim name As String = Convert.ToString(row("name"))
         Dim address As String = Convert.ToString(row("address"))
         Dim contact As String = Convert.ToString(row("contact"))
-        Dim status As String = Convert.ToBoolean(row("status"))
+
         Dim price As String = Convert.ToDecimal(row("price"))
         Dim payment As String = Convert.ToDecimal(row("payment"))
         Dim quantity As String = Convert.ToDecimal(row("quantity"))
 
 
-        client = New Client(name, address, contact, status, price, payment, quantity)
+        client = New Client(name, address, contact, price, payment, quantity)
         LoadOrders(clientId)
 
 

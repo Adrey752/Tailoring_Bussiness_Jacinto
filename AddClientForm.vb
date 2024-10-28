@@ -17,7 +17,7 @@ Public Class AddClientForm
 
         ' Add any initialization after the InitializeComponent() call.
         _home = homeInstance
-        _client = New Client("", "", -1, False, 0, 0, 0)
+        _client = New Client("", "", -1, 0, 0, 0)
 
 
     End Sub
@@ -244,12 +244,11 @@ Public Class AddClientForm
         End If
     End Function
     Public Function InsertClientToDB(client As Client) As Integer
-        Dim clientQuery As String = "INSERT INTO client (Name, Address, Contact, Status) VALUES (@Name, @Address, @Contact, @Status); SELECT LAST_INSERT_ID();"
+        Dim clientQuery As String = "INSERT INTO client (Name, Address, Contact) VALUES (@Name, @Address, @Contact); SELECT LAST_INSERT_ID();"
         Dim clientParams As New Dictionary(Of String, Object) From {
         {"@Name", client.Name},
         {"@Address", client.Address},
-        {"@Contact", client.Contact},
-        {"@Status", client.Status}
+        {"@Contact", client.Contact}
     }
 
         ' Return the newly inserted client_id
