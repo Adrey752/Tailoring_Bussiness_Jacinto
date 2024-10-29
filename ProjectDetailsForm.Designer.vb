@@ -22,8 +22,9 @@ Partial Class ProjectDetailsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         lblTask = New Label()
         tbNumber = New TextBox()
         tbAddress = New TextBox()
@@ -32,25 +33,34 @@ Partial Class ProjectDetailsForm
         lblContactNumber = New Label()
         LblName = New Label()
         dgSortOrders = New DataGridView()
-        pendingCheckBox = New DataGridViewCheckBoxColumn()
-        pending = New DataGridViewTextBoxColumn()
-        finishedCheckBox = New DataGridViewCheckBoxColumn()
-        finished = New DataGridViewTextBoxColumn()
-        claimed = New DataGridViewTextBoxColumn()
         lblHeaderPayment = New Label()
         cbSort = New ComboBox()
-        nudPayment = New NumericUpDown()
         lblPayment = New Label()
-        nudPrice = New NumericUpDown()
         lblAmountDue = New Label()
         lblNumOrders = New Label()
         nudOrders = New NumericUpDown()
         lblHeaderOrder = New Label()
         btnAddOrder = New Button()
+        DataGridView1 = New DataGridView()
+        Label1 = New Label()
+        Label2 = New Label()
+        Panel1 = New Panel()
+        Label3 = New Label()
+        Label4 = New Label()
+        btnAddrOrder = New Button()
+        claimed = New DataGridViewTextBoxColumn()
+        finished = New DataGridViewTextBoxColumn()
+        finishedCheckBox = New DataGridViewCheckBoxColumn()
+        pending = New DataGridViewTextBoxColumn()
+        pendingCheckBox = New DataGridViewCheckBoxColumn()
+        DataGridViewTextBoxColumn2 = New DataGridViewTextBoxColumn()
+        DataGridViewTextBoxColumn3 = New DataGridViewTextBoxColumn()
+        colOrdersPaid = New DataGridViewTextBoxColumn()
+        Panel2 = New Panel()
         CType(dgSortOrders, ComponentModel.ISupportInitialize).BeginInit()
-        CType(nudPayment, ComponentModel.ISupportInitialize).BeginInit()
-        CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).BeginInit()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        Panel1.SuspendLayout()
         SuspendLayout()
         ' 
         ' lblTask
@@ -59,7 +69,7 @@ Partial Class ProjectDetailsForm
         lblTask.BackColor = Color.Transparent
         lblTask.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTask.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblTask.Location = New Point(555, 49)
+        lblTask.Location = New Point(546, 27)
         lblTask.Name = "lblTask"
         lblTask.Size = New System.Drawing.Size(99, 36)
         lblTask.TabIndex = 14
@@ -68,7 +78,7 @@ Partial Class ProjectDetailsForm
         ' tbNumber
         ' 
         tbNumber.BackColor = Color.White
-        tbNumber.Location = New Point(210, 211)
+        tbNumber.Location = New Point(210, 187)
         tbNumber.MaxLength = 11
         tbNumber.Name = "tbNumber"
         tbNumber.PlaceholderText = "Enter Phone Number"
@@ -80,7 +90,7 @@ Partial Class ProjectDetailsForm
         ' 
         tbAddress.BackColor = Color.White
         tbAddress.ForeColor = Color.BurlyWood
-        tbAddress.Location = New Point(132, 160)
+        tbAddress.Location = New Point(132, 136)
         tbAddress.MaxLength = 150
         tbAddress.Name = "tbAddress"
         tbAddress.PlaceholderText = "Enter Address"
@@ -92,7 +102,7 @@ Partial Class ProjectDetailsForm
         ' 
         tbName.BackColor = Color.White
         tbName.ForeColor = Color.BurlyWood
-        tbName.Location = New Point(132, 115)
+        tbName.Location = New Point(132, 91)
         tbName.MaxLength = 150
         tbName.Name = "tbName"
         tbName.PlaceholderText = "Enter Client Name"
@@ -106,7 +116,7 @@ Partial Class ProjectDetailsForm
         lblAddress.BackColor = Color.Transparent
         lblAddress.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAddress.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblAddress.Location = New Point(40, 159)
+        lblAddress.Location = New Point(40, 135)
         lblAddress.Name = "lblAddress"
         lblAddress.Size = New System.Drawing.Size(86, 22)
         lblAddress.TabIndex = 10
@@ -118,7 +128,7 @@ Partial Class ProjectDetailsForm
         lblContactNumber.BackColor = Color.Transparent
         lblContactNumber.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblContactNumber.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblContactNumber.Location = New Point(39, 211)
+        lblContactNumber.Location = New Point(39, 187)
         lblContactNumber.Name = "lblContactNumber"
         lblContactNumber.Size = New System.Drawing.Size(165, 22)
         lblContactNumber.TabIndex = 9
@@ -130,7 +140,7 @@ Partial Class ProjectDetailsForm
         LblName.BackColor = Color.Transparent
         LblName.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LblName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        LblName.Location = New Point(40, 114)
+        LblName.Location = New Point(40, 90)
         LblName.Name = "LblName"
         LblName.Size = New System.Drawing.Size(72, 22)
         LblName.TabIndex = 8
@@ -145,40 +155,200 @@ Partial Class ProjectDetailsForm
         dgSortOrders.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         dgSortOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgSortOrders.Columns.AddRange(New DataGridViewColumn() {pendingCheckBox, pending, finishedCheckBox, finished, claimed})
-        dgSortOrders.Location = New Point(520, 159)
+        dgSortOrders.Location = New Point(533, 110)
         dgSortOrders.Name = "dgSortOrders"
         dgSortOrders.ReadOnly = True
-        dgSortOrders.Size = New System.Drawing.Size(679, 443)
+        dgSortOrders.Size = New System.Drawing.Size(679, 287)
         dgSortOrders.TabIndex = 20
         ' 
-        ' pendingCheckBox
+        ' lblHeaderPayment
         ' 
-        pendingCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        pendingCheckBox.HeaderText = ""
-        pendingCheckBox.MinimumWidth = 35
-        pendingCheckBox.Name = "pendingCheckBox"
-        pendingCheckBox.ReadOnly = True
-        pendingCheckBox.Width = 35
+        lblHeaderPayment.AutoSize = True
+        lblHeaderPayment.BackColor = Color.Transparent
+        lblHeaderPayment.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHeaderPayment.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblHeaderPayment.Location = New Point(39, 383)
+        lblHeaderPayment.Name = "lblHeaderPayment"
+        lblHeaderPayment.Size = New System.Drawing.Size(133, 36)
+        lblHeaderPayment.TabIndex = 21
+        lblHeaderPayment.Text = "Payment"
         ' 
-        ' pending
+        ' cbSort
         ' 
-        pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        pending.DataPropertyName = "pending"
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        pending.DefaultCellStyle = DataGridViewCellStyle1
-        pending.HeaderText = "Pending Orders"
-        pending.Name = "pending"
-        pending.ReadOnly = True
-        pending.Resizable = DataGridViewTriState.True
-        pending.Width = 200
+        cbSort.FormattingEnabled = True
+        cbSort.Location = New Point(533, 81)
+        cbSort.Name = "cbSort"
+        cbSort.Size = New System.Drawing.Size(121, 23)
+        cbSort.TabIndex = 22
+        cbSort.Text = "Sort By"
         ' 
-        ' finishedCheckBox
+        ' lblPayment
         ' 
-        finishedCheckBox.HeaderText = ""
-        finishedCheckBox.MinimumWidth = 35
-        finishedCheckBox.Name = "finishedCheckBox"
-        finishedCheckBox.ReadOnly = True
-        finishedCheckBox.Width = 35
+        lblPayment.Anchor = AnchorStyles.None
+        lblPayment.AutoSize = True
+        lblPayment.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblPayment.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblPayment.Location = New Point(30, 74)
+        lblPayment.Name = "lblPayment"
+        lblPayment.Size = New System.Drawing.Size(129, 25)
+        lblPayment.TabIndex = 28
+        lblPayment.Text = "Amount Paid"
+        ' 
+        ' lblAmountDue
+        ' 
+        lblAmountDue.Anchor = AnchorStyles.None
+        lblAmountDue.AutoSize = True
+        lblAmountDue.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblAmountDue.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblAmountDue.Location = New Point(30, 28)
+        lblAmountDue.Name = "lblAmountDue"
+        lblAmountDue.Size = New System.Drawing.Size(126, 25)
+        lblAmountDue.TabIndex = 31
+        lblAmountDue.Text = "Amount Due"
+        ' 
+        ' lblNumOrders
+        ' 
+        lblNumOrders.AutoSize = True
+        lblNumOrders.BackColor = Color.Transparent
+        lblNumOrders.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblNumOrders.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblNumOrders.Location = New Point(42, 245)
+        lblNumOrders.Name = "lblNumOrders"
+        lblNumOrders.Size = New System.Drawing.Size(177, 22)
+        lblNumOrders.TabIndex = 32
+        lblNumOrders.Text = "Number of Orders:"
+        ' 
+        ' nudOrders
+        ' 
+        nudOrders.Location = New Point(237, 245)
+        nudOrders.Name = "nudOrders"
+        nudOrders.ReadOnly = True
+        nudOrders.Size = New System.Drawing.Size(120, 23)
+        nudOrders.TabIndex = 33
+        ' 
+        ' lblHeaderOrder
+        ' 
+        lblHeaderOrder.AutoSize = True
+        lblHeaderOrder.BackColor = Color.Transparent
+        lblHeaderOrder.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHeaderOrder.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblHeaderOrder.Location = New Point(39, 27)
+        lblHeaderOrder.Name = "lblHeaderOrder"
+        lblHeaderOrder.Size = New System.Drawing.Size(201, 36)
+        lblHeaderOrder.TabIndex = 34
+        lblHeaderOrder.Text = "Client Details"
+        ' 
+        ' btnAddOrder
+        ' 
+        btnAddOrder.Location = New Point(1037, 81)
+        btnAddOrder.Name = "btnAddOrder"
+        btnAddOrder.Size = New System.Drawing.Size(75, 23)
+        btnAddOrder.TabIndex = 35
+        btnAddOrder.Tag = ""
+        btnAddOrder.Text = "Add Order"
+        btnAddOrder.UseVisualStyleBackColor = True
+        ' 
+        ' DataGridView1
+        ' 
+        DataGridView1.AllowDrop = True
+        DataGridView1.AllowUserToAddRows = False
+        DataGridView1.AllowUserToDeleteRows = False
+        DataGridView1.AllowUserToOrderColumns = True
+        DataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Raised
+        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridView1.Columns.AddRange(New DataGridViewColumn() {DataGridViewTextBoxColumn2, DataGridViewTextBoxColumn3, colOrdersPaid})
+        DataGridView1.Location = New Point(533, 424)
+        DataGridView1.Name = "DataGridView1"
+        DataGridView1.ReadOnly = True
+        DataGridView1.Size = New System.Drawing.Size(679, 197)
+        DataGridView1.TabIndex = 36
+        ' 
+        ' Label1
+        ' 
+        Label1.Anchor = AnchorStyles.None
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label1.Location = New Point(195, 28)
+        Label1.Name = "Label1"
+        Label1.Size = New System.Drawing.Size(88, 25)
+        Label1.TabIndex = 37
+        Label1.Text = "5,000.00"
+        ' 
+        ' Label2
+        ' 
+        Label2.Anchor = AnchorStyles.None
+        Label2.AutoSize = True
+        Label2.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label2.Location = New Point(195, 74)
+        Label2.Name = "Label2"
+        Label2.Size = New System.Drawing.Size(88, 25)
+        Label2.TabIndex = 38
+        Label2.Text = "2,500.00"
+        ' 
+        ' Panel1
+        ' 
+        Panel1.BackColor = Color.White
+        Panel1.Controls.Add(Label3)
+        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(Label1)
+        Panel1.Controls.Add(Label2)
+        Panel1.Controls.Add(lblPayment)
+        Panel1.Controls.Add(lblAmountDue)
+        Panel1.Location = New Point(42, 424)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New System.Drawing.Size(367, 169)
+        Panel1.TabIndex = 39
+        ' 
+        ' Label3
+        ' 
+        Label3.Anchor = AnchorStyles.None
+        Label3.AutoSize = True
+        Label3.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        Label3.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label3.Location = New Point(194, 115)
+        Label3.Name = "Label3"
+        Label3.Size = New System.Drawing.Size(88, 25)
+        Label3.TabIndex = 40
+        Label3.Text = "2,500.00"
+        ' 
+        ' Label4
+        ' 
+        Label4.Anchor = AnchorStyles.None
+        Label4.AutoSize = True
+        Label4.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label4.Location = New Point(33, 115)
+        Label4.Name = "Label4"
+        Label4.Size = New System.Drawing.Size(80, 25)
+        Label4.TabIndex = 39
+        Label4.Text = "Balance"
+        ' 
+        ' btnAddrOrder
+        ' 
+        btnAddrOrder.AutoSize = True
+        btnAddrOrder.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnAddrOrder.FlatAppearance.BorderSize = 0
+        btnAddrOrder.FlatStyle = FlatStyle.Flat
+        btnAddrOrder.ForeColor = Color.White
+        btnAddrOrder.Location = New Point(42, 608)
+        btnAddrOrder.Margin = New Padding(0)
+        btnAddrOrder.Name = "btnAddrOrder"
+        btnAddrOrder.RightToLeft = RightToLeft.No
+        btnAddrOrder.Size = New System.Drawing.Size(367, 37)
+        btnAddrOrder.TabIndex = 40
+        btnAddrOrder.Text = "Add order"
+        btnAddrOrder.UseVisualStyleBackColor = False
+        ' 
+        ' claimed
+        ' 
+        claimed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        claimed.DataPropertyName = "claimed"
+        claimed.HeaderText = "Claimed"
+        claimed.Name = "claimed"
+        claimed.ReadOnly = True
+        claimed.Width = 200
         ' 
         ' finished
         ' 
@@ -192,135 +362,84 @@ Partial Class ProjectDetailsForm
         finished.Resizable = DataGridViewTriState.True
         finished.Width = 200
         ' 
-        ' claimed
+        ' finishedCheckBox
         ' 
-        claimed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        claimed.DataPropertyName = "claimed"
-        claimed.HeaderText = "Claimed"
-        claimed.Name = "claimed"
-        claimed.ReadOnly = True
-        claimed.Width = 200
+        finishedCheckBox.HeaderText = ""
+        finishedCheckBox.MinimumWidth = 35
+        finishedCheckBox.Name = "finishedCheckBox"
+        finishedCheckBox.ReadOnly = True
+        finishedCheckBox.Width = 35
         ' 
-        ' lblHeaderPayment
+        ' pending
         ' 
-        lblHeaderPayment.AutoSize = True
-        lblHeaderPayment.BackColor = Color.Transparent
-        lblHeaderPayment.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblHeaderPayment.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblHeaderPayment.Location = New Point(49, 361)
-        lblHeaderPayment.Name = "lblHeaderPayment"
-        lblHeaderPayment.Size = New System.Drawing.Size(133, 36)
-        lblHeaderPayment.TabIndex = 21
-        lblHeaderPayment.Text = "Payment"
+        pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pending.DataPropertyName = "pending"
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        pending.DefaultCellStyle = DataGridViewCellStyle1
+        pending.HeaderText = "Pending Orders"
+        pending.Name = "pending"
+        pending.ReadOnly = True
+        pending.Resizable = DataGridViewTriState.True
+        pending.Width = 200
         ' 
-        ' cbSort
+        ' pendingCheckBox
         ' 
-        cbSort.FormattingEnabled = True
-        cbSort.Location = New Point(555, 113)
-        cbSort.Name = "cbSort"
-        cbSort.Size = New System.Drawing.Size(121, 23)
-        cbSort.TabIndex = 22
-        cbSort.Text = "Sort By"
+        pendingCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pendingCheckBox.HeaderText = ""
+        pendingCheckBox.MinimumWidth = 35
+        pendingCheckBox.Name = "pendingCheckBox"
+        pendingCheckBox.ReadOnly = True
+        pendingCheckBox.Width = 35
         ' 
-        ' nudPayment
+        ' DataGridViewTextBoxColumn2
         ' 
-        nudPayment.Anchor = AnchorStyles.None
-        nudPayment.Location = New Point(210, 485)
-        nudPayment.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
-        nudPayment.Name = "nudPayment"
-        nudPayment.ReadOnly = True
-        nudPayment.Size = New System.Drawing.Size(120, 23)
-        nudPayment.TabIndex = 29
+        DataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        DataGridViewTextBoxColumn2.DataPropertyName = "finished"
+        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewTextBoxColumn2.HeaderText = "Date"
+        DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        DataGridViewTextBoxColumn2.ReadOnly = True
+        DataGridViewTextBoxColumn2.Resizable = DataGridViewTriState.True
+        DataGridViewTextBoxColumn2.Width = 200
         ' 
-        ' lblPayment
+        ' DataGridViewTextBoxColumn3
         ' 
-        lblPayment.Anchor = AnchorStyles.None
-        lblPayment.AutoSize = True
-        lblPayment.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        lblPayment.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblPayment.Location = New Point(49, 483)
-        lblPayment.Name = "lblPayment"
-        lblPayment.Size = New System.Drawing.Size(134, 25)
-        lblPayment.TabIndex = 28
-        lblPayment.Text = " Amount Paid"
+        DataGridViewTextBoxColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        DataGridViewTextBoxColumn3.DataPropertyName = "claimed"
+        DataGridViewTextBoxColumn3.HeaderText = "Amount Paid"
+        DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        DataGridViewTextBoxColumn3.ReadOnly = True
+        DataGridViewTextBoxColumn3.Width = 200
         ' 
-        ' nudPrice
+        ' colOrdersPaid
         ' 
-        nudPrice.Anchor = AnchorStyles.None
-        nudPrice.Location = New Point(210, 426)
-        nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
-        nudPrice.Name = "nudPrice"
-        nudPrice.ReadOnly = True
-        nudPrice.Size = New System.Drawing.Size(120, 23)
-        nudPrice.TabIndex = 30
+        colOrdersPaid.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        colOrdersPaid.HeaderText = "Orders Paid"
+        colOrdersPaid.Name = "colOrdersPaid"
+        colOrdersPaid.ReadOnly = True
         ' 
-        ' lblAmountDue
+        ' Panel2
         ' 
-        lblAmountDue.Anchor = AnchorStyles.None
-        lblAmountDue.AutoSize = True
-        lblAmountDue.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        lblAmountDue.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblAmountDue.Location = New Point(56, 420)
-        lblAmountDue.Name = "lblAmountDue"
-        lblAmountDue.Size = New System.Drawing.Size(126, 25)
-        lblAmountDue.TabIndex = 31
-        lblAmountDue.Text = "Amount Due"
-        ' 
-        ' lblNumOrders
-        ' 
-        lblNumOrders.AutoSize = True
-        lblNumOrders.BackColor = Color.Transparent
-        lblNumOrders.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblNumOrders.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblNumOrders.Location = New Point(42, 269)
-        lblNumOrders.Name = "lblNumOrders"
-        lblNumOrders.Size = New System.Drawing.Size(177, 22)
-        lblNumOrders.TabIndex = 32
-        lblNumOrders.Text = "Number of Orders:"
-        ' 
-        ' nudOrders
-        ' 
-        nudOrders.Location = New Point(237, 269)
-        nudOrders.Name = "nudOrders"
-        nudOrders.ReadOnly = True
-        nudOrders.Size = New System.Drawing.Size(120, 23)
-        nudOrders.TabIndex = 33
-        ' 
-        ' lblHeaderOrder
-        ' 
-        lblHeaderOrder.AutoSize = True
-        lblHeaderOrder.BackColor = Color.Transparent
-        lblHeaderOrder.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblHeaderOrder.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblHeaderOrder.Location = New Point(39, 49)
-        lblHeaderOrder.Name = "lblHeaderOrder"
-        lblHeaderOrder.Size = New System.Drawing.Size(201, 36)
-        lblHeaderOrder.TabIndex = 34
-        lblHeaderOrder.Text = "Client Details"
-        ' 
-        ' btnAddOrder
-        ' 
-        btnAddOrder.Location = New Point(1124, 115)
-        btnAddOrder.Name = "btnAddOrder"
-        btnAddOrder.Size = New System.Drawing.Size(75, 23)
-        btnAddOrder.TabIndex = 35
-        btnAddOrder.Tag = ""
-        btnAddOrder.Text = "Add Order"
-        btnAddOrder.UseVisualStyleBackColor = True
+        Panel2.BackColor = Color.White
+        Panel2.Location = New Point(533, 136)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New System.Drawing.Size(442, 239)
+        Panel2.TabIndex = 41
         ' 
         ' ProjectDetailsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New System.Drawing.Size(1246, 654)
+        Controls.Add(Panel2)
+        Controls.Add(btnAddrOrder)
+        Controls.Add(Panel1)
+        Controls.Add(DataGridView1)
         Controls.Add(btnAddOrder)
         Controls.Add(lblHeaderOrder)
         Controls.Add(nudOrders)
         Controls.Add(lblNumOrders)
-        Controls.Add(nudPrice)
-        Controls.Add(lblAmountDue)
-        Controls.Add(nudPayment)
-        Controls.Add(lblPayment)
         Controls.Add(cbSort)
         Controls.Add(lblHeaderPayment)
         Controls.Add(dgSortOrders)
@@ -336,9 +455,10 @@ Partial Class ProjectDetailsForm
         StartPosition = FormStartPosition.CenterScreen
         Text = "ProjectDetailsForm"
         CType(dgSortOrders, ComponentModel.ISupportInitialize).EndInit()
-        CType(nudPayment, ComponentModel.ISupportInitialize).EndInit()
-        CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).EndInit()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        Panel1.ResumeLayout(False)
+        Panel1.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -353,17 +473,26 @@ Partial Class ProjectDetailsForm
     Friend WithEvents dgSortOrders As DataGridView
     Friend WithEvents lblHeaderPayment As Label
     Friend WithEvents cbSort As ComboBox
-    Friend WithEvents nudPayment As NumericUpDown
     Friend WithEvents lblPayment As Label
-    Friend WithEvents nudPrice As NumericUpDown
     Friend WithEvents lblAmountDue As Label
     Friend WithEvents lblNumOrders As Label
     Friend WithEvents nudOrders As NumericUpDown
     Friend WithEvents lblHeaderOrder As Label
     Friend WithEvents btnAddOrder As Button
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents btnAddrOrder As Button
     Friend WithEvents pendingCheckBox As DataGridViewCheckBoxColumn
     Friend WithEvents pending As DataGridViewTextBoxColumn
     Friend WithEvents finishedCheckBox As DataGridViewCheckBoxColumn
     Friend WithEvents finished As DataGridViewTextBoxColumn
     Friend WithEvents claimed As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents colOrdersPaid As DataGridViewTextBoxColumn
+    Friend WithEvents Panel2 As Panel
 End Class

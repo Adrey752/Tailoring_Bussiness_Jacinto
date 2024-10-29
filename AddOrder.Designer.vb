@@ -44,6 +44,7 @@ Partial Class AddOrder
         Label3 = New Label()
         nudPrice = New NumericUpDown()
         pnAddOrders = New Panel()
+        dtpOrderDate = New DateTimePicker()
         btnAddImage = New Button()
         btnRemoveImage = New Button()
         ComboBox1 = New ComboBox()
@@ -57,7 +58,6 @@ Partial Class AddOrder
         fPanelOrders = New FlowLayoutPanel()
         lblOrders = New Label()
         txtSearch = New TextBox()
-        dtpOrderDate = New DateTimePicker()
         CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
@@ -244,7 +244,7 @@ Partial Class AddOrder
         Label3.Anchor = AnchorStyles.None
         Label3.AutoSize = True
         Label3.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label3.Location = New Point(55, 171)
+        Label3.Location = New Point(54, 184)
         Label3.Name = "Label3"
         Label3.Size = New System.Drawing.Size(33, 15)
         Label3.TabIndex = 20
@@ -293,6 +293,13 @@ Partial Class AddOrder
         pnAddOrders.Name = "pnAddOrders"
         pnAddOrders.Size = New System.Drawing.Size(998, 653)
         pnAddOrders.TabIndex = 2
+        ' 
+        ' dtpOrderDate
+        ' 
+        dtpOrderDate.Location = New Point(315, 81)
+        dtpOrderDate.Name = "dtpOrderDate"
+        dtpOrderDate.Size = New System.Drawing.Size(200, 23)
+        dtpOrderDate.TabIndex = 33
         ' 
         ' btnAddImage
         ' 
@@ -420,13 +427,6 @@ Partial Class AddOrder
         txtSearch.Name = "txtSearch"
         txtSearch.Size = New System.Drawing.Size(208, 23)
         txtSearch.TabIndex = 25
-        ' 
-        ' dtpOrderDate
-        ' 
-        dtpOrderDate.Location = New Point(325, 31)
-        dtpOrderDate.Name = "dtpOrderDate"
-        dtpOrderDate.Size = New System.Drawing.Size(200, 23)
-        dtpOrderDate.TabIndex = 33
         ' 
         ' AddOrder
         ' 

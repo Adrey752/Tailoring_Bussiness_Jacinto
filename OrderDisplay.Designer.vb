@@ -22,241 +22,403 @@ Partial Class OrderDisplay
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Label1 = New Label()
-        TextBox1 = New TextBox()
-        btnSave = New Button()
-        btnEdit = New Button()
-        btnClose = New Button()
-        Label2 = New Label()
-        Label3 = New Label()
-        Label4 = New Label()
-        Label5 = New Label()
+        pnAddOrders = New Panel()
+        dtpOrderDate = New DateTimePicker()
+        btnAddImage = New Button()
+        btnRemoveImage = New Button()
         ComboBox1 = New ComboBox()
-        Label6 = New Label()
-        RichTextBox1 = New RichTextBox()
-        DataGridView1 = New DataGridView()
-        colBodyPart = New DataGridViewTextBoxColumn()
-        colMeasurement = New DataGridViewTextBoxColumn()
-        colGarment = New DataGridViewTextBoxColumn()
-        NumericUpDown1 = New NumericUpDown()
-        lblMeasurements = New Label()
-        PictureBox1 = New PictureBox()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
-        CType(NumericUpDown1, ComponentModel.ISupportInitialize).BeginInit()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        Label2 = New Label()
+        Label1 = New Label()
+        headerOrder = New Label()
+        btnCancel = New Button()
+        OrderPicturebox = New PictureBox()
+        btnOrderSave = New Button()
+        nudPrice = New NumericUpDown()
+        lblPrice = New Label()
+        btnaddMeasurement = New Button()
+        nudValue = New NumericUpDown()
+        dgMeasurements = New DataGridView()
+        size_type = New DataGridViewTextBoxColumn()
+        measurement = New DataGridViewTextBoxColumn()
+        GarmentType = New DataGridViewTextBoxColumn()
+        cbUnit = New ComboBox()
+        rbDescription = New RichTextBox()
+        lblSize = New Label()
+        lblDesc = New Label()
+        lblorderName = New Label()
+        tbOrderName = New TextBox()
+        sbMType = New ComboBox()
+        cbGarment = New ComboBox()
+        cbStype = New ComboBox()
+        lblServiceType = New Label()
+        pnAddOrders.SuspendLayout()
+        CType(OrderPicturebox, ComponentModel.ISupportInitialize).BeginInit()
+        CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
+        CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
-        ' Label1
+        ' pnAddOrders
         ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(21, 43)
-        Label1.Name = "Label1"
-        Label1.Size = New Drawing.Size(104, 21)
-        Label1.TabIndex = 0
-        Label1.Text = "Order Name: "
+        pnAddOrders.Anchor = AnchorStyles.None
+        pnAddOrders.BackColor = Color.White
+        pnAddOrders.Controls.Add(dtpOrderDate)
+        pnAddOrders.Controls.Add(btnAddImage)
+        pnAddOrders.Controls.Add(btnRemoveImage)
+        pnAddOrders.Controls.Add(ComboBox1)
+        pnAddOrders.Controls.Add(Label2)
+        pnAddOrders.Controls.Add(Label1)
+        pnAddOrders.Controls.Add(headerOrder)
+        pnAddOrders.Controls.Add(btnCancel)
+        pnAddOrders.Controls.Add(OrderPicturebox)
+        pnAddOrders.Controls.Add(btnOrderSave)
+        pnAddOrders.Controls.Add(nudPrice)
+        pnAddOrders.Controls.Add(lblPrice)
+        pnAddOrders.Controls.Add(btnaddMeasurement)
+        pnAddOrders.Controls.Add(nudValue)
+        pnAddOrders.Controls.Add(dgMeasurements)
+        pnAddOrders.Controls.Add(cbUnit)
+        pnAddOrders.Controls.Add(rbDescription)
+        pnAddOrders.Controls.Add(lblSize)
+        pnAddOrders.Controls.Add(lblDesc)
+        pnAddOrders.Controls.Add(lblorderName)
+        pnAddOrders.Controls.Add(tbOrderName)
+        pnAddOrders.Controls.Add(sbMType)
+        pnAddOrders.Controls.Add(cbGarment)
+        pnAddOrders.Controls.Add(cbStype)
+        pnAddOrders.Controls.Add(lblServiceType)
+        pnAddOrders.Location = New Point(0, 0)
+        pnAddOrders.Name = "pnAddOrders"
+        pnAddOrders.Size = New System.Drawing.Size(998, 653)
+        pnAddOrders.TabIndex = 3
         ' 
-        ' TextBox1
+        ' dtpOrderDate
         ' 
-        TextBox1.Enabled = False
-        TextBox1.Location = New Point(131, 45)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Drawing.Size(165, 23)
-        TextBox1.TabIndex = 1
+        dtpOrderDate.Location = New Point(342, 53)
+        dtpOrderDate.Name = "dtpOrderDate"
+        dtpOrderDate.Size = New System.Drawing.Size(200, 23)
+        dtpOrderDate.TabIndex = 32
         ' 
-        ' btnSave
+        ' btnAddImage
         ' 
-        btnSave.Enabled = False
-        btnSave.Location = New Point(533, 21)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Drawing.Size(75, 23)
-        btnSave.TabIndex = 2
-        btnSave.Text = "Save"
-        btnSave.UseVisualStyleBackColor = True
+        btnAddImage.Anchor = AnchorStyles.None
+        btnAddImage.Location = New Point(807, 345)
+        btnAddImage.Name = "btnAddImage"
+        btnAddImage.Size = New System.Drawing.Size(75, 23)
+        btnAddImage.TabIndex = 31
+        btnAddImage.Text = "Add Image"
+        btnAddImage.UseVisualStyleBackColor = True
         ' 
-        ' btnEdit
+        ' btnRemoveImage
         ' 
-        btnEdit.Location = New Point(614, 21)
-        btnEdit.Name = "btnEdit"
-        btnEdit.Size = New Drawing.Size(75, 23)
-        btnEdit.TabIndex = 3
-        btnEdit.Text = "Edit"
-        btnEdit.UseVisualStyleBackColor = True
-        ' 
-        ' btnClose
-        ' 
-        btnClose.Location = New Point(696, 21)
-        btnClose.Name = "btnClose"
-        btnClose.Size = New Drawing.Size(75, 23)
-        btnClose.TabIndex = 4
-        btnClose.Text = "Close"
-        btnClose.UseVisualStyleBackColor = True
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(21, 97)
-        Label2.Name = "Label2"
-        Label2.Size = New Drawing.Size(98, 21)
-        Label2.TabIndex = 5
-        Label2.Text = "Order Type:  "
-        ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(21, 144)
-        Label3.Name = "Label3"
-        Label3.Size = New Drawing.Size(44, 21)
-        Label3.TabIndex = 6
-        Label3.Text = "Price"
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(21, 193)
-        Label4.Name = "Label4"
-        Label4.Size = New Drawing.Size(59, 21)
-        Label4.TabIndex = 7
-        Label4.Text = "Status: "
-        ' 
-        ' Label5
-        ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(131, 193)
-        Label5.Name = "Label5"
-        Label5.Size = New Drawing.Size(47, 21)
-        Label5.TabIndex = 8
-        Label5.Text = "Done"
+        btnRemoveImage.Anchor = AnchorStyles.None
+        btnRemoveImage.Location = New Point(888, 345)
+        btnRemoveImage.Name = "btnRemoveImage"
+        btnRemoveImage.Size = New System.Drawing.Size(98, 23)
+        btnRemoveImage.TabIndex = 30
+        btnRemoveImage.Text = "Remove Image"
+        btnRemoveImage.UseVisualStyleBackColor = True
         ' 
         ' ComboBox1
         ' 
-        ComboBox1.Enabled = False
+        ComboBox1.Anchor = AnchorStyles.None
         ComboBox1.FormattingEnabled = True
-        ComboBox1.Location = New Point(131, 99)
+        ComboBox1.Items.AddRange(New Object() {"Small T-Shirt", "Large T-Shirt", "X-Large T-Shirt"})
+        ComboBox1.Location = New Point(298, 267)
         ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Drawing.Size(165, 23)
-        ComboBox1.TabIndex = 9
+        ComboBox1.Size = New System.Drawing.Size(109, 23)
+        ComboBox1.TabIndex = 27
+        ComboBox1.Text = "Small T-Shirt"
         ' 
-        ' Label6
+        ' Label2
         ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(12, 242)
-        Label6.Name = "Label6"
-        Label6.Size = New Drawing.Size(92, 21)
-        Label6.TabIndex = 10
-        Label6.Text = "Description:"
+        Label2.Anchor = AnchorStyles.None
+        Label2.AutoSize = True
+        Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label2.Location = New Point(154, 270)
+        Label2.Name = "Label2"
+        Label2.Size = New System.Drawing.Size(130, 15)
+        Label2.TabIndex = 28
+        Label2.Text = "Custom Measurements"
         ' 
-        ' RichTextBox1
+        ' Label1
         ' 
-        RichTextBox1.Enabled = False
-        RichTextBox1.Location = New Point(73, 297)
-        RichTextBox1.Name = "RichTextBox1"
-        RichTextBox1.Size = New Drawing.Size(264, 124)
-        RichTextBox1.TabIndex = 11
-        RichTextBox1.Text = ""
+        Label1.Anchor = AnchorStyles.None
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label1.Location = New Point(91, 256)
+        Label1.Name = "Label1"
+        Label1.Size = New System.Drawing.Size(57, 32)
+        Label1.TabIndex = 29
+        Label1.Text = "Size"
         ' 
-        ' DataGridView1
+        ' headerOrder
         ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Columns.AddRange(New DataGridViewColumn() {colBodyPart, colMeasurement, colGarment})
-        DataGridView1.Location = New Point(443, 297)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Drawing.Size(328, 124)
-        DataGridView1.TabIndex = 12
+        headerOrder.Anchor = AnchorStyles.None
+        headerOrder.AutoSize = True
+        headerOrder.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        headerOrder.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        headerOrder.Location = New Point(28, 31)
+        headerOrder.Name = "headerOrder"
+        headerOrder.Size = New System.Drawing.Size(158, 32)
+        headerOrder.TabIndex = 26
+        headerOrder.Text = "Order Details"
         ' 
-        ' colBodyPart
+        ' btnCancel
         ' 
-        colBodyPart.HeaderText = "Body Part"
-        colBodyPart.Name = "colBodyPart"
+        btnCancel.Anchor = AnchorStyles.None
+        btnCancel.BackColor = Color.SeaShell
+        btnCancel.Location = New Point(855, 599)
+        btnCancel.Name = "btnCancel"
+        btnCancel.Size = New System.Drawing.Size(104, 41)
+        btnCancel.TabIndex = 24
+        btnCancel.Text = "Cancel"
+        btnCancel.UseVisualStyleBackColor = False
         ' 
-        ' colMeasurement
+        ' OrderPicturebox
         ' 
-        colMeasurement.HeaderText = "Measurement"
-        colMeasurement.Name = "colMeasurement"
+        OrderPicturebox.Anchor = AnchorStyles.None
+        OrderPicturebox.ErrorImage = My.Resources.Resources.eye
+        OrderPicturebox.Image = My.Resources.Resources.noImageIcon
+        OrderPicturebox.Location = New Point(548, 32)
+        OrderPicturebox.Name = "OrderPicturebox"
+        OrderPicturebox.Size = New System.Drawing.Size(438, 297)
+        OrderPicturebox.SizeMode = PictureBoxSizeMode.Zoom
+        OrderPicturebox.TabIndex = 12
+        OrderPicturebox.TabStop = False
         ' 
-        ' colGarment
+        ' btnOrderSave
         ' 
-        colGarment.HeaderText = "Garment"
-        colGarment.Name = "colGarment"
+        btnOrderSave.Anchor = AnchorStyles.None
+        btnOrderSave.BackColor = Color.SeaShell
+        btnOrderSave.Location = New Point(745, 599)
+        btnOrderSave.Name = "btnOrderSave"
+        btnOrderSave.Size = New System.Drawing.Size(104, 41)
+        btnOrderSave.TabIndex = 3
+        btnOrderSave.Text = "Save"
+        btnOrderSave.UseVisualStyleBackColor = False
         ' 
-        ' NumericUpDown1
+        ' nudPrice
         ' 
-        NumericUpDown1.Enabled = False
-        NumericUpDown1.Location = New Point(131, 147)
-        NumericUpDown1.Name = "NumericUpDown1"
-        NumericUpDown1.Size = New Drawing.Size(120, 23)
-        NumericUpDown1.TabIndex = 13
+        nudPrice.Anchor = AnchorStyles.None
+        nudPrice.Location = New Point(164, 178)
+        nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
+        nudPrice.Name = "nudPrice"
+        nudPrice.Size = New System.Drawing.Size(120, 23)
+        nudPrice.TabIndex = 2
         ' 
-        ' lblMeasurements
+        ' lblPrice
         ' 
-        lblMeasurements.AutoSize = True
-        lblMeasurements.Location = New Point(443, 260)
-        lblMeasurements.Name = "lblMeasurements"
-        lblMeasurements.Size = New Drawing.Size(85, 15)
-        lblMeasurements.TabIndex = 14
-        lblMeasurements.Text = "Measurements"
+        lblPrice.Anchor = AnchorStyles.None
+        lblPrice.AutoSize = True
+        lblPrice.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblPrice.Location = New Point(61, 180)
+        lblPrice.Name = "lblPrice"
+        lblPrice.Size = New System.Drawing.Size(33, 15)
+        lblPrice.TabIndex = 20
+        lblPrice.Text = "Price"
         ' 
-        ' PictureBox1
+        ' btnaddMeasurement
         ' 
-        PictureBox1.Location = New Point(498, 66)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Drawing.Size(273, 171)
-        PictureBox1.TabIndex = 15
-        PictureBox1.TabStop = False
+        btnaddMeasurement.Anchor = AnchorStyles.None
+        btnaddMeasurement.Location = New Point(430, 306)
+        btnaddMeasurement.Name = "btnaddMeasurement"
+        btnaddMeasurement.Size = New System.Drawing.Size(75, 23)
+        btnaddMeasurement.TabIndex = 7
+        btnaddMeasurement.Text = "Add Size"
+        btnaddMeasurement.UseVisualStyleBackColor = True
+        ' 
+        ' nudValue
+        ' 
+        nudValue.Anchor = AnchorStyles.None
+        nudValue.Location = New Point(146, 306)
+        nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
+        nudValue.Name = "nudValue"
+        nudValue.Size = New System.Drawing.Size(102, 23)
+        nudValue.TabIndex = 4
+        ' 
+        ' dgMeasurements
+        ' 
+        dgMeasurements.Anchor = AnchorStyles.None
+        dgMeasurements.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgMeasurements.Columns.AddRange(New DataGridViewColumn() {size_type, measurement, GarmentType})
+        dgMeasurements.Location = New Point(39, 345)
+        dgMeasurements.Name = "dgMeasurements"
+        dgMeasurements.Size = New System.Drawing.Size(466, 295)
+        dgMeasurements.TabIndex = 10
+        ' 
+        ' size_type
+        ' 
+        size_type.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        size_type.HeaderText = "Measurement Type"
+        size_type.Name = "size_type"
+        size_type.Width = 160
+        ' 
+        ' measurement
+        ' 
+        measurement.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        measurement.HeaderText = "Measurement"
+        measurement.Name = "measurement"
+        measurement.Width = 110
+        ' 
+        ' GarmentType
+        ' 
+        GarmentType.HeaderText = "Garment Type"
+        GarmentType.Name = "GarmentType"
+        GarmentType.Width = 160
+        ' 
+        ' cbUnit
+        ' 
+        cbUnit.Anchor = AnchorStyles.None
+        cbUnit.FormattingEnabled = True
+        cbUnit.Items.AddRange(New Object() {"cm", "inches", "meters"})
+        cbUnit.Location = New Point(254, 305)
+        cbUnit.Name = "cbUnit"
+        cbUnit.Size = New System.Drawing.Size(77, 23)
+        cbUnit.TabIndex = 5
+        cbUnit.Text = "inches"
+        ' 
+        ' rbDescription
+        ' 
+        rbDescription.Anchor = AnchorStyles.None
+        rbDescription.BackColor = Color.FromArgb(CByte(194), CByte(194), CByte(194))
+        rbDescription.Location = New Point(548, 461)
+        rbDescription.MaxLength = 20000
+        rbDescription.Name = "rbDescription"
+        rbDescription.ScrollBars = RichTextBoxScrollBars.Vertical
+        rbDescription.Size = New System.Drawing.Size(438, 112)
+        rbDescription.TabIndex = 8
+        rbDescription.Text = ""
+        ' 
+        ' lblSize
+        ' 
+        lblSize.Anchor = AnchorStyles.None
+        lblSize.AutoSize = True
+        lblSize.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblSize.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblSize.Location = New Point(28, 256)
+        lblSize.Name = "lblSize"
+        lblSize.Size = New System.Drawing.Size(57, 32)
+        lblSize.TabIndex = 9
+        lblSize.Text = "Size"
+        ' 
+        ' lblDesc
+        ' 
+        lblDesc.Anchor = AnchorStyles.None
+        lblDesc.AutoSize = True
+        lblDesc.BackColor = Color.WhiteSmoke
+        lblDesc.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDesc.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblDesc.Location = New Point(548, 411)
+        lblDesc.Name = "lblDesc"
+        lblDesc.Size = New System.Drawing.Size(137, 32)
+        lblDesc.TabIndex = 7
+        lblDesc.Text = "Description"
+        ' 
+        ' lblorderName
+        ' 
+        lblorderName.AutoSize = True
+        lblorderName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblorderName.Location = New Point(61, 96)
+        lblorderName.Name = "lblorderName"
+        lblorderName.Size = New System.Drawing.Size(72, 15)
+        lblorderName.TabIndex = 5
+        lblorderName.Text = "Order Name"
+        ' 
+        ' tbOrderName
+        ' 
+        tbOrderName.Location = New Point(164, 96)
+        tbOrderName.MaxLength = 150
+        tbOrderName.Name = "tbOrderName"
+        tbOrderName.PlaceholderText = "Enter Order Name"
+        tbOrderName.Size = New System.Drawing.Size(121, 23)
+        tbOrderName.TabIndex = 0
+        ' 
+        ' sbMType
+        ' 
+        sbMType.Anchor = AnchorStyles.None
+        sbMType.FormattingEnabled = True
+        sbMType.Location = New Point(38, 305)
+        sbMType.Name = "sbMType"
+        sbMType.Size = New System.Drawing.Size(102, 23)
+        sbMType.TabIndex = 3
+        sbMType.Text = "Waist"
+        ' 
+        ' cbGarment
+        ' 
+        cbGarment.FormattingEnabled = True
+        cbGarment.Items.AddRange(New Object() {"Cotton", "Silk", "Leather"})
+        cbGarment.Location = New Point(337, 306)
+        cbGarment.Name = "cbGarment"
+        cbGarment.Size = New System.Drawing.Size(66, 23)
+        cbGarment.TabIndex = 6
+        cbGarment.Text = "Cotton"
+        ' 
+        ' cbStype
+        ' 
+        cbStype.FormattingEnabled = True
+        cbStype.Items.AddRange(New Object() {"Repair", "Resize"})
+        cbStype.Location = New Point(164, 142)
+        cbStype.Name = "cbStype"
+        cbStype.Size = New System.Drawing.Size(121, 23)
+        cbStype.TabIndex = 1
+        ' 
+        ' lblServiceType
+        ' 
+        lblServiceType.AutoSize = True
+        lblServiceType.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblServiceType.Location = New Point(61, 130)
+        lblServiceType.Name = "lblServiceType"
+        lblServiceType.Size = New System.Drawing.Size(71, 15)
+        lblServiceType.TabIndex = 0
+        lblServiceType.Text = "Service Type"
         ' 
         ' OrderDisplay
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Drawing.Size(800, 450)
-        Controls.Add(PictureBox1)
-        Controls.Add(lblMeasurements)
-        Controls.Add(NumericUpDown1)
-        Controls.Add(DataGridView1)
-        Controls.Add(RichTextBox1)
-        Controls.Add(Label6)
-        Controls.Add(ComboBox1)
-        Controls.Add(Label5)
-        Controls.Add(Label4)
-        Controls.Add(Label3)
-        Controls.Add(Label2)
-        Controls.Add(btnClose)
-        Controls.Add(btnEdit)
-        Controls.Add(btnSave)
-        Controls.Add(TextBox1)
-        Controls.Add(Label1)
+        ClientSize = New System.Drawing.Size(989, 654)
+        Controls.Add(pnAddOrders)
         Name = "OrderDisplay"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "OrderDisplay"
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
-        CType(NumericUpDown1, ComponentModel.ISupportInitialize).EndInit()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        Text = "Order Display"
+        pnAddOrders.ResumeLayout(False)
+        pnAddOrders.PerformLayout()
+        CType(OrderPicturebox, ComponentModel.ISupportInitialize).EndInit()
+        CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
+        CType(nudValue, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgMeasurements, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
-        PerformLayout()
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents btnSave As Button
-    Friend WithEvents btnEdit As Button
-    Friend WithEvents btnClose As Button
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents pnAddOrders As Panel
+    Friend WithEvents OrderPicturebox As PictureBox
+    Friend WithEvents btnOrderSave As Button
+    Friend WithEvents nudPrice As NumericUpDown
+    Friend WithEvents lblPrice As Label
+    Friend WithEvents btnaddMeasurement As Button
+    Friend WithEvents nudValue As NumericUpDown
+    Friend WithEvents dgMeasurements As DataGridView
+    Friend WithEvents cbUnit As ComboBox
+    Friend WithEvents rbDescription As RichTextBox
+    Friend WithEvents lblSize As Label
+    Friend WithEvents lblDesc As Label
+    Friend WithEvents lblorderName As Label
+    Friend WithEvents tbOrderName As TextBox
+    Friend WithEvents sbMType As ComboBox
+    Friend WithEvents cbGarment As ComboBox
+    Friend WithEvents cbStype As ComboBox
+    Friend WithEvents lblServiceType As Label
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents headerOrder As Label
     Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents RichTextBox1 As RichTextBox
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents colBodyPart As DataGridViewTextBoxColumn
-    Friend WithEvents colMeasurement As DataGridViewTextBoxColumn
-    Friend WithEvents colGarment As DataGridViewTextBoxColumn
-    Friend WithEvents NumericUpDown1 As NumericUpDown
-    Friend WithEvents lblMeasurements As Label
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents size_type As DataGridViewTextBoxColumn
+    Friend WithEvents measurement As DataGridViewTextBoxColumn
+    Friend WithEvents GarmentType As DataGridViewTextBoxColumn
+    Friend WithEvents btnAddImage As Button
+    Friend WithEvents btnRemoveImage As Button
+    Friend WithEvents dtpOrderDate As DateTimePicker
 End Class

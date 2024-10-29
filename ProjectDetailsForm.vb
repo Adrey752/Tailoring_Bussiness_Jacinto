@@ -84,7 +84,7 @@ Public Class ProjectDetailsForm
         Next
     End Sub
     Private Sub dgSortOrders_MouseDown(sender As Object, e As MouseEventArgs) Handles dgSortOrders.MouseDown
-        Dim hit As DataGridView.HitTestInfo = dgSortOrders.HitTest(e.X, e.Y)
+        Dim hit = dgSortOrders.HitTest(e.X, e.Y)
 
         If hit.RowIndex >= 0 AndAlso hit.ColumnIndex >= 0 Then
             ' Get the order object stored in the tag
@@ -108,10 +108,10 @@ Public Class ProjectDetailsForm
 
     Private Sub dgSortOrders_DragDrop(sender As Object, e As DragEventArgs) Handles dgSortOrders.DragDrop
 
-        Dim droppedOrder As Order = CType(e.Data.GetData(GetType(Order)), Order)
-        Dim clientPoint As Point = dgSortOrders.PointToClient(New Point(e.X, e.Y))
+        Dim droppedOrder = CType(e.Data.GetData(GetType(Order)), Order)
+        Dim clientPoint = dgSortOrders.PointToClient(New Point(e.X, e.Y))
 
-        Dim hit As DataGridView.HitTestInfo = dgSortOrders.HitTest(clientPoint.X, clientPoint.Y)
+        Dim hit = dgSortOrders.HitTest(clientPoint.X, clientPoint.Y)
         If hit.RowIndex >= 0 AndAlso hit.ColumnIndex > 0 AndAlso hit.ColumnIndex <> -1 AndAlso
            (hit.ColumnIndex = 1 Or hit.ColumnIndex = 3 Or hit.ColumnIndex = 4) Then
 
@@ -128,7 +128,7 @@ Public Class ProjectDetailsForm
             End Select
 
             UpdateOrderStatus(order_id, Status)
-            dgSortOrders.Rows.Clear()
+            dgSortOrders.Rows.Clear
             LoadOrders(clientId)
         End If
 
@@ -141,10 +141,10 @@ Public Class ProjectDetailsForm
         Dim columnIndex = e.ColumnIndex
         If columnIndex = 0 Or columnIndex = 2 AndAlso e.RowIndex >= 0 Then
 
-            Dim order As Order = CType(dgSortOrders.Rows(e.RowIndex).Cells(columnIndex + 1).Tag, Order)
+            Dim order = CType(dgSortOrders.Rows(e.RowIndex).Cells(columnIndex + 1).Tag, Order)
 
             If order IsNot Nothing Then
-                Dim status As String = ""
+                Dim status = ""
                 Dim order_id = order.OrderId
                 Select Case order.Status
                     Case "Pending"
@@ -154,7 +154,7 @@ Public Class ProjectDetailsForm
                 End Select
                 UpdateOrderStatus(order_id, status)
 
-                dgSortOrders.Rows.Clear()
+                dgSortOrders.Rows.Clear
                 LoadOrders(clientId)
             End If
         End If
@@ -266,7 +266,7 @@ Public Class ProjectDetailsForm
         _HomeForm.Show()
     End Sub
 
-    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
+
+
 End Class
