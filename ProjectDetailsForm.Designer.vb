@@ -22,8 +22,8 @@ Partial Class ProjectDetailsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         lblTask = New Label()
         tbNumber = New TextBox()
@@ -33,6 +33,11 @@ Partial Class ProjectDetailsForm
         lblContactNumber = New Label()
         LblName = New Label()
         dgSortOrders = New DataGridView()
+        pendingCheckBox = New DataGridViewCheckBoxColumn()
+        pending = New DataGridViewTextBoxColumn()
+        finishedCheckBox = New DataGridViewCheckBoxColumn()
+        finished = New DataGridViewTextBoxColumn()
+        claimed = New DataGridViewTextBoxColumn()
         lblHeaderPayment = New Label()
         cbSort = New ComboBox()
         lblPayment = New Label()
@@ -42,21 +47,15 @@ Partial Class ProjectDetailsForm
         lblHeaderOrder = New Label()
         btnAddOrder = New Button()
         DataGridView1 = New DataGridView()
-        Label1 = New Label()
-        Label2 = New Label()
-        Panel1 = New Panel()
-        Label3 = New Label()
-        Label4 = New Label()
-        btnAddrOrder = New Button()
-        claimed = New DataGridViewTextBoxColumn()
-        finished = New DataGridViewTextBoxColumn()
-        finishedCheckBox = New DataGridViewCheckBoxColumn()
-        pending = New DataGridViewTextBoxColumn()
-        pendingCheckBox = New DataGridViewCheckBoxColumn()
         DataGridViewTextBoxColumn2 = New DataGridViewTextBoxColumn()
         DataGridViewTextBoxColumn3 = New DataGridViewTextBoxColumn()
         colOrdersPaid = New DataGridViewTextBoxColumn()
-        Panel2 = New Panel()
+        lblDue = New Label()
+        lblPaid = New Label()
+        Panel1 = New Panel()
+        lblBalance = New Label()
+        Label4 = New Label()
+        btnAddrOrder = New Button()
         CType(dgSortOrders, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).BeginInit()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
@@ -161,6 +160,56 @@ Partial Class ProjectDetailsForm
         dgSortOrders.Size = New System.Drawing.Size(679, 287)
         dgSortOrders.TabIndex = 20
         ' 
+        ' pendingCheckBox
+        ' 
+        pendingCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pendingCheckBox.HeaderText = ""
+        pendingCheckBox.MinimumWidth = 35
+        pendingCheckBox.Name = "pendingCheckBox"
+        pendingCheckBox.ReadOnly = True
+        pendingCheckBox.Width = 35
+        ' 
+        ' pending
+        ' 
+        pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        pending.DataPropertyName = "pending"
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        pending.DefaultCellStyle = DataGridViewCellStyle1
+        pending.HeaderText = "Pending Orders"
+        pending.Name = "pending"
+        pending.ReadOnly = True
+        pending.Resizable = DataGridViewTriState.True
+        pending.Width = 200
+        ' 
+        ' finishedCheckBox
+        ' 
+        finishedCheckBox.HeaderText = ""
+        finishedCheckBox.MinimumWidth = 35
+        finishedCheckBox.Name = "finishedCheckBox"
+        finishedCheckBox.ReadOnly = True
+        finishedCheckBox.Width = 35
+        ' 
+        ' finished
+        ' 
+        finished.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        finished.DataPropertyName = "finished"
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        finished.DefaultCellStyle = DataGridViewCellStyle2
+        finished.HeaderText = "Finished"
+        finished.Name = "finished"
+        finished.ReadOnly = True
+        finished.Resizable = DataGridViewTriState.True
+        finished.Width = 200
+        ' 
+        ' claimed
+        ' 
+        claimed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        claimed.DataPropertyName = "claimed"
+        claimed.HeaderText = "Claimed"
+        claimed.Name = "claimed"
+        claimed.ReadOnly = True
+        claimed.Width = 200
+        ' 
         ' lblHeaderPayment
         ' 
         lblHeaderPayment.AutoSize = True
@@ -263,134 +312,6 @@ Partial Class ProjectDetailsForm
         DataGridView1.Size = New System.Drawing.Size(679, 197)
         DataGridView1.TabIndex = 36
         ' 
-        ' Label1
-        ' 
-        Label1.Anchor = AnchorStyles.None
-        Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label1.Location = New Point(195, 28)
-        Label1.Name = "Label1"
-        Label1.Size = New System.Drawing.Size(88, 25)
-        Label1.TabIndex = 37
-        Label1.Text = "5,000.00"
-        ' 
-        ' Label2
-        ' 
-        Label2.Anchor = AnchorStyles.None
-        Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label2.Location = New Point(195, 74)
-        Label2.Name = "Label2"
-        Label2.Size = New System.Drawing.Size(88, 25)
-        Label2.TabIndex = 38
-        Label2.Text = "2,500.00"
-        ' 
-        ' Panel1
-        ' 
-        Panel1.BackColor = Color.White
-        Panel1.Controls.Add(Label3)
-        Panel1.Controls.Add(Label4)
-        Panel1.Controls.Add(Label1)
-        Panel1.Controls.Add(Label2)
-        Panel1.Controls.Add(lblPayment)
-        Panel1.Controls.Add(lblAmountDue)
-        Panel1.Location = New Point(42, 424)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New System.Drawing.Size(367, 169)
-        Panel1.TabIndex = 39
-        ' 
-        ' Label3
-        ' 
-        Label3.Anchor = AnchorStyles.None
-        Label3.AutoSize = True
-        Label3.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label3.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label3.Location = New Point(194, 115)
-        Label3.Name = "Label3"
-        Label3.Size = New System.Drawing.Size(88, 25)
-        Label3.TabIndex = 40
-        Label3.Text = "2,500.00"
-        ' 
-        ' Label4
-        ' 
-        Label4.Anchor = AnchorStyles.None
-        Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label4.Location = New Point(33, 115)
-        Label4.Name = "Label4"
-        Label4.Size = New System.Drawing.Size(80, 25)
-        Label4.TabIndex = 39
-        Label4.Text = "Balance"
-        ' 
-        ' btnAddrOrder
-        ' 
-        btnAddrOrder.AutoSize = True
-        btnAddrOrder.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        btnAddrOrder.FlatAppearance.BorderSize = 0
-        btnAddrOrder.FlatStyle = FlatStyle.Flat
-        btnAddrOrder.ForeColor = Color.White
-        btnAddrOrder.Location = New Point(42, 608)
-        btnAddrOrder.Margin = New Padding(0)
-        btnAddrOrder.Name = "btnAddrOrder"
-        btnAddrOrder.RightToLeft = RightToLeft.No
-        btnAddrOrder.Size = New System.Drawing.Size(367, 37)
-        btnAddrOrder.TabIndex = 40
-        btnAddrOrder.Text = "Add order"
-        btnAddrOrder.UseVisualStyleBackColor = False
-        ' 
-        ' claimed
-        ' 
-        claimed.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        claimed.DataPropertyName = "claimed"
-        claimed.HeaderText = "Claimed"
-        claimed.Name = "claimed"
-        claimed.ReadOnly = True
-        claimed.Width = 200
-        ' 
-        ' finished
-        ' 
-        finished.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        finished.DataPropertyName = "finished"
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
-        finished.DefaultCellStyle = DataGridViewCellStyle2
-        finished.HeaderText = "Finished"
-        finished.Name = "finished"
-        finished.ReadOnly = True
-        finished.Resizable = DataGridViewTriState.True
-        finished.Width = 200
-        ' 
-        ' finishedCheckBox
-        ' 
-        finishedCheckBox.HeaderText = ""
-        finishedCheckBox.MinimumWidth = 35
-        finishedCheckBox.Name = "finishedCheckBox"
-        finishedCheckBox.ReadOnly = True
-        finishedCheckBox.Width = 35
-        ' 
-        ' pending
-        ' 
-        pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        pending.DataPropertyName = "pending"
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        pending.DefaultCellStyle = DataGridViewCellStyle1
-        pending.HeaderText = "Pending Orders"
-        pending.Name = "pending"
-        pending.ReadOnly = True
-        pending.Resizable = DataGridViewTriState.True
-        pending.Width = 200
-        ' 
-        ' pendingCheckBox
-        ' 
-        pendingCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        pendingCheckBox.HeaderText = ""
-        pendingCheckBox.MinimumWidth = 35
-        pendingCheckBox.Name = "pendingCheckBox"
-        pendingCheckBox.ReadOnly = True
-        pendingCheckBox.Width = 35
-        ' 
         ' DataGridViewTextBoxColumn2
         ' 
         DataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
@@ -419,20 +340,89 @@ Partial Class ProjectDetailsForm
         colOrdersPaid.Name = "colOrdersPaid"
         colOrdersPaid.ReadOnly = True
         ' 
-        ' Panel2
+        ' lblDue
         ' 
-        Panel2.BackColor = Color.White
-        Panel2.Location = New Point(533, 136)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New System.Drawing.Size(442, 239)
-        Panel2.TabIndex = 41
+        lblDue.Anchor = AnchorStyles.None
+        lblDue.AutoSize = True
+        lblDue.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblDue.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblDue.Location = New Point(195, 28)
+        lblDue.Name = "lblDue"
+        lblDue.Size = New System.Drawing.Size(88, 25)
+        lblDue.TabIndex = 37
+        lblDue.Text = "5,000.00"
+        ' 
+        ' lblPaid
+        ' 
+        lblPaid.Anchor = AnchorStyles.None
+        lblPaid.AutoSize = True
+        lblPaid.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblPaid.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblPaid.Location = New Point(195, 74)
+        lblPaid.Name = "lblPaid"
+        lblPaid.Size = New System.Drawing.Size(88, 25)
+        lblPaid.TabIndex = 38
+        lblPaid.Text = "2,500.00"
+        ' 
+        ' Panel1
+        ' 
+        Panel1.BackColor = Color.White
+        Panel1.Controls.Add(lblBalance)
+        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(lblDue)
+        Panel1.Controls.Add(lblPaid)
+        Panel1.Controls.Add(lblPayment)
+        Panel1.Controls.Add(lblAmountDue)
+        Panel1.Location = New Point(42, 424)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New System.Drawing.Size(367, 169)
+        Panel1.TabIndex = 39
+        ' 
+        ' lblBalance
+        ' 
+        lblBalance.Anchor = AnchorStyles.None
+        lblBalance.AutoSize = True
+        lblBalance.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblBalance.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblBalance.Location = New Point(194, 115)
+        lblBalance.Name = "lblBalance"
+        lblBalance.Size = New System.Drawing.Size(88, 25)
+        lblBalance.TabIndex = 40
+        lblBalance.Text = "2,500.00"
+        ' 
+        ' Label4
+        ' 
+        Label4.Anchor = AnchorStyles.None
+        Label4.AutoSize = True
+        Label4.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label4.Location = New Point(33, 115)
+        Label4.Name = "Label4"
+        Label4.Size = New System.Drawing.Size(80, 25)
+        Label4.TabIndex = 39
+        Label4.Text = "Balance"
+        ' 
+        ' btnAddrOrder
+        ' 
+        btnAddrOrder.AutoSize = True
+        btnAddrOrder.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnAddrOrder.FlatAppearance.BorderSize = 0
+        btnAddrOrder.FlatStyle = FlatStyle.Flat
+        btnAddrOrder.ForeColor = Color.White
+        btnAddrOrder.Location = New Point(42, 608)
+        btnAddrOrder.Margin = New Padding(0)
+        btnAddrOrder.Name = "btnAddrOrder"
+        btnAddrOrder.RightToLeft = RightToLeft.No
+        btnAddrOrder.Size = New System.Drawing.Size(367, 37)
+        btnAddrOrder.TabIndex = 40
+        btnAddrOrder.Text = "Make Payment"
+        btnAddrOrder.UseVisualStyleBackColor = False
         ' 
         ' ProjectDetailsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New System.Drawing.Size(1246, 654)
-        Controls.Add(Panel2)
         Controls.Add(btnAddrOrder)
         Controls.Add(Panel1)
         Controls.Add(DataGridView1)
@@ -480,10 +470,10 @@ Partial Class ProjectDetailsForm
     Friend WithEvents lblHeaderOrder As Label
     Friend WithEvents btnAddOrder As Button
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblDue As Label
+    Friend WithEvents lblPaid As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblBalance As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents btnAddrOrder As Button
     Friend WithEvents pendingCheckBox As DataGridViewCheckBoxColumn
@@ -494,5 +484,4 @@ Partial Class ProjectDetailsForm
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents colOrdersPaid As DataGridViewTextBoxColumn
-    Friend WithEvents Panel2 As Panel
 End Class

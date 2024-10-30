@@ -24,8 +24,8 @@ Public Class ProjectDetailsForm
         tbAddress.Text = client.Address
         tbNumber.Text = client.Contact
         nudOrders.Value = client.Quantity
-        nudPayment.Value = client.Payment
-        nudPrice.Value = client.Price
+        lblDue.Text = client.Price
+        lblPaid.Text = client.Payment
 
 
     End Sub
@@ -47,8 +47,9 @@ Public Class ProjectDetailsForm
         Dim payment As String = Convert.ToDecimal(row("payment"))
         Dim quantity As String = Convert.ToDecimal(row("quantity"))
 
-
         client = New Client(name, address, contact, price, payment, quantity)
+        client.Orders = GetOrdersFromDatabase(clientId)
+
         LoadOrders(clientId)
 
 
@@ -128,7 +129,7 @@ Public Class ProjectDetailsForm
             End Select
 
             UpdateOrderStatus(order_id, Status)
-            dgSortOrders.Rows.Clear
+            dgSortOrders.Rows.Clear()
             LoadOrders(clientId)
         End If
 
@@ -154,7 +155,7 @@ Public Class ProjectDetailsForm
                 End Select
                 UpdateOrderStatus(order_id, status)
 
-                dgSortOrders.Rows.Clear
+                dgSortOrders.Rows.Clear()
                 LoadOrders(clientId)
             End If
         End If
@@ -266,7 +267,12 @@ Public Class ProjectDetailsForm
         _HomeForm.Show()
     End Sub
 
+    Private Sub btnAddrOrder_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
+        Dim paymentDialog As New PaymentDialog(client)
+        paymentDialog.Show()
+    End Sub
 
+    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+    End Sub
 End Class
