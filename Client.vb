@@ -7,6 +7,8 @@
     Public Property Quantity As Integer
     Public Property Orders As List(Of Order)
 
+    Public Property PaymenHistory As New List(Of PaymentDetails)
+
     Public Sub New(name As String, address As String, contact As String, price As Decimal, payment As Decimal, quantity As Integer)
         Me.Name = name
         Me.Address = address

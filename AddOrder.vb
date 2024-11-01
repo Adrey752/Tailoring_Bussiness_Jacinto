@@ -37,7 +37,7 @@ Public Class AddOrder
 
         ' Add any initialization after the InitializeComponent() call.
         Me.client = client
-        Me.order = New Order(0, "", "", "", 0, False, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
         Me._addClientForm = orderForm
         LoadMeasurementsType()
 
@@ -78,7 +78,7 @@ Public Class AddOrder
         Dim OrderPanel = New OrderPanel(order)
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
         fPanelOrders.Controls.Add(OrderPanel)
-        Me.order = New Order(0, "", "", "", 0, False, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
         ClearForm()
     End Sub
     Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click

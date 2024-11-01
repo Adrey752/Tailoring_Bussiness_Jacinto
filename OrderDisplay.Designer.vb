@@ -23,6 +23,9 @@ Partial Class OrderDisplay
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         pnAddOrders = New Panel()
+        Label4 = New Label()
+        Label3 = New Label()
+        lblAmountToPay = New Label()
         dtpOrderDate = New DateTimePicker()
         btnAddImage = New Button()
         btnRemoveImage = New Button()
@@ -33,7 +36,6 @@ Partial Class OrderDisplay
         btnCancel = New Button()
         OrderPicturebox = New PictureBox()
         btnOrderSave = New Button()
-        nudPrice = New NumericUpDown()
         lblPrice = New Label()
         btnaddMeasurement = New Button()
         nudValue = New NumericUpDown()
@@ -53,7 +55,6 @@ Partial Class OrderDisplay
         lblServiceType = New Label()
         pnAddOrders.SuspendLayout()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).BeginInit()
-        CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -62,6 +63,9 @@ Partial Class OrderDisplay
         ' 
         pnAddOrders.Anchor = AnchorStyles.None
         pnAddOrders.BackColor = Color.White
+        pnAddOrders.Controls.Add(Label4)
+        pnAddOrders.Controls.Add(Label3)
+        pnAddOrders.Controls.Add(lblAmountToPay)
         pnAddOrders.Controls.Add(dtpOrderDate)
         pnAddOrders.Controls.Add(btnAddImage)
         pnAddOrders.Controls.Add(btnRemoveImage)
@@ -72,7 +76,6 @@ Partial Class OrderDisplay
         pnAddOrders.Controls.Add(btnCancel)
         pnAddOrders.Controls.Add(OrderPicturebox)
         pnAddOrders.Controls.Add(btnOrderSave)
-        pnAddOrders.Controls.Add(nudPrice)
         pnAddOrders.Controls.Add(lblPrice)
         pnAddOrders.Controls.Add(btnaddMeasurement)
         pnAddOrders.Controls.Add(nudValue)
@@ -92,9 +95,43 @@ Partial Class OrderDisplay
         pnAddOrders.Size = New System.Drawing.Size(998, 653)
         pnAddOrders.TabIndex = 3
         ' 
+        ' Label4
+        ' 
+        Label4.Anchor = AnchorStyles.None
+        Label4.AutoSize = True
+        Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label4.Location = New Point(164, 219)
+        Label4.Name = "Label4"
+        Label4.Size = New System.Drawing.Size(30, 15)
+        Label4.TabIndex = 69
+        Label4.Text = "Paid"
+        ' 
+        ' Label3
+        ' 
+        Label3.Anchor = AnchorStyles.None
+        Label3.AutoSize = True
+        Label3.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        Label3.Location = New Point(61, 219)
+        Label3.Name = "Label3"
+        Label3.Size = New System.Drawing.Size(89, 15)
+        Label3.TabIndex = 68
+        Label3.Text = "Payment Status"
+        ' 
+        ' lblAmountToPay
+        ' 
+        lblAmountToPay.Anchor = AnchorStyles.Left
+        lblAmountToPay.AutoSize = True
+        lblAmountToPay.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblAmountToPay.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblAmountToPay.Location = New Point(164, 180)
+        lblAmountToPay.Name = "lblAmountToPay"
+        lblAmountToPay.Size = New System.Drawing.Size(105, 25)
+        lblAmountToPay.TabIndex = 67
+        lblAmountToPay.Text = "₱ 2,550.00"
+        ' 
         ' dtpOrderDate
         ' 
-        dtpOrderDate.Location = New Point(342, 53)
+        dtpOrderDate.Location = New Point(298, 39)
         dtpOrderDate.Name = "dtpOrderDate"
         dtpOrderDate.Size = New System.Drawing.Size(200, 23)
         dtpOrderDate.TabIndex = 32
@@ -145,7 +182,7 @@ Partial Class OrderDisplay
         ' 
         Label1.Anchor = AnchorStyles.None
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         Label1.Location = New Point(91, 256)
         Label1.Name = "Label1"
@@ -157,7 +194,7 @@ Partial Class OrderDisplay
         ' 
         headerOrder.Anchor = AnchorStyles.None
         headerOrder.AutoSize = True
-        headerOrder.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        headerOrder.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         headerOrder.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         headerOrder.Location = New Point(28, 31)
         headerOrder.Name = "headerOrder"
@@ -198,15 +235,6 @@ Partial Class OrderDisplay
         btnOrderSave.TabIndex = 3
         btnOrderSave.Text = "Save"
         btnOrderSave.UseVisualStyleBackColor = False
-        ' 
-        ' nudPrice
-        ' 
-        nudPrice.Anchor = AnchorStyles.None
-        nudPrice.Location = New Point(164, 178)
-        nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
-        nudPrice.Name = "nudPrice"
-        nudPrice.Size = New System.Drawing.Size(120, 23)
-        nudPrice.TabIndex = 2
         ' 
         ' lblPrice
         ' 
@@ -295,7 +323,7 @@ Partial Class OrderDisplay
         ' 
         lblSize.Anchor = AnchorStyles.None
         lblSize.AutoSize = True
-        lblSize.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblSize.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblSize.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblSize.Location = New Point(28, 256)
         lblSize.Name = "lblSize"
@@ -308,7 +336,7 @@ Partial Class OrderDisplay
         lblDesc.Anchor = AnchorStyles.None
         lblDesc.AutoSize = True
         lblDesc.BackColor = Color.WhiteSmoke
-        lblDesc.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDesc.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDesc.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblDesc.Location = New Point(548, 411)
         lblDesc.Name = "lblDesc"
@@ -376,7 +404,7 @@ Partial Class OrderDisplay
         ' 
         ' OrderDisplay
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New System.Drawing.Size(989, 654)
         Controls.Add(pnAddOrders)
@@ -386,7 +414,6 @@ Partial Class OrderDisplay
         pnAddOrders.ResumeLayout(False)
         pnAddOrders.PerformLayout()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).EndInit()
-        CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         CType(nudValue, ComponentModel.ISupportInitialize).EndInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
@@ -395,7 +422,6 @@ Partial Class OrderDisplay
     Friend WithEvents pnAddOrders As Panel
     Friend WithEvents OrderPicturebox As PictureBox
     Friend WithEvents btnOrderSave As Button
-    Friend WithEvents nudPrice As NumericUpDown
     Friend WithEvents lblPrice As Label
     Friend WithEvents btnaddMeasurement As Button
     Friend WithEvents nudValue As NumericUpDown
@@ -421,4 +447,7 @@ Partial Class OrderDisplay
     Friend WithEvents btnAddImage As Button
     Friend WithEvents btnRemoveImage As Button
     Friend WithEvents dtpOrderDate As DateTimePicker
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents lblAmountToPay As Label
 End Class

@@ -256,14 +256,13 @@ Public Class AddClientForm
 
     End Function
     Public Function InsertOrder(order As Order, clientId As Integer) As Integer
-        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, done, image, date) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done, @image, @date); SELECT LAST_INSERT_ID();"
+        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, image, date) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @image, @date); SELECT LAST_INSERT_ID();"
         Dim orderParams As New Dictionary(Of String, Object) From {
     {"@ClientId", clientId},
     {"@OrderName", order.OrderName},
     {"@Type", order.Type},
     {"@Description", order.Description},
     {"@Price", order.Price},
-    {"@Done", order.Done},
     {"@image", ImageToBinary(order.OrderImage)},
     {"@date", order.DateOrdered}
 }

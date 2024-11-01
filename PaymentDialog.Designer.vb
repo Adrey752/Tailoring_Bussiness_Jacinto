@@ -29,8 +29,8 @@ Partial Class PaymentDialog
         Label5 = New Label()
         TextBox1 = New TextBox()
         Label3 = New Label()
-        DateTimePicker1 = New DateTimePicker()
-        NumericUpDown1 = New NumericUpDown()
+        dtpPaymentDate = New DateTimePicker()
+        nudPartialPayment = New NumericUpDown()
         Label2 = New Label()
         Label1 = New Label()
         lblAmountDue = New Label()
@@ -40,7 +40,7 @@ Partial Class PaymentDialog
         colOrderPrice = New DataGridViewTextBoxColumn()
         Label6 = New Label()
         lblAmountToPay = New Label()
-        CType(NumericUpDown1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(nudPartialPayment, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgOrders, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -140,21 +140,23 @@ Partial Class PaymentDialog
         Label3.TabIndex = 57
         Label3.Text = "Pay Specific Orders"
         ' 
-        ' DateTimePicker1
+        ' dtpPaymentDate
         ' 
-        DateTimePicker1.Anchor = AnchorStyles.Left
-        DateTimePicker1.Location = New Point(526, 36)
-        DateTimePicker1.Name = "DateTimePicker1"
-        DateTimePicker1.Size = New System.Drawing.Size(192, 23)
-        DateTimePicker1.TabIndex = 55
+        dtpPaymentDate.Anchor = AnchorStyles.Left
+        dtpPaymentDate.Location = New Point(526, 36)
+        dtpPaymentDate.Name = "dtpPaymentDate"
+        dtpPaymentDate.Size = New System.Drawing.Size(192, 23)
+        dtpPaymentDate.TabIndex = 55
         ' 
-        ' NumericUpDown1
+        ' nudPartialPayment
         ' 
-        NumericUpDown1.Anchor = AnchorStyles.Left
-        NumericUpDown1.Location = New Point(187, 184)
-        NumericUpDown1.Name = "NumericUpDown1"
-        NumericUpDown1.Size = New System.Drawing.Size(120, 23)
-        NumericUpDown1.TabIndex = 54
+        nudPartialPayment.Anchor = AnchorStyles.Left
+        nudPartialPayment.Location = New Point(187, 184)
+        nudPartialPayment.Maximum = New Decimal(New Integer() {-1304428544, 434162106, 542, 0})
+        nudPartialPayment.Name = "nudPartialPayment"
+        nudPartialPayment.Size = New System.Drawing.Size(120, 23)
+        nudPartialPayment.TabIndex = 54
+        nudPartialPayment.ThousandsSeparator = True
         ' 
         ' Label2
         ' 
@@ -266,8 +268,8 @@ Partial Class PaymentDialog
         Controls.Add(Label5)
         Controls.Add(TextBox1)
         Controls.Add(Label3)
-        Controls.Add(DateTimePicker1)
-        Controls.Add(NumericUpDown1)
+        Controls.Add(dtpPaymentDate)
+        Controls.Add(nudPartialPayment)
         Controls.Add(Label2)
         Controls.Add(Label1)
         Controls.Add(lblAmountDue)
@@ -277,9 +279,9 @@ Partial Class PaymentDialog
         MinimizeBox = False
         Name = "PaymentDialog"
         ShowInTaskbar = False
-        StartPosition = FormStartPosition.CenterParent
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Dialog1"
-        CType(NumericUpDown1, ComponentModel.ISupportInitialize).EndInit()
+        CType(nudPartialPayment, ComponentModel.ISupportInitialize).EndInit()
         CType(dgOrders, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
@@ -292,8 +294,8 @@ Partial Class PaymentDialog
     Friend WithEvents Label5 As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents dtpPaymentDate As DateTimePicker
+    Friend WithEvents nudPartialPayment As NumericUpDown
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents lblAmountDue As Label

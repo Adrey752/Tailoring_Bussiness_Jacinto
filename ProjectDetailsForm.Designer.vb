@@ -46,7 +46,7 @@ Partial Class ProjectDetailsForm
         nudOrders = New NumericUpDown()
         lblHeaderOrder = New Label()
         btnAddOrder = New Button()
-        DataGridView1 = New DataGridView()
+        dgPaymentHistory = New DataGridView()
         DataGridViewTextBoxColumn2 = New DataGridViewTextBoxColumn()
         DataGridViewTextBoxColumn3 = New DataGridViewTextBoxColumn()
         colOrdersPaid = New DataGridViewTextBoxColumn()
@@ -55,10 +55,10 @@ Partial Class ProjectDetailsForm
         Panel1 = New Panel()
         lblBalance = New Label()
         Label4 = New Label()
-        btnAddrOrder = New Button()
+        btnMakePayment = New Button()
         CType(dgSortOrders, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).BeginInit()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgPaymentHistory, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -297,20 +297,20 @@ Partial Class ProjectDetailsForm
         btnAddOrder.Text = "Add Order"
         btnAddOrder.UseVisualStyleBackColor = True
         ' 
-        ' DataGridView1
+        ' dgPaymentHistory
         ' 
-        DataGridView1.AllowDrop = True
-        DataGridView1.AllowUserToAddRows = False
-        DataGridView1.AllowUserToDeleteRows = False
-        DataGridView1.AllowUserToOrderColumns = True
-        DataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Raised
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Columns.AddRange(New DataGridViewColumn() {DataGridViewTextBoxColumn2, DataGridViewTextBoxColumn3, colOrdersPaid})
-        DataGridView1.Location = New Point(533, 424)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.ReadOnly = True
-        DataGridView1.Size = New System.Drawing.Size(679, 197)
-        DataGridView1.TabIndex = 36
+        dgPaymentHistory.AllowDrop = True
+        dgPaymentHistory.AllowUserToAddRows = False
+        dgPaymentHistory.AllowUserToDeleteRows = False
+        dgPaymentHistory.AllowUserToOrderColumns = True
+        dgPaymentHistory.CellBorderStyle = DataGridViewCellBorderStyle.Raised
+        dgPaymentHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgPaymentHistory.Columns.AddRange(New DataGridViewColumn() {DataGridViewTextBoxColumn2, DataGridViewTextBoxColumn3, colOrdersPaid})
+        dgPaymentHistory.Location = New Point(533, 424)
+        dgPaymentHistory.Name = "dgPaymentHistory"
+        dgPaymentHistory.ReadOnly = True
+        dgPaymentHistory.Size = New System.Drawing.Size(679, 197)
+        dgPaymentHistory.TabIndex = 36
         ' 
         ' DataGridViewTextBoxColumn2
         ' 
@@ -402,30 +402,30 @@ Partial Class ProjectDetailsForm
         Label4.TabIndex = 39
         Label4.Text = "Balance"
         ' 
-        ' btnAddrOrder
+        ' btnMakePayment
         ' 
-        btnAddrOrder.AutoSize = True
-        btnAddrOrder.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        btnAddrOrder.FlatAppearance.BorderSize = 0
-        btnAddrOrder.FlatStyle = FlatStyle.Flat
-        btnAddrOrder.ForeColor = Color.White
-        btnAddrOrder.Location = New Point(42, 608)
-        btnAddrOrder.Margin = New Padding(0)
-        btnAddrOrder.Name = "btnAddrOrder"
-        btnAddrOrder.RightToLeft = RightToLeft.No
-        btnAddrOrder.Size = New System.Drawing.Size(367, 37)
-        btnAddrOrder.TabIndex = 40
-        btnAddrOrder.Text = "Make Payment"
-        btnAddrOrder.UseVisualStyleBackColor = False
+        btnMakePayment.AutoSize = True
+        btnMakePayment.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnMakePayment.FlatAppearance.BorderSize = 0
+        btnMakePayment.FlatStyle = FlatStyle.Flat
+        btnMakePayment.ForeColor = Color.White
+        btnMakePayment.Location = New Point(42, 608)
+        btnMakePayment.Margin = New Padding(0)
+        btnMakePayment.Name = "btnMakePayment"
+        btnMakePayment.RightToLeft = RightToLeft.No
+        btnMakePayment.Size = New System.Drawing.Size(367, 37)
+        btnMakePayment.TabIndex = 40
+        btnMakePayment.Text = "Make Payment"
+        btnMakePayment.UseVisualStyleBackColor = False
         ' 
         ' ProjectDetailsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New System.Drawing.Size(1246, 654)
-        Controls.Add(btnAddrOrder)
+        Controls.Add(btnMakePayment)
         Controls.Add(Panel1)
-        Controls.Add(DataGridView1)
+        Controls.Add(dgPaymentHistory)
         Controls.Add(btnAddOrder)
         Controls.Add(lblHeaderOrder)
         Controls.Add(nudOrders)
@@ -446,7 +446,7 @@ Partial Class ProjectDetailsForm
         Text = "ProjectDetailsForm"
         CType(dgSortOrders, ComponentModel.ISupportInitialize).EndInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).EndInit()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgPaymentHistory, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         ResumeLayout(False)
@@ -469,13 +469,13 @@ Partial Class ProjectDetailsForm
     Friend WithEvents nudOrders As NumericUpDown
     Friend WithEvents lblHeaderOrder As Label
     Friend WithEvents btnAddOrder As Button
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgPaymentHistory As DataGridView
     Friend WithEvents lblDue As Label
     Friend WithEvents lblPaid As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents lblBalance As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents btnAddrOrder As Button
+    Friend WithEvents btnMakePayment As Button
     Friend WithEvents pendingCheckBox As DataGridViewCheckBoxColumn
     Friend WithEvents pending As DataGridViewTextBoxColumn
     Friend WithEvents finishedCheckBox As DataGridViewCheckBoxColumn

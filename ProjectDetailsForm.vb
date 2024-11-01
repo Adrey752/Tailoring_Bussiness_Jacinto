@@ -63,7 +63,7 @@ Public Class ProjectDetailsForm
 
         Dim maxRow = Math.Max(Math.Max(pendingOrders.Count, finishedOrders.Count), claimedOrders.Count)
 
-        For i As Integer = 0 To maxRow
+        For i As Integer = 0 To maxRow - 1 ' Looping from 0 to maxRow - 1
 
             ' Get the order names if available, otherwise use an empty string
             Dim pendingOrder = If(i < pendingOrders.Count, pendingOrders(i), Nothing)
@@ -78,12 +78,29 @@ Public Class ProjectDetailsForm
                                              If(claimedOrder IsNot Nothing, claimedOrder.OrderName, ""))
 
             ' Tag each row with the corresponding order object (if available)
-            If pendingOrder IsNot Nothing Then dgSortOrders.Rows(rowIndex).Cells(1).Tag = pendingOrder
-            If finishedOrder IsNot Nothing Then dgSortOrders.Rows(rowIndex).Cells(3).Tag = finishedOrder
-            If claimedOrder IsNot Nothing Then dgSortOrders.Rows(rowIndex).Cells(4).Tag = claimedOrder
-            'dgSortOrders.Rows.Add(Nothing, "", Nothing, "", "")
+            If pendingOrder IsNot Nothing Then
+                dgSortOrders.Rows(rowIndex).Cells(1).Tag = pendingOrder
+                If pendingOrder.Paid Then ' Check if pendingOrder is not Nothing before accessing Paid
+                    MarkOrderAsPaid(dgSortOrders.Rows(rowIndex).Cells(1))
+                End If
+            End If
+
+            If finishedOrder IsNot Nothing Then
+                dgSortOrders.Rows(rowIndex).Cells(3).Tag = finishedOrder
+                If finishedOrder.Paid Then ' Check if finishedOrder is not Nothing before accessing Paid
+                    MarkOrderAsPaid(dgSortOrders.Rows(rowIndex).Cells(3))
+                End If
+            End If
+
+            If claimedOrder IsNot Nothing Then
+                dgSortOrders.Rows(rowIndex).Cells(4).Tag = claimedOrder
+                If claimedOrder.Paid Then ' Check if claimedOrder is not Nothing before accessing Paid
+                    MarkOrderAsPaid(dgSortOrders.Rows(rowIndex).Cells(4))
+                End If
+            End If
         Next
     End Sub
+
     Private Sub dgSortOrders_MouseDown(sender As Object, e As MouseEventArgs) Handles dgSortOrders.MouseDown
         Dim hit = dgSortOrders.HitTest(e.X, e.Y)
 
@@ -171,6 +188,17 @@ Public Class ProjectDetailsForm
         MySQLModule.ExecuteNonQuery(query, parameter)
     End Sub
 
+    Private Sub UpdateOrderPaymentStatus(order_id As Integer)
+        Dim query = "UPDATE client_order SET paymentStatus = @paymentStatus WHERE order_id = @order_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+            {"@paymentStatus", True},
+            {"@order_id", order_id}
+        }
+        MySQLModule.ExecuteNonQuery(query, parameter)
+    End Sub
+
+
+
     Private Shared Function GetOrdersFromDatabase(client_id As Integer) As List(Of Order)
         Dim OrderList As New List(Of Order)
         Dim query As String = "SELECT * FROM client_order WHERE client_id = @client_id"
@@ -188,7 +216,6 @@ Public Class ProjectDetailsForm
             Dim OrderType As String = row.Field(Of String)("type")
             Dim description As String = row.Field(Of String)("description")
             Dim price As Decimal = row.Field(Of Decimal)("price")
-            Dim done As Boolean = row.Field(Of Boolean)("done")
 
             Dim imageByte As Byte() = row.Field(Of Byte())("image")
             Dim image As Image = ByteArrayToImage(imageByte)
@@ -196,7 +223,7 @@ Public Class ProjectDetailsForm
             Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
             Dim status As String = row.Field(Of String)("status")
 
-            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, done, image, OrderDate, sizes, status))
+            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, sizes, status))
         Next
         Return OrderList
     End Function
@@ -252,7 +279,7 @@ Public Class ProjectDetailsForm
         If result IsNot Nothing Then
             Return result
         Else
-            Throw New Exception("garment_id doesn't exist ni whattt")
+            Throw New Exception("garment_id doesn't exist ")
         End If
     End Function
 
@@ -267,12 +294,41 @@ Public Class ProjectDetailsForm
         _HomeForm.Show()
     End Sub
 
-    Private Sub btnAddrOrder_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
+    Private Sub btnAddrOrder_Click(sender As Object, e As EventArgs) Handles btnMakePayment.Click
         Dim paymentDialog As New PaymentDialog(client)
-        paymentDialog.Show()
+        paymentDialog.ShowDialog()
+        If paymentDialog.DialogResult = DialogResult.OK Then
+            Dim PaymentDate As DateTime = paymentDialog.PaymentDate
+            Dim PaymentAmount As Decimal = paymentDialog.PaymentAmount
+            Dim PaidOrders As List(Of Order) = paymentDialog.CheckedOrders
+            Dim paymentDetails As New PaymentDetails(PaymentDate, PaymentAmount, PaidOrders)
+
+            client.PaymenHistory.Add(paymentDetails)
+            dgPaymentHistory.Rows.Add(PaymentDate, PaymentAmount, ListOfOrderNames(PaidOrders))
+            paymentDialog.Close()
+        End If
+
     End Sub
 
-    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub SavePaymentDetails()
 
     End Sub
+    ' Assuming dgOrders is your DataGridView, and columns represent different order statuses
+    Private Sub MarkOrderAsPaid(orderCell As DataGridViewCell)
+        ' Check if the order is already marked as paid
+        If Not orderCell.Style.NullValue.Equals(My.Resources.paid) Then
+            ' Set the cell's background to the paid icon
+            orderCell.Style.NullValue = My.Resources.paid
+            orderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        End If
+    End Sub
+
+    Private Function ListOfOrderNames(listOfOrder As List(Of Order)) As String
+        Dim orderNames = ""
+        For Each order As Order In listOfOrder
+            orderNames &= order.OrderName & ", "
+        Next
+        Return orderNames
+    End Function
+
 End Class

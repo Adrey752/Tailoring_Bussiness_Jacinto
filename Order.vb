@@ -6,22 +6,21 @@
 
     Public Property Description As String
     Public Property Price As Decimal
-    Public Property Done As Boolean
     Public Property Sizes As List(Of Size)
 
     Public Property DateOrdered As DateTime
     Public Property OrderImage As Image
 
     Public Property Status As String
+    Public Property Paid As Boolean = False
 
 
-    Public Sub New(OrderId As Integer, orderName As String, serviceType As String, description As String, price As Decimal, done As Boolean, orderImage As Image, DateOrdered As DateTime, sizes As List(Of Size), status As String)
+    Public Sub New(OrderId As Integer, orderName As String, serviceType As String, description As String, price As Decimal, orderImage As Image, DateOrdered As DateTime, sizes As List(Of Size), status As String)
         Me.OrderId = OrderId
         Me.OrderName = orderName
         Me.Type = serviceType
         Me.Description = description
         Me.Price = price
-        Me.Done = done
         Me.Sizes = sizes
         Me.Status = status
         Me.DateOrdered = DateOrdered
