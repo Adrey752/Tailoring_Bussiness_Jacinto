@@ -9,6 +9,7 @@ Public Class ProjectDetailsForm
     Dim clientId As Integer
     Dim client As Client
     Dim _HomeForm As Home
+    Dim balance
 
     Public Sub New(id As Integer, _home As Home)
 
@@ -19,14 +20,6 @@ Public Class ProjectDetailsForm
         Me.clientId = id
         Me._HomeForm = _home
         LoadClient(clientId)
-
-        tbName.Text = client.Name
-        tbAddress.Text = client.Address
-        tbNumber.Text = client.Contact
-        nudOrders.Value = client.Quantity
-        lblDue.Text = client.Price
-        lblPaid.Text = client.Payment
-
 
     End Sub
 
@@ -48,15 +41,26 @@ Public Class ProjectDetailsForm
         Dim quantity As String = Convert.ToDecimal(row("quantity"))
 
         client = New Client(name, address, contact, price, payment, quantity)
-        client.Orders = GetOrdersFromDatabase(clientId)
+        client.Orders = GetClientOrdersFromDatabase(clientId)
+
+        tbName.Text = client.Name
+        tbAddress.Text = client.Address
+        tbNumber.Text = client.Contact
+        nudOrders.Value = client.Quantity
+        lblDue.Text = "₱" & client.Price.ToString("N2")
+        lblPaid.Text = "₱ " & client.Payment
+        Dim balance = client.Price - client.Payment
+        lblBalance.Text = "₱ " & balance.ToString("N2")
 
         LoadOrders(clientId)
+        LoadPaymentHistory()
 
 
     End Sub
 
     Private Sub LoadOrders(client_id As Integer)
-        Dim orderList = GetOrdersFromDatabase(client_id)
+        dgSortOrders.Rows.Clear()
+        Dim orderList = GetClientOrdersFromDatabase(client_id)
         Dim pendingOrders = orderList.Where(Function(o) o.Status = "Pending").ToList()
         Dim finishedOrders = orderList.Where(Function(o) o.Status = "Finished").ToList()
         Dim claimedOrders = orderList.Where(Function(o) o.Status = "Claimed").ToList()
@@ -80,21 +84,21 @@ Public Class ProjectDetailsForm
             ' Tag each row with the corresponding order object (if available)
             If pendingOrder IsNot Nothing Then
                 dgSortOrders.Rows(rowIndex).Cells(1).Tag = pendingOrder
-                If pendingOrder.Paid Then ' Check if pendingOrder is not Nothing before accessing Paid
+                If pendingOrder.Payment_id <> -1 Then ' Check if pendingOrder is not Nothing before accessing Paid
                     MarkOrderAsPaid(dgSortOrders.Rows(rowIndex).Cells(1))
                 End If
             End If
 
             If finishedOrder IsNot Nothing Then
                 dgSortOrders.Rows(rowIndex).Cells(3).Tag = finishedOrder
-                If finishedOrder.Paid Then ' Check if finishedOrder is not Nothing before accessing Paid
+                If finishedOrder.Payment_id <> -1 Then ' Check if finishedOrder is not Nothing before accessing Paid
                     MarkOrderAsPaid(dgSortOrders.Rows(rowIndex).Cells(3))
                 End If
             End If
 
             If claimedOrder IsNot Nothing Then
                 dgSortOrders.Rows(rowIndex).Cells(4).Tag = claimedOrder
-                If claimedOrder.Paid Then ' Check if claimedOrder is not Nothing before accessing Paid
+                If claimedOrder.Payment_id <> -1 Then ' Check if claimedOrder is not Nothing before accessing Paid
                     MarkOrderAsPaid(dgSortOrders.Rows(rowIndex).Cells(4))
                 End If
             End If
@@ -146,7 +150,7 @@ Public Class ProjectDetailsForm
             End Select
 
             UpdateOrderStatus(order_id, Status)
-            dgSortOrders.Rows.Clear()
+
             LoadOrders(clientId)
         End If
 
@@ -172,7 +176,7 @@ Public Class ProjectDetailsForm
                 End Select
                 UpdateOrderStatus(order_id, status)
 
-                dgSortOrders.Rows.Clear()
+
                 LoadOrders(clientId)
             End If
         End If
@@ -199,7 +203,7 @@ Public Class ProjectDetailsForm
 
 
 
-    Private Shared Function GetOrdersFromDatabase(client_id As Integer) As List(Of Order)
+    Private Shared Function GetClientOrdersFromDatabase(client_id As Integer) As List(Of Order)
         Dim OrderList As New List(Of Order)
         Dim query As String = "SELECT * FROM client_order WHERE client_id = @client_id"
         Dim parameter As New Dictionary(Of String, Object) From {
@@ -222,8 +226,9 @@ Public Class ProjectDetailsForm
             Dim OrderDate As DateTime = row.Field(Of DateTime)("date")
             Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
             Dim status As String = row.Field(Of String)("status")
+            Dim payment_id As Integer = If(row.IsNull("payment_id"), -1, row.Field(Of Integer)("payment_id"))
 
-            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, sizes, status))
+            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, sizes, status, payment_id))
         Next
         Return OrderList
     End Function
@@ -304,24 +309,107 @@ Public Class ProjectDetailsForm
             Dim paymentDetails As New PaymentDetails(PaymentDate, PaymentAmount, PaidOrders)
 
             client.PaymenHistory.Add(paymentDetails)
-            dgPaymentHistory.Rows.Add(PaymentDate, PaymentAmount, ListOfOrderNames(PaidOrders))
+            SavePaymentDetails(clientId, paymentDetails)
             paymentDialog.Close()
+            LoadClient(clientId)
         End If
 
     End Sub
 
-    Private Sub SavePaymentDetails()
+    Private Sub SavePaymentDetails(client_id As Integer, paymentDetails As PaymentDetails)
+        Dim updatedPaymentAmount = paymentDetails.PaymentAmount + client.Payment
+        UpdateClientPaymentInDB(client_id, updatedPaymentAmount)
+        Dim payment_id = InsertPaymentToDb(client_id, paymentDetails)
+
+        For Each order As Order In paymentDetails.OrdersPaid
+            UpdateOrderPaymentStatus(payment_id, order)
+        Next
 
     End Sub
-    ' Assuming dgOrders is your DataGridView, and columns represent different order statuses
+
+    Private Function InsertPaymentToDb(client_id As Integer, paymentDetails As PaymentDetails) As Integer
+        Dim parameter = "INSERT INTO payment_log (payment_date, payment_amount, client_id) VALUES (@payment_date, @payment_amount, @client_id); SELECT LAST_INSERT_ID();"
+        Dim query As New Dictionary(Of String, Object) From {
+            {"@payment_date", paymentDetails.PaymentDate},
+            {"@payment_amount", paymentDetails.PaymentAmount},
+            {"@client_id", clientId}
+        }
+        Dim payment_id = Convert.ToInt32(MySQLModule.ExecuteScalar(parameter, query))
+        Return payment_id
+    End Function
+
+    Private Sub UpdateClientPaymentInDB(client_id As Integer, payment As Decimal)
+        Dim query = "UPDATE client SET payment = @payment WHERE client_id = @client_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+            {"@payment", payment},
+            {"@client_id", clientId}
+        }
+        MySQLModule.ExecuteNonQuery(query, parameter)
+    End Sub
+
+    Private Sub UpdateOrderPaymentStatus(payment_id As Integer, order As Order)
+        Dim query = "UPDATE client_order SET payment_id = @payment_id WHERE order_id = @order_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+            {"payment_id", payment_id},
+            {"order_id", order.OrderId}
+        }
+        MySQLModule.ExecuteNonQuery(query, parameter)
+    End Sub
+
+    Private Sub LoadPaymentHistory()
+        dgPaymentHistory.Rows.Clear()
+        Dim parameter = "SELECT * FROM payment_log WHERE client_id = @client_id"
+        Dim query As New Dictionary(Of String, Object) From {
+            {"@client_id", clientId}
+        }
+        Dim datatable As DataTable = MySQLModule.ExecuteQuery(parameter, query)
+        For Each row As DataRow In datatable.Rows
+            Dim paymentDate = row.Field(Of DateTime)("payment_date")
+            Dim paymentAmount = "₱ " & row.Field(Of Decimal)("payment_amount").ToString("N2")
+            Dim payment_id As Integer = If(row.IsNull("payment_id"), -1, row.Field(Of Integer)("payment_id"))
+            Dim ordersPaid As String = ListOfOrderNames(GetPaidOrdersFromDatabase(payment_id))
+            dgPaymentHistory.Rows.Add(paymentDate, paymentAmount, ordersPaid)
+
+        Next
+    End Sub
+
+    Private Shared Function GetPaidOrdersFromDatabase(payment_id As Integer) As List(Of Order)
+        Dim OrderList As New List(Of Order)
+        Dim query As String = "SELECT * FROM client_order WHERE payment_id = @payment_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"payment_id", payment_id}
+        }
+
+        Dim datatable = MySQLModule.ExecuteQuery(query, parameter)
+
+
+
+        For Each row As DataRow In datatable.Rows
+            Dim OrderId As Integer = row.Field(Of Integer)("order_id")
+            Dim OrderName As String = row.Field(Of String)("order_name")
+            Dim OrderType As String = row.Field(Of String)("type")
+            Dim description As String = row.Field(Of String)("description")
+            Dim price As Decimal = row.Field(Of Decimal)("price")
+
+            Dim imageByte As Byte() = row.Field(Of Byte())("image")
+            Dim image As Image = ByteArrayToImage(imageByte)
+            Dim OrderDate As DateTime = row.Field(Of DateTime)("date")
+            Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
+            Dim status As String = row.Field(Of String)("status")
+            Dim paymentId As Integer = row.Field(Of Integer)("payment_id")
+
+            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, sizes, status, payment_id))
+        Next
+        Return OrderList
+    End Function
     Private Sub MarkOrderAsPaid(orderCell As DataGridViewCell)
-        ' Check if the order is already marked as paid
-        If Not orderCell.Style.NullValue.Equals(My.Resources.paid) Then
-            ' Set the cell's background to the paid icon
-            orderCell.Style.NullValue = My.Resources.paid
-            orderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        ' Check if the orderCell is valid and not already marked
+        If orderCell IsNot Nothing AndAlso orderCell.Style.BackColor <> Color.Green Then
+            orderCell.Style.BackColor = Color.Green ' Change the background color to green
+            orderCell.Style.ForeColor = Color.White ' Optionally change text color to white for contrast
         End If
     End Sub
+
 
     Private Function ListOfOrderNames(listOfOrder As List(Of Order)) As String
         Dim orderNames = ""
@@ -330,5 +418,10 @@ Public Class ProjectDetailsForm
         Next
         Return orderNames
     End Function
+
+    Private Sub ProjectDetailsForm_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+    End Sub
+
 
 End Class

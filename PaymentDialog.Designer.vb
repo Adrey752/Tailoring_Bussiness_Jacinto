@@ -25,14 +25,14 @@ Partial Class PaymentDialog
         Cancel_Button = New Button()
         OK_Button = New Button()
         btnAddrOrder = New Button()
-        Label4 = New Label()
+        lblBalance = New Label()
         Label5 = New Label()
         TextBox1 = New TextBox()
         Label3 = New Label()
         dtpPaymentDate = New DateTimePicker()
         nudPartialPayment = New NumericUpDown()
         Label2 = New Label()
-        Label1 = New Label()
+        lblTotal = New Label()
         lblAmountDue = New Label()
         dgOrders = New DataGridView()
         Column1 = New DataGridViewCheckBoxColumn()
@@ -95,17 +95,17 @@ Partial Class PaymentDialog
         btnAddrOrder.Text = "Preview Reciept"
         btnAddrOrder.UseVisualStyleBackColor = False
         ' 
-        ' Label4
+        ' lblBalance
         ' 
-        Label4.Anchor = AnchorStyles.Left
-        Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label4.Location = New Point(187, 121)
-        Label4.Name = "Label4"
-        Label4.Size = New System.Drawing.Size(105, 25)
-        Label4.TabIndex = 60
-        Label4.Text = "₱ 5,000.00"
+        lblBalance.Anchor = AnchorStyles.Left
+        lblBalance.AutoSize = True
+        lblBalance.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblBalance.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblBalance.Location = New Point(187, 106)
+        lblBalance.Name = "lblBalance"
+        lblBalance.Size = New System.Drawing.Size(105, 25)
+        lblBalance.TabIndex = 60
+        lblBalance.Text = "₱ 5,000.00"
         ' 
         ' Label5
         ' 
@@ -113,7 +113,7 @@ Partial Class PaymentDialog
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
         Label5.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label5.Location = New Point(22, 106)
+        Label5.Location = New Point(22, 94)
         Label5.Name = "Label5"
         Label5.Size = New System.Drawing.Size(112, 50)
         Label5.TabIndex = 59
@@ -170,17 +170,17 @@ Partial Class PaymentDialog
         Label2.TabIndex = 53
         Label2.Text = "Amount to Pay"
         ' 
-        ' Label1
+        ' lblTotal
         ' 
-        Label1.Anchor = AnchorStyles.Left
-        Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label1.Location = New Point(187, 34)
-        Label1.Name = "Label1"
-        Label1.Size = New System.Drawing.Size(105, 25)
-        Label1.TabIndex = 52
-        Label1.Text = "₱ 5,000.00"
+        lblTotal.Anchor = AnchorStyles.Left
+        lblTotal.AutoSize = True
+        lblTotal.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblTotal.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblTotal.Location = New Point(187, 34)
+        lblTotal.Name = "lblTotal"
+        lblTotal.Size = New System.Drawing.Size(105, 25)
+        lblTotal.TabIndex = 52
+        lblTotal.Text = "₱ 5,000.00"
         ' 
         ' lblAmountDue
         ' 
@@ -190,9 +190,9 @@ Partial Class PaymentDialog
         lblAmountDue.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblAmountDue.Location = New Point(22, 34)
         lblAmountDue.Name = "lblAmountDue"
-        lblAmountDue.Size = New System.Drawing.Size(126, 25)
+        lblAmountDue.Size = New System.Drawing.Size(104, 25)
         lblAmountDue.TabIndex = 51
-        lblAmountDue.Text = "Amount Due"
+        lblAmountDue.Text = "Total Price"
         ' 
         ' dgOrders
         ' 
@@ -264,14 +264,14 @@ Partial Class PaymentDialog
         Controls.Add(Cancel_Button)
         Controls.Add(OK_Button)
         Controls.Add(btnAddrOrder)
-        Controls.Add(Label4)
+        Controls.Add(lblBalance)
         Controls.Add(Label5)
         Controls.Add(TextBox1)
         Controls.Add(Label3)
         Controls.Add(dtpPaymentDate)
         Controls.Add(nudPartialPayment)
         Controls.Add(Label2)
-        Controls.Add(Label1)
+        Controls.Add(lblTotal)
         Controls.Add(lblAmountDue)
         FormBorderStyle = FormBorderStyle.FixedDialog
         Margin = New Padding(4, 3, 4, 3)
@@ -290,14 +290,14 @@ Partial Class PaymentDialog
     Friend WithEvents Cancel_Button As Button
     Friend WithEvents OK_Button As Button
     Friend WithEvents btnAddrOrder As Button
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblBalance As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents dtpPaymentDate As DateTimePicker
     Friend WithEvents nudPartialPayment As NumericUpDown
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTotal As Label
     Friend WithEvents lblAmountDue As Label
     Friend WithEvents dgOrders As DataGridView
     Friend WithEvents Label6 As Label

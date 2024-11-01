@@ -6,6 +6,7 @@ Public Class PaymentDetails
     Public Property PaymentAmount As Decimal
     Public Property OrdersPaid As List(Of Order)
 
+
     Public Sub New(PaymentDate As DateTime, amount As Decimal, orders As List(Of Order))
         Me.PaymentDate = PaymentDate
         Me.PaymentAmount = amount

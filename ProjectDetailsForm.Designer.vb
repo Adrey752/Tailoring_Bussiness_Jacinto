@@ -41,7 +41,7 @@ Partial Class ProjectDetailsForm
         lblHeaderPayment = New Label()
         cbSort = New ComboBox()
         lblPayment = New Label()
-        lblAmountDue = New Label()
+        lblTotalPrice = New Label()
         lblNumOrders = New Label()
         nudOrders = New NumericUpDown()
         lblHeaderOrder = New Label()
@@ -243,17 +243,17 @@ Partial Class ProjectDetailsForm
         lblPayment.TabIndex = 28
         lblPayment.Text = "Amount Paid"
         ' 
-        ' lblAmountDue
+        ' lblTotalPrice
         ' 
-        lblAmountDue.Anchor = AnchorStyles.None
-        lblAmountDue.AutoSize = True
-        lblAmountDue.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        lblAmountDue.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblAmountDue.Location = New Point(30, 28)
-        lblAmountDue.Name = "lblAmountDue"
-        lblAmountDue.Size = New System.Drawing.Size(126, 25)
-        lblAmountDue.TabIndex = 31
-        lblAmountDue.Text = "Amount Due"
+        lblTotalPrice.Anchor = AnchorStyles.None
+        lblTotalPrice.AutoSize = True
+        lblTotalPrice.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        lblTotalPrice.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblTotalPrice.Location = New Point(30, 28)
+        lblTotalPrice.Name = "lblTotalPrice"
+        lblTotalPrice.Size = New System.Drawing.Size(104, 25)
+        lblTotalPrice.TabIndex = 31
+        lblTotalPrice.Text = "Total Price"
         ' 
         ' lblNumOrders
         ' 
@@ -372,7 +372,7 @@ Partial Class ProjectDetailsForm
         Panel1.Controls.Add(lblDue)
         Panel1.Controls.Add(lblPaid)
         Panel1.Controls.Add(lblPayment)
-        Panel1.Controls.Add(lblAmountDue)
+        Panel1.Controls.Add(lblTotalPrice)
         Panel1.Location = New Point(42, 424)
         Panel1.Name = "Panel1"
         Panel1.Size = New System.Drawing.Size(367, 169)
@@ -464,7 +464,7 @@ Partial Class ProjectDetailsForm
     Friend WithEvents lblHeaderPayment As Label
     Friend WithEvents cbSort As ComboBox
     Friend WithEvents lblPayment As Label
-    Friend WithEvents lblAmountDue As Label
+    Friend WithEvents lblTotalPrice As Label
     Friend WithEvents lblNumOrders As Label
     Friend WithEvents nudOrders As NumericUpDown
     Friend WithEvents lblHeaderOrder As Label

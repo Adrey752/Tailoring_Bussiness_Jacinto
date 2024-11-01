@@ -12,10 +12,10 @@
     Public Property OrderImage As Image
 
     Public Property Status As String
-    Public Property Paid As Boolean = False
+    Public Property Payment_id As Integer
 
 
-    Public Sub New(OrderId As Integer, orderName As String, serviceType As String, description As String, price As Decimal, orderImage As Image, DateOrdered As DateTime, sizes As List(Of Size), status As String)
+    Public Sub New(OrderId As Integer, orderName As String, serviceType As String, description As String, price As Decimal, orderImage As Image, DateOrdered As DateTime, sizes As List(Of Size), status As String, paymentId As Integer)
         Me.OrderId = OrderId
         Me.OrderName = orderName
         Me.Type = serviceType
@@ -25,6 +25,7 @@
         Me.Status = status
         Me.DateOrdered = DateOrdered
         Me.OrderImage = orderImage
+        Me.Payment_id = paymentId
     End Sub
 
     Public Sub AddSize(size As Size)

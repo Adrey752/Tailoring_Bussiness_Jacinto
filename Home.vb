@@ -113,20 +113,22 @@
             End If
             If DataGridOrders.SelectedRows.Count > 0 Then
 
-                    Dim verify As DialogResult = MessageBox.Show("Are you sure you want to delete this items?")
-                    If verify = DialogResult.OK Then
-                        For Each row As DataGridViewRow In DataGridOrders.SelectedRows
-                            If IsDBNull(row.Cells("client_id").Value) Then
-                                Continue For
-                            End If
+                Dim verify As DialogResult = MessageBox.Show("Are you sure you want to delete this items?")
+                If verify = DialogResult.OK Then
+                    For Each row As DataGridViewRow In DataGridOrders.SelectedRows
+                        MessageBox.Show("I'm inside for loop")
+                        If IsDBNull(row.Cells("client_id").Value) Then
+                            MessageBox.Show("column null")
+                            Continue For
+                        End If
                         Dim id As Integer = Convert.ToInt64(row.Cells("client_id").Value)
                         DeleteClient(id)
-                            DataGridOrders.Rows.Remove(row)
+                        DataGridOrders.Rows.Remove(row)
 
-                        Next
-                    End If
+                    Next
                 End If
             End If
+        End If
     End Sub
 
     Private Sub DeleteClient(client_id As Integer)
@@ -187,6 +189,10 @@
     End Sub
 
     Private Sub Home_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+    End Sub
+
+    Private Sub Home_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadDatabase()
     End Sub
 End Class

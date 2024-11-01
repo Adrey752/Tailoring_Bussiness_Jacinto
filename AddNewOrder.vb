@@ -34,7 +34,7 @@ Public Class AddNewOrder
         ' Add any initialization after the InitializeComponent() call.
         Me.client_id = client_id
         Me._ProjectDetailsForm = _ProjectForm
-        Me.order = New Order(1, "", "", "", 1, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
+        Me.order = New Order(1, "", "", "", 1, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending", -1)
 
     End Sub
     Private Sub AddNewOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -105,7 +105,7 @@ Public Class AddNewOrder
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
         fPanelOrders.Controls.Add(OrderPanel)
 
-        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending")
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending", -1)
         ClearForm()
     End Sub
     Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
@@ -264,7 +264,7 @@ Public Class AddNewOrder
 
 
     Public Function InsertOrder(order As Order, clientId As Integer) As Integer
-        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, image, date) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @Done, @image, @date); SELECT LAST_INSERT_ID();"
+        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, image, date) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @image, @date); SELECT LAST_INSERT_ID();"
         Dim orderParams As New Dictionary(Of String, Object) From {
     {"@ClientId", clientId},
     {"@OrderName", order.OrderName},
@@ -353,9 +353,6 @@ Public Class AddNewOrder
         OrderPicturebox.Image = My.Resources.noImageIcon
     End Sub
 
-    Private Sub pnAddOrders_Paint(sender As Object, e As PaintEventArgs) Handles pnAddOrders.Paint
-
-    End Sub
 
 
 End Class

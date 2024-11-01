@@ -17,6 +17,10 @@ Public Class PaymentDialog
         Me.client = client
 
         ' Add any initialization after the InitializeComponent() call.
+        lblTotal.Text = "₱" & client.Price.ToString("N2")
+        Dim balance = client.Price - client.Payment
+        lblBalance.Text = "₱ " & balance.ToString("N2")
+        lblAmountToPay.Text = "₱ " & 0.ToString("N2")
 
     End Sub
 
@@ -35,8 +39,10 @@ Public Class PaymentDialog
 
     Private Sub PaymentDialog_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         For Each order As Order In client.Orders
-            Dim rowIndex As Integer = dgOrders.Rows.Add(False, order.OrderName, "₱" & order.Price)
-            dgOrders.Rows(rowIndex).Tag = order
+            If order.Payment_id = -1 Then
+                Dim rowIndex As Integer = dgOrders.Rows.Add(False, order.OrderName, "₱" & order.Price)
+                dgOrders.Rows(rowIndex).Tag = order
+            End If
 
         Next
     End Sub
@@ -47,7 +53,6 @@ Public Class PaymentDialog
             Dim checkbox As Boolean = row.Cells(0).Value
             If checkbox = True Then
                 Dim taggedOrder As Order = row.Tag
-                taggedOrder.Paid = True
                 checkedOrder.Add(taggedOrder)
             End If
         Next
@@ -88,7 +93,4 @@ Public Class PaymentDialog
         lblAmountToPay.Text = "₱ " & totalPrice.ToString("N2")
     End Sub
 
-    Private Sub lblAmountToPay_Click(sender As Object, e As EventArgs) Handles lblAmountToPay.Click
-
-    End Sub
 End Class

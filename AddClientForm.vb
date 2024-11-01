@@ -267,7 +267,6 @@ Public Class AddClientForm
     {"@date", order.DateOrdered}
 }
 
-        ' Return the newly inserted order_id
         Return Convert.ToInt32(MySQLModule.ExecuteScalar(orderQuery, orderParams))
     End Function
 
@@ -290,4 +289,7 @@ Public Class AddClientForm
         MySQLModule.ExecuteNonQuery(sizeQuery, sizeParams)
     End Sub
 
+    Private Sub AddClientForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
