@@ -76,10 +76,10 @@ Public Class ProjectDetailsForm
 
             ' Add a new row to the DataGridView
             Dim rowIndex = dgSortOrders.Rows.Add(False,
-                                             If(pendingOrder IsNot Nothing, pendingOrder.OrderName, ""),
+                                             If(pendingOrder IsNot Nothing, If(pendingOrder.Payment_id <> -1, pendingOrder.OrderName & "  - Paid", pendingOrder.OrderName), ""),
                                              False,
-                                             If(finishedOrder IsNot Nothing, finishedOrder.OrderName, ""),
-                                             If(claimedOrder IsNot Nothing, claimedOrder.OrderName, ""))
+                                             If(finishedOrder IsNot Nothing, If(finishedOrder.Payment_id <> -1, finishedOrder.OrderName & "  - Paid", finishedOrder.OrderName), ""),
+                                             If(claimedOrder IsNot Nothing, If(claimedOrder.Payment_id <> -1, claimedOrder.OrderName & "  - Paid", claimedOrder.OrderName), ""))
 
             ' Tag each row with the corresponding order object (if available)
             If pendingOrder IsNot Nothing Then

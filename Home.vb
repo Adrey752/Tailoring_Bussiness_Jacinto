@@ -27,12 +27,59 @@
 
 
     Public Sub loadDatabase()
-        Dim tableQuery = "SELECT client_id, name, date, quantity, order_status, payment_status  FROM CLIENT"
+        Dim tableQuery = "SELECT client_id, name, date, quantity, payment, price, order_status FROM CLIENT"
 
         Dim parameter As New Dictionary(Of String, Object)()
 
         Dim resultTable As DataTable = ExecuteQuery(tableQuery, parameter)
-        DataGridOrders.DataSource = resultTable
+
+        For Each row As DataRow In resultTable.Rows
+            Dim client_id As Integer = row.Field(Of Integer)("client_id")
+            Dim name As String = row.Field(Of String)("name")
+            Dim dateOrder As DateTime = row.Field(Of DateTime)("date")
+            Dim orderStatus As String = row.Field(Of String)("order_status")
+            Dim payment As Decimal = row.Field(Of Decimal)("payment")
+            Dim price As Decimal = row.Field(Of Decimal)("price")
+            Dim quantity As Integer = row.Field(Of Integer)("quantity")
+
+            Dim paymentStatus As String
+            If payment > 0 Then
+                If payment = price Then
+                    paymentStatus = "Fully Paid"
+
+                Else
+                    paymentStatus = "Partially Paid"
+                End If
+            Else
+                paymentStatus = "No Payments Made"
+
+            End If
+
+            Dim rowIndex = DataGridProjects.Rows.Add("theres' a button in the first column", client_id, name, dateOrder, quantity, orderStatus, paymentStatus)
+            If paymentStatus = "Partially Paid" Then
+                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.BackColor = Color.Yellow
+                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.ForeColor = Color.Black
+
+            ElseIf paymentStatus = "Fully Paid" Then
+                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.BackColor = Color.Green
+                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.ForeColor = Color.Black
+
+            End If
+
+            If orderStatus = "Pending" Then
+                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.Yellow
+                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
+            ElseIf orderStatus = "Finished" Then
+                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.YellowGreen
+                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
+
+            ElseIf orderStatus = "Claimed" Then
+                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.Green
+                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
+            End If
+        Next
+
+
 
     End Sub
 
@@ -92,11 +139,11 @@
         _login.Close()
     End Sub
 
-    Private Sub DataGridOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOrders.CellContentClick
+    Private Sub DataGridOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridProjects.CellContentClick
 
 
-        Dim clickedRow As DataGridViewRow = DataGridOrders.Rows(e.RowIndex)
-        If e.ColumnIndex = DataGridOrders.Columns("btDetails").Index AndAlso e.RowIndex >= 0 AndAlso Not IsDBNull(clickedRow.Cells("client_id").Value) Then
+        Dim clickedRow As DataGridViewRow = DataGridProjects.Rows(e.RowIndex)
+        If e.ColumnIndex = DataGridProjects.Columns("btDetails").Index AndAlso e.RowIndex >= 0 AndAlso Not IsDBNull(clickedRow.Cells("client_id").Value) Then
             Dim client_id As Integer = Convert.ToInt32(clickedRow.Cells("client_id").Value)
 
             Dim projectDetails = New ProjectDetailsForm(client_id, Me)
@@ -106,16 +153,16 @@
         End If
     End Sub
 
-    Private Sub DataGridOrders_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridOrders.KeyDown
+    Private Sub DataGridOrders_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridProjects.KeyDown
         If e.KeyCode = Keys.Delete Then
-            If DataGridOrders.SelectedRows.Count = 1 AndAlso IsDBNull(DataGridOrders.SelectedRows(0).Cells("client_id").Value) Then
+            If DataGridProjects.SelectedRows.Count = 1 AndAlso IsDBNull(DataGridProjects.SelectedRows(0).Cells("client_id").Value) Then
                 Exit Sub
             End If
-            If DataGridOrders.SelectedRows.Count > 0 Then
+            If DataGridProjects.SelectedRows.Count > 0 Then
 
                 Dim verify As DialogResult = MessageBox.Show("Are you sure you want to delete this items?")
                 If verify = DialogResult.OK Then
-                    For Each row As DataGridViewRow In DataGridOrders.SelectedRows
+                    For Each row As DataGridViewRow In DataGridProjects.SelectedRows
                         MessageBox.Show("I'm inside for loop")
                         If IsDBNull(row.Cells("client_id").Value) Then
                             MessageBox.Show("column null")
@@ -123,7 +170,7 @@
                         End If
                         Dim id As Integer = Convert.ToInt64(row.Cells("client_id").Value)
                         DeleteClient(id)
-                        DataGridOrders.Rows.Remove(row)
+                        DataGridProjects.Rows.Remove(row)
 
                     Next
                 End If
