@@ -288,6 +288,41 @@ Public Class AddOrder
         OrderPicturebox.Image = My.Resources.noImageIcon
     End Sub
 
+    Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub LblName_Click(sender As Object, e As EventArgs)
+    End Sub
+
+    Private Sub tbOrderName_TextChanged(sender As Object, e As EventArgs) Handles tbOrderName.TextChanged
+
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub pnAddOrders_Paint(sender As Object, e As PaintEventArgs) Handles pnAddOrders.Paint
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+
+    End Sub
+
 
 
 

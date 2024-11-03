@@ -353,6 +353,11 @@ Public Class AddNewOrder
         OrderPicturebox.Image = My.Resources.noImageIcon
     End Sub
 
+    Private Sub pnAddOrders_Paint(sender As Object, e As PaintEventArgs) Handles pnAddOrders.Paint
 
+    End Sub
 
+    Private Sub lblServiceType_Click(sender As Object, e As EventArgs) Handles lblServiceType.Click
+
+    End Sub
 End Class

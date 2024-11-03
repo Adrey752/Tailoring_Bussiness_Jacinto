@@ -253,7 +253,7 @@ Public Class Home
         loadDatabase()
 
     End Sub
-
+    'Git Conflict Management broooooo!
     Private Sub pnSort_Click(sender As Object, e As EventArgs) Handles pnSort.Click
         cmsSorting.Show(pnSort, New Point(0, pnSort.Height))
     End Sub

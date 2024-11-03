@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Home
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Home
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
         Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
@@ -49,10 +49,10 @@ Partial Class Home
         lblProjects = New Label()
         btnSort = New Button()
         pnNavigation = New Panel()
+        pbTailoringJacinto = New PictureBox()
         btnSettings = New Button()
         btnSearch = New Button()
         btnHome = New Button()
-        pbTailoringJacinto = New PictureBox()
         TextBox1 = New TextBox()
         PictureBox1 = New PictureBox()
         cmsSorting = New ContextMenuStrip(components)
@@ -78,13 +78,13 @@ Partial Class Home
         ' 
         DataGridProjects.AllowUserToAddRows = False
         DataGridProjects.AllowUserToDeleteRows = False
-        DataGridProjects.Anchor = AnchorStyles.Left Or AnchorStyles.Right
+        DataGridProjects.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         DataGridProjects.BackgroundColor = Color.White
         DataGridProjects.BorderStyle = BorderStyle.None
         DataGridProjects.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single
         DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(36), CByte(36), CByte(36))
-        DataGridViewCellStyle1.Font = New Font("Segoe UI", 12F)
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 12.0F)
         DataGridViewCellStyle1.ForeColor = Color.White
         DataGridViewCellStyle1.Padding = New Padding(0, 8, 0, 8)
         DataGridViewCellStyle1.SelectionBackColor = Color.White
@@ -95,7 +95,7 @@ Partial Class Home
         DataGridProjects.Columns.AddRange(New DataGridViewColumn() {btDetails, client_id, colName, OrderDate, colQuantity, colOrderStatus, colPayStatus})
         DataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle9.BackColor = Color.FromArgb(CByte(33), CByte(33), CByte(33))
-        DataGridViewCellStyle9.Font = New Font("Segoe UI", 9F)
+        DataGridViewCellStyle9.Font = New Font("Segoe UI", 9.0F)
         DataGridViewCellStyle9.ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
         DataGridViewCellStyle9.SelectionBackColor = Color.Gray
         DataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText
@@ -234,7 +234,7 @@ Partial Class Home
         ' 
         ' btnSetNew
         ' 
-        btnSetNew.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnSetNew.BackColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         btnSetNew.FlatStyle = FlatStyle.Flat
         btnSetNew.Location = New Point(18, 55)
         btnSetNew.Name = "btnSetNew"
@@ -245,7 +245,7 @@ Partial Class Home
         ' 
         ' btnLogOut
         ' 
-        btnLogOut.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnLogOut.BackColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         btnLogOut.FlatStyle = FlatStyle.Flat
         btnLogOut.Location = New Point(18, 12)
         btnLogOut.Name = "btnLogOut"
@@ -257,7 +257,7 @@ Partial Class Home
         ' btnAddrOrder
         ' 
         btnAddrOrder.AutoSize = True
-        btnAddrOrder.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnAddrOrder.BackColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         btnAddrOrder.FlatAppearance.BorderSize = 0
         btnAddrOrder.FlatStyle = FlatStyle.Flat
         btnAddrOrder.ForeColor = Color.FromArgb(CByte(9), CByte(11), CByte(23))
@@ -274,8 +274,8 @@ Partial Class Home
         ' 
         lblProjects.AutoSize = True
         lblProjects.BackColor = Color.Transparent
-        lblProjects.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblProjects.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblProjects.Font = New Font("Segoe UI", 24.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblProjects.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblProjects.Location = New Point(313, 152)
         lblProjects.Name = "lblProjects"
         lblProjects.Size = New System.Drawing.Size(140, 45)
@@ -302,15 +302,26 @@ Partial Class Home
         ' 
         ' pnNavigation
         ' 
+        pnNavigation.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
         pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(pbTailoringJacinto)
         pnNavigation.Controls.Add(btnSettings)
         pnNavigation.Controls.Add(btnSearch)
         pnNavigation.Controls.Add(btnHome)
-        pnNavigation.Controls.Add(pbTailoringJacinto)
-        pnNavigation.Location = New Point(12, 12)
+        pnNavigation.Location = New Point(0, -1)
         pnNavigation.Name = "pnNavigation"
-        pnNavigation.Size = New System.Drawing.Size(284, 637)
+        pnNavigation.Size = New System.Drawing.Size(296, 663)
         pnNavigation.TabIndex = 8
+        ' 
+        ' pbTailoringJacinto
+        ' 
+        pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
+        pbTailoringJacinto.Location = New Point(51, 39)
+        pbTailoringJacinto.Name = "pbTailoringJacinto"
+        pbTailoringJacinto.Size = New System.Drawing.Size(203, 143)
+        pbTailoringJacinto.SizeMode = PictureBoxSizeMode.StretchImage
+        pbTailoringJacinto.TabIndex = 9
+        pbTailoringJacinto.TabStop = False
         ' 
         ' btnSettings
         ' 
@@ -318,7 +329,7 @@ Partial Class Home
         btnSettings.Location = New Point(3, 363)
         btnSettings.Name = "btnSettings"
         btnSettings.Padding = New Padding(30, 0, 0, 0)
-        btnSettings.Size = New System.Drawing.Size(281, 45)
+        btnSettings.Size = New System.Drawing.Size(293, 45)
         btnSettings.TabIndex = 11
         btnSettings.Text = "Settings"
         btnSettings.TextAlign = ContentAlignment.MiddleLeft
@@ -330,7 +341,7 @@ Partial Class Home
         btnSearch.Location = New Point(3, 322)
         btnSearch.Name = "btnSearch"
         btnSearch.Padding = New Padding(30, 0, 0, 0)
-        btnSearch.Size = New System.Drawing.Size(281, 45)
+        btnSearch.Size = New System.Drawing.Size(293, 45)
         btnSearch.TabIndex = 10
         btnSearch.Text = "Search"
         btnSearch.TextAlign = ContentAlignment.MiddleLeft
@@ -342,35 +353,26 @@ Partial Class Home
         btnHome.Location = New Point(3, 280)
         btnHome.Name = "btnHome"
         btnHome.Padding = New Padding(30, 0, 0, 0)
-        btnHome.Size = New System.Drawing.Size(281, 45)
+        btnHome.Size = New System.Drawing.Size(293, 45)
         btnHome.TabIndex = 9
         btnHome.Text = "Home"
         btnHome.TextAlign = ContentAlignment.MiddleLeft
         btnHome.UseVisualStyleBackColor = False
         ' 
-        ' pbTailoringJacinto
-        ' 
-        pbTailoringJacinto.Anchor = AnchorStyles.None
-        pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
-        pbTailoringJacinto.Location = New Point(41, 26)
-        pbTailoringJacinto.Name = "pbTailoringJacinto"
-        pbTailoringJacinto.Size = New System.Drawing.Size(203, 143)
-        pbTailoringJacinto.SizeMode = PictureBoxSizeMode.StretchImage
-        pbTailoringJacinto.TabIndex = 9
-        pbTailoringJacinto.TabStop = False
-        ' 
         ' TextBox1
         ' 
-        TextBox1.Location = New Point(449, 38)
+        TextBox1.Anchor = AnchorStyles.Top
+        TextBox1.Location = New Point(513, 38)
         TextBox1.Name = "TextBox1"
         TextBox1.Size = New System.Drawing.Size(440, 23)
         TextBox1.TabIndex = 9
         ' 
         ' PictureBox1
         ' 
+        PictureBox1.Anchor = AnchorStyles.Top
         PictureBox1.BackColor = Color.White
         PictureBox1.Image = My.Resources.Resources.search_interface_symbol
-        PictureBox1.Location = New Point(895, 38)
+        PictureBox1.Location = New Point(959, 38)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New System.Drawing.Size(26, 23)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
@@ -457,7 +459,7 @@ Partial Class Home
         ' 
         ' Home
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         AutoValidate = AutoValidate.EnableAllowFocusChange
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
