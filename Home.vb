@@ -242,4 +242,8 @@
     Private Sub Home_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadDatabase()
     End Sub
+
+    Private Sub pnNavigation_Paint(sender As Object, e As PaintEventArgs) Handles pnNavigation.Paint
+
+    End Sub
 End Class

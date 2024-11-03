@@ -25,41 +25,35 @@ Partial Class AddClientForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddClientForm))
         btnSave = New Button()
         Panel1 = New Panel()
+        tbNumber = New TextBox()
+        lblContactNumber = New Label()
         fpTask = New FlowLayoutPanel()
+        tbName = New TextBox()
+        lblCustomerDetails = New Label()
+        LblName = New Label()
+        tbAddress = New TextBox()
         btnRemoveTask = New Button()
+        lblAddress = New Label()
         btnAddTask = New Button()
         lblTask = New Label()
         btnCancel = New Button()
-        tbNumber = New TextBox()
-        tbAddress = New TextBox()
-        tbName = New TextBox()
-        lblAddress = New Label()
-        lblContactNumber = New Label()
-        LblName = New Label()
-        lblCustomerDetails = New Label()
         Button1 = New Button()
         pnLogout = New Panel()
         btnSetNew = New Button()
         btnLogOut = New Button()
-        Panel2 = New Panel()
-        Button4 = New Button()
-        Button3 = New Button()
-        Button2 = New Button()
-        PictureBox2 = New PictureBox()
+        FlowLayoutPanel1 = New FlowLayoutPanel()
         Panel1.SuspendLayout()
         pnLogout.SuspendLayout()
-        Panel2.SuspendLayout()
-        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnSave
         ' 
-        btnSave.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnSave.BackColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         btnSave.FlatAppearance.BorderSize = 0
         btnSave.FlatStyle = FlatStyle.Flat
         btnSave.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnSave.ForeColor = Color.White
-        btnSave.Location = New Point(720, 77)
+        btnSave.ForeColor = Color.Black
+        btnSave.Location = New Point(1064, 502)
         btnSave.Name = "btnSave"
         btnSave.Size = New System.Drawing.Size(91, 38)
         btnSave.TabIndex = 1
@@ -68,52 +62,137 @@ Partial Class AddClientForm
         ' 
         ' Panel1
         ' 
-        Panel1.BackColor = Color.White
+        Panel1.BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
+        Panel1.Controls.Add(tbNumber)
         Panel1.Controls.Add(btnSave)
+        Panel1.Controls.Add(lblContactNumber)
         Panel1.Controls.Add(fpTask)
+        Panel1.Controls.Add(tbName)
+        Panel1.Controls.Add(lblCustomerDetails)
+        Panel1.Controls.Add(LblName)
+        Panel1.Controls.Add(tbAddress)
         Panel1.Controls.Add(btnRemoveTask)
+        Panel1.Controls.Add(lblAddress)
         Panel1.Controls.Add(btnAddTask)
         Panel1.Controls.Add(lblTask)
         Panel1.Controls.Add(btnCancel)
-        Panel1.Controls.Add(tbNumber)
-        Panel1.Controls.Add(tbAddress)
-        Panel1.Controls.Add(tbName)
-        Panel1.Controls.Add(lblAddress)
-        Panel1.Controls.Add(lblContactNumber)
-        Panel1.Controls.Add(LblName)
-        Panel1.Controls.Add(lblCustomerDetails)
+        Panel1.Controls.Add(FlowLayoutPanel1)
         Panel1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Panel1.Location = New Point(290, 3)
+        Panel1.Location = New Point(-1, 0)
         Panel1.Name = "Panel1"
-        Panel1.Size = New System.Drawing.Size(1009, 746)
+        Panel1.Size = New System.Drawing.Size(1300, 614)
         Panel1.TabIndex = 2
+        ' 
+        ' tbNumber
+        ' 
+        tbNumber.BackColor = Color.White
+        tbNumber.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tbNumber.Location = New Point(53, 347)
+        tbNumber.MaxLength = 11
+        tbNumber.Name = "tbNumber"
+        tbNumber.PlaceholderText = "Enter Text"
+        tbNumber.Size = New System.Drawing.Size(442, 33)
+        tbNumber.TabIndex = 6
+        ' 
+        ' lblContactNumber
+        ' 
+        lblContactNumber.AutoSize = True
+        lblContactNumber.BackColor = Color.White
+        lblContactNumber.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblContactNumber.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        lblContactNumber.Location = New Point(53, 317)
+        lblContactNumber.Name = "lblContactNumber"
+        lblContactNumber.Size = New System.Drawing.Size(198, 27)
+        lblContactNumber.TabIndex = 2
+        lblContactNumber.Text = "Contact Number: "
         ' 
         ' fpTask
         ' 
         fpTask.AutoScroll = True
-        fpTask.Location = New Point(41, 267)
+        fpTask.BackColor = Color.White
+        fpTask.Location = New Point(555, 116)
         fpTask.Name = "fpTask"
-        fpTask.Size = New System.Drawing.Size(877, 202)
+        fpTask.Size = New System.Drawing.Size(694, 344)
         fpTask.TabIndex = 12
+        ' 
+        ' tbName
+        ' 
+        tbName.BackColor = Color.White
+        tbName.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tbName.ForeColor = Color.BurlyWood
+        tbName.Location = New Point(53, 202)
+        tbName.MaxLength = 150
+        tbName.Name = "tbName"
+        tbName.PlaceholderText = "Enter Client Name"
+        tbName.Size = New System.Drawing.Size(442, 33)
+        tbName.TabIndex = 4
+        ' 
+        ' lblCustomerDetails
+        ' 
+        lblCustomerDetails.AutoSize = True
+        lblCustomerDetails.BackColor = Color.Transparent
+        lblCustomerDetails.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblCustomerDetails.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        lblCustomerDetails.Location = New Point(53, 52)
+        lblCustomerDetails.Name = "lblCustomerDetails"
+        lblCustomerDetails.Size = New System.Drawing.Size(260, 36)
+        lblCustomerDetails.TabIndex = 0
+        lblCustomerDetails.Text = " Customer Details"
+        ' 
+        ' LblName
+        ' 
+        LblName.AutoSize = True
+        LblName.BackColor = Color.White
+        LblName.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LblName.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        LblName.Location = New Point(53, 172)
+        LblName.Name = "LblName"
+        LblName.Size = New System.Drawing.Size(88, 27)
+        LblName.TabIndex = 1
+        LblName.Text = "Name: "
+        ' 
+        ' tbAddress
+        ' 
+        tbAddress.BackColor = Color.White
+        tbAddress.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tbAddress.ForeColor = Color.BurlyWood
+        tbAddress.Location = New Point(53, 274)
+        tbAddress.MaxLength = 150
+        tbAddress.Name = "tbAddress"
+        tbAddress.PlaceholderText = "Enter Address"
+        tbAddress.Size = New System.Drawing.Size(442, 33)
+        tbAddress.TabIndex = 5
         ' 
         ' btnRemoveTask
         ' 
         btnRemoveTask.BackColor = Color.White
-        btnRemoveTask.Location = New Point(827, 505)
+        btnRemoveTask.Location = New Point(743, 77)
         btnRemoveTask.Name = "btnRemoveTask"
-        btnRemoveTask.Size = New System.Drawing.Size(91, 38)
+        btnRemoveTask.Size = New System.Drawing.Size(99, 34)
         btnRemoveTask.TabIndex = 11
-        btnRemoveTask.Text = "Remove Task"
+        btnRemoveTask.Text = "Remove "
         btnRemoveTask.UseVisualStyleBackColor = False
+        ' 
+        ' lblAddress
+        ' 
+        lblAddress.AutoSize = True
+        lblAddress.BackColor = Color.White
+        lblAddress.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblAddress.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        lblAddress.Location = New Point(53, 244)
+        lblAddress.Name = "lblAddress"
+        lblAddress.Size = New System.Drawing.Size(104, 27)
+        lblAddress.TabIndex = 3
+        lblAddress.Text = "Address:"
         ' 
         ' btnAddTask
         ' 
         btnAddTask.BackColor = Color.White
-        btnAddTask.Location = New Point(720, 505)
+        btnAddTask.Location = New Point(646, 77)
         btnAddTask.Name = "btnAddTask"
-        btnAddTask.Size = New System.Drawing.Size(91, 38)
+        btnAddTask.Size = New System.Drawing.Size(91, 34)
         btnAddTask.TabIndex = 9
-        btnAddTask.Text = "Add Task"
+        btnAddTask.Text = "Add "
         btnAddTask.UseVisualStyleBackColor = False
         ' 
         ' lblTask
@@ -121,106 +200,26 @@ Partial Class AddClientForm
         lblTask.AutoSize = True
         lblTask.BackColor = Color.Transparent
         lblTask.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTask.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblTask.Location = New Point(41, 216)
+        lblTask.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        lblTask.Location = New Point(555, 82)
         lblTask.Name = "lblTask"
-        lblTask.Size = New System.Drawing.Size(71, 27)
+        lblTask.Size = New System.Drawing.Size(85, 27)
         lblTask.TabIndex = 7
-        lblTask.Text = "Tasks"
+        lblTask.Text = "Orders"
         ' 
         ' btnCancel
         ' 
-        btnCancel.BackColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        btnCancel.BackColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         btnCancel.FlatAppearance.BorderSize = 0
         btnCancel.FlatStyle = FlatStyle.Flat
         btnCancel.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnCancel.ForeColor = Color.White
-        btnCancel.Location = New Point(827, 77)
+        btnCancel.Location = New Point(1158, 502)
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New System.Drawing.Size(91, 38)
         btnCancel.TabIndex = 3
         btnCancel.Text = "Cancel"
         btnCancel.UseVisualStyleBackColor = False
-        ' 
-        ' tbNumber
-        ' 
-        tbNumber.BackColor = Color.White
-        tbNumber.Location = New Point(212, 159)
-        tbNumber.MaxLength = 11
-        tbNumber.Name = "tbNumber"
-        tbNumber.PlaceholderText = "Enter Text"
-        tbNumber.Size = New System.Drawing.Size(322, 23)
-        tbNumber.TabIndex = 6
-        ' 
-        ' tbAddress
-        ' 
-        tbAddress.BackColor = Color.White
-        tbAddress.ForeColor = Color.BurlyWood
-        tbAddress.Location = New Point(155, 121)
-        tbAddress.MaxLength = 150
-        tbAddress.Name = "tbAddress"
-        tbAddress.PlaceholderText = "Enter Address"
-        tbAddress.Size = New System.Drawing.Size(379, 23)
-        tbAddress.TabIndex = 5
-        ' 
-        ' tbName
-        ' 
-        tbName.BackColor = Color.White
-        tbName.ForeColor = Color.BurlyWood
-        tbName.Location = New Point(155, 86)
-        tbName.MaxLength = 150
-        tbName.Name = "tbName"
-        tbName.PlaceholderText = "Enter Client Name"
-        tbName.Size = New System.Drawing.Size(379, 23)
-        tbName.TabIndex = 4
-        ' 
-        ' lblAddress
-        ' 
-        lblAddress.AutoSize = True
-        lblAddress.BackColor = Color.Transparent
-        lblAddress.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblAddress.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblAddress.Location = New Point(41, 116)
-        lblAddress.Name = "lblAddress"
-        lblAddress.Size = New System.Drawing.Size(86, 22)
-        lblAddress.TabIndex = 3
-        lblAddress.Text = "Address:"
-        ' 
-        ' lblContactNumber
-        ' 
-        lblContactNumber.AutoSize = True
-        lblContactNumber.BackColor = Color.Transparent
-        lblContactNumber.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblContactNumber.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblContactNumber.Location = New Point(41, 160)
-        lblContactNumber.Name = "lblContactNumber"
-        lblContactNumber.Size = New System.Drawing.Size(165, 22)
-        lblContactNumber.TabIndex = 2
-        lblContactNumber.Text = "Contact Number: "
-        ' 
-        ' LblName
-        ' 
-        LblName.AutoSize = True
-        LblName.BackColor = Color.Transparent
-        LblName.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        LblName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        LblName.Location = New Point(41, 84)
-        LblName.Name = "LblName"
-        LblName.Size = New System.Drawing.Size(72, 22)
-        LblName.TabIndex = 1
-        LblName.Text = "Name: "
-        ' 
-        ' lblCustomerDetails
-        ' 
-        lblCustomerDetails.AutoSize = True
-        lblCustomerDetails.BackColor = Color.Transparent
-        lblCustomerDetails.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblCustomerDetails.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblCustomerDetails.Location = New Point(447, 23)
-        lblCustomerDetails.Name = "lblCustomerDetails"
-        lblCustomerDetails.Size = New System.Drawing.Size(199, 27)
-        lblCustomerDetails.TabIndex = 0
-        lblCustomerDetails.Text = " Customer Details"
         ' 
         ' Button1
         ' 
@@ -228,7 +227,7 @@ Partial Class AddClientForm
         Button1.BackColor = Color.Transparent
         Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), Image)
         Button1.BackgroundImageLayout = ImageLayout.Stretch
-        Button1.Location = New Point(2039, 21)
+        Button1.Location = New Point(2022, 21)
         Button1.Name = "Button1"
         Button1.Size = New System.Drawing.Size(42, 36)
         Button1.TabIndex = 11
@@ -240,7 +239,7 @@ Partial Class AddClientForm
         pnLogout.BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         pnLogout.Controls.Add(btnSetNew)
         pnLogout.Controls.Add(btnLogOut)
-        pnLogout.Location = New Point(1975, 63)
+        pnLogout.Location = New Point(1958, 63)
         pnLogout.Name = "pnLogout"
         pnLogout.Size = New System.Drawing.Size(122, 105)
         pnLogout.TabIndex = 12
@@ -268,73 +267,22 @@ Partial Class AddClientForm
         btnLogOut.Text = "Logout"
         btnLogOut.UseVisualStyleBackColor = False
         ' 
-        ' Panel2
+        ' FlowLayoutPanel1
         ' 
-        Panel2.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
-        Panel2.Controls.Add(Button4)
-        Panel2.Controls.Add(Button3)
-        Panel2.Controls.Add(Button2)
-        Panel2.Controls.Add(PictureBox2)
-        Panel2.Location = New Point(0, 3)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New System.Drawing.Size(284, 1066)
-        Panel2.TabIndex = 15
-        ' 
-        ' Button4
-        ' 
-        Button4.BackColor = Color.BurlyWood
-        Button4.Location = New Point(3, 363)
-        Button4.Name = "Button4"
-        Button4.Padding = New Padding(29, 0, 0, 0)
-        Button4.Size = New System.Drawing.Size(281, 45)
-        Button4.TabIndex = 11
-        Button4.Text = "Settings"
-        Button4.TextAlign = ContentAlignment.MiddleLeft
-        Button4.UseVisualStyleBackColor = False
-        ' 
-        ' Button3
-        ' 
-        Button3.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        Button3.Location = New Point(3, 322)
-        Button3.Name = "Button3"
-        Button3.Padding = New Padding(29, 0, 0, 0)
-        Button3.Size = New System.Drawing.Size(281, 45)
-        Button3.TabIndex = 10
-        Button3.Text = "Search"
-        Button3.TextAlign = ContentAlignment.MiddleLeft
-        Button3.UseVisualStyleBackColor = False
-        ' 
-        ' Button2
-        ' 
-        Button2.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
-        Button2.Location = New Point(3, 280)
-        Button2.Name = "Button2"
-        Button2.Padding = New Padding(29, 0, 0, 0)
-        Button2.Size = New System.Drawing.Size(281, 45)
-        Button2.TabIndex = 9
-        Button2.Text = "Home"
-        Button2.TextAlign = ContentAlignment.MiddleLeft
-        Button2.UseVisualStyleBackColor = False
-        ' 
-        ' PictureBox2
-        ' 
-        PictureBox2.Anchor = AnchorStyles.None
-        PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
-        PictureBox2.Location = New Point(43, 62)
-        PictureBox2.Name = "PictureBox2"
-        PictureBox2.Size = New System.Drawing.Size(203, 142)
-        PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
-        PictureBox2.TabIndex = 9
-        PictureBox2.TabStop = False
+        FlowLayoutPanel1.BackColor = Color.White
+        FlowLayoutPanel1.ForeColor = SystemColors.ControlLightLight
+        FlowLayoutPanel1.Location = New Point(25, 116)
+        FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        FlowLayoutPanel1.Size = New System.Drawing.Size(506, 344)
+        FlowLayoutPanel1.TabIndex = 13
         ' 
         ' AddClientForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New System.Drawing.Size(1300, 749)
+        ClientSize = New System.Drawing.Size(1283, 608)
         Controls.Add(Panel1)
-        Controls.Add(Panel2)
         Controls.Add(Button1)
         Controls.Add(pnLogout)
         Font = New Font("Segoe UI", 9F, FontStyle.Bold)
@@ -344,19 +292,11 @@ Partial Class AddClientForm
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         pnLogout.ResumeLayout(False)
-        Panel2.ResumeLayout(False)
-        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
     Friend WithEvents btnSave As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents lblCustomerDetails As Label
-    Friend WithEvents tbAddress As TextBox
-    Friend WithEvents tbName As TextBox
-    Friend WithEvents lblAddress As Label
-    Friend WithEvents lblContactNumber As Label
-    Friend WithEvents LblName As Label
-    Friend WithEvents tbNumber As TextBox
     Friend WithEvents lblTask As Label
     Friend WithEvents btnAddTask As Button
     Friend WithEvents btnCancel As Button
@@ -365,10 +305,12 @@ Partial Class AddClientForm
     Friend WithEvents pnLogout As Panel
     Friend WithEvents btnSetNew As Button
     Friend WithEvents btnLogOut As Button
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents fpTask As FlowLayoutPanel
+    Friend WithEvents tbNumber As TextBox
+    Friend WithEvents lblContactNumber As Label
+    Friend WithEvents tbName As TextBox
+    Friend WithEvents LblName As Label
+    Friend WithEvents tbAddress As TextBox
+    Friend WithEvents lblAddress As Label
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
 End Class

@@ -289,4 +289,15 @@ Public Class AddClientForm
         MySQLModule.ExecuteNonQuery(sizeQuery, sizeParams)
     End Sub
 
+    Private Sub tbAddress_TextChanged(sender As Object, e As EventArgs) Handles tbAddress.TextChanged
+
+    End Sub
+
+    Private Sub lblAddress_Click(sender As Object, e As EventArgs) Handles lblAddress.Click
+
+    End Sub
+
+    Private Sub lblCustomerDetails_Click(sender As Object, e As EventArgs) Handles lblCustomerDetails.Click
+
+    End Sub
 End Class

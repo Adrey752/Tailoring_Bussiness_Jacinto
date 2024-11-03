@@ -24,19 +24,17 @@ Partial Class AddNewOrder
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddNewOrder))
         pnAddOrders = New Panel()
+        Panel1 = New Panel()
+        cbStype = New ComboBox()
+        lblServiceType = New Label()
         dtpOrderDate = New DateTimePicker()
         btnAddImage = New Button()
         btnRemoveImage = New Button()
         ComboBox1 = New ComboBox()
         Label2 = New Label()
-        Label1 = New Label()
         headerOrder = New Label()
         btnAdd = New Button()
-        btnCancel = New Button()
         OrderPicturebox = New PictureBox()
-        btnOrderSave = New Button()
-        nudPrice = New NumericUpDown()
-        lblPrice = New Label()
         btnaddMeasurement = New Button()
         nudValue = New NumericUpDown()
         dgMeasurements = New DataGridView()
@@ -47,41 +45,44 @@ Partial Class AddNewOrder
         rbDescription = New RichTextBox()
         lblSize = New Label()
         lblDesc = New Label()
-        lblorderName = New Label()
-        tbOrderName = New TextBox()
         sbMType = New ComboBox()
         cbGarment = New ComboBox()
-        cbStype = New ComboBox()
-        lblServiceType = New Label()
+        Panel2 = New Panel()
+        tbOrderName = New TextBox()
+        lblorderName = New Label()
+        Panel3 = New Panel()
+        lblPrice = New Label()
+        nudPrice = New NumericUpDown()
+        btnCancel = New Button()
+        btnOrderSave = New Button()
         fPanelOrders = New FlowLayoutPanel()
         LbSuggestions = New ListBox()
         lblOrders = New Label()
         txtSearch = New TextBox()
         pnAddOrders.SuspendLayout()
+        Panel1.SuspendLayout()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).BeginInit()
-        CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
+        Panel2.SuspendLayout()
+        Panel3.SuspendLayout()
+        CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' pnAddOrders
         ' 
         pnAddOrders.Anchor = AnchorStyles.None
         pnAddOrders.AutoSizeMode = AutoSizeMode.GrowAndShrink
-        pnAddOrders.BackColor = Color.White
+        pnAddOrders.BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
+        pnAddOrders.Controls.Add(Panel1)
         pnAddOrders.Controls.Add(dtpOrderDate)
         pnAddOrders.Controls.Add(btnAddImage)
         pnAddOrders.Controls.Add(btnRemoveImage)
         pnAddOrders.Controls.Add(ComboBox1)
         pnAddOrders.Controls.Add(Label2)
-        pnAddOrders.Controls.Add(Label1)
         pnAddOrders.Controls.Add(headerOrder)
         pnAddOrders.Controls.Add(btnAdd)
-        pnAddOrders.Controls.Add(btnCancel)
         pnAddOrders.Controls.Add(OrderPicturebox)
-        pnAddOrders.Controls.Add(btnOrderSave)
-        pnAddOrders.Controls.Add(nudPrice)
-        pnAddOrders.Controls.Add(lblPrice)
         pnAddOrders.Controls.Add(btnaddMeasurement)
         pnAddOrders.Controls.Add(nudValue)
         pnAddOrders.Controls.Add(dgMeasurements)
@@ -89,20 +90,49 @@ Partial Class AddNewOrder
         pnAddOrders.Controls.Add(rbDescription)
         pnAddOrders.Controls.Add(lblSize)
         pnAddOrders.Controls.Add(lblDesc)
-        pnAddOrders.Controls.Add(lblorderName)
-        pnAddOrders.Controls.Add(tbOrderName)
         pnAddOrders.Controls.Add(sbMType)
         pnAddOrders.Controls.Add(cbGarment)
-        pnAddOrders.Controls.Add(cbStype)
-        pnAddOrders.Controls.Add(lblServiceType)
+        pnAddOrders.Controls.Add(Panel2)
+        pnAddOrders.Controls.Add(Panel3)
         pnAddOrders.Location = New Point(1, 2)
         pnAddOrders.Name = "pnAddOrders"
         pnAddOrders.Size = New System.Drawing.Size(998, 653)
         pnAddOrders.TabIndex = 3
         ' 
+        ' Panel1
+        ' 
+        Panel1.BackColor = Color.White
+        Panel1.Controls.Add(cbStype)
+        Panel1.Controls.Add(lblServiceType)
+        Panel1.Location = New Point(40, 148)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New System.Drawing.Size(481, 51)
+        Panel1.TabIndex = 44
+        ' 
+        ' cbStype
+        ' 
+        cbStype.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cbStype.FormattingEnabled = True
+        cbStype.Items.AddRange(New Object() {"Repair", "Resize"})
+        cbStype.Location = New Point(125, 13)
+        cbStype.Name = "cbStype"
+        cbStype.Size = New System.Drawing.Size(342, 29)
+        cbStype.TabIndex = 1
+        ' 
+        ' lblServiceType
+        ' 
+        lblServiceType.AutoSize = True
+        lblServiceType.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblServiceType.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblServiceType.Location = New Point(14, 16)
+        lblServiceType.Name = "lblServiceType"
+        lblServiceType.Size = New System.Drawing.Size(96, 21)
+        lblServiceType.TabIndex = 0
+        lblServiceType.Text = "Service Type"
+        ' 
         ' dtpOrderDate
         ' 
-        dtpOrderDate.Location = New Point(342, 53)
+        dtpOrderDate.Location = New Point(38, 66)
         dtpOrderDate.Name = "dtpOrderDate"
         dtpOrderDate.Size = New System.Drawing.Size(200, 23)
         dtpOrderDate.TabIndex = 32
@@ -110,7 +140,7 @@ Partial Class AddNewOrder
         ' btnAddImage
         ' 
         btnAddImage.Anchor = AnchorStyles.None
-        btnAddImage.Location = New Point(807, 345)
+        btnAddImage.Location = New Point(821, 310)
         btnAddImage.Name = "btnAddImage"
         btnAddImage.Size = New System.Drawing.Size(75, 23)
         btnAddImage.TabIndex = 31
@@ -120,11 +150,11 @@ Partial Class AddNewOrder
         ' btnRemoveImage
         ' 
         btnRemoveImage.Anchor = AnchorStyles.None
-        btnRemoveImage.Location = New Point(888, 345)
+        btnRemoveImage.Location = New Point(902, 310)
         btnRemoveImage.Name = "btnRemoveImage"
-        btnRemoveImage.Size = New System.Drawing.Size(98, 23)
+        btnRemoveImage.Size = New System.Drawing.Size(84, 23)
         btnRemoveImage.TabIndex = 30
-        btnRemoveImage.Text = "Remove Image"
+        btnRemoveImage.Text = "Remove "
         btnRemoveImage.UseVisualStyleBackColor = True
         ' 
         ' ComboBox1
@@ -132,7 +162,7 @@ Partial Class AddNewOrder
         ComboBox1.Anchor = AnchorStyles.None
         ComboBox1.FormattingEnabled = True
         ComboBox1.Items.AddRange(New Object() {"Small T-Shirt", "Large T-Shirt", "X-Large T-Shirt"})
-        ComboBox1.Location = New Point(298, 267)
+        ComboBox1.Location = New Point(398, 311)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New System.Drawing.Size(109, 23)
         ComboBox1.TabIndex = 27
@@ -143,23 +173,11 @@ Partial Class AddNewOrder
         Label2.Anchor = AnchorStyles.None
         Label2.AutoSize = True
         Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label2.Location = New Point(154, 270)
+        Label2.Location = New Point(254, 314)
         Label2.Name = "Label2"
         Label2.Size = New System.Drawing.Size(130, 15)
         Label2.TabIndex = 28
         Label2.Text = "Custom Measurements"
-        ' 
-        ' Label1
-        ' 
-        Label1.Anchor = AnchorStyles.None
-        Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label1.Location = New Point(91, 256)
-        Label1.Name = "Label1"
-        Label1.Size = New System.Drawing.Size(57, 32)
-        Label1.TabIndex = 29
-        Label1.Text = "Size"
         ' 
         ' headerOrder
         ' 
@@ -177,23 +195,12 @@ Partial Class AddNewOrder
         ' 
         btnAdd.Anchor = AnchorStyles.None
         btnAdd.BackColor = Color.SeaShell
-        btnAdd.Location = New Point(635, 599)
+        btnAdd.Location = New Point(691, 346)
         btnAdd.Name = "btnAdd"
-        btnAdd.Size = New System.Drawing.Size(104, 41)
+        btnAdd.Size = New System.Drawing.Size(72, 30)
         btnAdd.TabIndex = 25
         btnAdd.Text = "Add +"
         btnAdd.UseVisualStyleBackColor = False
-        ' 
-        ' btnCancel
-        ' 
-        btnCancel.Anchor = AnchorStyles.None
-        btnCancel.BackColor = Color.SeaShell
-        btnCancel.Location = New Point(855, 599)
-        btnCancel.Name = "btnCancel"
-        btnCancel.Size = New System.Drawing.Size(104, 41)
-        btnCancel.TabIndex = 24
-        btnCancel.Text = "Cancel"
-        btnCancel.UseVisualStyleBackColor = False
         ' 
         ' OrderPicturebox
         ' 
@@ -202,46 +209,15 @@ Partial Class AddNewOrder
         OrderPicturebox.Image = CType(resources.GetObject("OrderPicturebox.Image"), Image)
         OrderPicturebox.Location = New Point(548, 32)
         OrderPicturebox.Name = "OrderPicturebox"
-        OrderPicturebox.Size = New System.Drawing.Size(438, 297)
+        OrderPicturebox.Size = New System.Drawing.Size(438, 272)
         OrderPicturebox.SizeMode = PictureBoxSizeMode.Zoom
         OrderPicturebox.TabIndex = 12
         OrderPicturebox.TabStop = False
         ' 
-        ' btnOrderSave
-        ' 
-        btnOrderSave.Anchor = AnchorStyles.None
-        btnOrderSave.BackColor = Color.SeaShell
-        btnOrderSave.Location = New Point(745, 599)
-        btnOrderSave.Name = "btnOrderSave"
-        btnOrderSave.Size = New System.Drawing.Size(104, 41)
-        btnOrderSave.TabIndex = 3
-        btnOrderSave.Text = "Save"
-        btnOrderSave.UseVisualStyleBackColor = False
-        ' 
-        ' nudPrice
-        ' 
-        nudPrice.Anchor = AnchorStyles.None
-        nudPrice.Location = New Point(164, 178)
-        nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
-        nudPrice.Name = "nudPrice"
-        nudPrice.Size = New System.Drawing.Size(120, 23)
-        nudPrice.TabIndex = 2
-        ' 
-        ' lblPrice
-        ' 
-        lblPrice.Anchor = AnchorStyles.None
-        lblPrice.AutoSize = True
-        lblPrice.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblPrice.Location = New Point(61, 180)
-        lblPrice.Name = "lblPrice"
-        lblPrice.Size = New System.Drawing.Size(33, 15)
-        lblPrice.TabIndex = 20
-        lblPrice.Text = "Price"
-        ' 
         ' btnaddMeasurement
         ' 
         btnaddMeasurement.Anchor = AnchorStyles.None
-        btnaddMeasurement.Location = New Point(430, 306)
+        btnaddMeasurement.Location = New Point(430, 617)
         btnaddMeasurement.Name = "btnaddMeasurement"
         btnaddMeasurement.Size = New System.Drawing.Size(75, 23)
         btnaddMeasurement.TabIndex = 7
@@ -251,7 +227,7 @@ Partial Class AddNewOrder
         ' nudValue
         ' 
         nudValue.Anchor = AnchorStyles.None
-        nudValue.Location = New Point(146, 306)
+        nudValue.Location = New Point(201, 347)
         nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudValue.Name = "nudValue"
         nudValue.Size = New System.Drawing.Size(102, 23)
@@ -262,9 +238,9 @@ Partial Class AddNewOrder
         dgMeasurements.Anchor = AnchorStyles.None
         dgMeasurements.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgMeasurements.Columns.AddRange(New DataGridViewColumn() {size_type, measurement, GarmentType})
-        dgMeasurements.Location = New Point(39, 345)
+        dgMeasurements.Location = New Point(39, 383)
         dgMeasurements.Name = "dgMeasurements"
-        dgMeasurements.Size = New System.Drawing.Size(466, 295)
+        dgMeasurements.Size = New System.Drawing.Size(466, 217)
         dgMeasurements.TabIndex = 10
         ' 
         ' size_type
@@ -292,7 +268,7 @@ Partial Class AddNewOrder
         cbUnit.Anchor = AnchorStyles.None
         cbUnit.FormattingEnabled = True
         cbUnit.Items.AddRange(New Object() {"cm", "inches", "meters"})
-        cbUnit.Location = New Point(254, 305)
+        cbUnit.Location = New Point(309, 346)
         cbUnit.Name = "cbUnit"
         cbUnit.Size = New System.Drawing.Size(77, 23)
         cbUnit.TabIndex = 5
@@ -302,11 +278,11 @@ Partial Class AddNewOrder
         ' 
         rbDescription.Anchor = AnchorStyles.None
         rbDescription.BackColor = Color.FromArgb(CByte(194), CByte(194), CByte(194))
-        rbDescription.Location = New Point(548, 461)
+        rbDescription.Location = New Point(548, 383)
         rbDescription.MaxLength = 20000
         rbDescription.Name = "rbDescription"
         rbDescription.ScrollBars = RichTextBoxScrollBars.Vertical
-        rbDescription.Size = New System.Drawing.Size(438, 112)
+        rbDescription.Size = New System.Drawing.Size(438, 217)
         rbDescription.TabIndex = 8
         rbDescription.Text = ""
         ' 
@@ -316,7 +292,7 @@ Partial Class AddNewOrder
         lblSize.AutoSize = True
         lblSize.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblSize.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblSize.Location = New Point(28, 256)
+        lblSize.Location = New Point(38, 302)
         lblSize.Name = "lblSize"
         lblSize.Size = New System.Drawing.Size(57, 32)
         lblSize.TabIndex = 9
@@ -326,39 +302,20 @@ Partial Class AddNewOrder
         ' 
         lblDesc.Anchor = AnchorStyles.None
         lblDesc.AutoSize = True
-        lblDesc.BackColor = Color.WhiteSmoke
+        lblDesc.BackColor = Color.Transparent
         lblDesc.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDesc.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblDesc.Location = New Point(548, 411)
+        lblDesc.Location = New Point(548, 346)
         lblDesc.Name = "lblDesc"
         lblDesc.Size = New System.Drawing.Size(137, 32)
         lblDesc.TabIndex = 7
         lblDesc.Text = "Description"
         ' 
-        ' lblorderName
-        ' 
-        lblorderName.AutoSize = True
-        lblorderName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblorderName.Location = New Point(61, 96)
-        lblorderName.Name = "lblorderName"
-        lblorderName.Size = New System.Drawing.Size(72, 15)
-        lblorderName.TabIndex = 5
-        lblorderName.Text = "Order Name"
-        ' 
-        ' tbOrderName
-        ' 
-        tbOrderName.Location = New Point(164, 96)
-        tbOrderName.MaxLength = 150
-        tbOrderName.Name = "tbOrderName"
-        tbOrderName.PlaceholderText = "Enter Order Name"
-        tbOrderName.Size = New System.Drawing.Size(121, 23)
-        tbOrderName.TabIndex = 0
-        ' 
         ' sbMType
         ' 
         sbMType.Anchor = AnchorStyles.None
         sbMType.FormattingEnabled = True
-        sbMType.Location = New Point(38, 305)
+        sbMType.Location = New Point(93, 346)
         sbMType.Name = "sbMType"
         sbMType.Size = New System.Drawing.Size(102, 23)
         sbMType.TabIndex = 3
@@ -368,38 +325,104 @@ Partial Class AddNewOrder
         ' 
         cbGarment.FormattingEnabled = True
         cbGarment.Items.AddRange(New Object() {"Cotton", "Silk", "Leather"})
-        cbGarment.Location = New Point(337, 306)
+        cbGarment.Location = New Point(392, 347)
         cbGarment.Name = "cbGarment"
         cbGarment.Size = New System.Drawing.Size(66, 23)
         cbGarment.TabIndex = 6
         cbGarment.Text = "Cotton"
         ' 
-        ' cbStype
+        ' Panel2
         ' 
-        cbStype.FormattingEnabled = True
-        cbStype.Items.AddRange(New Object() {"Repair", "Resize"})
-        cbStype.Location = New Point(164, 142)
-        cbStype.Name = "cbStype"
-        cbStype.Size = New System.Drawing.Size(121, 23)
-        cbStype.TabIndex = 1
+        Panel2.BackColor = Color.White
+        Panel2.Controls.Add(tbOrderName)
+        Panel2.Controls.Add(lblorderName)
+        Panel2.Location = New Point(38, 91)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New System.Drawing.Size(481, 51)
+        Panel2.TabIndex = 43
         ' 
-        ' lblServiceType
+        ' tbOrderName
         ' 
-        lblServiceType.AutoSize = True
-        lblServiceType.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        lblServiceType.Location = New Point(61, 130)
-        lblServiceType.Name = "lblServiceType"
-        lblServiceType.Size = New System.Drawing.Size(71, 15)
-        lblServiceType.TabIndex = 0
-        lblServiceType.Text = "Service Type"
+        tbOrderName.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        tbOrderName.Location = New Point(127, 13)
+        tbOrderName.MaxLength = 150
+        tbOrderName.Name = "tbOrderName"
+        tbOrderName.PlaceholderText = "Enter Order Name"
+        tbOrderName.Size = New System.Drawing.Size(342, 29)
+        tbOrderName.TabIndex = 0
+        ' 
+        ' lblorderName
+        ' 
+        lblorderName.AutoSize = True
+        lblorderName.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblorderName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblorderName.Location = New Point(15, 16)
+        lblorderName.Name = "lblorderName"
+        lblorderName.Size = New System.Drawing.Size(97, 21)
+        lblorderName.TabIndex = 5
+        lblorderName.Text = "Order Name"
+        ' 
+        ' Panel3
+        ' 
+        Panel3.BackColor = Color.White
+        Panel3.Controls.Add(lblPrice)
+        Panel3.Controls.Add(nudPrice)
+        Panel3.Location = New Point(40, 205)
+        Panel3.Name = "Panel3"
+        Panel3.Size = New System.Drawing.Size(481, 51)
+        Panel3.TabIndex = 45
+        ' 
+        ' lblPrice
+        ' 
+        lblPrice.Anchor = AnchorStyles.None
+        lblPrice.AutoSize = True
+        lblPrice.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblPrice.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblPrice.Location = New Point(14, 17)
+        lblPrice.Name = "lblPrice"
+        lblPrice.Size = New System.Drawing.Size(44, 21)
+        lblPrice.TabIndex = 20
+        lblPrice.Text = "Price"
+        ' 
+        ' nudPrice
+        ' 
+        nudPrice.Anchor = AnchorStyles.None
+        nudPrice.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        nudPrice.Location = New Point(126, 15)
+        nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
+        nudPrice.Name = "nudPrice"
+        nudPrice.Size = New System.Drawing.Size(341, 29)
+        nudPrice.TabIndex = 2
+        ' 
+        ' btnCancel
+        ' 
+        btnCancel.Anchor = AnchorStyles.None
+        btnCancel.BackColor = Color.SeaShell
+        btnCancel.Location = New Point(1130, 601)
+        btnCancel.Name = "btnCancel"
+        btnCancel.Size = New System.Drawing.Size(104, 41)
+        btnCancel.TabIndex = 24
+        btnCancel.Text = "Cancel"
+        btnCancel.UseVisualStyleBackColor = False
+        ' 
+        ' btnOrderSave
+        ' 
+        btnOrderSave.Anchor = AnchorStyles.None
+        btnOrderSave.BackColor = Color.SeaShell
+        btnOrderSave.Location = New Point(1013, 601)
+        btnOrderSave.Name = "btnOrderSave"
+        btnOrderSave.Size = New System.Drawing.Size(104, 41)
+        btnOrderSave.TabIndex = 3
+        btnOrderSave.Text = "Save"
+        btnOrderSave.UseVisualStyleBackColor = False
         ' 
         ' fPanelOrders
         ' 
         fPanelOrders.AutoScroll = True
-        fPanelOrders.BackColor = SystemColors.ActiveCaption
-        fPanelOrders.Location = New Point(1013, 87)
+        fPanelOrders.BackColor = Color.White
+        fPanelOrders.Location = New Point(1014, 87)
         fPanelOrders.Name = "fPanelOrders"
-        fPanelOrders.Size = New System.Drawing.Size(208, 504)
+        fPanelOrders.Size = New System.Drawing.Size(220, 504)
         fPanelOrders.TabIndex = 0
         ' 
         ' LbSuggestions
@@ -408,7 +431,7 @@ Partial Class AddNewOrder
         LbSuggestions.ItemHeight = 15
         LbSuggestions.Location = New Point(1014, 83)
         LbSuggestions.Name = "LbSuggestions"
-        LbSuggestions.Size = New System.Drawing.Size(207, 49)
+        LbSuggestions.Size = New System.Drawing.Size(220, 49)
         LbSuggestions.TabIndex = 26
         LbSuggestions.Visible = False
         ' 
@@ -429,28 +452,37 @@ Partial Class AddNewOrder
         ' 
         txtSearch.Location = New Point(1014, 58)
         txtSearch.Name = "txtSearch"
-        txtSearch.Size = New System.Drawing.Size(207, 23)
+        txtSearch.Size = New System.Drawing.Size(220, 23)
         txtSearch.TabIndex = 9
         ' 
         ' AddNewOrder
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         ClientSize = New System.Drawing.Size(1246, 654)
         Controls.Add(LbSuggestions)
         Controls.Add(txtSearch)
         Controls.Add(lblOrders)
         Controls.Add(fPanelOrders)
         Controls.Add(pnAddOrders)
+        Controls.Add(btnCancel)
+        Controls.Add(btnOrderSave)
         Name = "AddNewOrder"
         StartPosition = FormStartPosition.CenterScreen
         Text = "AddNewOrder"
         pnAddOrders.ResumeLayout(False)
         pnAddOrders.PerformLayout()
+        Panel1.ResumeLayout(False)
+        Panel1.PerformLayout()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).EndInit()
-        CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         CType(nudValue, ComponentModel.ISupportInitialize).EndInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).EndInit()
+        Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
+        Panel3.ResumeLayout(False)
+        Panel3.PerformLayout()
+        CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -482,11 +514,13 @@ Partial Class AddNewOrder
     Friend WithEvents headerOrder As Label
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents size_type As DataGridViewTextBoxColumn
     Friend WithEvents measurement As DataGridViewTextBoxColumn
     Friend WithEvents GarmentType As DataGridViewTextBoxColumn
     Friend WithEvents btnAddImage As Button
     Friend WithEvents btnRemoveImage As Button
     Friend WithEvents dtpOrderDate As DateTimePicker
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel3 As Panel
 End Class

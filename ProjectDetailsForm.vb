@@ -423,5 +423,27 @@ Public Class ProjectDetailsForm
 
     End Sub
 
+    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub LblName_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblAddress_Click(sender As Object, e As EventArgs) Handles lblAddress.Click
+
+    End Sub
+
+    Private Sub lblPayment_Click(sender As Object, e As EventArgs) Handles lblPayment.Click
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub ProjectDetailsForm_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
