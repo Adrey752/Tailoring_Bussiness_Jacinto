@@ -296,6 +296,7 @@ Public Class ProjectDetailsForm
 
 
     Private Sub ProjectDetailsForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        _HomeForm.loadDatabase()
         _HomeForm.Show()
     End Sub
 

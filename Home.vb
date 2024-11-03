@@ -1,13 +1,23 @@
-﻿Public Class Home
+﻿Imports System.ComponentModel
+
+Public Class Home
     Dim _login As login
+
+    Dim selectedSortby As ToolStripItem
+    Dim selectedSortDirection As ToolStripItem
 
     Public Sub New(login As login)
 
-        ' This call is required by the designer.
         InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
         Me._login = login
+        selectedSortby = nameItem
+        selectedSortDirection = ascendingItem
+        selectToolStripItem(selectedSortby)
+        selectToolStripItem(selectedSortDirection)
+
+        SortDataGridProjects(selectedSortby.Text, selectedSortDirection.Text)
+
 
     End Sub
 
@@ -27,6 +37,7 @@
 
 
     Public Sub loadDatabase()
+        DataGridProjects.Rows.Clear()
         Dim tableQuery = "SELECT client_id, name, date, quantity, payment, price, order_status FROM CLIENT"
 
         Dim parameter As New Dictionary(Of String, Object)()
@@ -87,7 +98,7 @@
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
 
         Dim addOrder As New AddClientForm(Me)
-        Me.Hide()
+        Hide()
         addOrder.Show()
 
     End Sub
@@ -104,7 +115,7 @@
         sender.BackColor = Color.FromArgb(184, 115, 51)
 
         ' Define corner radius for rounded edges
-        Dim cornerRadius As Integer = 15
+        Dim cornerRadius = 15
 
         ' Create a new GraphicsPath for rounded rectangle
         Dim path As New Drawing2D.GraphicsPath
@@ -149,6 +160,7 @@
             Dim projectDetails = New ProjectDetailsForm(client_id, Me)
             Me.Hide()
             projectDetails.Show()
+
 
         End If
     End Sub
@@ -235,11 +247,75 @@
 
     End Sub
 
-    Private Sub Home_Activated(sender As Object, e As EventArgs) Handles Me.Activated
 
-    End Sub
 
     Private Sub Home_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadDatabase()
+
     End Sub
+
+    Private Sub pnSort_Click(sender As Object, e As EventArgs) Handles pnSort.Click
+        cmsSorting.Show(pnSort, New Point(0, pnSort.Height))
+    End Sub
+
+
+    Dim sortingTypes As New List(Of String) From {"Name", "Date", "Quantity"}
+    Dim sortingDirections As New List(Of String) From {"Ascending", "Decending"}
+
+    Private Sub cmsSorting_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles cmsSorting.ItemClicked
+
+
+        Dim selectedItem = TryCast(e.ClickedItem, ToolStripItem)
+
+
+        If sortingTypes.Contains(selectedItem.Text) Then
+            unselectToolStripItem(selectedSortby)
+            selectedSortby = selectedItem
+            selectToolStripItem(selectedSortby)
+        ElseIf sortingDirections.Contains(selectedItem.Text) Then
+            unselectToolStripItem(selectedSortDirection)
+            selectedSortDirection = selectedItem
+            selectToolStripItem(selectedSortDirection)
+        End If
+        SortDataGridProjects(selectedSortby.Text, selectedSortDirection.Text)
+    End Sub
+
+    Private Sub selectToolStripItem(item As ToolStripItem)
+        item.BackColor = Color.Gray
+        item.ForeColor = Color.White
+    End Sub
+
+    Private Sub unselectToolStripItem(item As ToolStripItem)
+        If item IsNot Nothing Then
+            item.BackColor = Color.Empty
+            item.ForeColor = Color.Empty
+        End If
+    End Sub
+
+
+
+
+    Private Sub SortDataGridProjects(sortBy As String, sortDirection As String)
+        Dim columnName = ""
+        Dim ListSortDirection As System.ComponentModel.ListSortDirection
+        Select Case sortBy
+            Case Is = "Name"
+                columnName = "colName"
+            Case Is = "Date"
+                columnName = "OrderDate"
+            Case Is = "Quantity"
+                columnName = "colQuantity"
+        End Select
+
+        Select Case sortDirection
+            Case Is = "Ascending"
+                ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
+            Case Is = "Decending"
+                ListSortDirection = System.ComponentModel.ListSortDirection.Descending
+        End Select
+        Dim datagridColumn As DataGridViewColumn = DataGridProjects.Columns(columnName)
+        DataGridProjects.Sort(datagridColumn, ListSortDirection)
+    End Sub
+
+
 End Class

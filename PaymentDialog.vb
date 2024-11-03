@@ -93,4 +93,7 @@ Public Class PaymentDialog
         lblAmountToPay.Text = "₱ " & totalPrice.ToString("N2")
     End Sub
 
+    Private Sub PaymentDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
