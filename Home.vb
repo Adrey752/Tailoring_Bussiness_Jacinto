@@ -317,5 +317,15 @@ Public Class Home
         DataGridProjects.Sort(datagridColumn, ListSortDirection)
     End Sub
 
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
 
+    End Sub
+
+    Private Sub pbTailoringJacinto_Click(sender As Object, e As EventArgs) Handles pbTailoringJacinto.Click
+
+    End Sub
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+
+    End Sub
 End Class

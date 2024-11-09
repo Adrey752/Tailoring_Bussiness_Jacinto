@@ -447,4 +447,12 @@ Public Class ProjectDetailsForm
     Private Sub ProjectDetailsForm_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub nudOrders_ValueChanged(sender As Object, e As EventArgs) Handles nudOrders.ValueChanged
+
+    End Sub
+
+    Private Sub lblCustomerDetails_Click(sender As Object, e As EventArgs) Handles lblCustomerDetails.Click
+
+    End Sub
 End Class
