@@ -25,24 +25,41 @@ Partial Class AddClientForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddClientForm))
         btnSave = New Button()
         Panel1 = New Panel()
+        PictureBox5 = New PictureBox()
+        PictureBox4 = New PictureBox()
+        pnNavigation = New Panel()
+        PictureBox3 = New PictureBox()
+        PictureBox2 = New PictureBox()
+        PictureBox1 = New PictureBox()
+        pbTailoringJacinto = New PictureBox()
+        btnSettings = New Button()
+        btnSearch = New Button()
+        btnHome = New Button()
+        Panel2 = New Panel()
+        lblCustomerDetails = New Label()
         tbNumber = New TextBox()
         lblContactNumber = New Label()
         fpTask = New FlowLayoutPanel()
         tbName = New TextBox()
-        lblCustomerDetails = New Label()
         LblName = New Label()
         tbAddress = New TextBox()
-        btnRemoveTask = New Button()
         lblAddress = New Label()
-        btnAddTask = New Button()
         lblTask = New Label()
-        btnCancel = New Button()
+        btnAddTask = New Button()
+        btnRemoveTask = New Button()
         Button1 = New Button()
         pnLogout = New Panel()
         btnSetNew = New Button()
         btnLogOut = New Button()
-        FlowLayoutPanel1 = New FlowLayoutPanel()
         Panel1.SuspendLayout()
+        CType(PictureBox5, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
+        pnNavigation.SuspendLayout()
+        CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).BeginInit()
+        Panel2.SuspendLayout()
         pnLogout.SuspendLayout()
         SuspendLayout()
         ' 
@@ -52,8 +69,8 @@ Partial Class AddClientForm
         btnSave.FlatAppearance.BorderSize = 0
         btnSave.FlatStyle = FlatStyle.Flat
         btnSave.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnSave.ForeColor = Color.Black
-        btnSave.Location = New Point(1064, 502)
+        btnSave.ForeColor = Color.White
+        btnSave.Location = New Point(1157, 551)
         btnSave.Name = "btnSave"
         btnSave.Size = New System.Drawing.Size(91, 38)
         btnSave.TabIndex = 1
@@ -63,69 +80,155 @@ Partial Class AddClientForm
         ' Panel1
         ' 
         Panel1.BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
+        Panel1.Controls.Add(PictureBox5)
+        Panel1.Controls.Add(PictureBox4)
+        Panel1.Controls.Add(pnNavigation)
+        Panel1.Controls.Add(Panel2)
         Panel1.Controls.Add(tbNumber)
         Panel1.Controls.Add(btnSave)
         Panel1.Controls.Add(lblContactNumber)
         Panel1.Controls.Add(fpTask)
         Panel1.Controls.Add(tbName)
-        Panel1.Controls.Add(lblCustomerDetails)
         Panel1.Controls.Add(LblName)
         Panel1.Controls.Add(tbAddress)
-        Panel1.Controls.Add(btnRemoveTask)
         Panel1.Controls.Add(lblAddress)
-        Panel1.Controls.Add(btnAddTask)
         Panel1.Controls.Add(lblTask)
-        Panel1.Controls.Add(btnCancel)
-        Panel1.Controls.Add(FlowLayoutPanel1)
+        Panel1.Controls.Add(btnAddTask)
+        Panel1.Controls.Add(btnRemoveTask)
         Panel1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Panel1.Location = New Point(-1, 0)
         Panel1.Name = "Panel1"
-        Panel1.Size = New System.Drawing.Size(1300, 614)
+        Panel1.Size = New System.Drawing.Size(1300, 700)
         Panel1.TabIndex = 2
         ' 
-        ' tbNumber
+        ' PictureBox5
         ' 
-        tbNumber.BackColor = Color.White
-        tbNumber.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tbNumber.Location = New Point(53, 347)
-        tbNumber.MaxLength = 11
-        tbNumber.Name = "tbNumber"
-        tbNumber.PlaceholderText = "Enter Text"
-        tbNumber.Size = New System.Drawing.Size(442, 33)
-        tbNumber.TabIndex = 6
+        PictureBox5.BackColor = Color.White
+        PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), Image)
+        PictureBox5.Location = New Point(873, 149)
+        PictureBox5.Name = "PictureBox5"
+        PictureBox5.Size = New System.Drawing.Size(31, 25)
+        PictureBox5.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox5.TabIndex = 17
+        PictureBox5.TabStop = False
         ' 
-        ' lblContactNumber
+        ' PictureBox4
         ' 
-        lblContactNumber.AutoSize = True
-        lblContactNumber.BackColor = Color.White
-        lblContactNumber.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblContactNumber.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblContactNumber.Location = New Point(53, 317)
-        lblContactNumber.Name = "lblContactNumber"
-        lblContactNumber.Size = New System.Drawing.Size(198, 27)
-        lblContactNumber.TabIndex = 2
-        lblContactNumber.Text = "Contact Number: "
+        PictureBox4.BackColor = Color.White
+        PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), Image)
+        PictureBox4.Location = New Point(771, 149)
+        PictureBox4.Name = "PictureBox4"
+        PictureBox4.Size = New System.Drawing.Size(27, 25)
+        PictureBox4.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox4.TabIndex = 16
+        PictureBox4.TabStop = False
         ' 
-        ' fpTask
+        ' pnNavigation
         ' 
-        fpTask.AutoScroll = True
-        fpTask.BackColor = Color.White
-        fpTask.Location = New Point(555, 116)
-        fpTask.Name = "fpTask"
-        fpTask.Size = New System.Drawing.Size(694, 344)
-        fpTask.TabIndex = 12
+        pnNavigation.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
+        pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(PictureBox3)
+        pnNavigation.Controls.Add(PictureBox2)
+        pnNavigation.Controls.Add(PictureBox1)
+        pnNavigation.Controls.Add(pbTailoringJacinto)
+        pnNavigation.Controls.Add(btnSettings)
+        pnNavigation.Controls.Add(btnSearch)
+        pnNavigation.Controls.Add(btnHome)
+        pnNavigation.Location = New Point(0, 0)
+        pnNavigation.Name = "pnNavigation"
+        pnNavigation.Size = New System.Drawing.Size(78, 778)
+        pnNavigation.TabIndex = 14
         ' 
-        ' tbName
+        ' PictureBox3
         ' 
-        tbName.BackColor = Color.White
-        tbName.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tbName.ForeColor = Color.BurlyWood
-        tbName.Location = New Point(53, 202)
-        tbName.MaxLength = 150
-        tbName.Name = "tbName"
-        tbName.PlaceholderText = "Enter Client Name"
-        tbName.Size = New System.Drawing.Size(442, 33)
-        tbName.TabIndex = 4
+        PictureBox3.BackColor = Color.BurlyWood
+        PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), Image)
+        PictureBox3.Location = New Point(13, 211)
+        PictureBox3.Name = "PictureBox3"
+        PictureBox3.Size = New System.Drawing.Size(50, 26)
+        PictureBox3.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox3.TabIndex = 17
+        PictureBox3.TabStop = False
+        ' 
+        ' PictureBox2
+        ' 
+        PictureBox2.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
+        PictureBox2.Location = New Point(13, 169)
+        PictureBox2.Name = "PictureBox2"
+        PictureBox2.Size = New System.Drawing.Size(50, 27)
+        PictureBox2.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox2.TabIndex = 16
+        PictureBox2.TabStop = False
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(13, 129)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New System.Drawing.Size(50, 27)
+        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox1.TabIndex = 15
+        PictureBox1.TabStop = False
+        ' 
+        ' pbTailoringJacinto
+        ' 
+        pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
+        pbTailoringJacinto.Location = New Point(3, 3)
+        pbTailoringJacinto.Name = "pbTailoringJacinto"
+        pbTailoringJacinto.Size = New System.Drawing.Size(72, 65)
+        pbTailoringJacinto.SizeMode = PictureBoxSizeMode.Zoom
+        pbTailoringJacinto.TabIndex = 9
+        pbTailoringJacinto.TabStop = False
+        ' 
+        ' btnSettings
+        ' 
+        btnSettings.BackColor = Color.BurlyWood
+        btnSettings.FlatStyle = FlatStyle.Flat
+        btnSettings.ForeColor = Color.BurlyWood
+        btnSettings.Location = New Point(-3, 202)
+        btnSettings.Name = "btnSettings"
+        btnSettings.Padding = New Padding(30, 0, 0, 0)
+        btnSettings.Size = New System.Drawing.Size(81, 45)
+        btnSettings.TabIndex = 11
+        btnSettings.TextAlign = ContentAlignment.MiddleLeft
+        btnSettings.UseVisualStyleBackColor = False
+        ' 
+        ' btnSearch
+        ' 
+        btnSearch.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        btnSearch.FlatStyle = FlatStyle.Flat
+        btnSearch.ForeColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        btnSearch.Location = New Point(-3, 160)
+        btnSearch.Name = "btnSearch"
+        btnSearch.Padding = New Padding(30, 0, 0, 0)
+        btnSearch.Size = New System.Drawing.Size(81, 45)
+        btnSearch.TabIndex = 10
+        btnSearch.TextAlign = ContentAlignment.MiddleLeft
+        btnSearch.UseVisualStyleBackColor = False
+        ' 
+        ' btnHome
+        ' 
+        btnHome.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
+        btnHome.FlatStyle = FlatStyle.Flat
+        btnHome.ForeColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
+        btnHome.Location = New Point(-3, 118)
+        btnHome.Name = "btnHome"
+        btnHome.Padding = New Padding(30, 0, 0, 0)
+        btnHome.Size = New System.Drawing.Size(81, 45)
+        btnHome.TabIndex = 9
+        btnHome.TextAlign = ContentAlignment.MiddleLeft
+        btnHome.UseVisualStyleBackColor = False
+        ' 
+        ' Panel2
+        ' 
+        Panel2.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        Panel2.Controls.Add(lblCustomerDetails)
+        Panel2.Location = New Point(73, 0)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New System.Drawing.Size(1212, 68)
+        Panel2.TabIndex = 15
         ' 
         ' lblCustomerDetails
         ' 
@@ -133,67 +236,91 @@ Partial Class AddClientForm
         lblCustomerDetails.BackColor = Color.Transparent
         lblCustomerDetails.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblCustomerDetails.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblCustomerDetails.Location = New Point(53, 52)
+        lblCustomerDetails.Location = New Point(26, 18)
         lblCustomerDetails.Name = "lblCustomerDetails"
         lblCustomerDetails.Size = New System.Drawing.Size(260, 36)
         lblCustomerDetails.TabIndex = 0
         lblCustomerDetails.Text = " Customer Details"
         ' 
+        ' tbNumber
+        ' 
+        tbNumber.BackColor = Color.White
+        tbNumber.BorderStyle = BorderStyle.None
+        tbNumber.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tbNumber.Location = New Point(126, 374)
+        tbNumber.MaxLength = 11
+        tbNumber.Name = "tbNumber"
+        tbNumber.Size = New System.Drawing.Size(442, 26)
+        tbNumber.TabIndex = 6
+        ' 
+        ' lblContactNumber
+        ' 
+        lblContactNumber.AutoSize = True
+        lblContactNumber.BackColor = Color.Transparent
+        lblContactNumber.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblContactNumber.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        lblContactNumber.Location = New Point(126, 344)
+        lblContactNumber.Name = "lblContactNumber"
+        lblContactNumber.Size = New System.Drawing.Size(165, 22)
+        lblContactNumber.TabIndex = 2
+        lblContactNumber.Text = "Contact Number: "
+        ' 
+        ' fpTask
+        ' 
+        fpTask.AutoScroll = True
+        fpTask.BackColor = Color.White
+        fpTask.Location = New Point(629, 187)
+        fpTask.Name = "fpTask"
+        fpTask.Size = New System.Drawing.Size(619, 279)
+        fpTask.TabIndex = 12
+        ' 
+        ' tbName
+        ' 
+        tbName.BackColor = Color.White
+        tbName.BorderStyle = BorderStyle.None
+        tbName.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tbName.ForeColor = Color.BurlyWood
+        tbName.Location = New Point(126, 229)
+        tbName.MaxLength = 150
+        tbName.Name = "tbName"
+        tbName.Size = New System.Drawing.Size(442, 26)
+        tbName.TabIndex = 4
+        ' 
         ' LblName
         ' 
         LblName.AutoSize = True
-        LblName.BackColor = Color.White
-        LblName.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LblName.BackColor = Color.Transparent
+        LblName.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LblName.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        LblName.Location = New Point(53, 172)
+        LblName.Location = New Point(126, 202)
         LblName.Name = "LblName"
-        LblName.Size = New System.Drawing.Size(88, 27)
+        LblName.Size = New System.Drawing.Size(72, 22)
         LblName.TabIndex = 1
         LblName.Text = "Name: "
         ' 
         ' tbAddress
         ' 
         tbAddress.BackColor = Color.White
+        tbAddress.BorderStyle = BorderStyle.None
         tbAddress.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tbAddress.ForeColor = Color.BurlyWood
-        tbAddress.Location = New Point(53, 274)
+        tbAddress.Location = New Point(126, 301)
         tbAddress.MaxLength = 150
         tbAddress.Name = "tbAddress"
-        tbAddress.PlaceholderText = "Enter Address"
-        tbAddress.Size = New System.Drawing.Size(442, 33)
+        tbAddress.Size = New System.Drawing.Size(442, 26)
         tbAddress.TabIndex = 5
-        ' 
-        ' btnRemoveTask
-        ' 
-        btnRemoveTask.BackColor = Color.White
-        btnRemoveTask.Location = New Point(743, 77)
-        btnRemoveTask.Name = "btnRemoveTask"
-        btnRemoveTask.Size = New System.Drawing.Size(99, 34)
-        btnRemoveTask.TabIndex = 11
-        btnRemoveTask.Text = "Remove "
-        btnRemoveTask.UseVisualStyleBackColor = False
         ' 
         ' lblAddress
         ' 
         lblAddress.AutoSize = True
-        lblAddress.BackColor = Color.White
-        lblAddress.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblAddress.BackColor = Color.Transparent
+        lblAddress.Font = New Font("Baskerville Old Face", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAddress.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblAddress.Location = New Point(53, 244)
+        lblAddress.Location = New Point(126, 271)
         lblAddress.Name = "lblAddress"
-        lblAddress.Size = New System.Drawing.Size(104, 27)
+        lblAddress.Size = New System.Drawing.Size(86, 22)
         lblAddress.TabIndex = 3
         lblAddress.Text = "Address:"
-        ' 
-        ' btnAddTask
-        ' 
-        btnAddTask.BackColor = Color.White
-        btnAddTask.Location = New Point(646, 77)
-        btnAddTask.Name = "btnAddTask"
-        btnAddTask.Size = New System.Drawing.Size(91, 34)
-        btnAddTask.TabIndex = 9
-        btnAddTask.Text = "Add "
-        btnAddTask.UseVisualStyleBackColor = False
         ' 
         ' lblTask
         ' 
@@ -201,25 +328,38 @@ Partial Class AddClientForm
         lblTask.BackColor = Color.Transparent
         lblTask.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTask.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblTask.Location = New Point(555, 82)
+        lblTask.Location = New Point(629, 149)
         lblTask.Name = "lblTask"
         lblTask.Size = New System.Drawing.Size(85, 27)
         lblTask.TabIndex = 7
         lblTask.Text = "Orders"
         ' 
-        ' btnCancel
+        ' btnAddTask
         ' 
-        btnCancel.BackColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        btnCancel.FlatAppearance.BorderSize = 0
-        btnCancel.FlatStyle = FlatStyle.Flat
-        btnCancel.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnCancel.ForeColor = Color.White
-        btnCancel.Location = New Point(1158, 502)
-        btnCancel.Name = "btnCancel"
-        btnCancel.Size = New System.Drawing.Size(91, 38)
-        btnCancel.TabIndex = 3
-        btnCancel.Text = "Cancel"
-        btnCancel.UseVisualStyleBackColor = False
+        btnAddTask.BackColor = Color.White
+        btnAddTask.FlatStyle = FlatStyle.Flat
+        btnAddTask.ForeColor = Color.Black
+        btnAddTask.Location = New Point(731, 144)
+        btnAddTask.Name = "btnAddTask"
+        btnAddTask.Size = New System.Drawing.Size(75, 34)
+        btnAddTask.TabIndex = 9
+        btnAddTask.Text = "Add "
+        btnAddTask.TextAlign = ContentAlignment.MiddleLeft
+        btnAddTask.UseVisualStyleBackColor = False
+        ' 
+        ' btnRemoveTask
+        ' 
+        btnRemoveTask.BackColor = Color.White
+        btnRemoveTask.BackgroundImageLayout = ImageLayout.None
+        btnRemoveTask.FlatStyle = FlatStyle.Flat
+        btnRemoveTask.ForeColor = Color.Black
+        btnRemoveTask.Location = New Point(812, 144)
+        btnRemoveTask.Name = "btnRemoveTask"
+        btnRemoveTask.Size = New System.Drawing.Size(96, 34)
+        btnRemoveTask.TabIndex = 11
+        btnRemoveTask.Text = "Remove "
+        btnRemoveTask.TextAlign = ContentAlignment.MiddleLeft
+        btnRemoveTask.UseVisualStyleBackColor = False
         ' 
         ' Button1
         ' 
@@ -267,21 +407,12 @@ Partial Class AddClientForm
         btnLogOut.Text = "Logout"
         btnLogOut.UseVisualStyleBackColor = False
         ' 
-        ' FlowLayoutPanel1
-        ' 
-        FlowLayoutPanel1.BackColor = Color.White
-        FlowLayoutPanel1.ForeColor = SystemColors.ControlLightLight
-        FlowLayoutPanel1.Location = New Point(25, 116)
-        FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        FlowLayoutPanel1.Size = New System.Drawing.Size(506, 344)
-        FlowLayoutPanel1.TabIndex = 13
-        ' 
         ' AddClientForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New System.Drawing.Size(1283, 608)
+        ClientSize = New System.Drawing.Size(1283, 691)
         Controls.Add(Panel1)
         Controls.Add(Button1)
         Controls.Add(pnLogout)
@@ -291,6 +422,15 @@ Partial Class AddClientForm
         Text = "Add Client"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        CType(PictureBox5, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
+        pnNavigation.ResumeLayout(False)
+        CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).EndInit()
+        Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
         pnLogout.ResumeLayout(False)
         ResumeLayout(False)
     End Sub
@@ -299,7 +439,6 @@ Partial Class AddClientForm
     Friend WithEvents lblCustomerDetails As Label
     Friend WithEvents lblTask As Label
     Friend WithEvents btnAddTask As Button
-    Friend WithEvents btnCancel As Button
     Friend WithEvents btnRemoveTask As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents pnLogout As Panel
@@ -312,5 +451,15 @@ Partial Class AddClientForm
     Friend WithEvents LblName As Label
     Friend WithEvents tbAddress As TextBox
     Friend WithEvents lblAddress As Label
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents pnNavigation As Panel
+    Friend WithEvents pbTailoringJacinto As PictureBox
+    Friend WithEvents btnSettings As Button
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnHome As Button
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents PictureBox5 As PictureBox
+    Friend WithEvents PictureBox4 As PictureBox
 End Class

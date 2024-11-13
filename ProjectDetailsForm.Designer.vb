@@ -25,6 +25,7 @@ Partial Class ProjectDetailsForm
         Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProjectDetailsForm))
         lblTask = New Label()
         tbNumber = New TextBox()
         tbAddress = New TextBox()
@@ -59,6 +60,17 @@ Partial Class ProjectDetailsForm
         Panel3 = New Panel()
         Panel4 = New Panel()
         Panel5 = New Panel()
+        pnNavigation = New Panel()
+        PictureBox3 = New PictureBox()
+        PictureBox2 = New PictureBox()
+        PictureBox1 = New PictureBox()
+        pbTailoringJacinto = New PictureBox()
+        btnSettings = New Button()
+        btnSearch = New Button()
+        btnHome = New Button()
+        Panel6 = New Panel()
+        lblCustomerDetails = New Label()
+        Panel7 = New Panel()
         lblHeaderPayment = New Label()
         CType(dgSortOrders, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudOrders, ComponentModel.ISupportInitialize).BeginInit()
@@ -68,17 +80,23 @@ Partial Class ProjectDetailsForm
         Panel3.SuspendLayout()
         Panel4.SuspendLayout()
         Panel5.SuspendLayout()
+        pnNavigation.SuspendLayout()
+        CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).BeginInit()
+        Panel6.SuspendLayout()
         SuspendLayout()
         ' 
         ' lblTask
         ' 
         lblTask.AutoSize = True
         lblTask.BackColor = Color.Transparent
-        lblTask.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTask.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTask.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblTask.Location = New Point(537, 59)
+        lblTask.Location = New Point(110, 434)
         lblTask.Name = "lblTask"
-        lblTask.Size = New System.Drawing.Size(99, 36)
+        lblTask.Size = New System.Drawing.Size(76, 27)
         lblTask.TabIndex = 14
         lblTask.Text = "Order"
         ' 
@@ -90,19 +108,19 @@ Partial Class ProjectDetailsForm
         tbNumber.Name = "tbNumber"
         tbNumber.PlaceholderText = "Enter Phone Number"
         tbNumber.ReadOnly = True
-        tbNumber.Size = New System.Drawing.Size(311, 23)
+        tbNumber.Size = New System.Drawing.Size(410, 23)
         tbNumber.TabIndex = 13
         ' 
         ' tbAddress
         ' 
         tbAddress.BackColor = Color.White
         tbAddress.ForeColor = Color.Black
-        tbAddress.Location = New Point(99, 16)
+        tbAddress.Location = New Point(139, 16)
         tbAddress.MaxLength = 150
         tbAddress.Name = "tbAddress"
         tbAddress.PlaceholderText = "Enter Address"
         tbAddress.ReadOnly = True
-        tbAddress.Size = New System.Drawing.Size(348, 23)
+        tbAddress.Size = New System.Drawing.Size(410, 23)
         tbAddress.TabIndex = 12
         ' 
         ' lblAddress
@@ -139,10 +157,10 @@ Partial Class ProjectDetailsForm
         dgSortOrders.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         dgSortOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgSortOrders.Columns.AddRange(New DataGridViewColumn() {pendingCheckBox, pending, finishedCheckBox, finished, claimed})
-        dgSortOrders.Location = New Point(537, 98)
+        dgSortOrders.Location = New Point(108, 472)
         dgSortOrders.Name = "dgSortOrders"
         dgSortOrders.ReadOnly = True
-        dgSortOrders.Size = New System.Drawing.Size(679, 228)
+        dgSortOrders.Size = New System.Drawing.Size(673, 227)
         dgSortOrders.TabIndex = 20
         ' 
         ' pendingCheckBox
@@ -198,9 +216,9 @@ Partial Class ProjectDetailsForm
         ' cbSort
         ' 
         cbSort.FormattingEnabled = True
-        cbSort.Location = New Point(642, 69)
+        cbSort.Location = New Point(205, 437)
         cbSort.Name = "cbSort"
-        cbSort.Size = New System.Drawing.Size(84, 23)
+        cbSort.Size = New System.Drawing.Size(66, 23)
         cbSort.TabIndex = 22
         cbSort.Text = "Sort By"
         ' 
@@ -210,7 +228,7 @@ Partial Class ProjectDetailsForm
         lblPayment.AutoSize = True
         lblPayment.Font = New Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblPayment.ForeColor = Color.Black
-        lblPayment.Location = New Point(14, 74)
+        lblPayment.Location = New Point(13, 73)
         lblPayment.Name = "lblPayment"
         lblPayment.Size = New System.Drawing.Size(102, 21)
         lblPayment.TabIndex = 28
@@ -222,7 +240,7 @@ Partial Class ProjectDetailsForm
         lblTotalPrice.AutoSize = True
         lblTotalPrice.Font = New Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblTotalPrice.ForeColor = Color.Black
-        lblTotalPrice.Location = New Point(14, 28)
+        lblTotalPrice.Location = New Point(13, 27)
         lblTotalPrice.Name = "lblTotalPrice"
         lblTotalPrice.Size = New System.Drawing.Size(83, 21)
         lblTotalPrice.TabIndex = 31
@@ -242,7 +260,7 @@ Partial Class ProjectDetailsForm
         ' 
         ' nudOrders
         ' 
-        nudOrders.Location = New Point(327, 16)
+        nudOrders.Location = New Point(426, 17)
         nudOrders.Name = "nudOrders"
         nudOrders.ReadOnly = True
         nudOrders.Size = New System.Drawing.Size(120, 23)
@@ -252,23 +270,26 @@ Partial Class ProjectDetailsForm
         ' 
         lblHeaderOrder.AutoSize = True
         lblHeaderOrder.BackColor = Color.Transparent
-        lblHeaderOrder.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHeaderOrder.Font = New Font("Baskerville Old Face", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblHeaderOrder.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblHeaderOrder.Location = New Point(31, 49)
+        lblHeaderOrder.Location = New Point(110, 102)
         lblHeaderOrder.Name = "lblHeaderOrder"
-        lblHeaderOrder.Size = New System.Drawing.Size(201, 36)
+        lblHeaderOrder.Size = New System.Drawing.Size(213, 27)
         lblHeaderOrder.TabIndex = 34
-        lblHeaderOrder.Text = "Client Details"
+        lblHeaderOrder.Text = "Client  Information"
         ' 
         ' btnAddOrder
         ' 
-        btnAddOrder.Location = New Point(1126, 59)
+        btnAddOrder.BackColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        btnAddOrder.FlatStyle = FlatStyle.Popup
+        btnAddOrder.ForeColor = Color.White
+        btnAddOrder.Location = New Point(709, 434)
         btnAddOrder.Name = "btnAddOrder"
-        btnAddOrder.Size = New System.Drawing.Size(90, 32)
+        btnAddOrder.Size = New System.Drawing.Size(72, 32)
         btnAddOrder.TabIndex = 35
         btnAddOrder.Tag = ""
         btnAddOrder.Text = "Add Order"
-        btnAddOrder.UseVisualStyleBackColor = True
+        btnAddOrder.UseVisualStyleBackColor = False
         ' 
         ' dgPaymentHistory
         ' 
@@ -280,10 +301,10 @@ Partial Class ProjectDetailsForm
         dgPaymentHistory.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         dgPaymentHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgPaymentHistory.Columns.AddRange(New DataGridViewColumn() {DataGridViewTextBoxColumn2, DataGridViewTextBoxColumn3, colOrdersPaid})
-        dgPaymentHistory.Location = New Point(537, 402)
+        dgPaymentHistory.Location = New Point(864, 473)
         dgPaymentHistory.Name = "dgPaymentHistory"
         dgPaymentHistory.ReadOnly = True
-        dgPaymentHistory.Size = New System.Drawing.Size(679, 222)
+        dgPaymentHistory.Size = New System.Drawing.Size(472, 222)
         dgPaymentHistory.TabIndex = 36
         ' 
         ' DataGridViewTextBoxColumn2
@@ -296,7 +317,6 @@ Partial Class ProjectDetailsForm
         DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         DataGridViewTextBoxColumn2.ReadOnly = True
         DataGridViewTextBoxColumn2.Resizable = DataGridViewTriState.True
-        DataGridViewTextBoxColumn2.Width = 200
         ' 
         ' DataGridViewTextBoxColumn3
         ' 
@@ -320,7 +340,7 @@ Partial Class ProjectDetailsForm
         lblDue.AutoSize = True
         lblDue.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
         lblDue.ForeColor = Color.FromArgb(CByte(255), CByte(87), CByte(34))
-        lblDue.Location = New Point(261, 28)
+        lblDue.Location = New Point(260, 27)
         lblDue.Name = "lblDue"
         lblDue.Size = New System.Drawing.Size(88, 25)
         lblDue.TabIndex = 37
@@ -332,7 +352,7 @@ Partial Class ProjectDetailsForm
         lblPaid.AutoSize = True
         lblPaid.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
         lblPaid.ForeColor = Color.FromArgb(CByte(255), CByte(87), CByte(34))
-        lblPaid.Location = New Point(261, 74)
+        lblPaid.Location = New Point(260, 73)
         lblPaid.Name = "lblPaid"
         lblPaid.Size = New System.Drawing.Size(88, 25)
         lblPaid.TabIndex = 38
@@ -341,13 +361,14 @@ Partial Class ProjectDetailsForm
         ' Panel1
         ' 
         Panel1.BackColor = Color.White
+        Panel1.BorderStyle = BorderStyle.FixedSingle
         Panel1.Controls.Add(lblBalance)
         Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(lblDue)
         Panel1.Controls.Add(lblPaid)
         Panel1.Controls.Add(lblPayment)
         Panel1.Controls.Add(lblTotalPrice)
-        Panel1.Location = New Point(70, 399)
+        Panel1.Location = New Point(910, 176)
         Panel1.Name = "Panel1"
         Panel1.Size = New System.Drawing.Size(367, 169)
         Panel1.TabIndex = 39
@@ -358,7 +379,7 @@ Partial Class ProjectDetailsForm
         lblBalance.AutoSize = True
         lblBalance.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
         lblBalance.ForeColor = Color.FromArgb(CByte(255), CByte(87), CByte(34))
-        lblBalance.Location = New Point(261, 115)
+        lblBalance.Location = New Point(260, 114)
         lblBalance.Name = "lblBalance"
         lblBalance.Size = New System.Drawing.Size(88, 25)
         lblBalance.TabIndex = 40
@@ -370,7 +391,7 @@ Partial Class ProjectDetailsForm
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label4.ForeColor = Color.Black
-        Label4.Location = New Point(14, 115)
+        Label4.Location = New Point(13, 114)
         Label4.Name = "Label4"
         Label4.Size = New System.Drawing.Size(67, 21)
         Label4.TabIndex = 39
@@ -383,7 +404,7 @@ Partial Class ProjectDetailsForm
         btnMakePayment.FlatAppearance.BorderSize = 0
         btnMakePayment.FlatStyle = FlatStyle.Flat
         btnMakePayment.ForeColor = Color.White
-        btnMakePayment.Location = New Point(70, 583)
+        btnMakePayment.Location = New Point(910, 360)
         btnMakePayment.Margin = New Padding(0)
         btnMakePayment.Name = "btnMakePayment"
         btnMakePayment.RightToLeft = RightToLeft.No
@@ -396,12 +417,12 @@ Partial Class ProjectDetailsForm
         ' 
         tbName.BackColor = Color.White
         tbName.ForeColor = Color.Black
-        tbName.Location = New Point(99, 13)
+        tbName.Location = New Point(136, 13)
         tbName.MaxLength = 150
         tbName.Name = "tbName"
         tbName.PlaceholderText = "Enter Client Name"
         tbName.ReadOnly = True
-        tbName.Size = New System.Drawing.Size(348, 23)
+        tbName.Size = New System.Drawing.Size(410, 23)
         tbName.TabIndex = 11
         ' 
         ' LblName
@@ -421,9 +442,9 @@ Partial Class ProjectDetailsForm
         Panel2.BackColor = Color.White
         Panel2.Controls.Add(tbName)
         Panel2.Controls.Add(LblName)
-        Panel2.Location = New Point(31, 96)
+        Panel2.Location = New Point(170, 167)
         Panel2.Name = "Panel2"
-        Panel2.Size = New System.Drawing.Size(461, 51)
+        Panel2.Size = New System.Drawing.Size(557, 51)
         Panel2.TabIndex = 41
         ' 
         ' Panel3
@@ -431,9 +452,9 @@ Partial Class ProjectDetailsForm
         Panel3.BackColor = Color.White
         Panel3.Controls.Add(lblAddress)
         Panel3.Controls.Add(tbAddress)
-        Panel3.Location = New Point(31, 153)
+        Panel3.Location = New Point(167, 346)
         Panel3.Name = "Panel3"
-        Panel3.Size = New System.Drawing.Size(461, 51)
+        Panel3.Size = New System.Drawing.Size(560, 51)
         Panel3.TabIndex = 42
         ' 
         ' Panel4
@@ -441,9 +462,9 @@ Partial Class ProjectDetailsForm
         Panel4.BackColor = Color.White
         Panel4.Controls.Add(lblContactNumber)
         Panel4.Controls.Add(tbNumber)
-        Panel4.Location = New Point(31, 210)
+        Panel4.Location = New Point(170, 224)
         Panel4.Name = "Panel4"
-        Panel4.Size = New System.Drawing.Size(461, 51)
+        Panel4.Size = New System.Drawing.Size(557, 51)
         Panel4.TabIndex = 42
         ' 
         ' Panel5
@@ -451,10 +472,137 @@ Partial Class ProjectDetailsForm
         Panel5.BackColor = Color.White
         Panel5.Controls.Add(lblNumOrders)
         Panel5.Controls.Add(nudOrders)
-        Panel5.Location = New Point(31, 267)
+        Panel5.Location = New Point(170, 281)
         Panel5.Name = "Panel5"
-        Panel5.Size = New System.Drawing.Size(461, 51)
+        Panel5.Size = New System.Drawing.Size(557, 51)
         Panel5.TabIndex = 42
+        ' 
+        ' pnNavigation
+        ' 
+        pnNavigation.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
+        pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(PictureBox3)
+        pnNavigation.Controls.Add(PictureBox2)
+        pnNavigation.Controls.Add(PictureBox1)
+        pnNavigation.Controls.Add(pbTailoringJacinto)
+        pnNavigation.Controls.Add(btnSettings)
+        pnNavigation.Controls.Add(btnSearch)
+        pnNavigation.Controls.Add(btnHome)
+        pnNavigation.Location = New Point(2, -1)
+        pnNavigation.Name = "pnNavigation"
+        pnNavigation.Size = New System.Drawing.Size(78, 732)
+        pnNavigation.TabIndex = 43
+        ' 
+        ' PictureBox3
+        ' 
+        PictureBox3.BackColor = Color.BurlyWood
+        PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), Image)
+        PictureBox3.Location = New Point(13, 211)
+        PictureBox3.Name = "PictureBox3"
+        PictureBox3.Size = New System.Drawing.Size(50, 26)
+        PictureBox3.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox3.TabIndex = 17
+        PictureBox3.TabStop = False
+        ' 
+        ' PictureBox2
+        ' 
+        PictureBox2.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
+        PictureBox2.Location = New Point(13, 169)
+        PictureBox2.Name = "PictureBox2"
+        PictureBox2.Size = New System.Drawing.Size(50, 27)
+        PictureBox2.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox2.TabIndex = 16
+        PictureBox2.TabStop = False
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(13, 129)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New System.Drawing.Size(50, 27)
+        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox1.TabIndex = 15
+        PictureBox1.TabStop = False
+        ' 
+        ' pbTailoringJacinto
+        ' 
+        pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
+        pbTailoringJacinto.Location = New Point(3, 3)
+        pbTailoringJacinto.Name = "pbTailoringJacinto"
+        pbTailoringJacinto.Size = New System.Drawing.Size(72, 65)
+        pbTailoringJacinto.SizeMode = PictureBoxSizeMode.Zoom
+        pbTailoringJacinto.TabIndex = 9
+        pbTailoringJacinto.TabStop = False
+        ' 
+        ' btnSettings
+        ' 
+        btnSettings.BackColor = Color.BurlyWood
+        btnSettings.FlatStyle = FlatStyle.Flat
+        btnSettings.ForeColor = Color.BurlyWood
+        btnSettings.Location = New Point(-3, 202)
+        btnSettings.Name = "btnSettings"
+        btnSettings.Padding = New Padding(30, 0, 0, 0)
+        btnSettings.Size = New System.Drawing.Size(81, 45)
+        btnSettings.TabIndex = 11
+        btnSettings.TextAlign = ContentAlignment.MiddleLeft
+        btnSettings.UseVisualStyleBackColor = False
+        ' 
+        ' btnSearch
+        ' 
+        btnSearch.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        btnSearch.FlatStyle = FlatStyle.Flat
+        btnSearch.ForeColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        btnSearch.Location = New Point(-3, 160)
+        btnSearch.Name = "btnSearch"
+        btnSearch.Padding = New Padding(30, 0, 0, 0)
+        btnSearch.Size = New System.Drawing.Size(81, 45)
+        btnSearch.TabIndex = 10
+        btnSearch.TextAlign = ContentAlignment.MiddleLeft
+        btnSearch.UseVisualStyleBackColor = False
+        ' 
+        ' btnHome
+        ' 
+        btnHome.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
+        btnHome.FlatStyle = FlatStyle.Flat
+        btnHome.ForeColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
+        btnHome.Location = New Point(-3, 118)
+        btnHome.Name = "btnHome"
+        btnHome.Padding = New Padding(30, 0, 0, 0)
+        btnHome.Size = New System.Drawing.Size(81, 45)
+        btnHome.TabIndex = 9
+        btnHome.TextAlign = ContentAlignment.MiddleLeft
+        btnHome.UseVisualStyleBackColor = False
+        ' 
+        ' Panel6
+        ' 
+        Panel6.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        Panel6.Controls.Add(lblCustomerDetails)
+        Panel6.Location = New Point(74, -1)
+        Panel6.Name = "Panel6"
+        Panel6.Size = New System.Drawing.Size(1369, 68)
+        Panel6.TabIndex = 44
+        ' 
+        ' lblCustomerDetails
+        ' 
+        lblCustomerDetails.AutoSize = True
+        lblCustomerDetails.BackColor = Color.Transparent
+        lblCustomerDetails.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblCustomerDetails.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        lblCustomerDetails.Location = New Point(34, 20)
+        lblCustomerDetails.Name = "lblCustomerDetails"
+        lblCustomerDetails.Size = New System.Drawing.Size(215, 36)
+        lblCustomerDetails.TabIndex = 0
+        lblCustomerDetails.Text = "Project Details"
+        ' 
+        ' Panel7
+        ' 
+        Panel7.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        Panel7.Location = New Point(108, 143)
+        Panel7.Name = "Panel7"
+        Panel7.Size = New System.Drawing.Size(673, 279)
+        Panel7.TabIndex = 45
         ' 
         ' lblHeaderPayment
         ' 
@@ -462,7 +610,7 @@ Partial Class ProjectDetailsForm
         lblHeaderPayment.BackColor = Color.Transparent
         lblHeaderPayment.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblHeaderPayment.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblHeaderPayment.Location = New Point(70, 351)
+        lblHeaderPayment.Location = New Point(910, 128)
         lblHeaderPayment.Name = "lblHeaderPayment"
         lblHeaderPayment.Size = New System.Drawing.Size(133, 36)
         lblHeaderPayment.TabIndex = 21
@@ -473,8 +621,10 @@ Partial Class ProjectDetailsForm
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New System.Drawing.Size(1246, 654)
+        ClientSize = New System.Drawing.Size(1361, 726)
         Controls.Add(lblHeaderPayment)
+        Controls.Add(pnNavigation)
+        Controls.Add(Panel6)
         Controls.Add(Panel5)
         Controls.Add(btnMakePayment)
         Controls.Add(Panel1)
@@ -487,6 +637,7 @@ Partial Class ProjectDetailsForm
         Controls.Add(Panel2)
         Controls.Add(Panel3)
         Controls.Add(Panel4)
+        Controls.Add(Panel7)
         Location = New Point(244, 52)
         Name = "ProjectDetailsForm"
         StartPosition = FormStartPosition.CenterScreen
@@ -504,6 +655,13 @@ Partial Class ProjectDetailsForm
         Panel4.PerformLayout()
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
+        pnNavigation.ResumeLayout(False)
+        CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).EndInit()
+        Panel6.ResumeLayout(False)
+        Panel6.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -533,14 +691,25 @@ Partial Class ProjectDetailsForm
     Friend WithEvents finishedCheckBox As DataGridViewCheckBoxColumn
     Friend WithEvents finished As DataGridViewTextBoxColumn
     Friend WithEvents claimed As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-    Friend WithEvents colOrdersPaid As DataGridViewTextBoxColumn
     Friend WithEvents tbName As TextBox
     Friend WithEvents LblName As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel5 As Panel
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents colOrdersPaid As DataGridViewTextBoxColumn
+    Friend WithEvents pnNavigation As Panel
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents pbTailoringJacinto As PictureBox
+    Friend WithEvents btnSettings As Button
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnHome As Button
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents lblCustomerDetails As Label
+    Friend WithEvents Panel7 As Panel
     Friend WithEvents lblHeaderPayment As Label
 End Class

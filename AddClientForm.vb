@@ -94,8 +94,8 @@ Public Class AddClientForm
 
 
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Hide()
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
+        Hide
     End Sub
 
     Public Sub AddProjectPanel(order As Order)
@@ -191,13 +191,13 @@ Public Class AddClientForm
 
 
     '********** Function Helper ni ***********8
-    Private Sub btnAddrOrder_Paint(sender As Object, e As PaintEventArgs) Handles btnSave.Paint, btnCancel.Paint
+    Private Sub btnAddrOrder_Paint(sender As Object, e As PaintEventArgs) Handles btnSave.Paint
         'sender = FormBorderStyle.Non
         sender.BackColor = Color.FromArgb(184, 115, 51)
 
 
         Dim DGP As New Drawing2D.GraphicsPath
-        DGP.StartFigure()
+        DGP.StartFigure
         'top left corner
         DGP.AddArc(New Rectangle(0, 0, 8, 8), 180, 90)
         DGP.AddLine(8, 0, sender.Width - 8, 0)
@@ -212,7 +212,7 @@ Public Class AddClientForm
 
         'buttom left corner
         DGP.AddArc(New Rectangle(0, sender.Height - 8, 8, 8), 90, 90)
-        DGP.CloseFigure()
+        DGP.CloseFigure
 
         sender.Region = New Region(DGP)
     End Sub
@@ -298,6 +298,26 @@ Public Class AddClientForm
     End Sub
 
     Private Sub lblCustomerDetails_Click(sender As Object, e As EventArgs) Handles lblCustomerDetails.Click
+
+    End Sub
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+
+    End Sub
+
+    Private Sub pnNavigation_Paint(sender As Object, e As PaintEventArgs) Handles pnNavigation.Paint
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
 
     End Sub
 End Class
