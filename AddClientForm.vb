@@ -40,7 +40,7 @@ Public Class AddClientForm
                 Dim orderId As Integer = InsertOrder(order, clientId)
 
                 ' Step 3: Insert each DressMeasurement (Size) for the order
-                For Each size As Size In order.Sizes
+                For Each size As Measurement In order.Sizes
                     InsertSize(size, orderId)
                 Next
             Next
@@ -53,6 +53,7 @@ Public Class AddClientForm
 
     End Sub
     Private Function ValidateFields() As Boolean
+
         Dim emptyFields As New List(Of String)
         If String.IsNullOrEmpty(tbName.Text) Then
             emptyFields.Add("Name")
@@ -94,51 +95,6 @@ Public Class AddClientForm
 
 
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
-        Hide
-    End Sub
-
-    Public Sub AddProjectPanel(order As Order)
-
-        Dim projectPanel As New Panel
-        projectPanel.Height = 80
-        projectPanel.Width = 200
-        projectPanel.Margin = New Padding(10)
-
-        Dim lblOrderName As New Label
-        lblOrderName.Text = "Order Name: " & order.OrderName
-        lblOrderName.Location = New Point(10, 10)
-
-        Dim lblServiceType As New Label
-        lblServiceType.Text = "Service Type: " & order.Type
-        lblServiceType.Location = New Point(10, 30)
-
-
-
-        Dim checkBox As New CheckBox
-        checkBox.Location = New Point(projectPanel.Width - 40, 30)
-        checkBox.Tag = order
-
-        lblServiceType.AutoSize = True
-        lblOrderName.AutoSize = True
-
-        projectPanel.Controls.Add(lblOrderName)
-        projectPanel.Controls.Add(lblServiceType)
-        projectPanel.Controls.Add(checkBox)
-
-        projectPanel.BackColor = Color.FromArgb(217, 185, 155)
-        projectPanel.ForeColor = Color.Black
-
-        AddHandler projectPanel.Click, AddressOf ProjectPanel_Click
-        AddHandler lblOrderName.Click, AddressOf ProjectPanel_Click
-        AddHandler lblServiceType.Click, AddressOf ProjectPanel_Click
-        AddHandler checkBox.Click, AddressOf ProjectPanel_Click
-
-
-        fpTask.Controls.Add(projectPanel)
-    End Sub
-
-
 
     Private Sub ProjectPanel_Click(sender As Object, e As EventArgs)
         Dim clickedPanel As Panel = TryCast(sender, Panel)
@@ -160,13 +116,14 @@ Public Class AddClientForm
     End Sub
 
 
+
     Private Sub btnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
         For i As Integer = fpTask.Controls.Count - 1 To 0 Step -1
             Dim panel As Panel = TryCast(fpTask.Controls(i), Panel)
             If panel IsNot Nothing Then
                 Dim checkBox As CheckBox = TryCast(panel.Controls.OfType(Of CheckBox)().FirstOrDefault(), CheckBox)
                 If checkBox IsNot Nothing AndAlso checkBox.Checked Then
-                    Dim orderToRemove As Order = TryCast(checkBox.Tag, Order)
+                    Dim orderToRemove As Order = TryCast(panel.Tag, Order)
                     If orderToRemove IsNot Nothing Then
                         Client_Orders.Remove(orderToRemove)
                     End If
@@ -183,7 +140,9 @@ Public Class AddClientForm
         fpTask.Controls.Clear()
         If Client_Orders.Count > 0 Then
             For Each order As Order In Client_Orders
-                AddProjectPanel(order)
+                Dim orderPanel As New OrderPanel(order)
+                AddHandler orderPanel.Click, AddressOf ProjectPanel_Click
+                fpTask.Controls.Add(orderPanel)
             Next
         End If
     End Sub
@@ -276,7 +235,7 @@ Public Class AddClientForm
             Return ms.ToArray()
         End Using
     End Function
-    Public Sub InsertSize(size As Size, orderId As Integer)
+    Public Sub InsertSize(size As Measurement, orderId As Integer)
         Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_id) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment_id)"
         Dim sizeParams As New Dictionary(Of String, Object) From {
         {"@OrderId", orderId},
@@ -289,35 +248,7 @@ Public Class AddClientForm
         MySQLModule.ExecuteNonQuery(sizeQuery, sizeParams)
     End Sub
 
-    Private Sub tbAddress_TextChanged(sender As Object, e As EventArgs) Handles tbAddress.TextChanged
-
-    End Sub
-
-    Private Sub lblAddress_Click(sender As Object, e As EventArgs) Handles lblAddress.Click
-
-    End Sub
-
-    Private Sub lblCustomerDetails_Click(sender As Object, e As EventArgs) Handles lblCustomerDetails.Click
-
-    End Sub
-
-    Private Sub btnSettings_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
-
-    End Sub
-
-    Private Sub pnNavigation_Paint(sender As Object, e As PaintEventArgs) Handles pnNavigation.Paint
-
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
-
-    Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
+    Private Sub AddClientForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

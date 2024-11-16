@@ -34,7 +34,7 @@ Public Class AddNewOrder
         ' Add any initialization after the InitializeComponent() call.
         Me.client_id = client_id
         Me._ProjectDetailsForm = _ProjectForm
-        Me.order = New Order(1, "", "", "", 1, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending", -1)
+        Me.order = New Order(1, "", "", "", 1, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
 
     End Sub
     Private Sub AddNewOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -42,18 +42,6 @@ Public Class AddNewOrder
         LoadGarmentTypes()
     End Sub
 
-    Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
-        For Each order In ListOrders
-            Dim orderId = InsertOrder(order, client_id)
-            For Each Size As Size In order.Sizes
-                InsertSize(Size, orderId)
-            Next
-        Next
-        _ProjectDetailsForm.dgSortOrders.Rows.Clear()
-        _ProjectDetailsForm.LoadClient(client_id)
-        Me.Close()
-
-    End Sub
 
 
 
@@ -78,7 +66,7 @@ Public Class AddNewOrder
         OrderToEdit.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
             If row.Tag IsNot Nothing Then
-                Dim size As Size = CType(row.Tag, Size)
+                Dim size As Measurement = CType(row.Tag, Measurement)
                 OrderToEdit.Sizes.Add(size)
             End If
         Next
@@ -96,7 +84,7 @@ Public Class AddNewOrder
         order.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
             If row.Tag IsNot Nothing Then
-                Dim size As Size = CType(row.Tag, Size)
+                Dim size As Measurement = CType(row.Tag, Measurement)
                 order.Sizes.Add(size)
             End If
         Next
@@ -105,8 +93,24 @@ Public Class AddNewOrder
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
         fPanelOrders.Controls.Add(OrderPanel)
 
-        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending", -1)
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
         ClearForm()
+    End Sub
+    Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
+
+        If tbOrderName.Text <> "" Then
+            AddOrder()
+        End If
+        For Each order In ListOrders
+            Dim orderId = InsertOrder(order, client_id)
+            For Each Size As Measurement In order.Sizes
+                InsertSize(Size, orderId)
+            Next
+        Next
+        _ProjectDetailsForm.dgSortOrders.Rows.Clear()
+        _ProjectDetailsForm.LoadClient(client_id)
+        Me.Close()
+
     End Sub
     Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
         Dim Panel = TryCast(sender, Panel)
@@ -181,11 +185,11 @@ Public Class AddNewOrder
 
     '   ****** Setting Up Functions *******
 
-    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Size))
+    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Measurement))
         If sizes.Count = 0 Then
             MessageBox.Show("empty sizes")
         End If
-        For Each size As Size In sizes
+        For Each size As Measurement In sizes
             Dim rowIndex As Integer = dgMeasurements.Rows.Add(size.BodyPart, (size.Value & " " & size.Unit), size.garment)
             dgMeasurements.Rows(rowIndex).Tag = size
         Next
@@ -256,7 +260,7 @@ Public Class AddNewOrder
         Dim value = nudValue.Value
         Dim unit = cbUnit.Text
         Dim garment = cbGarment.Text
-        Dim measurement = New Size(measurementType, value, unit, garment)
+        Dim measurement = New Measurement(measurementType, value, unit, garment)
 
         Dim rowIndex As Integer = dgMeasurements.Rows.Add(measurementType, (value & " " & unit), garment)
         dgMeasurements.Rows(rowIndex).Tag = measurement
@@ -286,7 +290,7 @@ Public Class AddNewOrder
         End Using
     End Function
 
-    Public Sub InsertSize(size As Size, orderId As Integer)
+    Public Sub InsertSize(size As Measurement, orderId As Integer)
         Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_id) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment_id)"
         Dim sizeParams As New Dictionary(Of String, Object) From {
         {"@OrderId", orderId},

@@ -1,15 +1,40 @@
-﻿Imports System.Net.NetworkInformation
+﻿Imports System.Diagnostics.CodeAnalysis
+Imports System.Net.NetworkInformation
+Imports System.Text.RegularExpressions
+Imports Mysqlx.Crud
 Imports Mysqlx.XDevAPI
 Imports Windows.Win32.UI.Input
 
 Public Class AddOrder
+
     Dim client As Client
     Dim order As Order
     Dim _addClientForm As AddClientForm
     Dim SelectedOrder As Order
+    Dim selectedCount As Integer = 0
     Private selectedPanelIndex As Integer
     Dim selected = False
 
+    Private ReadOnly Property OrderNames As List(Of String)
+        Get
+            Dim names As New HashSet(Of String)
+
+            ' Add order names from client orders
+            For Each order As Order In client.Orders
+                MessageBox.Show("Adding from client.orders: " & order.OrderName)
+                names.Add(order.OrderName)
+            Next
+
+            ' Add order names from staged orders in the panel
+            For Each panel As Panel In AllPanelsInFlowPane
+                Dim order = CType(panel.Tag, Order)
+                names.Add(order.OrderName)
+            Next
+
+
+            Return names.ToList()
+        End Get
+    End Property
 
 
     Private ReadOnly Property AllPanelsInFlowPane As List(Of Panel)
@@ -24,6 +49,7 @@ Public Class AddOrder
             For Each panel As Panel In AllPanelsInFlowPane
                 Dim order = CType(panel.Tag, Order)
                 orders.Add(order)
+
             Next
             Return orders
         End Get
@@ -37,7 +63,7 @@ Public Class AddOrder
 
         ' Add any initialization after the InitializeComponent() call.
         Me.client = client
-        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending", -1)
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
         Me._addClientForm = orderForm
         LoadMeasurementsType()
 
@@ -46,18 +72,73 @@ Public Class AddOrder
     ' ****** Buttons or Input Handlers  ********
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If SelectedOrder IsNot Nothing Then
-            Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
-            SaveEdit(SelectedOrder, SelectedPanel)
-            UnselectMethod(SelectedPanel)
+        If validateFieds() = True Then
 
-        Else
-            AddOrder()
+            If SelectedOrder IsNot Nothing Then
+                Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+                SaveEdit(SelectedOrder, SelectedPanel)
+                UnselectMethod(SelectedPanel)
 
+            Else
+                AddOrder()
+
+            End If
+            ReloadForm()
         End If
 
 
     End Sub
+    Private Function HandleSameName(orderName As String) As String
+        Dim result = ""
+        'For Each name As String In OrderNames
+        '    MessageBox.Show(name)
+        'Next
+        If OrderNames.Contains(orderName) Then
+            Dim match As Match = Regex.Match(orderName, "\d+$")
+            If match.Success Then
+
+                Dim number As Integer = match.Value + 1
+                result = Regex.Replace(orderName, "\d+$", number.ToString)
+            Else
+                result = orderName & "1"
+
+            End If
+        End If
+        Return result
+    End Function
+    Private Function ValidateFieds() As Boolean
+        Dim listOfEmptyFields As New List(Of String)
+
+        If OrderNames.Contains(tbOrderName.Text) Then
+            MessageBox.Show("Name already in use!", "Duplicate Name", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            tbOrderName.Text = HandleSameName(tbOrderName.Text)
+            tbOrderName.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrEmpty(tbOrderName.Text.Trim()) Then
+            listOfEmptyFields.Add("Order Name")
+        End If
+
+        If nudPrice.Value = 0 Then
+            listOfEmptyFields.Add("Price")
+        End If
+
+        If listOfEmptyFields.Count > 0 Then
+            MessageBox.Show("The following fields cannot be blank: " & String.Join(", ", listOfEmptyFields), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            If listOfEmptyFields.Contains("Order Name") Then
+                tbOrderName.Focus()
+            ElseIf listOfEmptyFields.Contains("Price") Then
+                nudPrice.Focus()
+            End If
+
+            Return False
+        End If
+
+        Return True
+    End Function
+
 
     Private Sub AddOrder()
         order.OrderName = tbOrderName.Text
@@ -70,23 +151,42 @@ Public Class AddOrder
         order.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
             If row.Tag IsNot Nothing Then
-                Dim size As Size = CType(row.Tag, Size)
+                Dim size As Measurement = CType(row.Tag, Measurement)
                 order.Sizes.Add(size)
             End If
         Next
 
         Dim OrderPanel = New OrderPanel(order)
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
+        AddHandler OrderPanel.CheckBoxStateChanged, AddressOf UpdateSelectedCount
         fPanelOrders.Controls.Add(OrderPanel)
-        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Size), "Pending", -1)
-        ClearForm()
+        numberOfOrdersDisplay()
+
+    End Sub
+    Private Sub UpdateSelectedCount(sender As Object, e As EventArgs)
+        ' Cast sender to OrderPanel to access the checkbox state
+        Dim orderPanel As OrderPanel = CType(sender, OrderPanel)
+
+        If orderPanel.checkBox.Checked Then
+            selectedCount += 1
+        Else
+            selectedCount -= 1
+        End If
+
+        ' Update the label with the new selected count
+        lblOrders.Text = "Selected Orders: " & selectedCount
+    End Sub
+    Private Sub ReloadForm()
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
+        tbOrderName.Text = HandleSameName(tbOrderName.Text)
+
     End Sub
     Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click
         Dim measurementType = sbMType.Text
         Dim value = nudValue.Value
         Dim unit = cbUnit.Text
         Dim garment = cbGarment.Text
-        Dim measurement = New Size(measurementType, value, unit, garment)
+        Dim measurement = New Measurement(measurementType, value, unit, garment)
 
         ' Add row to DataGridView with Size Tag 
         Dim rowIndex = dgMeasurements.Rows.Add(measurementType, value & " " & unit, garment)
@@ -103,7 +203,7 @@ Public Class AddOrder
         OrderToEdit.Sizes.Clear()
         For Each row As DataGridViewRow In dgMeasurements.Rows
             If row.Tag IsNot Nothing Then
-                Dim size As Size = CType(row.Tag, Size)
+                Dim size As Measurement = CType(row.Tag, Measurement)
                 OrderToEdit.Sizes.Add(size)
 
             End If
@@ -112,6 +212,9 @@ Public Class AddOrder
     End Sub
 
     Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
+        If tbOrderName.Text <> "" Then
+            AddOrder()
+        End If
         For Each order In ListOrders
             client.addOrder(order)
         Next
@@ -239,8 +342,8 @@ Public Class AddOrder
 
     '   ****** Setting Up Functions *******
 
-    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Size))
-        For Each size As Size In sizes
+    Private Sub AddMeasurementsToDatagrid(sizes As List(Of Measurement))
+        For Each size As Measurement In sizes
             Dim rowIndex As Integer = dgMeasurements.Rows.Add(size.BodyPart, (size.Value & " " & size.Unit), size.garment)
             dgMeasurements.Rows(rowIndex).Tag = size
         Next
@@ -288,43 +391,13 @@ Public Class AddOrder
         OrderPicturebox.Image = My.Resources.noImageIcon
     End Sub
 
-    Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
-
-    Private Sub LblName_Click(sender As Object, e As EventArgs)
-    End Sub
-
-    Private Sub tbOrderName_TextChanged(sender As Object, e As EventArgs) Handles tbOrderName.TextChanged
-
-    End Sub
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub pnAddOrders_Paint(sender As Object, e As PaintEventArgs) Handles pnAddOrders.Paint
-
-    End Sub
-
-    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
-
-    End Sub
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
-
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
-
+    Private Sub numberOfOrdersDisplay()
+        If ListOrders.Count = 1 Then
+            lblOrders.Text = "1 order added"
+        ElseIf ListOrders.Count > 1 Then
+            lblOrders.Text = ListOrders.Count & " orders added"
+        End If
     End Sub
 
 

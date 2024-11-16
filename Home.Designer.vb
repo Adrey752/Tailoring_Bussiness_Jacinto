@@ -49,14 +49,10 @@ Partial Class Home
         lblProjects = New Label()
         btnSort = New Button()
         pnNavigation = New Panel()
-        Label1 = New Label()
-        Label3 = New Label()
-        pbTailoringJacinto = New PictureBox()
-        Label2 = New Label()
         btnSettings = New Button()
         btnSearch = New Button()
         btnHome = New Button()
-        TextBox1 = New TextBox()
+        tbSearch = New TextBox()
         PictureBox1 = New PictureBox()
         cmsSorting = New ContextMenuStrip(components)
         nameItem = New ToolStripMenuItem()
@@ -68,19 +64,15 @@ Partial Class Home
         ToolStripSeparator2 = New ToolStripSeparator()
         pnSort = New Panel()
         Button1 = New Button()
-        PictureBox2 = New PictureBox()
-        PictureBox3 = New PictureBox()
-        PictureBox4 = New PictureBox()
+        lbSuggestions = New ListBox()
+        pbTailoringJacinto = New PictureBox()
         CType(DataGridProjects, ComponentModel.ISupportInitialize).BeginInit()
         pnLogout.SuspendLayout()
         pnNavigation.SuspendLayout()
-        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         cmsSorting.SuspendLayout()
         pnSort.SuspendLayout()
-        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
-        CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
-        CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' DataGridProjects
@@ -313,13 +305,7 @@ Partial Class Home
         ' 
         pnNavigation.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
         pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
-        pnNavigation.Controls.Add(PictureBox4)
-        pnNavigation.Controls.Add(PictureBox3)
-        pnNavigation.Controls.Add(PictureBox2)
-        pnNavigation.Controls.Add(Label1)
-        pnNavigation.Controls.Add(Label3)
         pnNavigation.Controls.Add(pbTailoringJacinto)
-        pnNavigation.Controls.Add(Label2)
         pnNavigation.Controls.Add(btnSettings)
         pnNavigation.Controls.Add(btnSearch)
         pnNavigation.Controls.Add(btnHome)
@@ -327,49 +313,6 @@ Partial Class Home
         pnNavigation.Name = "pnNavigation"
         pnNavigation.Size = New System.Drawing.Size(227, 663)
         pnNavigation.TabIndex = 8
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        Label1.ForeColor = Color.Black
-        Label1.Location = New Point(56, 378)
-        Label1.Name = "Label1"
-        Label1.Size = New System.Drawing.Size(49, 15)
-        Label1.TabIndex = 15
-        Label1.Text = "Settings"
-        ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        Label3.ForeColor = Color.Black
-        Label3.Location = New Point(56, 337)
-        Label3.Name = "Label3"
-        Label3.Size = New System.Drawing.Size(42, 15)
-        Label3.TabIndex = 14
-        Label3.Text = "Search"
-        ' 
-        ' pbTailoringJacinto
-        ' 
-        pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
-        pbTailoringJacinto.Location = New Point(12, 31)
-        pbTailoringJacinto.Name = "pbTailoringJacinto"
-        pbTailoringJacinto.Size = New System.Drawing.Size(203, 143)
-        pbTailoringJacinto.SizeMode = PictureBoxSizeMode.StretchImage
-        pbTailoringJacinto.TabIndex = 9
-        pbTailoringJacinto.TabStop = False
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
-        Label2.ForeColor = Color.Black
-        Label2.Location = New Point(56, 295)
-        Label2.Name = "Label2"
-        Label2.Size = New System.Drawing.Size(40, 15)
-        Label2.TabIndex = 13
-        Label2.Text = "Home"
         ' 
         ' btnSettings
         ' 
@@ -412,13 +355,13 @@ Partial Class Home
         btnHome.TextAlign = ContentAlignment.MiddleLeft
         btnHome.UseVisualStyleBackColor = False
         ' 
-        ' TextBox1
+        ' tbSearch
         ' 
-        TextBox1.Anchor = AnchorStyles.Top
-        TextBox1.Location = New Point(513, 38)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New System.Drawing.Size(440, 23)
-        TextBox1.TabIndex = 9
+        tbSearch.Anchor = AnchorStyles.Top
+        tbSearch.Location = New Point(513, 38)
+        tbSearch.Name = "tbSearch"
+        tbSearch.Size = New System.Drawing.Size(440, 23)
+        tbSearch.TabIndex = 9
         ' 
         ' PictureBox1
         ' 
@@ -510,38 +453,25 @@ Partial Class Home
         Button1.Text = "Sort by"
         Button1.UseVisualStyleBackColor = False
         ' 
-        ' PictureBox2
+        ' lbSuggestions
         ' 
-        PictureBox2.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
-        PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
-        PictureBox2.Location = New Point(4, 289)
-        PictureBox2.Name = "PictureBox2"
-        PictureBox2.Size = New System.Drawing.Size(50, 27)
-        PictureBox2.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox2.TabIndex = 16
-        PictureBox2.TabStop = False
+        lbSuggestions.FormattingEnabled = True
+        lbSuggestions.ItemHeight = 15
+        lbSuggestions.Location = New Point(510, 72)
+        lbSuggestions.Name = "lbSuggestions"
+        lbSuggestions.Size = New System.Drawing.Size(443, 94)
+        lbSuggestions.TabIndex = 12
+        lbSuggestions.Visible = False
         ' 
-        ' PictureBox3
+        ' pbTailoringJacinto
         ' 
-        PictureBox3.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), Image)
-        PictureBox3.Location = New Point(4, 331)
-        PictureBox3.Name = "PictureBox3"
-        PictureBox3.Size = New System.Drawing.Size(50, 27)
-        PictureBox3.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox3.TabIndex = 17
-        PictureBox3.TabStop = False
-        ' 
-        ' PictureBox4
-        ' 
-        PictureBox4.BackColor = Color.BurlyWood
-        PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), Image)
-        PictureBox4.Location = New Point(4, 373)
-        PictureBox4.Name = "PictureBox4"
-        PictureBox4.Size = New System.Drawing.Size(50, 26)
-        PictureBox4.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox4.TabIndex = 18
-        PictureBox4.TabStop = False
+        pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
+        pbTailoringJacinto.Location = New Point(0, -3)
+        pbTailoringJacinto.Name = "pbTailoringJacinto"
+        pbTailoringJacinto.Size = New System.Drawing.Size(227, 192)
+        pbTailoringJacinto.SizeMode = PictureBoxSizeMode.Zoom
+        pbTailoringJacinto.TabIndex = 12
+        pbTailoringJacinto.TabStop = False
         ' 
         ' Home
         ' 
@@ -550,9 +480,10 @@ Partial Class Home
         AutoValidate = AutoValidate.EnableAllowFocusChange
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         ClientSize = New System.Drawing.Size(1246, 661)
+        Controls.Add(lbSuggestions)
         Controls.Add(pnSort)
         Controls.Add(PictureBox1)
-        Controls.Add(TextBox1)
+        Controls.Add(tbSearch)
         Controls.Add(pnNavigation)
         Controls.Add(lblProjects)
         Controls.Add(btnAddrOrder)
@@ -567,15 +498,11 @@ Partial Class Home
         CType(DataGridProjects, ComponentModel.ISupportInitialize).EndInit()
         pnLogout.ResumeLayout(False)
         pnNavigation.ResumeLayout(False)
-        pnNavigation.PerformLayout()
-        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         cmsSorting.ResumeLayout(False)
         pnSort.ResumeLayout(False)
         pnSort.PerformLayout()
-        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
-        CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
-        CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
+        CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -588,11 +515,9 @@ Partial Class Home
     Friend WithEvents lblProjects As Label
     Friend WithEvents btnSort As Button
     Friend WithEvents pnNavigation As Panel
-    Friend WithEvents pbTailoringJacinto As PictureBox
     Friend WithEvents btnSearch As Button
-    Friend WithEvents btnHome As Button
     Friend WithEvents btnSettings As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents tbSearch As TextBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btDetails As DataGridViewButtonColumn
     Friend WithEvents client_id As DataGridViewTextBoxColumn
@@ -611,10 +536,7 @@ Partial Class Home
     Friend WithEvents quantityItem As ToolStripMenuItem
     Friend WithEvents ascendingItem As ToolStripMenuItem
     Friend WithEvents decendingItem As ToolStripMenuItem
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents PictureBox3 As PictureBox
-    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents lbSuggestions As ListBox
+    Friend WithEvents btnHome As Button
+    Friend WithEvents pbTailoringJacinto As PictureBox
 End Class

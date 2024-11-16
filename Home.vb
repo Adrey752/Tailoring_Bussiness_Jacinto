@@ -6,6 +6,17 @@ Public Class Home
     Dim selectedSortby As ToolStripItem
     Dim selectedSortDirection As ToolStripItem
 
+    Private ReadOnly Property AllClients As List(Of Client)
+        Get
+            Dim listOfClients As New List(Of Client)
+            For Each row As DataGridViewRow In DataGridProjects.Rows
+                listOfClients.Add(CType(row.Tag, Client))
+            Next
+            Return listOfClients
+        End Get
+
+    End Property
+
     Public Sub New(login As login)
 
         InitializeComponent()
@@ -38,7 +49,7 @@ Public Class Home
 
     Public Sub loadDatabase()
         DataGridProjects.Rows.Clear()
-        Dim tableQuery = "SELECT client_id, name, date, quantity, payment, price, order_status FROM CLIENT"
+        Dim tableQuery = "SELECT * FROM CLIENT"
 
         Dim parameter As New Dictionary(Of String, Object)()
 
@@ -47,11 +58,13 @@ Public Class Home
         For Each row As DataRow In resultTable.Rows
             Dim client_id As Integer = row.Field(Of Integer)("client_id")
             Dim name As String = row.Field(Of String)("name")
-            Dim dateOrder As DateTime = row.Field(Of DateTime)("date")
+            Dim dateOrder As String = If(IsDBNull(row("date")), "00/00/00", row.Field(Of DateTime)("date").ToString())
             Dim orderStatus As String = row.Field(Of String)("order_status")
             Dim payment As Decimal = row.Field(Of Decimal)("payment")
             Dim price As Decimal = row.Field(Of Decimal)("price")
             Dim quantity As Integer = row.Field(Of Integer)("quantity")
+            Dim address As String = row.Field(Of String)("address")
+            Dim contact As String = row.Field(Of String)("contact")
 
             Dim paymentStatus As String
             If payment > 0 Then
@@ -67,33 +80,46 @@ Public Class Home
             End If
 
             Dim rowIndex = DataGridProjects.Rows.Add("theres' a button in the first column", client_id, name, dateOrder, quantity, orderStatus, paymentStatus)
-            If paymentStatus = "Partially Paid" Then
-                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.BackColor = Color.Yellow
-                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.ForeColor = Color.Black
 
-            ElseIf paymentStatus = "Fully Paid" Then
-                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.BackColor = Color.Green
-                DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.ForeColor = Color.Black
+            Dim client As New Client(name, address, contact, price, payment, quantity)
 
-            End If
+            paymentStatusCellColor(paymentStatus, rowIndex)
+            orderStatusCellColor(orderStatus, rowIndex)
+            DataGridProjects.Rows(rowIndex).Tag = client
 
-            If orderStatus = "Pending" Then
-                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.Yellow
-                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
-            ElseIf orderStatus = "Finished" Then
-                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.YellowGreen
-                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
 
-            ElseIf orderStatus = "Claimed" Then
-                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.Green
-                DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
-            End If
         Next
 
 
 
     End Sub
 
+    Private Sub orderStatusCellColor(orderStatus As String, rowIndex As Integer)
+        If orderStatus = "Pending" Then
+            DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.Yellow
+            DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
+        ElseIf orderStatus = "Finished" Then
+            DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.YellowGreen
+            DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
+
+        ElseIf orderStatus = "Claimed" Then
+            DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.BackColor = Color.Green
+            DataGridProjects.Rows(rowIndex).Cells("colOrderStatus").Style.ForeColor = Color.Black
+        End If
+    End Sub
+
+    Private Sub paymentStatusCellColor(paymentStatus As String, rowIndex As Integer)
+
+        If paymentStatus = "Partially Paid" Then
+            DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.BackColor = Color.Yellow
+            DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.ForeColor = Color.Black
+
+        ElseIf paymentStatus = "Fully Paid" Then
+            DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.BackColor = Color.Green
+            DataGridProjects.Rows(rowIndex).Cells("colPayStatus").Style.ForeColor = Color.Black
+
+        End If
+    End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
 
@@ -175,7 +201,7 @@ Public Class Home
                 Dim verify As DialogResult = MessageBox.Show("Are you sure you want to delete this items?")
                 If verify = DialogResult.OK Then
                     For Each row As DataGridViewRow In DataGridProjects.SelectedRows
-                        MessageBox.Show("I'm inside for loop")
+
                         If IsDBNull(row.Cells("client_id").Value) Then
                             MessageBox.Show("column null")
                             Continue For
@@ -321,11 +347,53 @@ Public Class Home
 
     End Sub
 
-    Private Sub pbTailoringJacinto_Click(sender As Object, e As EventArgs) Handles pbTailoringJacinto.Click
+    Private Sub pbTailoringJacinto_Click(sender As Object, e As EventArgs)
 
     End Sub
 
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
 
     End Sub
+
+    Private Sub tbSearch_TextChanged(sender As Object, e As EventArgs) Handles tbSearch.TextChanged
+
+        Dim searchText = tbSearch.Text.ToLower()
+        Dim suggestions = AllClients.Where(Function(c) c.Name.ToLower().Contains(searchText)).ToList()
+        If suggestions.Count > 0 Then
+            lbSuggestions.Visible = True
+        Else
+            lbSuggestions.Visible = False
+        End If
+        lbSuggestions.Items.Clear()
+        lbSuggestions.Items.AddRange(suggestions.Select(Function(c) c.Name).ToArray)
+    End Sub
+
+
+
+    Private Sub Home_Click(sender As Object, e As EventArgs) Handles Me.Click
+        lbSuggestions.Visible = False
+        DataGridProjects.ClearSelection()
+    End Sub
+
+    Private Sub lbSuggestions_SelectedValueChanged(sender As Object, e As EventArgs) Handles lbSuggestions.SelectedValueChanged
+        Dim selectedResult = CStr(lbSuggestions.SelectedItem)
+        SearchAndSelectRow(selectedResult)
+    End Sub
+    Private Sub SearchAndSelectRow(searchValue As String)
+        Dim rowIndex As Integer = -1
+        For Each row As DataGridViewRow In DataGridProjects.Rows
+            If row.Cells("colName").Value IsNot Nothing AndAlso row.Cells("colName").Value.ToString() = searchValue Then
+                rowIndex = row.Index
+                Exit For
+            End If
+        Next
+
+        If rowIndex <> -1 Then
+            DataGridProjects.Rows(rowIndex).Selected = True
+            DataGridProjects.FirstDisplayedScrollingRowIndex = rowIndex
+        Else
+            MessageBox.Show("Value not found.")
+        End If
+    End Sub
+
 End Class

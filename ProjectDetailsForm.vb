@@ -224,7 +224,7 @@ Public Class ProjectDetailsForm
             Dim imageByte As Byte() = row.Field(Of Byte())("image")
             Dim image As Image = ByteArrayToImage(imageByte)
             Dim OrderDate As DateTime = row.Field(Of DateTime)("date")
-            Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
+            Dim sizes As List(Of Measurement) = GetSize(row.Field(Of Integer)("order_id"))
             Dim status As String = row.Field(Of String)("status")
             Dim payment_id As Integer = If(row.IsNull("payment_id"), -1, row.Field(Of Integer)("payment_id"))
 
@@ -239,8 +239,8 @@ Public Class ProjectDetailsForm
         End Using
     End Function
 
-    Private Shared Function GetSize(order_id As Integer) As List(Of Size)
-        Dim sizes As New List(Of Size)
+    Private Shared Function GetSize(order_id As Integer) As List(Of Measurement)
+        Dim sizes As New List(Of Measurement)
 
         Dim query = "SELECT * FROM size_values WHERE order_id = @order_id"
         Dim parameter As New Dictionary(Of String, Object) From {
@@ -254,7 +254,7 @@ Public Class ProjectDetailsForm
             Dim unit = row.Field(Of String)("size_unit")
             Dim garment = GetGarmentType(row.Field(Of Integer)("garment_id"))
 
-            sizes.Add(New Size(bodyPart, value, unit, garment))
+            sizes.Add(New Measurement(bodyPart, value, unit, garment))
         Next
 
         Return sizes
@@ -395,7 +395,7 @@ Public Class ProjectDetailsForm
             Dim imageByte As Byte() = row.Field(Of Byte())("image")
             Dim image As Image = ByteArrayToImage(imageByte)
             Dim OrderDate As DateTime = row.Field(Of DateTime)("date")
-            Dim sizes As List(Of Size) = GetSize(row.Field(Of Integer)("order_id"))
+            Dim sizes As List(Of Measurement) = GetSize(row.Field(Of Integer)("order_id"))
             Dim status As String = row.Field(Of String)("status")
             Dim paymentId As Integer = row.Field(Of Integer)("payment_id")
 

@@ -1,4 +1,4 @@
-﻿Public Class Size
+﻿Public Class Measurement
 
     Public Property BodyPart As String
     Public Property Value As Decimal

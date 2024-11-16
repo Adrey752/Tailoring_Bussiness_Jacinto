@@ -32,9 +32,8 @@ Partial Class AddNewOrder
         btnRemoveImage = New Button()
         ComboBox1 = New ComboBox()
         Label2 = New Label()
-        headerOrder = New Label()
-        btnAdd = New Button()
         OrderPicturebox = New PictureBox()
+        headerOrder = New Label()
         btnaddMeasurement = New Button()
         nudValue = New NumericUpDown()
         dgMeasurements = New DataGridView()
@@ -53,6 +52,7 @@ Partial Class AddNewOrder
         Panel3 = New Panel()
         lblPrice = New Label()
         nudPrice = New NumericUpDown()
+        btnAdd = New Button()
         btnOrderSave = New Button()
         fPanelOrders = New FlowLayoutPanel()
         LbSuggestions = New ListBox()
@@ -177,29 +177,6 @@ Partial Class AddNewOrder
         Label2.TabIndex = 28
         Label2.Text = "Custom Measurements"
         ' 
-        ' headerOrder
-        ' 
-        headerOrder.Anchor = AnchorStyles.None
-        headerOrder.AutoSize = True
-        headerOrder.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        headerOrder.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        headerOrder.Location = New Point(38, 21)
-        headerOrder.Name = "headerOrder"
-        headerOrder.Size = New System.Drawing.Size(158, 32)
-        headerOrder.TabIndex = 26
-        headerOrder.Text = "Order Details"
-        ' 
-        ' btnAdd
-        ' 
-        btnAdd.Anchor = AnchorStyles.None
-        btnAdd.BackColor = Color.SeaShell
-        btnAdd.Location = New Point(1014, 601)
-        btnAdd.Name = "btnAdd"
-        btnAdd.Size = New System.Drawing.Size(103, 41)
-        btnAdd.TabIndex = 25
-        btnAdd.Text = "Add Order"
-        btnAdd.UseVisualStyleBackColor = False
-        ' 
         ' OrderPicturebox
         ' 
         OrderPicturebox.Anchor = AnchorStyles.None
@@ -211,6 +188,18 @@ Partial Class AddNewOrder
         OrderPicturebox.SizeMode = PictureBoxSizeMode.Zoom
         OrderPicturebox.TabIndex = 12
         OrderPicturebox.TabStop = False
+        ' 
+        ' headerOrder
+        ' 
+        headerOrder.Anchor = AnchorStyles.None
+        headerOrder.AutoSize = True
+        headerOrder.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        headerOrder.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
+        headerOrder.Location = New Point(38, 21)
+        headerOrder.Name = "headerOrder"
+        headerOrder.Size = New System.Drawing.Size(158, 32)
+        headerOrder.TabIndex = 26
+        headerOrder.Text = "Order Details"
         ' 
         ' btnaddMeasurement
         ' 
@@ -391,6 +380,17 @@ Partial Class AddNewOrder
         nudPrice.Name = "nudPrice"
         nudPrice.Size = New System.Drawing.Size(341, 29)
         nudPrice.TabIndex = 2
+        ' 
+        ' btnAdd
+        ' 
+        btnAdd.Anchor = AnchorStyles.None
+        btnAdd.BackColor = Color.SeaShell
+        btnAdd.Location = New Point(1014, 601)
+        btnAdd.Name = "btnAdd"
+        btnAdd.Size = New System.Drawing.Size(103, 41)
+        btnAdd.TabIndex = 25
+        btnAdd.Text = "Add More Order"
+        btnAdd.UseVisualStyleBackColor = False
         ' 
         ' btnOrderSave
         ' 
