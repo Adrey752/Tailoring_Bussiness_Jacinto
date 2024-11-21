@@ -5,7 +5,7 @@
 
     Private lblServiceType As Label
     Private lblOrderName As Label
-    Public checkBox As CheckBox
+    Public Property checkBox As CheckBox
 
     Public Event CheckBoxStateChanged(sender As Object, e As EventArgs)
 

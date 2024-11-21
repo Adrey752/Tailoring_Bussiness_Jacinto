@@ -11,8 +11,9 @@ Public Class AddOrder
     Dim order As Order
     Dim _addClientForm As AddClientForm
     Dim SelectedOrder As Order
-    Dim selectedCount As Integer = 0
     Private selectedPanelIndex As Integer
+    Private selectedPanels As New List(Of Integer)()
+    Private ctrlKeyPressed As Boolean = False
     Dim selected = False
 
     Private ReadOnly Property OrderNames As List(Of String)
@@ -72,7 +73,7 @@ Public Class AddOrder
     ' ****** Buttons or Input Handlers  ********
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If validateFieds() = True Then
+        If ValidateFieds() = True Then
 
             If SelectedOrder IsNot Nothing Then
                 Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
@@ -163,18 +164,22 @@ Public Class AddOrder
         numberOfOrdersDisplay()
 
     End Sub
+
     Private Sub UpdateSelectedCount(sender As Object, e As EventArgs)
         ' Cast sender to OrderPanel to access the checkbox state
         Dim orderPanel As OrderPanel = CType(sender, OrderPanel)
+        Dim index = fPanelOrders.Controls.IndexOf(orderPanel)
 
         If orderPanel.checkBox.Checked Then
-            selectedCount += 1
+            SelectMethod(orderPanel)
+            selectedPanels.Add(index)
         Else
-            selectedCount -= 1
+            UnselectMethod(orderPanel)
+            selectedPanels.Remove(index)
         End If
 
         ' Update the label with the new selected count
-        lblOrders.Text = "Selected Orders: " & selectedCount
+        lblOrders.Text = "Selected Orders: " & selectedPanels.Count
     End Sub
     Private Sub ReloadForm()
         Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
@@ -239,44 +244,50 @@ Public Class AddOrder
 
 
     Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
-        Dim Panel = TryCast(sender, Panel)
+        Dim Panel = TryCast(sender, OrderPanel)
         If Panel IsNot Nothing Then
+            'MessageBox.Show("before get child")
+            'MessageBox.Show("after get child")
             Dim panelIndex = fPanelOrders.Controls.GetChildIndex(Panel)
 
             SelectPanel(panelIndex)
 
         End If
     End Sub
+
+
     Private Sub SelectPanel(index As Integer)
         Dim OrderPanelsCount = fPanelOrders.Controls.Count
-
-        ' unselect previously selected panel if it's not the same as current clicked panel
-        If ValidIndexRange(selectedPanelIndex, OrderPanelsCount) AndAlso index <> selectedPanelIndex Then
-            Dim previousSelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
-            UnselectMethod(previousSelectedPanel)
-        End If
+        ctrlKeyPressed = (Control.ModifierKeys And Keys.Control) = Keys.Control
 
         If ValidIndexRange(index, OrderPanelsCount) Then
-
             Dim panelClicked = fPanelOrders.Controls(index)
-            SelectedOrder = panelClicked.Tag
-            'When clicking the same panel
-            If selectedPanelIndex = index Then
-                If selected Then
+
+            ' Unselect all if Control is not pressed
+            If Not ctrlKeyPressed Then
+                Dim panelsToUnselect = selectedPanels.ToList()
+                For Each selectedIndex In panelsToUnselect
+                    Dim panelToUnselect = fPanelOrders.Controls(selectedIndex)
+                    UnselectMethod(panelToUnselect)
+                Next
+                selectedPanels.Clear()
+            End If
+
+            ' Toggle selection if Control is pressed
+            If selectedPanels.Contains(index) Then
+                If ctrlKeyPressed Then
                     UnselectMethod(panelClicked)
-
-                Else
-                    SelectMethod(panelClicked, SelectedOrder)
-
+                    selectedPanels.Remove(index)
                 End If
             Else
-                ' when clicking different panel
-                SelectMethod(panelClicked, SelectedOrder)
-                selectedPanelIndex = index
+                SelectMethod(panelClicked)
+                selectedPanels.Add(index)
             End If
         End If
-
     End Sub
+
+
+
 
     Private Shared Function ValidIndexRange(index As Integer, upperLimit As Integer) As Boolean
         If index >= upperLimit Or index < 0 Then
@@ -285,19 +296,23 @@ Public Class AddOrder
         Return True
     End Function
 
-    Private Sub SelectMethod(selectedPanel As Panel, selectedOrder As Order)
+    Private Sub SelectMethod(selectedPanel As OrderPanel)
+        Dim SelectedOrder = selectedPanel.Tag
         selectedPanel.BackColor = Color.Gray
-        ShowOrderDetails(selectedOrder)
+        ShowOrderDetails(SelectedOrder)
         btnAdd.Text = "Save Edit"
         selected = True
+        selectedPanel.checkBox.Checked = True
     End Sub
-    Private Sub UnselectMethod(selectedPanel As Panel)
+    Private Sub UnselectMethod(selectedPanel As OrderPanel)
         selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
         selected = False
         btnAdd.Text = "Add +"
         SelectedOrder = Nothing
+        selectedPanel.checkBox.Checked = False
         ClearForm()
     End Sub
+
 
     ' ******* Helper Functions *******
     Private Sub ClearForm()
@@ -400,53 +415,19 @@ Public Class AddOrder
         End If
     End Sub
 
+    Private Sub SelectedOrderDisplay()
 
+    End Sub
 
-
-    '********** Di ko narin yata to gagamitin yung mga ito pero itatabi ko lang ********
-
-    'Public Sub AddOrderToFlowPane(order As Order)
-
-    '    Dim projectPanel As New Panel
-    '    projectPanel.Height = 80
-    '    projectPanel.Width = 200
-    '    projectPanel.Margin = New Padding(10)
-
-    '    Dim lblOrderName As New Label
-    '    lblOrderName.Text = "Order Name: " & order.OrderName
-    '    lblOrderName.Location = New Point(10, 10)
-
-    '    Dim lblServiceType As New Label
-    '    lblServiceType.Text = "Service Type: " & order.Type
-    '    lblServiceType.Location = New Point(10, 30)
-
-
-
-    '    Dim checkBox As New CheckBox
-    '    checkBox.Location = New Point(projectPanel.Width - 40, 30)
-    '    projectPanel.Tag = order
-
-    '    lblServiceType.AutoSize = True
-    '    lblOrderName.AutoSize = True
-
-    '    lblOrderName.Enabled = False
-    '    lblServiceType.Enabled = False
-
-
-    '    projectPanel.Controls.Add(lblOrderName)
-    '    projectPanel.Controls.Add(lblServiceType)
-    '    projectPanel.Controls.Add(checkBox)
-
-    '    projectPanel.BackColor = Color.FromArgb(217, 185, 155)
-    '    projectPanel.ForeColor = Color.Black
-
-
-    '    AddHandler projectPanel.Click, AddressOf Order_Panel_Click
-
-    '    fPanelOrders.Controls.Add(projectPanel)
-    'End Sub
-
-
+    Private Sub DeleteSelectedPanels() Handles btnDelete.Click
+        ' Iterate in reverse handling index shift when deleting
+        For Each index In selectedPanels.OrderByDescending(Function(i) i)
+            If index >= 0 AndAlso index < fPanelOrders.Controls.Count Then
+                fPanelOrders.Controls.RemoveAt(index)
+            End If
+        Next
+        selectedPanels.Clear()
+    End Sub
 
 
 End Class

@@ -22,6 +22,7 @@ Partial Class AddOrder
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddOrder))
         btnOrderSave = New Button()
         nudValue = New NumericUpDown()
         btnaddMeasurement = New Button()
@@ -57,6 +58,7 @@ Partial Class AddOrder
         fPanelOrders = New FlowLayoutPanel()
         lblOrders = New Label()
         txtSearch = New TextBox()
+        btnDelete = New PictureBox()
         CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
@@ -65,6 +67,7 @@ Partial Class AddOrder
         Panel3.SuspendLayout()
         Panel2.SuspendLayout()
         Panel1.SuspendLayout()
+        CType(btnDelete, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnOrderSave
@@ -450,12 +453,24 @@ Partial Class AddOrder
         txtSearch.Size = New Size(268, 23)
         txtSearch.TabIndex = 25
         ' 
+        ' btnDelete
+        ' 
+        btnDelete.BackColor = Color.White
+        btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), Image)
+        btnDelete.Location = New Point(1230, 26)
+        btnDelete.Name = "btnDelete"
+        btnDelete.Size = New Size(31, 25)
+        btnDelete.SizeMode = PictureBoxSizeMode.Zoom
+        btnDelete.TabIndex = 28
+        btnDelete.TabStop = False
+        ' 
         ' AddOrder
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         ClientSize = New Size(1273, 654)
+        Controls.Add(btnDelete)
         Controls.Add(LbSuggestions)
         Controls.Add(pnAddOrders)
         Controls.Add(lblOrders)
@@ -479,6 +494,7 @@ Partial Class AddOrder
         Panel2.PerformLayout()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        CType(btnDelete, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -517,4 +533,5 @@ Partial Class AddOrder
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Label5 As Label
     Friend WithEvents rbDescription As RichTextBox
+    Friend WithEvents btnDelete As PictureBox
 End Class

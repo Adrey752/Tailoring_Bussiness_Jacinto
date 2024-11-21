@@ -126,6 +126,28 @@
   <metadata name="GarmentType.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAA6NJREFUeF7t
+        m4tt20AUBCUghaSUlJJS0klKSSkpJSEtx54TR15JpsxH5w0wCCDcysvj50jaOTRN0zRN0zRN0zRN0zTN
+        hvx5sE3AJm1Nm4BN2o0e5bMXm4BN2pp+OmwjS3mUz67z0pk0fL45LOMe5bOVvH9yR9/xPZtjpUYfuAO2
+        sdIZsJfJXbknzpjNGYqFO5CVveoa/Wg3x0oFV56gbc/CzbFS0bUWT+rfyZ39kDNjc17LfLrF9irLsSw5
+        7pjqpLOzPFaaVsc60/JYaVod60zLY6VpdawzLY+VptWxzrQ8VppWxzrT6sR77epYZ1oeK02rY51peaw0
+        TViGJixDE5ah5bHSNDGOXz5dJ87Hnz9YJTjWLI+VpgnL0IRlaMIytDxWmiYsQxOWoQnLPPl8JpVnUfzM
+        hGVowjI0YRlaHitNE5ahCcvQhGVoed77NtEyNGEZmrDMk30JOvk2T3dNbz4MJixDy2OlaUIyw4QmONZM
+        WIaWx0rThGVowjI0YRlanmXp234jxrFmwjI0YRlaHitNE5ahCcvQhGVoeaw0TViGJqYxvQi/ZcIyNGEZ
+        Gtj963QtTROWOXlaSxLL3GjCMrQ8VpomLEMTlqEJjD0OD5X9IHYyYRmasAwtj5WmCcvQhGVoYpnZ1x+W
+        DWXNhGVowjI0YRlanqGwvJhLnI8/N2EZmrAMLY+Vpm8S3qTOJixDExirt6TlsdI0YRmasAxNWIaWx0rT
+        hGVowjI0YRlaHitNE5ahiUXm7LKW4FizPEPhvS/Cd/TfHCs9+bKgJZBRE5ahCcvQ8lhpmrAMTViGJobx
+        uzwDgonncRffSiYsQxOWoeWx0jRhGZqwDE1YhpbHStOEZWjCMjRhGVoeK00TlqEJy9CEZWh5hsJr3Ybi
+        exJDTkxYhpbHStOEZIYFOcGxZoA/q98FmQnL0IRlaHlORZf/seKfCcvQhGVowjK0PKeiq+6Aj7wEaYaW
+        B2V3eQ1F1/9zDdga60zLY6VpdawzLY+VptWxzrQ8VppWxzrT8ixL7+vvatjVLI+VptWxzrQ8VppWxzrT
+        8vyetOJ1vPyQ6L6On7etPL8mxw24Qf998p3eOtHZedvK83PSyl/vpYlbf0Jv9cdkeb5O1r8M3ezTa4l5
+        23bBfKScbcDu3cXR/8rxfWvBY9SXa9e4i2u/MR81d1+OVl2Q7/f75H75cjh8m/6Zd8R8FD3vjLuPxI9y
+        vpGYO8/dm6ZpmqZpmqZpmqZpmmYFDoe/DQN51LwN2BoAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>108</value>
   </metadata>
