@@ -10,6 +10,9 @@ Public Class ProjectDetailsForm
     Dim client As Client
     Dim _HomeForm As Home
     Dim balance
+    Private isDragging As Boolean = False
+    Private dragStartPoint As Point
+
 
     Public Sub New(id As Integer, _home As Home)
 
@@ -105,22 +108,43 @@ Public Class ProjectDetailsForm
         Next
     End Sub
 
+
+
+
+    ' MouseDown: Sets up for a potential drag
     Private Sub dgSortOrders_MouseDown(sender As Object, e As MouseEventArgs) Handles dgSortOrders.MouseDown
         Dim hit = dgSortOrders.HitTest(e.X, e.Y)
 
         If hit.RowIndex >= 0 AndAlso hit.ColumnIndex >= 0 Then
-            ' Get the order object stored in the tag
-            Dim order = TryCast(dgSortOrders.Rows(hit.RowIndex).Cells(hit.ColumnIndex).Tag, Order)
+            dragStartPoint = e.Location
+            isDragging = False ' Reset the dragging flag
+        End If
+    End Sub
 
-            ' Only start drag if the order is not Nothing
-            If order IsNot Nothing Then
-                dgSortOrders.DoDragDrop(order, DragDropEffects.Move)
+    ' MouseMove: Starts the drag if the mouse moves far enough
+    Private Sub dgSortOrders_MouseMove(sender As Object, e As MouseEventArgs) Handles dgSortOrders.MouseMove
+        If e.Button = MouseButtons.Left AndAlso Not isDragging Then
+            Dim deltaX = Math.Abs(e.X - dragStartPoint.X)
+            Dim deltaY = Math.Abs(e.Y - dragStartPoint.Y)
+
+            ' Only start dragging if the mouse has moved a significant distance
+            If deltaX > SystemInformation.DragSize.Width OrElse deltaY > SystemInformation.DragSize.Height Then
+                isDragging = True
+
+                ' Get the order object to drag
+                Dim hit = dgSortOrders.HitTest(dragStartPoint.X, dragStartPoint.Y)
+                If hit.RowIndex >= 0 AndAlso hit.ColumnIndex >= 0 Then
+                    Dim order = TryCast(dgSortOrders.Rows(hit.RowIndex).Cells(hit.ColumnIndex).Tag, Order)
+                    If order IsNot Nothing Then
+                        dgSortOrders.DoDragDrop(order, DragDropEffects.Move)
+                    End If
+                End If
             End If
         End If
     End Sub
 
+    ' DragEnter: Sets the drag-drop effect
     Private Sub dgSortOrders_DragEnter(sender As Object, e As DragEventArgs) Handles dgSortOrders.DragEnter
-        ' Allow the drop if it's a valid move operation
         If e.Data.GetDataPresent(GetType(Order)) Then
             e.Effect = DragDropEffects.Move
         Else
@@ -128,56 +152,47 @@ Public Class ProjectDetailsForm
         End If
     End Sub
 
+    ' DragDrop: Handles the dropped data
     Private Sub dgSortOrders_DragDrop(sender As Object, e As DragEventArgs) Handles dgSortOrders.DragDrop
-
         Dim droppedOrder = CType(e.Data.GetData(GetType(Order)), Order)
         Dim clientPoint = dgSortOrders.PointToClient(New Point(e.X, e.Y))
 
         Dim hit = dgSortOrders.HitTest(clientPoint.X, clientPoint.Y)
-        If hit.RowIndex >= 0 AndAlso hit.ColumnIndex > 0 AndAlso hit.ColumnIndex <> -1 AndAlso
-           (hit.ColumnIndex = 1 Or hit.ColumnIndex = 3 Or hit.ColumnIndex = 4) Then
-
-            Dim Status = ""
-            Dim order_id = droppedOrder.OrderId
-
+        If hit.RowIndex >= 0 AndAlso hit.ColumnIndex >= 0 Then
+            ' Example logic for processing the drop
+            Dim newStatus As String = ""
             Select Case hit.ColumnIndex
-                Case 1
-                    Status = "Pending"
-                Case 3
-                    Status = "Finished"
-                Case 4
-                    Status = "Claimed"
+                Case 1 : newStatus = "Pending"
+                Case 3 : newStatus = "Finished"
+                Case 4 : newStatus = "Claimed"
             End Select
 
-            UpdateOrderStatus(order_id, Status)
-
-            LoadOrders(clientId)
+            If Not String.IsNullOrEmpty(newStatus) Then
+                UpdateOrderStatus(droppedOrder.OrderId, newStatus)
+                LoadOrders(clientId)
+            End If
         End If
-
-
     End Sub
 
+    ' CellContentClick: Processes clicks if no drag was detected
+    Private Sub dgSortOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgSortOrders.CellClick
+        If isDragging Then Return ' Skip processing if a drag was in progress
 
-    Private Sub dgSortOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgSortOrders.CellContentClick
-
-        Dim columnIndex = e.ColumnIndex
-        If columnIndex = 0 Or columnIndex = 2 AndAlso e.RowIndex >= 0 Then
-
-            Dim order = CType(dgSortOrders.Rows(e.RowIndex).Cells(columnIndex + 1).Tag, Order)
-
-            If order IsNot Nothing Then
-                Dim status = ""
-                Dim order_id = order.OrderId
-                Select Case order.Status
-                    Case "Pending"
-                        status = "Finished"
-                    Case "Finished"
-                        status = "Claimed"
-                End Select
-                UpdateOrderStatus(order_id, status)
-
-
-                LoadOrders(clientId)
+        If e.RowIndex >= 0 Then
+            Dim columnIndex = e.ColumnIndex
+            If columnIndex = 0 OrElse columnIndex = 2 Then
+                Dim order = TryCast(dgSortOrders.Rows(e.RowIndex).Cells(columnIndex + 1).Tag, Order)
+                If order IsNot Nothing Then
+                    Dim status As String = If(order.Status = "Pending", "Finished", "Claimed")
+                    UpdateOrderStatus(order.OrderId, status)
+                    LoadOrders(clientId)
+                End If
+            ElseIf columnIndex = 1 OrElse columnIndex = 3 OrElse columnIndex = 4 Then
+                Dim lorder = TryCast(dgSortOrders.Rows(e.RowIndex).Cells(columnIndex).Tag, Order)
+                If lorder IsNot Nothing Then
+                    Dim orderDisplay = New OrderDisplay(lorder)
+                    orderDisplay.Show()
+                End If
             End If
         End If
     End Sub
@@ -420,39 +435,4 @@ Public Class ProjectDetailsForm
         Return orderNames
     End Function
 
-    Private Sub ProjectDetailsForm_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-
-    End Sub
-
-    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub LblName_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub lblAddress_Click(sender As Object, e As EventArgs) Handles lblAddress.Click
-
-    End Sub
-
-    Private Sub lblPayment_Click(sender As Object, e As EventArgs) Handles lblPayment.Click
-
-    End Sub
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
-
-    End Sub
-
-    Private Sub ProjectDetailsForm_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Private Sub nudOrders_ValueChanged(sender As Object, e As EventArgs) Handles nudOrders.ValueChanged
-
-    End Sub
-
-    Private Sub lblCustomerDetails_Click(sender As Object, e As EventArgs) Handles lblCustomerDetails.Click
-
-    End Sub
 End Class

@@ -7,7 +7,7 @@
     Private lblOrderName As Label
     Public Property checkBox As CheckBox
 
-    Public Event CheckBoxStateChanged(sender As Object, e As EventArgs)
+    'Public Event CheckBoxStateChanged(sender As Object, e As EventArgs)
 
     Public Sub New(order As Order)
         Me.Order = order
@@ -36,10 +36,11 @@
         checkBox = New CheckBox() With {
             .Location = New Point(Me.Width - 30, 5),
             .Anchor = AnchorStyles.Top Or AnchorStyles.Right,
-            .Text = ""
+            .Text = "",
+            .Enabled = False
         }
 
-        AddHandler checkBox.CheckedChanged, AddressOf CheckBox_CheckedChanged
+        'AddHandler checkBox.CheckedChanged, AddressOf CheckBox_CheckedChanged
 
         Me.Controls.Add(lblOrderName)
         Me.Controls.Add(lblServiceType)
@@ -47,9 +48,9 @@
         Me.Tag = order
     End Sub
 
-    Private Sub CheckBox_CheckedChanged(sender As Object, e As EventArgs)
-        RaiseEvent CheckBoxStateChanged(Me, e)
-    End Sub
+    'Private Sub CheckBox_CheckedChanged(sender As Object, e As EventArgs)
+    '    RaiseEvent CheckBoxStateChanged(Me, e)
+    'End Sub
 
     Public Sub UpdateUI()
         lblOrderName.Text = "Order Name: " & Order.OrderName

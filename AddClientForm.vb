@@ -97,14 +97,15 @@ Public Class AddClientForm
 
 
     Private Sub ProjectPanel_Click(sender As Object, e As EventArgs)
-        Dim clickedPanel As Panel = TryCast(sender, Panel)
+        Dim clickedPanel As OrderPanel = TryCast(sender, OrderPanel)
         If clickedPanel Is Nothing Then
 
             Dim control As Control = DirectCast(sender, Control)
             clickedPanel = control.Parent
         End If
         If clickedPanel IsNot Nothing Then
-            Dim orderDisplay As OrderDisplay = New OrderDisplay()
+            Dim order As Order = clickedPanel.Tag
+            Dim orderDisplay As OrderDisplay = New OrderDisplay(order)
             orderDisplay.Show()
         End If
     End Sub

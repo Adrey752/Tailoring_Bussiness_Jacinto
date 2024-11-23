@@ -23,7 +23,7 @@ Partial Class OrderDisplay
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         pnAddOrders = New Panel()
-        Label4 = New Label()
+        lblPaymentStatus = New Label()
         rbDescription = New RichTextBox()
         Label3 = New Label()
         lblAmountToPay = New Label()
@@ -62,7 +62,7 @@ Partial Class OrderDisplay
         ' 
         pnAddOrders.Anchor = AnchorStyles.None
         pnAddOrders.BackColor = Color.White
-        pnAddOrders.Controls.Add(Label4)
+        pnAddOrders.Controls.Add(lblPaymentStatus)
         pnAddOrders.Controls.Add(rbDescription)
         pnAddOrders.Controls.Add(Label3)
         pnAddOrders.Controls.Add(lblAmountToPay)
@@ -90,19 +90,19 @@ Partial Class OrderDisplay
         pnAddOrders.Controls.Add(lblServiceType)
         pnAddOrders.Location = New Point(17, 0)
         pnAddOrders.Name = "pnAddOrders"
-        pnAddOrders.Size = New System.Drawing.Size(998, 653)
+        pnAddOrders.Size = New Size(998, 653)
         pnAddOrders.TabIndex = 3
         ' 
-        ' Label4
+        ' lblPaymentStatus
         ' 
-        Label4.Anchor = AnchorStyles.None
-        Label4.AutoSize = True
-        Label4.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
-        Label4.Location = New Point(131, 206)
-        Label4.Name = "Label4"
-        Label4.Size = New System.Drawing.Size(30, 15)
-        Label4.TabIndex = 69
-        Label4.Text = "Paid"
+        lblPaymentStatus.Anchor = AnchorStyles.None
+        lblPaymentStatus.AutoSize = True
+        lblPaymentStatus.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
+        lblPaymentStatus.Location = New Point(131, 206)
+        lblPaymentStatus.Name = "lblPaymentStatus"
+        lblPaymentStatus.Size = New Size(30, 15)
+        lblPaymentStatus.TabIndex = 69
+        lblPaymentStatus.Text = "Paid"
         ' 
         ' rbDescription
         ' 
@@ -112,7 +112,7 @@ Partial Class OrderDisplay
         rbDescription.MaxLength = 20000
         rbDescription.Name = "rbDescription"
         rbDescription.ScrollBars = RichTextBoxScrollBars.Vertical
-        rbDescription.Size = New System.Drawing.Size(438, 125)
+        rbDescription.Size = New Size(438, 125)
         rbDescription.TabIndex = 8
         rbDescription.Text = ""
         ' 
@@ -123,7 +123,7 @@ Partial Class OrderDisplay
         Label3.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         Label3.Location = New Point(28, 206)
         Label3.Name = "Label3"
-        Label3.Size = New System.Drawing.Size(89, 15)
+        Label3.Size = New Size(89, 15)
         Label3.TabIndex = 68
         Label3.Text = "Payment Status"
         ' 
@@ -135,7 +135,7 @@ Partial Class OrderDisplay
         lblAmountToPay.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblAmountToPay.Location = New Point(131, 167)
         lblAmountToPay.Name = "lblAmountToPay"
-        lblAmountToPay.Size = New System.Drawing.Size(105, 25)
+        lblAmountToPay.Size = New Size(105, 25)
         lblAmountToPay.TabIndex = 67
         lblAmountToPay.Text = "₱ 2,550.00"
         ' 
@@ -143,7 +143,7 @@ Partial Class OrderDisplay
         ' 
         dtpOrderDate.Location = New Point(298, 39)
         dtpOrderDate.Name = "dtpOrderDate"
-        dtpOrderDate.Size = New System.Drawing.Size(200, 23)
+        dtpOrderDate.Size = New Size(200, 23)
         dtpOrderDate.TabIndex = 32
         ' 
         ' btnAddImage
@@ -151,7 +151,7 @@ Partial Class OrderDisplay
         btnAddImage.Anchor = AnchorStyles.None
         btnAddImage.Location = New Point(777, 345)
         btnAddImage.Name = "btnAddImage"
-        btnAddImage.Size = New System.Drawing.Size(99, 41)
+        btnAddImage.Size = New Size(99, 41)
         btnAddImage.TabIndex = 31
         btnAddImage.Text = "Upload Image"
         btnAddImage.UseVisualStyleBackColor = True
@@ -161,7 +161,7 @@ Partial Class OrderDisplay
         btnRemoveImage.Anchor = AnchorStyles.None
         btnRemoveImage.Location = New Point(888, 345)
         btnRemoveImage.Name = "btnRemoveImage"
-        btnRemoveImage.Size = New System.Drawing.Size(98, 41)
+        btnRemoveImage.Size = New Size(98, 41)
         btnRemoveImage.TabIndex = 30
         btnRemoveImage.Text = "Remove Image"
         btnRemoveImage.UseVisualStyleBackColor = True
@@ -173,7 +173,7 @@ Partial Class OrderDisplay
         ComboBox1.Items.AddRange(New Object() {"Small T-Shirt", "Large T-Shirt", "X-Large T-Shirt"})
         ComboBox1.Location = New Point(330, 452)
         ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New System.Drawing.Size(109, 23)
+        ComboBox1.Size = New Size(109, 23)
         ComboBox1.TabIndex = 27
         ComboBox1.Text = "Small T-Shirt"
         ' 
@@ -184,7 +184,7 @@ Partial Class OrderDisplay
         Label2.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         Label2.Location = New Point(194, 452)
         Label2.Name = "Label2"
-        Label2.Size = New System.Drawing.Size(130, 15)
+        Label2.Size = New Size(130, 15)
         Label2.TabIndex = 28
         Label2.Text = "Custom Measurements"
         ' 
@@ -196,7 +196,7 @@ Partial Class OrderDisplay
         headerOrder.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         headerOrder.Location = New Point(28, 31)
         headerOrder.Name = "headerOrder"
-        headerOrder.Size = New System.Drawing.Size(158, 32)
+        headerOrder.Size = New Size(158, 32)
         headerOrder.TabIndex = 26
         headerOrder.Text = "Order Details"
         ' 
@@ -206,7 +206,7 @@ Partial Class OrderDisplay
         btnCancel.BackColor = Color.SeaShell
         btnCancel.Location = New Point(882, 601)
         btnCancel.Name = "btnCancel"
-        btnCancel.Size = New System.Drawing.Size(104, 41)
+        btnCancel.Size = New Size(104, 41)
         btnCancel.TabIndex = 24
         btnCancel.Text = "Cancel"
         btnCancel.UseVisualStyleBackColor = False
@@ -218,7 +218,7 @@ Partial Class OrderDisplay
         OrderPicturebox.Image = My.Resources.Resources.noImageIcon
         OrderPicturebox.Location = New Point(520, 32)
         OrderPicturebox.Name = "OrderPicturebox"
-        OrderPicturebox.Size = New System.Drawing.Size(466, 297)
+        OrderPicturebox.Size = New Size(466, 297)
         OrderPicturebox.SizeMode = PictureBoxSizeMode.Zoom
         OrderPicturebox.TabIndex = 12
         OrderPicturebox.TabStop = False
@@ -229,7 +229,7 @@ Partial Class OrderDisplay
         btnOrderSave.BackColor = Color.SeaShell
         btnOrderSave.Location = New Point(772, 601)
         btnOrderSave.Name = "btnOrderSave"
-        btnOrderSave.Size = New System.Drawing.Size(104, 41)
+        btnOrderSave.Size = New Size(104, 41)
         btnOrderSave.TabIndex = 3
         btnOrderSave.Text = "Save"
         btnOrderSave.UseVisualStyleBackColor = False
@@ -241,7 +241,7 @@ Partial Class OrderDisplay
         lblPrice.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblPrice.Location = New Point(28, 167)
         lblPrice.Name = "lblPrice"
-        lblPrice.Size = New System.Drawing.Size(33, 15)
+        lblPrice.Size = New Size(33, 15)
         lblPrice.TabIndex = 20
         lblPrice.Text = "Price"
         ' 
@@ -250,7 +250,7 @@ Partial Class OrderDisplay
         btnaddMeasurement.Anchor = AnchorStyles.None
         btnaddMeasurement.Location = New Point(391, 545)
         btnaddMeasurement.Name = "btnaddMeasurement"
-        btnaddMeasurement.Size = New System.Drawing.Size(75, 41)
+        btnaddMeasurement.Size = New Size(75, 41)
         btnaddMeasurement.TabIndex = 7
         btnaddMeasurement.Text = "Add Size"
         btnaddMeasurement.UseVisualStyleBackColor = True
@@ -261,7 +261,7 @@ Partial Class OrderDisplay
         nudValue.Location = New Point(178, 491)
         nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         nudValue.Name = "nudValue"
-        nudValue.Size = New System.Drawing.Size(102, 23)
+        nudValue.Size = New Size(102, 23)
         nudValue.TabIndex = 4
         ' 
         ' dgMeasurements
@@ -271,7 +271,7 @@ Partial Class OrderDisplay
         dgMeasurements.Columns.AddRange(New DataGridViewColumn() {size_type, measurement, GarmentType})
         dgMeasurements.Location = New Point(520, 407)
         dgMeasurements.Name = "dgMeasurements"
-        dgMeasurements.Size = New System.Drawing.Size(466, 179)
+        dgMeasurements.Size = New Size(466, 179)
         dgMeasurements.TabIndex = 10
         ' 
         ' size_type
@@ -301,7 +301,7 @@ Partial Class OrderDisplay
         cbUnit.Items.AddRange(New Object() {"cm", "inches", "meters"})
         cbUnit.Location = New Point(286, 490)
         cbUnit.Name = "cbUnit"
-        cbUnit.Size = New System.Drawing.Size(77, 23)
+        cbUnit.Size = New Size(77, 23)
         cbUnit.TabIndex = 5
         cbUnit.Text = "inches"
         ' 
@@ -313,7 +313,7 @@ Partial Class OrderDisplay
         lblSize.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblSize.Location = New Point(60, 441)
         lblSize.Name = "lblSize"
-        lblSize.Size = New System.Drawing.Size(57, 32)
+        lblSize.Size = New Size(57, 32)
         lblSize.TabIndex = 9
         lblSize.Text = "Size"
         ' 
@@ -326,7 +326,7 @@ Partial Class OrderDisplay
         lblDesc.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblDesc.Location = New Point(24, 242)
         lblDesc.Name = "lblDesc"
-        lblDesc.Size = New System.Drawing.Size(137, 32)
+        lblDesc.Size = New Size(137, 32)
         lblDesc.TabIndex = 7
         lblDesc.Text = "Description"
         ' 
@@ -336,7 +336,7 @@ Partial Class OrderDisplay
         lblorderName.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblorderName.Location = New Point(28, 83)
         lblorderName.Name = "lblorderName"
-        lblorderName.Size = New System.Drawing.Size(72, 15)
+        lblorderName.Size = New Size(72, 15)
         lblorderName.TabIndex = 5
         lblorderName.Text = "Order Name"
         ' 
@@ -346,7 +346,7 @@ Partial Class OrderDisplay
         tbOrderName.MaxLength = 150
         tbOrderName.Name = "tbOrderName"
         tbOrderName.PlaceholderText = "Enter Order Name"
-        tbOrderName.Size = New System.Drawing.Size(121, 23)
+        tbOrderName.Size = New Size(121, 23)
         tbOrderName.TabIndex = 0
         ' 
         ' sbMType
@@ -355,7 +355,7 @@ Partial Class OrderDisplay
         sbMType.FormattingEnabled = True
         sbMType.Location = New Point(70, 490)
         sbMType.Name = "sbMType"
-        sbMType.Size = New System.Drawing.Size(102, 23)
+        sbMType.Size = New Size(102, 23)
         sbMType.TabIndex = 3
         sbMType.Text = "Waist"
         ' 
@@ -365,7 +365,7 @@ Partial Class OrderDisplay
         cbGarment.Items.AddRange(New Object() {"Cotton", "Silk", "Leather"})
         cbGarment.Location = New Point(373, 490)
         cbGarment.Name = "cbGarment"
-        cbGarment.Size = New System.Drawing.Size(66, 23)
+        cbGarment.Size = New Size(66, 23)
         cbGarment.TabIndex = 6
         cbGarment.Text = "Cotton"
         ' 
@@ -375,7 +375,7 @@ Partial Class OrderDisplay
         cbStype.Items.AddRange(New Object() {"Repair", "Resize"})
         cbStype.Location = New Point(131, 129)
         cbStype.Name = "cbStype"
-        cbStype.Size = New System.Drawing.Size(121, 23)
+        cbStype.Size = New Size(121, 23)
         cbStype.TabIndex = 1
         ' 
         ' lblServiceType
@@ -384,7 +384,7 @@ Partial Class OrderDisplay
         lblServiceType.ForeColor = Color.FromArgb(CByte(184), CByte(115), CByte(51))
         lblServiceType.Location = New Point(28, 117)
         lblServiceType.Name = "lblServiceType"
-        lblServiceType.Size = New System.Drawing.Size(71, 15)
+        lblServiceType.Size = New Size(71, 15)
         lblServiceType.TabIndex = 0
         lblServiceType.Text = "Service Type"
         ' 
@@ -392,7 +392,7 @@ Partial Class OrderDisplay
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New System.Drawing.Size(1022, 654)
+        ClientSize = New Size(1022, 654)
         Controls.Add(pnAddOrders)
         Name = "OrderDisplay"
         StartPosition = FormStartPosition.CenterScreen
@@ -432,7 +432,7 @@ Partial Class OrderDisplay
     Friend WithEvents btnAddImage As Button
     Friend WithEvents btnRemoveImage As Button
     Friend WithEvents dtpOrderDate As DateTimePicker
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblPaymentStatus As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents lblAmountToPay As Label
 End Class

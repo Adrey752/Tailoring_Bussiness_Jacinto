@@ -9,6 +9,8 @@ Public Class AddNewOrder
     Dim _ProjectDetailsForm As ProjectDetailsForm
     Dim SelectedOrder As Order
     Private selectedPanelIndex As Integer
+    Private selectedPanels As New List(Of Integer)()
+    Private ctrlKeyPressed As Boolean = False
     Dim selected = False
     Private ReadOnly Property allPanels As List(Of Panel)
         Get

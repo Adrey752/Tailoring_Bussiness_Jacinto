@@ -159,28 +159,12 @@ Public Class AddOrder
 
         Dim OrderPanel = New OrderPanel(order)
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
-        AddHandler OrderPanel.CheckBoxStateChanged, AddressOf UpdateSelectedCount
         fPanelOrders.Controls.Add(OrderPanel)
         numberOfOrdersDisplay()
 
     End Sub
 
-    Private Sub UpdateSelectedCount(sender As Object, e As EventArgs)
-        ' Cast sender to OrderPanel to access the checkbox state
-        Dim orderPanel As OrderPanel = CType(sender, OrderPanel)
-        Dim index = fPanelOrders.Controls.IndexOf(orderPanel)
 
-        If orderPanel.checkBox.Checked Then
-            SelectMethod(orderPanel)
-            selectedPanels.Add(index)
-        Else
-            UnselectMethod(orderPanel)
-            selectedPanels.Remove(index)
-        End If
-
-        ' Update the label with the new selected count
-        lblOrders.Text = "Selected Orders: " & selectedPanels.Count
-    End Sub
     Private Sub ReloadForm()
         Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
         tbOrderName.Text = HandleSameName(tbOrderName.Text)
@@ -244,72 +228,88 @@ Public Class AddOrder
 
 
     Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
-        Dim Panel = TryCast(sender, OrderPanel)
-        If Panel IsNot Nothing Then
-            'MessageBox.Show("before get child")
-            'MessageBox.Show("after get child")
-            Dim panelIndex = fPanelOrders.Controls.GetChildIndex(Panel)
-
-            SelectPanel(panelIndex)
+        Dim OrderPanel = TryCast(sender, OrderPanel)
+        If OrderPanel IsNot Nothing Then
+            SelectPanel(OrderPanel)
 
         End If
     End Sub
 
 
-    Private Sub SelectPanel(index As Integer)
+    Private Sub SelectPanel(orderPanel As OrderPanel)
         Dim OrderPanelsCount = fPanelOrders.Controls.Count
+        Dim orderPanelIndex = fPanelOrders.Controls.GetChildIndex(orderPanel)
+
         ctrlKeyPressed = (Control.ModifierKeys And Keys.Control) = Keys.Control
 
-        If ValidIndexRange(index, OrderPanelsCount) Then
-            Dim panelClicked = fPanelOrders.Controls(index)
+        If ValidIndexRange(orderPanelIndex, OrderPanelsCount) Then
 
-            ' Unselect all if Control is not pressed
-            If Not ctrlKeyPressed Then
-                Dim panelsToUnselect = selectedPanels.ToList()
-                For Each selectedIndex In panelsToUnselect
-                    Dim panelToUnselect = fPanelOrders.Controls(selectedIndex)
-                    UnselectMethod(panelToUnselect)
-                Next
-                selectedPanels.Clear()
-            End If
-
-            ' Toggle selection if Control is pressed
-            If selectedPanels.Contains(index) Then
-                If ctrlKeyPressed Then
-                    UnselectMethod(panelClicked)
-                    selectedPanels.Remove(index)
+            ' clicking panels when ctrl keys is pressed
+            If ctrlKeyPressed Then
+                If selectedPanels.Contains(orderPanelIndex) Then
+                    UnselectMethod(orderPanel)
+                Else
+                    SelectMethod(orderPanel)
                 End If
-            Else
-                SelectMethod(panelClicked)
-                selectedPanels.Add(index)
+                ' When clicking panels when ctrke is not pressed
+            ElseIf ctrlKeyPressed = False Then
+                If ValidIndexRange(selectedPanelIndex, fPanelOrders.Controls.Count) AndAlso orderPanelIndex <> selectedPanelIndex Then
+                    Dim previouslySelected = fPanelOrders.Controls(selectedPanelIndex)
+                    UnselectMethod(previouslySelected)
+
+                End If
+                If selectedPanels.Count > 1 Then
+                    UnselectAllPanelsSelected()
+                Else
+
+                End If
+
+                If selectedPanelIndex = orderPanelIndex Then
+                    If selected Then
+                        UnselectMethod(orderPanel)
+                    Else
+                        SelectMethod(orderPanel)
+                    End If
+                Else
+                    SelectMethod(orderPanel)
+                    selectedPanelIndex = orderPanelIndex
+                End If
             End If
+
+
+            lblOrders.Text = "Selected Orders: " & selectedPanels.Count
         End If
+
+    End Sub
+
+    Private Sub UnselectAllPanelsSelected()
+        For Each index In selectedPanels.ToList()
+            Dim orderPanel = TryCast(fPanelOrders.Controls(index), OrderPanel)
+            UnselectMethod(orderPanel)
+        Next
     End Sub
 
 
 
 
-    Private Shared Function ValidIndexRange(index As Integer, upperLimit As Integer) As Boolean
-        If index >= upperLimit Or index < 0 Then
-            Return False
-        End If
-        Return True
-    End Function
-
     Private Sub SelectMethod(selectedPanel As OrderPanel)
+        Dim index = fPanelOrders.Controls.GetChildIndex(selectedPanel)
         Dim SelectedOrder = selectedPanel.Tag
         selectedPanel.BackColor = Color.Gray
         ShowOrderDetails(SelectedOrder)
         btnAdd.Text = "Save Edit"
         selected = True
         selectedPanel.checkBox.Checked = True
+        selectedPanels.Add(index)
     End Sub
     Private Sub UnselectMethod(selectedPanel As OrderPanel)
+        Dim index = fPanelOrders.Controls.GetChildIndex(selectedPanel)
         selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
         selected = False
         btnAdd.Text = "Add +"
         SelectedOrder = Nothing
         selectedPanel.checkBox.Checked = False
+        selectedPanels.Remove(index)
         ClearForm()
     End Sub
 
@@ -415,9 +415,6 @@ Public Class AddOrder
         End If
     End Sub
 
-    Private Sub SelectedOrderDisplay()
-
-    End Sub
 
     Private Sub DeleteSelectedPanels() Handles btnDelete.Click
         ' Iterate in reverse handling index shift when deleting
@@ -429,5 +426,10 @@ Public Class AddOrder
         selectedPanels.Clear()
     End Sub
 
-
+    Private Shared Function ValidIndexRange(index As Integer, upperLimit As Integer) As Boolean
+        If index >= upperLimit Or index < 0 Then
+            Return False
+        End If
+        Return True
+    End Function
 End Class
