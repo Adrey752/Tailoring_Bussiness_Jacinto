@@ -22,7 +22,6 @@ Public Class AddOrder
 
             ' Add order names from client orders
             For Each order As Order In client.Orders
-                MessageBox.Show("Adding from client.orders: " & order.OrderName)
                 names.Add(order.OrderName)
             Next
 
@@ -276,8 +275,7 @@ Public Class AddOrder
                 End If
             End If
 
-
-            lblOrders.Text = "Selected Orders: " & selectedPanels.Count
+            numberOfOrdersDisplay()
         End If
 
     End Sub
@@ -301,6 +299,15 @@ Public Class AddOrder
         selected = True
         selectedPanel.checkBox.Checked = True
         selectedPanels.Add(index)
+    End Sub
+    Private Sub numberOfOrdersDisplay()
+        If selectedPanels.Count > 0 Then
+            lblOrders.Text = "Selected Orders: " & selectedPanels.Count
+        ElseIf ListOrders.Count = 1 Then
+            lblOrders.Text = "1 order added"
+        ElseIf ListOrders.Count > 1 Then
+            lblOrders.Text = ListOrders.Count & " orders added"
+        End If
     End Sub
     Private Sub UnselectMethod(selectedPanel As OrderPanel)
         Dim index = fPanelOrders.Controls.GetChildIndex(selectedPanel)
@@ -407,13 +414,6 @@ Public Class AddOrder
     End Sub
 
 
-    Private Sub numberOfOrdersDisplay()
-        If ListOrders.Count = 1 Then
-            lblOrders.Text = "1 order added"
-        ElseIf ListOrders.Count > 1 Then
-            lblOrders.Text = ListOrders.Count & " orders added"
-        End If
-    End Sub
 
 
     Private Sub DeleteSelectedPanels() Handles btnDelete.Click

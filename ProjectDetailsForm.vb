@@ -44,6 +44,7 @@ Public Class ProjectDetailsForm
         Dim quantity As String = Convert.ToDecimal(row("quantity"))
 
         client = New Client(name, address, contact, price, payment, quantity)
+        client.client_Id = clientId
         client.Orders = GetClientOrdersFromDatabase(clientId)
 
         tbName.Text = client.Name
@@ -304,7 +305,7 @@ Public Class ProjectDetailsForm
     End Function
 
     Private Sub btnAddOrder_Click(sender As Object, e As EventArgs) Handles btnAddOrder.Click
-        Dim AddNewOrderForm As New AddNewOrder(clientId, Me)
+        Dim AddNewOrderForm As New AddNewOrder(client, Me)
         Me.Hide()
         AddNewOrderForm.Show()
     End Sub
@@ -435,4 +436,7 @@ Public Class ProjectDetailsForm
         Return orderNames
     End Function
 
+    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

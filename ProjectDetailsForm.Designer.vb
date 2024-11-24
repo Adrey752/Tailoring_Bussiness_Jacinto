@@ -96,7 +96,7 @@ Partial Class ProjectDetailsForm
         lblTask.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblTask.Location = New Point(110, 434)
         lblTask.Name = "lblTask"
-        lblTask.Size = New System.Drawing.Size(76, 27)
+        lblTask.Size = New Size(76, 27)
         lblTask.TabIndex = 14
         lblTask.Text = "Order"
         ' 
@@ -108,7 +108,7 @@ Partial Class ProjectDetailsForm
         tbNumber.Name = "tbNumber"
         tbNumber.PlaceholderText = "Enter Phone Number"
         tbNumber.ReadOnly = True
-        tbNumber.Size = New System.Drawing.Size(410, 23)
+        tbNumber.Size = New Size(410, 23)
         tbNumber.TabIndex = 13
         ' 
         ' tbAddress
@@ -120,7 +120,7 @@ Partial Class ProjectDetailsForm
         tbAddress.Name = "tbAddress"
         tbAddress.PlaceholderText = "Enter Address"
         tbAddress.ReadOnly = True
-        tbAddress.Size = New System.Drawing.Size(410, 23)
+        tbAddress.Size = New Size(410, 23)
         tbAddress.TabIndex = 12
         ' 
         ' lblAddress
@@ -131,7 +131,7 @@ Partial Class ProjectDetailsForm
         lblAddress.ForeColor = SystemColors.ActiveCaptionText
         lblAddress.Location = New Point(9, 17)
         lblAddress.Name = "lblAddress"
-        lblAddress.Size = New System.Drawing.Size(64, 18)
+        lblAddress.Size = New Size(64, 18)
         lblAddress.TabIndex = 10
         lblAddress.Text = "Address:"
         ' 
@@ -143,7 +143,7 @@ Partial Class ProjectDetailsForm
         lblContactNumber.ForeColor = SystemColors.ActiveCaptionText
         lblContactNumber.Location = New Point(7, 16)
         lblContactNumber.Name = "lblContactNumber"
-        lblContactNumber.Size = New System.Drawing.Size(123, 18)
+        lblContactNumber.Size = New Size(123, 18)
         lblContactNumber.TabIndex = 9
         lblContactNumber.Text = "Contact Number: "
         ' 
@@ -160,7 +160,7 @@ Partial Class ProjectDetailsForm
         dgSortOrders.Location = New Point(108, 472)
         dgSortOrders.Name = "dgSortOrders"
         dgSortOrders.ReadOnly = True
-        dgSortOrders.Size = New System.Drawing.Size(673, 227)
+        dgSortOrders.Size = New Size(673, 227)
         dgSortOrders.TabIndex = 20
         ' 
         ' pendingCheckBox
@@ -218,7 +218,7 @@ Partial Class ProjectDetailsForm
         cbSort.FormattingEnabled = True
         cbSort.Location = New Point(205, 437)
         cbSort.Name = "cbSort"
-        cbSort.Size = New System.Drawing.Size(66, 23)
+        cbSort.Size = New Size(66, 23)
         cbSort.TabIndex = 22
         cbSort.Text = "Sort By"
         ' 
@@ -230,7 +230,7 @@ Partial Class ProjectDetailsForm
         lblPayment.ForeColor = Color.Black
         lblPayment.Location = New Point(13, 73)
         lblPayment.Name = "lblPayment"
-        lblPayment.Size = New System.Drawing.Size(102, 21)
+        lblPayment.Size = New Size(102, 21)
         lblPayment.TabIndex = 28
         lblPayment.Text = "Amount Paid:"
         ' 
@@ -242,7 +242,7 @@ Partial Class ProjectDetailsForm
         lblTotalPrice.ForeColor = Color.Black
         lblTotalPrice.Location = New Point(13, 27)
         lblTotalPrice.Name = "lblTotalPrice"
-        lblTotalPrice.Size = New System.Drawing.Size(83, 21)
+        lblTotalPrice.Size = New Size(83, 21)
         lblTotalPrice.TabIndex = 31
         lblTotalPrice.Text = "Total Price:"
         ' 
@@ -254,7 +254,7 @@ Partial Class ProjectDetailsForm
         lblNumOrders.ForeColor = Color.Black
         lblNumOrders.Location = New Point(7, 17)
         lblNumOrders.Name = "lblNumOrders"
-        lblNumOrders.Size = New System.Drawing.Size(132, 18)
+        lblNumOrders.Size = New Size(132, 18)
         lblNumOrders.TabIndex = 32
         lblNumOrders.Text = "Number of Orders:"
         ' 
@@ -263,7 +263,7 @@ Partial Class ProjectDetailsForm
         nudOrders.Location = New Point(426, 17)
         nudOrders.Name = "nudOrders"
         nudOrders.ReadOnly = True
-        nudOrders.Size = New System.Drawing.Size(120, 23)
+        nudOrders.Size = New Size(120, 23)
         nudOrders.TabIndex = 33
         ' 
         ' lblHeaderOrder
@@ -274,7 +274,7 @@ Partial Class ProjectDetailsForm
         lblHeaderOrder.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblHeaderOrder.Location = New Point(110, 102)
         lblHeaderOrder.Name = "lblHeaderOrder"
-        lblHeaderOrder.Size = New System.Drawing.Size(213, 27)
+        lblHeaderOrder.Size = New Size(213, 27)
         lblHeaderOrder.TabIndex = 34
         lblHeaderOrder.Text = "Client  Information"
         ' 
@@ -285,7 +285,7 @@ Partial Class ProjectDetailsForm
         btnAddOrder.ForeColor = Color.White
         btnAddOrder.Location = New Point(709, 434)
         btnAddOrder.Name = "btnAddOrder"
-        btnAddOrder.Size = New System.Drawing.Size(72, 32)
+        btnAddOrder.Size = New Size(72, 32)
         btnAddOrder.TabIndex = 35
         btnAddOrder.Tag = ""
         btnAddOrder.Text = "Add Order"
@@ -304,7 +304,7 @@ Partial Class ProjectDetailsForm
         dgPaymentHistory.Location = New Point(864, 473)
         dgPaymentHistory.Name = "dgPaymentHistory"
         dgPaymentHistory.ReadOnly = True
-        dgPaymentHistory.Size = New System.Drawing.Size(472, 222)
+        dgPaymentHistory.Size = New Size(472, 222)
         dgPaymentHistory.TabIndex = 36
         ' 
         ' DataGridViewTextBoxColumn2
@@ -342,7 +342,7 @@ Partial Class ProjectDetailsForm
         lblDue.ForeColor = Color.FromArgb(CByte(255), CByte(87), CByte(34))
         lblDue.Location = New Point(260, 27)
         lblDue.Name = "lblDue"
-        lblDue.Size = New System.Drawing.Size(88, 25)
+        lblDue.Size = New Size(88, 25)
         lblDue.TabIndex = 37
         lblDue.Text = "5,000.00"
         ' 
@@ -354,7 +354,7 @@ Partial Class ProjectDetailsForm
         lblPaid.ForeColor = Color.FromArgb(CByte(255), CByte(87), CByte(34))
         lblPaid.Location = New Point(260, 73)
         lblPaid.Name = "lblPaid"
-        lblPaid.Size = New System.Drawing.Size(88, 25)
+        lblPaid.Size = New Size(88, 25)
         lblPaid.TabIndex = 38
         lblPaid.Text = "2,500.00"
         ' 
@@ -370,7 +370,7 @@ Partial Class ProjectDetailsForm
         Panel1.Controls.Add(lblTotalPrice)
         Panel1.Location = New Point(910, 176)
         Panel1.Name = "Panel1"
-        Panel1.Size = New System.Drawing.Size(367, 169)
+        Panel1.Size = New Size(367, 169)
         Panel1.TabIndex = 39
         ' 
         ' lblBalance
@@ -381,7 +381,7 @@ Partial Class ProjectDetailsForm
         lblBalance.ForeColor = Color.FromArgb(CByte(255), CByte(87), CByte(34))
         lblBalance.Location = New Point(260, 114)
         lblBalance.Name = "lblBalance"
-        lblBalance.Size = New System.Drawing.Size(88, 25)
+        lblBalance.Size = New Size(88, 25)
         lblBalance.TabIndex = 40
         lblBalance.Text = "2,500.00"
         ' 
@@ -393,7 +393,7 @@ Partial Class ProjectDetailsForm
         Label4.ForeColor = Color.Black
         Label4.Location = New Point(13, 114)
         Label4.Name = "Label4"
-        Label4.Size = New System.Drawing.Size(67, 21)
+        Label4.Size = New Size(67, 21)
         Label4.TabIndex = 39
         Label4.Text = "Balance:"
         ' 
@@ -408,7 +408,7 @@ Partial Class ProjectDetailsForm
         btnMakePayment.Margin = New Padding(0)
         btnMakePayment.Name = "btnMakePayment"
         btnMakePayment.RightToLeft = RightToLeft.No
-        btnMakePayment.Size = New System.Drawing.Size(367, 37)
+        btnMakePayment.Size = New Size(367, 37)
         btnMakePayment.TabIndex = 40
         btnMakePayment.Text = "Make Payment"
         btnMakePayment.UseVisualStyleBackColor = False
@@ -422,7 +422,7 @@ Partial Class ProjectDetailsForm
         tbName.Name = "tbName"
         tbName.PlaceholderText = "Enter Client Name"
         tbName.ReadOnly = True
-        tbName.Size = New System.Drawing.Size(410, 23)
+        tbName.Size = New Size(410, 23)
         tbName.TabIndex = 11
         ' 
         ' LblName
@@ -433,7 +433,7 @@ Partial Class ProjectDetailsForm
         LblName.ForeColor = SystemColors.ActiveCaptionText
         LblName.Location = New Point(18, 18)
         LblName.Name = "LblName"
-        LblName.Size = New System.Drawing.Size(55, 18)
+        LblName.Size = New Size(55, 18)
         LblName.TabIndex = 8
         LblName.Text = "Name: "
         ' 
@@ -444,7 +444,7 @@ Partial Class ProjectDetailsForm
         Panel2.Controls.Add(LblName)
         Panel2.Location = New Point(170, 167)
         Panel2.Name = "Panel2"
-        Panel2.Size = New System.Drawing.Size(557, 51)
+        Panel2.Size = New Size(557, 51)
         Panel2.TabIndex = 41
         ' 
         ' Panel3
@@ -454,7 +454,7 @@ Partial Class ProjectDetailsForm
         Panel3.Controls.Add(tbAddress)
         Panel3.Location = New Point(167, 346)
         Panel3.Name = "Panel3"
-        Panel3.Size = New System.Drawing.Size(560, 51)
+        Panel3.Size = New Size(560, 51)
         Panel3.TabIndex = 42
         ' 
         ' Panel4
@@ -464,7 +464,7 @@ Partial Class ProjectDetailsForm
         Panel4.Controls.Add(tbNumber)
         Panel4.Location = New Point(170, 224)
         Panel4.Name = "Panel4"
-        Panel4.Size = New System.Drawing.Size(557, 51)
+        Panel4.Size = New Size(557, 51)
         Panel4.TabIndex = 42
         ' 
         ' Panel5
@@ -474,7 +474,7 @@ Partial Class ProjectDetailsForm
         Panel5.Controls.Add(nudOrders)
         Panel5.Location = New Point(170, 281)
         Panel5.Name = "Panel5"
-        Panel5.Size = New System.Drawing.Size(557, 51)
+        Panel5.Size = New Size(557, 51)
         Panel5.TabIndex = 42
         ' 
         ' pnNavigation
@@ -490,7 +490,7 @@ Partial Class ProjectDetailsForm
         pnNavigation.Controls.Add(btnHome)
         pnNavigation.Location = New Point(2, -1)
         pnNavigation.Name = "pnNavigation"
-        pnNavigation.Size = New System.Drawing.Size(78, 732)
+        pnNavigation.Size = New Size(78, 732)
         pnNavigation.TabIndex = 43
         ' 
         ' PictureBox3
@@ -499,7 +499,7 @@ Partial Class ProjectDetailsForm
         PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), Image)
         PictureBox3.Location = New Point(13, 211)
         PictureBox3.Name = "PictureBox3"
-        PictureBox3.Size = New System.Drawing.Size(50, 26)
+        PictureBox3.Size = New Size(50, 26)
         PictureBox3.SizeMode = PictureBoxSizeMode.Zoom
         PictureBox3.TabIndex = 17
         PictureBox3.TabStop = False
@@ -510,7 +510,7 @@ Partial Class ProjectDetailsForm
         PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
         PictureBox2.Location = New Point(13, 169)
         PictureBox2.Name = "PictureBox2"
-        PictureBox2.Size = New System.Drawing.Size(50, 27)
+        PictureBox2.Size = New Size(50, 27)
         PictureBox2.SizeMode = PictureBoxSizeMode.Zoom
         PictureBox2.TabIndex = 16
         PictureBox2.TabStop = False
@@ -521,7 +521,7 @@ Partial Class ProjectDetailsForm
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
         PictureBox1.Location = New Point(13, 129)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New System.Drawing.Size(50, 27)
+        PictureBox1.Size = New Size(50, 27)
         PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
         PictureBox1.TabIndex = 15
         PictureBox1.TabStop = False
@@ -531,7 +531,7 @@ Partial Class ProjectDetailsForm
         pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
         pbTailoringJacinto.Location = New Point(3, 3)
         pbTailoringJacinto.Name = "pbTailoringJacinto"
-        pbTailoringJacinto.Size = New System.Drawing.Size(72, 65)
+        pbTailoringJacinto.Size = New Size(72, 65)
         pbTailoringJacinto.SizeMode = PictureBoxSizeMode.Zoom
         pbTailoringJacinto.TabIndex = 9
         pbTailoringJacinto.TabStop = False
@@ -544,7 +544,7 @@ Partial Class ProjectDetailsForm
         btnSettings.Location = New Point(-3, 202)
         btnSettings.Name = "btnSettings"
         btnSettings.Padding = New Padding(30, 0, 0, 0)
-        btnSettings.Size = New System.Drawing.Size(81, 45)
+        btnSettings.Size = New Size(81, 45)
         btnSettings.TabIndex = 11
         btnSettings.TextAlign = ContentAlignment.MiddleLeft
         btnSettings.UseVisualStyleBackColor = False
@@ -557,7 +557,7 @@ Partial Class ProjectDetailsForm
         btnSearch.Location = New Point(-3, 160)
         btnSearch.Name = "btnSearch"
         btnSearch.Padding = New Padding(30, 0, 0, 0)
-        btnSearch.Size = New System.Drawing.Size(81, 45)
+        btnSearch.Size = New Size(81, 45)
         btnSearch.TabIndex = 10
         btnSearch.TextAlign = ContentAlignment.MiddleLeft
         btnSearch.UseVisualStyleBackColor = False
@@ -570,7 +570,7 @@ Partial Class ProjectDetailsForm
         btnHome.Location = New Point(-3, 118)
         btnHome.Name = "btnHome"
         btnHome.Padding = New Padding(30, 0, 0, 0)
-        btnHome.Size = New System.Drawing.Size(81, 45)
+        btnHome.Size = New Size(81, 45)
         btnHome.TabIndex = 9
         btnHome.TextAlign = ContentAlignment.MiddleLeft
         btnHome.UseVisualStyleBackColor = False
@@ -581,7 +581,7 @@ Partial Class ProjectDetailsForm
         Panel6.Controls.Add(lblCustomerDetails)
         Panel6.Location = New Point(74, -1)
         Panel6.Name = "Panel6"
-        Panel6.Size = New System.Drawing.Size(1369, 68)
+        Panel6.Size = New Size(1369, 68)
         Panel6.TabIndex = 44
         ' 
         ' lblCustomerDetails
@@ -592,7 +592,7 @@ Partial Class ProjectDetailsForm
         lblCustomerDetails.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblCustomerDetails.Location = New Point(34, 20)
         lblCustomerDetails.Name = "lblCustomerDetails"
-        lblCustomerDetails.Size = New System.Drawing.Size(215, 36)
+        lblCustomerDetails.Size = New Size(215, 36)
         lblCustomerDetails.TabIndex = 0
         lblCustomerDetails.Text = "Project Details"
         ' 
@@ -601,7 +601,7 @@ Partial Class ProjectDetailsForm
         Panel7.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
         Panel7.Location = New Point(108, 143)
         Panel7.Name = "Panel7"
-        Panel7.Size = New System.Drawing.Size(673, 279)
+        Panel7.Size = New Size(673, 279)
         Panel7.TabIndex = 45
         ' 
         ' lblHeaderPayment
@@ -612,7 +612,7 @@ Partial Class ProjectDetailsForm
         lblHeaderPayment.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblHeaderPayment.Location = New Point(910, 128)
         lblHeaderPayment.Name = "lblHeaderPayment"
-        lblHeaderPayment.Size = New System.Drawing.Size(133, 36)
+        lblHeaderPayment.Size = New Size(133, 36)
         lblHeaderPayment.TabIndex = 21
         lblHeaderPayment.Text = "Payment"
         ' 
@@ -621,7 +621,7 @@ Partial Class ProjectDetailsForm
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
-        ClientSize = New System.Drawing.Size(1361, 726)
+        ClientSize = New Size(1361, 726)
         Controls.Add(lblHeaderPayment)
         Controls.Add(pnNavigation)
         Controls.Add(Panel6)

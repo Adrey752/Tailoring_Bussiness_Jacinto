@@ -1,4 +1,6 @@
 ﻿Public Class Client
+
+    Public Property client_Id
     Public Property Name As String
     Public Property Address As String
     Public Property Contact As String

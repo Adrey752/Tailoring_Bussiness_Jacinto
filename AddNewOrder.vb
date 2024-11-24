@@ -1,10 +1,12 @@
 ﻿Imports System.ComponentModel.Design.ObjectSelectorEditor
 Imports System.IO
+Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports Mysqlx.XDevAPI
 
 Public Class AddNewOrder
     Dim client_id As Integer
+    Dim client As Client
     Dim order As Order
     Dim _ProjectDetailsForm As ProjectDetailsForm
     Dim SelectedOrder As Order
@@ -18,6 +20,31 @@ Public Class AddNewOrder
         End Get
     End Property
 
+
+    Private ReadOnly Property OrderNames As List(Of String)
+        Get
+            Dim names As New HashSet(Of String)
+
+            ' Add order names from client orders
+            For Each order As Order In client.Orders
+                names.Add(order.OrderName)
+            Next
+
+            ' Add order names from staged orders in the panel
+            For Each panel As Panel In AllPanelsInFlowPane
+                Dim order = CType(panel.Tag, Order)
+                names.Add(order.OrderName)
+            Next
+
+
+            Return names.ToList()
+        End Get
+    End Property
+    Private ReadOnly Property AllPanelsInFlowPane As List(Of Panel)
+        Get
+            Return fPanelOrders.Controls.OfType(Of Panel).ToList()
+        End Get
+    End Property
     Private ReadOnly Property ListOrders As List(Of Order)
         Get
             Dim orders As New List(Of Order)
@@ -28,13 +55,14 @@ Public Class AddNewOrder
             Return orders
         End Get
     End Property
-    Public Sub New(client_id As Integer, _ProjectForm As ProjectDetailsForm)
+    Public Sub New(client As Client, _ProjectForm As ProjectDetailsForm)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.client_id = client_id
+        Me.client = client
+        Me.client_id = client.client_Id
         Me._ProjectDetailsForm = _ProjectForm
         Me.order = New Order(1, "", "", "", 1, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
 
@@ -48,14 +76,18 @@ Public Class AddNewOrder
 
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If SelectedOrder IsNot Nothing Then
-            Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
-            SaveEdit(SelectedOrder, SelectedPanel)
-            UnselectMethod(SelectedPanel)
+        If ValidateFieds() = True Then
 
-        Else
-            AddOrder()
+            If SelectedOrder IsNot Nothing Then
+                Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+                SaveEdit(SelectedOrder, SelectedPanel)
+                UnselectMethod(SelectedPanel)
 
+            Else
+                AddOrder()
+
+            End If
+            ReloadForm()
         End If
 
 
@@ -96,7 +128,7 @@ Public Class AddNewOrder
         fPanelOrders.Controls.Add(OrderPanel)
 
         Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
-        ClearForm()
+
     End Sub
     Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
 
@@ -114,63 +146,97 @@ Public Class AddNewOrder
         Me.Close()
 
     End Sub
+
     Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
-        Dim Panel = TryCast(sender, Panel)
-        If Panel IsNot Nothing Then
-            Dim panelIndex = fPanelOrders.Controls.GetChildIndex(Panel)
-            SelectPanel(panelIndex)
+        Dim OrderPanel = TryCast(sender, OrderPanel)
+        If OrderPanel IsNot Nothing Then
+            SelectPanel(OrderPanel)
 
         End If
     End Sub
-    Private Sub SelectPanel(index As Integer)
+
+    Private Sub SelectPanel(orderPanel As OrderPanel)
         Dim OrderPanelsCount = fPanelOrders.Controls.Count
+        Dim orderPanelIndex = fPanelOrders.Controls.GetChildIndex(orderPanel)
 
-        ' unselect previously selected panel if it's not the same as current clicked panel
-        If ValidIndexRange(selectedPanelIndex, OrderPanelsCount) AndAlso index <> selectedPanelIndex Then
-            Dim previousSelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
-            UnselectMethod(previousSelectedPanel)
-        End If
+        ctrlKeyPressed = (Control.ModifierKeys And Keys.Control) = Keys.Control
 
-        If ValidIndexRange(index, OrderPanelsCount) Then
+        If ValidIndexRange(orderPanelIndex, OrderPanelsCount) Then
 
-            Dim panelClicked = fPanelOrders.Controls(index)
-            SelectedOrder = panelClicked.Tag
-            'When clicking the same panel
-            If selectedPanelIndex = index Then
-                If selected Then
-                    UnselectMethod(panelClicked)
-
+            ' clicking panels when ctrl keys is pressed
+            If ctrlKeyPressed Then
+                If selectedPanels.Contains(orderPanelIndex) Then
+                    UnselectMethod(orderPanel)
                 Else
-                    SelectMethod(panelClicked, SelectedOrder)
+                    SelectMethod(orderPanel)
+                End If
+                ' When clicking panels when ctrke is not pressed
+            ElseIf ctrlKeyPressed = False Then
+                If ValidIndexRange(selectedPanelIndex, fPanelOrders.Controls.Count) AndAlso orderPanelIndex <> selectedPanelIndex Then
+                    Dim previouslySelected = fPanelOrders.Controls(selectedPanelIndex)
+                    UnselectMethod(previouslySelected)
 
                 End If
-            Else
-                ' when clicking different panel
-                SelectMethod(panelClicked, SelectedOrder)
-                selectedPanelIndex = index
+                If selectedPanels.Count > 1 Then
+                    UnselectAllPanelsSelected()
+                Else
+
+                End If
+
+                If selectedPanelIndex = orderPanelIndex Then
+                    If selected Then
+                        UnselectMethod(orderPanel)
+                    Else
+                        SelectMethod(orderPanel)
+                    End If
+                Else
+                    SelectMethod(orderPanel)
+                    selectedPanelIndex = orderPanelIndex
+                End If
             End If
+
+            numberOfOrdersDisplay()
         End If
 
     End Sub
 
-    Private Shared Function ValidIndexRange(index As Integer, upperLimit As Integer) As Boolean
-        If index >= upperLimit Or index < 0 Then
-            Return False
-        End If
-        Return True
-    End Function
+    Private Sub UnselectAllPanelsSelected()
+        For Each index In selectedPanels.ToList()
+            Dim orderPanel = TryCast(fPanelOrders.Controls(index), OrderPanel)
+            UnselectMethod(orderPanel)
+        Next
+    End Sub
 
-    Private Sub SelectMethod(selectedPanel As Panel, selectedOrder As Order)
+
+
+
+    Private Sub SelectMethod(selectedPanel As OrderPanel)
+        Dim index = fPanelOrders.Controls.GetChildIndex(selectedPanel)
+        Dim SelectedOrder = selectedPanel.Tag
         selectedPanel.BackColor = Color.Gray
-        ShowOrderDetails(selectedOrder)
+        ShowOrderDetails(SelectedOrder)
         btnAdd.Text = "Save Edit"
         selected = True
+        selectedPanel.checkBox.Checked = True
+        selectedPanels.Add(index)
     End Sub
-    Private Sub UnselectMethod(selectedPanel As Panel)
+    Private Sub numberOfOrdersDisplay()
+        If selectedPanels.Count > 0 Then
+            lblOrders.Text = "Selected Orders: " & selectedPanels.Count
+        ElseIf ListOrders.Count = 1 Then
+            lblOrders.Text = "1 order added"
+        ElseIf ListOrders.Count > 1 Then
+            lblOrders.Text = ListOrders.Count & " orders added"
+        End If
+    End Sub
+    Private Sub UnselectMethod(selectedPanel As OrderPanel)
+        Dim index = fPanelOrders.Controls.GetChildIndex(selectedPanel)
         selectedPanel.BackColor = Color.FromArgb(217, 185, 155)
         selected = False
         btnAdd.Text = "Add +"
         SelectedOrder = Nothing
+        selectedPanel.checkBox.Checked = False
+        selectedPanels.Remove(index)
         ClearForm()
     End Sub
 
@@ -184,13 +250,16 @@ Public Class AddNewOrder
 
     End Sub
 
+    Private Sub ReloadForm()
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
+        tbOrderName.Text = HandleSameName(tbOrderName.Text)
+
+    End Sub
 
     '   ****** Setting Up Functions *******
 
     Private Sub AddMeasurementsToDatagrid(sizes As List(Of Measurement))
-        If sizes.Count = 0 Then
-            MessageBox.Show("empty sizes")
-        End If
+
         For Each size As Measurement In sizes
             Dim rowIndex As Integer = dgMeasurements.Rows.Add(size.BodyPart, (size.Value & " " & size.Unit), size.garment)
             dgMeasurements.Rows(rowIndex).Tag = size
@@ -204,6 +273,13 @@ Public Class AddNewOrder
         nudValue.Value = 0
         dgMeasurements.Rows.Clear()
     End Sub
+
+    Private Shared Function ValidIndexRange(index As Integer, upperLimit As Integer) As Boolean
+        If index >= upperLimit Or index < 0 Then
+            Return False
+        End If
+        Return True
+    End Function
 
 
 
@@ -366,4 +442,54 @@ Public Class AddNewOrder
     Private Sub lblServiceType_Click(sender As Object, e As EventArgs) Handles lblServiceType.Click
 
     End Sub
+    Private Function HandleSameName(orderName As String) As String
+        Dim result = ""
+        'For Each name As String In OrderNames
+        '    MessageBox.Show(name)
+        'Next
+        If OrderNames.Contains(orderName) Then
+            Dim match As Match = Regex.Match(orderName, "\d+$")
+            If match.Success Then
+
+                Dim number As Integer = match.Value + 1
+                result = Regex.Replace(orderName, "\d+$", number.ToString)
+            Else
+                result = orderName & "1"
+
+            End If
+        End If
+        Return result
+    End Function
+    Private Function ValidateFieds() As Boolean
+        Dim listOfEmptyFields As New List(Of String)
+
+        If OrderNames.Contains(tbOrderName.Text) Then
+            MessageBox.Show("Name already in use!", "Duplicate Name", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            tbOrderName.Text = HandleSameName(tbOrderName.Text)
+            tbOrderName.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrEmpty(tbOrderName.Text.Trim()) Then
+            listOfEmptyFields.Add("Order Name")
+        End If
+
+        If nudPrice.Value = 0 Then
+            listOfEmptyFields.Add("Price")
+        End If
+
+        If listOfEmptyFields.Count > 0 Then
+            MessageBox.Show("The following fields cannot be blank: " & String.Join(", ", listOfEmptyFields), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            If listOfEmptyFields.Contains("Order Name") Then
+                tbOrderName.Focus()
+            ElseIf listOfEmptyFields.Contains("Price") Then
+                nudPrice.Focus()
+            End If
+
+            Return False
+        End If
+
+        Return True
+    End Function
 End Class
