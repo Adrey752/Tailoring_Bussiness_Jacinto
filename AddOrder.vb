@@ -66,9 +66,29 @@ Public Class AddOrder
         Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
         Me._addClientForm = orderForm
         LoadMeasurementsType()
+        Dim ClothingSizes = GetSizesInDb()
+        cbSizes.Items.AddRange(ClothingSizes.ToArray)
 
     End Sub
+    Private Function GetSizesInDb() As List(Of ClothingSize)
+        Dim list As New List(Of ClothingSize)
 
+        Dim query = "SELECT * FROM clothing_size"
+        Dim parameter As New Dictionary(Of String, Object)
+
+        Dim datatable = MySQLModule.ExecuteQuery(query, parameter)
+
+        For Each row As DataRow In datatable.Rows
+            Dim id As Integer = row.Field(Of Integer)("id")
+            Dim name As String = row.Field(Of String)("name")
+
+            Dim newClothingSize As New ClothingSize(name)
+            newClothingSize.Id = id
+            list.Add(newClothingSize)
+
+        Next
+        Return list
+    End Function
     ' ****** Buttons or Input Handlers  ********
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -432,4 +452,10 @@ Public Class AddOrder
         End If
         Return True
     End Function
+
+
+
+
+
+
 End Class

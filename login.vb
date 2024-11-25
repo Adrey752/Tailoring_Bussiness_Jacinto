@@ -1,11 +1,23 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Configuration
+Imports System.Text.Json
+Imports System.Text.Json.Nodes
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class login
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        tbPassword.Focus()
-        Me.BackColor = Color.FromArgb(226, 217, 185)
+
+        Dim admin_details As AdminDetails = GetAdminDetails()
+
+        If admin_details IsNot Nothing Then
+            tbPassword.Focus()
+            Me.BackColor = Color.FromArgb(226, 217, 185)
+        Else
+            Dim Welcome As New WelcomeNewUser(Me)
+            Me.Hide()
+            Welcome.ShowDialog()
+
+        End If
 
 
     End Sub
@@ -76,15 +88,30 @@ Public Class login
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
+    Private Function GetAdminDetails() As AdminDetails
+        Dim query = "SELECT * FROM admin LIMIT 1"
+        Dim parametery As New Dictionary(Of String, Object)
 
-    End Sub
+        Dim resultTable = MySQLModule.ExecuteQuery(query, parametery)
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+        If resultTable Is Nothing OrElse resultTable.Rows.Count = 0 Then
+            Return Nothing
+        End If
 
-    End Sub
+        For Each row As DataRow In resultTable.Rows
+            Dim firstname As String = row.Field(Of String)("firstname")
+            Dim middlename As String = row.Field(Of String)("middlename")
+            Dim lastname As String = row.Field(Of String)("lastname")
+            Dim birthday As Date = row.Field(Of Date)("birthday")
+            Dim password As String = row.Field(Of String)("password")
+            Dim secque As String = row.Field(Of String)("securityQuestion")
+            Dim securityQuestions As Dictionary(Of String, String) = JsonSerializer.Deserialize(Of Dictionary(Of String, String))(secque)
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+            Dim adminDetails As New AdminDetails(firstname, middlename, lastname, birthday, password, securityQuestions)
+            Return adminDetails
+        Next
 
-    End Sub
+        Return Nothing
+    End Function
+
 End Class

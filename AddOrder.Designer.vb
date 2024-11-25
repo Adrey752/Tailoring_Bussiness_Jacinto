@@ -48,7 +48,7 @@ Partial Class AddOrder
         dtpOrderDate = New DateTimePicker()
         btnAddImage = New Button()
         btnRemoveImage = New Button()
-        ComboBox1 = New ComboBox()
+        cbSizes = New ComboBox()
         Label2 = New Label()
         rbDescription = New RichTextBox()
         Panel2 = New Panel()
@@ -267,7 +267,7 @@ Partial Class AddOrder
         pnAddOrders.Controls.Add(dtpOrderDate)
         pnAddOrders.Controls.Add(btnAddImage)
         pnAddOrders.Controls.Add(btnRemoveImage)
-        pnAddOrders.Controls.Add(ComboBox1)
+        pnAddOrders.Controls.Add(cbSizes)
         pnAddOrders.Controls.Add(Label2)
         pnAddOrders.Controls.Add(btnaddMeasurement)
         pnAddOrders.Controls.Add(nudValue)
@@ -347,16 +347,14 @@ Partial Class AddOrder
         btnRemoveImage.Text = "Remove "
         btnRemoveImage.UseVisualStyleBackColor = False
         ' 
-        ' ComboBox1
+        ' cbSizes
         ' 
-        ComboBox1.Anchor = AnchorStyles.None
-        ComboBox1.FormattingEnabled = True
-        ComboBox1.Items.AddRange(New Object() {"Small T-Shirt", "Large T-Shirt", "X-Large T-Shirt"})
-        ComboBox1.Location = New Point(377, 494)
-        ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(109, 23)
-        ComboBox1.TabIndex = 3
-        ComboBox1.Text = "Small T-Shirt"
+        cbSizes.Anchor = AnchorStyles.None
+        cbSizes.FormattingEnabled = True
+        cbSizes.Location = New Point(377, 494)
+        cbSizes.Name = "cbSizes"
+        cbSizes.Size = New Size(109, 23)
+        cbSizes.TabIndex = 3
         ' 
         ' Label2
         ' 
@@ -520,7 +518,7 @@ Partial Class AddOrder
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents LbSuggestions As ListBox
     Friend WithEvents btnAdd As Button
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cbSizes As ComboBox
     Friend WithEvents Label2 As Label
     Friend WithEvents size_type As DataGridViewTextBoxColumn
     Friend WithEvents measurement As DataGridViewTextBoxColumn

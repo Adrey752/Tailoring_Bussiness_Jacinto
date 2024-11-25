@@ -142,6 +142,7 @@ Public Class AddClientForm
         If Client_Orders.Count > 0 Then
             For Each order As Order In Client_Orders
                 Dim orderPanel As New OrderPanel(order)
+                orderPanel.checkBox.Enabled = True
                 AddHandler orderPanel.Click, AddressOf ProjectPanel_Click
                 fpTask.Controls.Add(orderPanel)
             Next
