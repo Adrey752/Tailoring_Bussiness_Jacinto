@@ -28,6 +28,9 @@ Partial Class AddClientForm
         PictureBox5 = New PictureBox()
         PictureBox4 = New PictureBox()
         pnNavigation = New Panel()
+        PictureBox3 = New PictureBox()
+        PictureBox1 = New PictureBox()
+        PictureBox2 = New PictureBox()
         pbTailoringJacinto = New PictureBox()
         btnSettings = New Button()
         btnSearch = New Button()
@@ -52,6 +55,9 @@ Partial Class AddClientForm
         CType(PictureBox5, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         pnNavigation.SuspendLayout()
+        CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         pnLogout.SuspendLayout()
@@ -121,21 +127,63 @@ Partial Class AddClientForm
         ' 
         ' pnNavigation
         ' 
-        pnNavigation.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
+        pnNavigation.Anchor = AnchorStyles.None
         pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(PictureBox3)
+        pnNavigation.Controls.Add(PictureBox1)
+        pnNavigation.Controls.Add(PictureBox2)
         pnNavigation.Controls.Add(pbTailoringJacinto)
         pnNavigation.Controls.Add(btnSettings)
         pnNavigation.Controls.Add(btnSearch)
         pnNavigation.Controls.Add(btnHome)
         pnNavigation.Location = New Point(0, 0)
         pnNavigation.Name = "pnNavigation"
-        pnNavigation.Size = New Size(78, 778)
+        pnNavigation.Size = New Size(78, 700)
         pnNavigation.TabIndex = 14
+        ' 
+        ' PictureBox3
+        ' 
+        PictureBox3.Anchor = AnchorStyles.None
+        PictureBox3.Enabled = False
+        PictureBox3.Image = My.Resources.Resources.logout
+        PictureBox3.Location = New Point(19, 169)
+        PictureBox3.Margin = New Padding(0)
+        PictureBox3.Name = "PictureBox3"
+        PictureBox3.Size = New Size(31, 29)
+        PictureBox3.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox3.TabIndex = 18
+        PictureBox3.TabStop = False
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Anchor = AnchorStyles.None
+        PictureBox1.Enabled = False
+        PictureBox1.Image = My.Resources.Resources.setting
+        PictureBox1.Location = New Point(19, 128)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(31, 29)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 19
+        PictureBox1.TabStop = False
+        ' 
+        ' PictureBox2
+        ' 
+        PictureBox2.Anchor = AnchorStyles.None
+        PictureBox2.Enabled = False
+        PictureBox2.Image = My.Resources.Resources.home
+        PictureBox2.Location = New Point(19, 79)
+        PictureBox2.Margin = New Padding(0)
+        PictureBox2.Name = "PictureBox2"
+        PictureBox2.Size = New Size(41, 38)
+        PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox2.TabIndex = 18
+        PictureBox2.TabStop = False
         ' 
         ' pbTailoringJacinto
         ' 
+        pbTailoringJacinto.Anchor = AnchorStyles.None
         pbTailoringJacinto.Image = CType(resources.GetObject("pbTailoringJacinto.Image"), Image)
-        pbTailoringJacinto.Location = New Point(3, 3)
+        pbTailoringJacinto.Location = New Point(3, 0)
         pbTailoringJacinto.Name = "pbTailoringJacinto"
         pbTailoringJacinto.Size = New Size(72, 65)
         pbTailoringJacinto.SizeMode = PictureBoxSizeMode.Zoom
@@ -144,10 +192,11 @@ Partial Class AddClientForm
         ' 
         ' btnSettings
         ' 
+        btnSettings.Anchor = AnchorStyles.None
         btnSettings.BackColor = Color.BurlyWood
         btnSettings.FlatStyle = FlatStyle.Flat
         btnSettings.ForeColor = Color.BurlyWood
-        btnSettings.Location = New Point(-3, 202)
+        btnSettings.Location = New Point(-3, 163)
         btnSettings.Name = "btnSettings"
         btnSettings.Padding = New Padding(30, 0, 0, 0)
         btnSettings.Size = New Size(81, 45)
@@ -157,10 +206,11 @@ Partial Class AddClientForm
         ' 
         ' btnSearch
         ' 
+        btnSearch.Anchor = AnchorStyles.None
         btnSearch.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
         btnSearch.FlatStyle = FlatStyle.Flat
         btnSearch.ForeColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        btnSearch.Location = New Point(-3, 160)
+        btnSearch.Location = New Point(-3, 121)
         btnSearch.Name = "btnSearch"
         btnSearch.Padding = New Padding(30, 0, 0, 0)
         btnSearch.Size = New Size(81, 45)
@@ -170,10 +220,11 @@ Partial Class AddClientForm
         ' 
         ' btnHome
         ' 
+        btnHome.Anchor = AnchorStyles.None
         btnHome.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
         btnHome.FlatStyle = FlatStyle.Flat
         btnHome.ForeColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
-        btnHome.Location = New Point(-3, 118)
+        btnHome.Location = New Point(-3, 79)
         btnHome.Name = "btnHome"
         btnHome.Padding = New Padding(30, 0, 0, 0)
         btnHome.Size = New Size(81, 45)
@@ -385,6 +436,9 @@ Partial Class AddClientForm
         CType(PictureBox5, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         pnNavigation.ResumeLayout(False)
+        CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         CType(pbTailoringJacinto, ComponentModel.ISupportInitialize).EndInit()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
@@ -413,7 +467,10 @@ Partial Class AddClientForm
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents pnNavigation As Panel
     Friend WithEvents pbTailoringJacinto As PictureBox
-    Friend WithEvents btnSettings As Button
     Friend WithEvents btnSearch As Button
     Friend WithEvents btnHome As Button
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnSettings As Button
+    Friend WithEvents PictureBox3 As PictureBox
 End Class

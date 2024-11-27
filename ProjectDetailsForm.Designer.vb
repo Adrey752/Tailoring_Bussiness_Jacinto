@@ -22,9 +22,9 @@ Partial Class ProjectDetailsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProjectDetailsForm))
         lblTask = New Label()
         tbNumber = New TextBox()
@@ -65,8 +65,8 @@ Partial Class ProjectDetailsForm
         PictureBox2 = New PictureBox()
         PictureBox1 = New PictureBox()
         pbTailoringJacinto = New PictureBox()
-        btnSettings = New Button()
-        btnSearch = New Button()
+        btnLogout = New Button()
+        btnSetting = New Button()
         btnHome = New Button()
         Panel6 = New Panel()
         lblCustomerDetails = New Label()
@@ -176,8 +176,8 @@ Partial Class ProjectDetailsForm
         ' 
         pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         pending.DataPropertyName = "pending"
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        pending.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft
+        pending.DefaultCellStyle = DataGridViewCellStyle4
         pending.HeaderText = "Pending Orders"
         pending.Name = "pending"
         pending.ReadOnly = True
@@ -196,8 +196,8 @@ Partial Class ProjectDetailsForm
         ' 
         finished.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         finished.DataPropertyName = "finished"
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
-        finished.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft
+        finished.DefaultCellStyle = DataGridViewCellStyle5
         finished.HeaderText = "Finished"
         finished.Name = "finished"
         finished.ReadOnly = True
@@ -311,8 +311,8 @@ Partial Class ProjectDetailsForm
         ' 
         DataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         DataGridViewTextBoxColumn2.DataPropertyName = "finished"
-        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
         DataGridViewTextBoxColumn2.HeaderText = "Date"
         DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         DataGridViewTextBoxColumn2.ReadOnly = True
@@ -485,8 +485,8 @@ Partial Class ProjectDetailsForm
         pnNavigation.Controls.Add(PictureBox2)
         pnNavigation.Controls.Add(PictureBox1)
         pnNavigation.Controls.Add(pbTailoringJacinto)
-        pnNavigation.Controls.Add(btnSettings)
-        pnNavigation.Controls.Add(btnSearch)
+        pnNavigation.Controls.Add(btnLogout)
+        pnNavigation.Controls.Add(btnSetting)
         pnNavigation.Controls.Add(btnHome)
         pnNavigation.Location = New Point(2, -1)
         pnNavigation.Name = "pnNavigation"
@@ -496,7 +496,8 @@ Partial Class ProjectDetailsForm
         ' PictureBox3
         ' 
         PictureBox3.BackColor = Color.BurlyWood
-        PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), Image)
+        PictureBox3.Enabled = False
+        PictureBox3.Image = My.Resources.Resources.logout
         PictureBox3.Location = New Point(13, 211)
         PictureBox3.Name = "PictureBox3"
         PictureBox3.Size = New Size(50, 26)
@@ -507,7 +508,8 @@ Partial Class ProjectDetailsForm
         ' PictureBox2
         ' 
         PictureBox2.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), Image)
+        PictureBox2.Enabled = False
+        PictureBox2.Image = My.Resources.Resources.setting
         PictureBox2.Location = New Point(13, 169)
         PictureBox2.Name = "PictureBox2"
         PictureBox2.Size = New Size(50, 27)
@@ -518,7 +520,8 @@ Partial Class ProjectDetailsForm
         ' PictureBox1
         ' 
         PictureBox1.BackColor = Color.FromArgb(CByte(255), CByte(240), CByte(219))
-        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Enabled = False
+        PictureBox1.Image = My.Resources.Resources.home
         PictureBox1.Location = New Point(13, 129)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(50, 27)
@@ -536,31 +539,31 @@ Partial Class ProjectDetailsForm
         pbTailoringJacinto.TabIndex = 9
         pbTailoringJacinto.TabStop = False
         ' 
-        ' btnSettings
+        ' btnLogout
         ' 
-        btnSettings.BackColor = Color.BurlyWood
-        btnSettings.FlatStyle = FlatStyle.Flat
-        btnSettings.ForeColor = Color.BurlyWood
-        btnSettings.Location = New Point(-3, 202)
-        btnSettings.Name = "btnSettings"
-        btnSettings.Padding = New Padding(30, 0, 0, 0)
-        btnSettings.Size = New Size(81, 45)
-        btnSettings.TabIndex = 11
-        btnSettings.TextAlign = ContentAlignment.MiddleLeft
-        btnSettings.UseVisualStyleBackColor = False
+        btnLogout.BackColor = Color.BurlyWood
+        btnLogout.FlatStyle = FlatStyle.Flat
+        btnLogout.ForeColor = Color.BurlyWood
+        btnLogout.Location = New Point(-3, 202)
+        btnLogout.Name = "btnLogout"
+        btnLogout.Padding = New Padding(30, 0, 0, 0)
+        btnLogout.Size = New Size(81, 45)
+        btnLogout.TabIndex = 11
+        btnLogout.TextAlign = ContentAlignment.MiddleLeft
+        btnLogout.UseVisualStyleBackColor = False
         ' 
-        ' btnSearch
+        ' btnSetting
         ' 
-        btnSearch.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        btnSearch.FlatStyle = FlatStyle.Flat
-        btnSearch.ForeColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
-        btnSearch.Location = New Point(-3, 160)
-        btnSearch.Name = "btnSearch"
-        btnSearch.Padding = New Padding(30, 0, 0, 0)
-        btnSearch.Size = New Size(81, 45)
-        btnSearch.TabIndex = 10
-        btnSearch.TextAlign = ContentAlignment.MiddleLeft
-        btnSearch.UseVisualStyleBackColor = False
+        btnSetting.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        btnSetting.FlatStyle = FlatStyle.Flat
+        btnSetting.ForeColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        btnSetting.Location = New Point(-3, 160)
+        btnSetting.Name = "btnSetting"
+        btnSetting.Padding = New Padding(30, 0, 0, 0)
+        btnSetting.Size = New Size(81, 45)
+        btnSetting.TabIndex = 10
+        btnSetting.TextAlign = ContentAlignment.MiddleLeft
+        btnSetting.UseVisualStyleBackColor = False
         ' 
         ' btnHome
         ' 
@@ -705,8 +708,8 @@ Partial Class ProjectDetailsForm
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents pbTailoringJacinto As PictureBox
-    Friend WithEvents btnSettings As Button
-    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnLogout As Button
+    Friend WithEvents btnSetting As Button
     Friend WithEvents btnHome As Button
     Friend WithEvents Panel6 As Panel
     Friend WithEvents lblCustomerDetails As Label

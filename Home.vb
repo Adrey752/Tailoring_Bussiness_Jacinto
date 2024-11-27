@@ -33,16 +33,10 @@ Public Class Home
     End Sub
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnToggle.Click
-        If Not pnLogout.Visible Then
-            pnLogout.Visible = True
-        Else
-            pnLogout.Visible = False
-        End If
-    End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnLogOut.Click
-        Me.Hide()
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
+        Hide()
         login.Show()
     End Sub
 
@@ -123,7 +117,7 @@ Public Class Home
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnAddrOrder.Click
 
-        Dim addOrder As New AddClientForm(Me)
+        Dim addOrder As New AddClientForm(_login, Me)
         Hide()
         addOrder.Show()
 
@@ -183,7 +177,7 @@ Public Class Home
         If e.ColumnIndex = DataGridProjects.Columns("btDetails").Index AndAlso e.RowIndex >= 0 AndAlso Not IsDBNull(clickedRow.Cells("client_id").Value) Then
             Dim client_id As Integer = Convert.ToInt32(clickedRow.Cells("client_id").Value)
 
-            Dim projectDetails = New ProjectDetailsForm(client_id, Me)
+            Dim projectDetails = New ProjectDetailsForm(client_id, Me, _login)
             Me.Hide()
             projectDetails.Show()
 
@@ -351,7 +345,9 @@ Public Class Home
 
     End Sub
 
-    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        _login.Show()
+        Me.Hide()
 
     End Sub
 
@@ -396,4 +392,11 @@ Public Class Home
         End If
     End Sub
 
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+
+    End Sub
 End Class

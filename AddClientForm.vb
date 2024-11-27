@@ -5,12 +5,13 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Public Class AddClientForm
     Dim _home As Home
     Dim _client As Client
+    Dim _login As login
     Private ReadOnly Property Client_Orders As List(Of Order)
         Get
             Return _client.Orders
         End Get
     End Property
-    Public Sub New(homeInstance As Home)
+    Public Sub New(login As login, homeInstance As Home)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -18,7 +19,7 @@ Public Class AddClientForm
         ' Add any initialization after the InitializeComponent() call.
         _home = homeInstance
         _client = New Client("", "", -1, 0, 0, 0)
-
+        _login = login
 
     End Sub
     Private Sub Btn_Save(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -88,7 +89,7 @@ Public Class AddClientForm
         _client.Address = address
         _client.Contact = number
 
-        Dim addOrder = New AddOrder(_client, Me)
+        Dim addOrder = New AddOrder(_login, _home, _client, Me)
         Me.Hide()
         addOrder.Show()
     End Sub
@@ -251,6 +252,23 @@ Public Class AddClientForm
     End Sub
 
     Private Sub AddClientForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        _home.Show()
+        Me.Close()
+
+    End Sub
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        Me.Close()
+        _home.Hide()
+        _login.Show()
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
 End Class

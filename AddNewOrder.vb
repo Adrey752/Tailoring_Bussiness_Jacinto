@@ -3,12 +3,15 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports Mysqlx.XDevAPI
+Imports ZstdSharp.Unsafe
 
 Public Class AddNewOrder
     Dim client_id As Integer
     Dim client As Client
     Dim order As Order
     Dim _ProjectDetailsForm As ProjectDetailsForm
+    Dim _home As Home
+    Dim _login As login
     Dim SelectedOrder As Order
     Private selectedPanelIndex As Integer
     Private selectedPanels As New List(Of Integer)()
@@ -55,7 +58,7 @@ Public Class AddNewOrder
             Return orders
         End Get
     End Property
-    Public Sub New(client As Client, _ProjectForm As ProjectDetailsForm)
+    Public Sub New(client As Client, _ProjectForm As ProjectDetailsForm, _home As Home, _login As login)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -64,6 +67,8 @@ Public Class AddNewOrder
         Me.client = client
         Me.client_id = client.client_Id
         Me._ProjectDetailsForm = _ProjectForm
+        Me._home = _home
+        Me._login = _login
         Me.order = New Order(1, "", "", "", 1, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
 
     End Sub
@@ -75,23 +80,7 @@ Public Class AddNewOrder
 
 
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If ValidateFieds() = True Then
 
-            If SelectedOrder IsNot Nothing Then
-                Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
-                SaveEdit(SelectedOrder, SelectedPanel)
-                UnselectMethod(SelectedPanel)
-
-            Else
-                AddOrder()
-
-            End If
-            ReloadForm()
-        End If
-
-
-    End Sub
     Private Sub SaveEdit(OrderToEdit As Order, PanelToEdit As OrderPanel)
         OrderToEdit.OrderName = tbOrderName.Text
         OrderToEdit.Type = cbStype.Text
@@ -130,22 +119,7 @@ Public Class AddNewOrder
         Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
 
     End Sub
-    Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
 
-        If tbOrderName.Text <> "" Then
-            AddOrder()
-        End If
-        For Each order In ListOrders
-            Dim orderId = InsertOrder(order, client_id)
-            For Each Size As Measurement In order.Sizes
-                InsertSize(Size, orderId)
-            Next
-        Next
-        _ProjectDetailsForm.dgSortOrders.Rows.Clear()
-        _ProjectDetailsForm.LoadClient(client_id)
-        Me.Close()
-
-    End Sub
 
     Public Sub Order_Panel_Click(sender As Object, e As EventArgs)
         Dim OrderPanel = TryCast(sender, OrderPanel)
@@ -283,66 +257,13 @@ Public Class AddNewOrder
 
 
 
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        Dim allPanels = fPanelOrders.Controls.OfType(Of Panel).ToList()
-        Dim searchText As String = txtSearch.Text.ToLower()
-        Dim suggestions = allPanels.Where(Function(p) CType(p.Tag, Order).OrderName.ToLower().Contains(searchText)).ToList()
 
-        ' Update ListBox with matching tags
-        LbSuggestions.Items.Clear()
-        LbSuggestions.Items.AddRange(suggestions.Select(Function(p) CType(p.Tag, Order).OrderName).ToArray())
-        LbSuggestions.Visible = LbSuggestions.Items.Count > 0
-    End Sub
-
-    ' Step 3: Move the selected panel to the top when a suggestion is clicked
-    Private Sub LbSuggestions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbSuggestions.SelectedIndexChanged
-        Dim selectedTag = CStr(LbSuggestions.SelectedItem)
-
-        ' Find the matching panel by its tag
-        Dim panelToMove = allPanels.FirstOrDefault(Function(p) CType(p.Tag, Order).OrderName = selectedTag)
-        If panelToMove IsNot Nothing Then
-            ' Move the panel to the top of the FlowLayoutPanel
-            fPanelOrders.Controls.SetChildIndex(panelToMove, 0)
-        End If
-
-        ' Hide the suggestions after selection
-        txtSearch.Clear()
-        LbSuggestions.Visible = False
-    End Sub
 
     '*********** HELPER FUNCTIONS BELOW NG MGA WHATT ***************
 
-    Private Sub SortOrderPanel()
-        ' Step 1: Get all panels from the FlowLayoutPanel
-        Dim panels As List(Of Panel) = fPanelOrders.Controls.OfType(Of Panel).ToList()
-
-        ' Step 2: Sort the panels based on their Tag property
-        panels.Sort(Function(x, y) String.Compare(CStr(x.Tag), CStr(y.Tag)))
-
-        ' Step 3: Clear the FlowLayoutPanel
-        fPanelOrders.Controls.Clear()
-
-        ' Step 4: Add the sorted panels back to the FlowLayoutPanel
-        For Each panel As Panel In panels
-            fPanelOrders.Controls.Add(panel)
-        Next
-    End Sub
-
-    Private Sub AddNewOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        _ProjectDetailsForm.Show()
-    End Sub
 
 
-    Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click
-        Dim measurementType = sbMType.Text
-        Dim value = nudValue.Value
-        Dim unit = cbUnit.Text
-        Dim garment = cbGarment.Text
-        Dim measurement = New Measurement(measurementType, value, unit, garment)
 
-        Dim rowIndex As Integer = dgMeasurements.Rows.Add(measurementType, (value & " " & unit), garment)
-        dgMeasurements.Rows(rowIndex).Tag = measurement
-    End Sub
 
 
     Public Function InsertOrder(order As Order, clientId As Integer) As Integer
@@ -423,25 +344,9 @@ Public Class AddNewOrder
 
     End Sub
 
-    Private Sub btnAddImage_Click(sender As Object, e As EventArgs) Handles btnAddImage.Click
-        Dim OpenFileDialog = New OpenFileDialog
-        OpenFileDialog.Filter = "Image ile |*.jpg;, *.jpeg;, *.png;, *.svg; *.bmp;"
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            OrderPicturebox.Image = Image.FromFile(OpenFileDialog.FileName)
-        End If
-    End Sub
 
-    Private Sub btnRemoveImage_Click(sender As Object, e As EventArgs) Handles btnRemoveImage.Click
-        OrderPicturebox.Image = My.Resources.noImageIcon
-    End Sub
 
-    Private Sub pnAddOrders_Paint(sender As Object, e As PaintEventArgs) Handles pnAddOrders.Paint
 
-    End Sub
-
-    Private Sub lblServiceType_Click(sender As Object, e As EventArgs) Handles lblServiceType.Click
-
-    End Sub
     Private Function HandleSameName(orderName As String) As String
         Dim result = ""
         'For Each name As String In OrderNames
@@ -492,4 +397,133 @@ Public Class AddNewOrder
 
         Return True
     End Function
+
+
+
+
+
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        Me.Close()
+        _ProjectDetailsForm.Close()
+        _home.Show()
+
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        Me.Close()
+        _ProjectDetailsForm.Close()
+        _home.Hide()
+        _login.Show()
+
+
+    End Sub
+    Private Sub AddNewOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        _ProjectDetailsForm.Show()
+    End Sub
+
+
+    Private Sub btnOrderSave_Click_1(sender As Object, e As EventArgs) Handles btnOrderSave.Click
+
+        If tbOrderName.Text <> "" Then
+            AddOrder()
+        End If
+        For Each order In ListOrders
+            Dim orderId = InsertOrder(order, client_id)
+            For Each size As Measurement In order.Sizes
+                InsertSize(size, orderId)
+            Next
+        Next
+        _ProjectDetailsForm.dgSortOrders.Rows.Clear()
+        _ProjectDetailsForm.LoadClient(client_id)
+        Close()
+    End Sub
+    Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click
+        Dim measurementType = sbMType.Text
+        Dim value = nudValue.Value
+        Dim unit = cbUnit.Text
+        Dim garment = cbGarment.Text
+        Dim measurement = New Measurement(measurementType, value, unit, garment)
+
+        Dim rowIndex = dgMeasurements.Rows.Add(measurementType, value & " " & unit, garment)
+        dgMeasurements.Rows(rowIndex).Tag = measurement
+    End Sub
+    Private Sub btnAddImage_Click(sender As Object, e As EventArgs) Handles btnAddImage.Click
+        Dim OpenFileDialog = New OpenFileDialog
+        OpenFileDialog.Filter = "Image ile |*.jpg;, *.jpeg;, *.png;, *.svg; *.bmp;"
+        If OpenFileDialog.ShowDialog = DialogResult.OK Then
+            OrderPicturebox.Image = Image.FromFile(OpenFileDialog.FileName)
+        End If
+    End Sub
+    'Private Sub SortOrderPanel()
+
+    '    Dim panels As List(Of Panel) = fPanelOrders.Controls.OfType(Of Panel).ToList()
+
+    '    panels.Sort(Function(x, y) String.Compare(CStr(x.Tag), CStr(y.Tag)))
+
+    '    fPanelOrders.Controls.Clear()
+
+
+    '    For Each panel As Panel In panels
+    '        fPanelOrders.Controls.Add(panel)
+    '    Next
+    'End Sub
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Dim allPanels = fPanelOrders.Controls.OfType(Of Panel).ToList
+        Dim searchText = txtSearch.Text.ToLower
+        Dim suggestions = allPanels.Where(Function(p) CType(p.Tag, Order).OrderName.ToLower.Contains(searchText)).ToList
+
+        ' Update ListBox with matching tags
+        LbSuggestions.Items.Clear()
+        LbSuggestions.Items.AddRange(suggestions.Select(Function(p) CType(p.Tag, Order).OrderName).ToArray)
+        LbSuggestions.Visible = LbSuggestions.Items.Count > 0
+    End Sub
+
+    ' Step 3: Move the selected panel to the top when a suggestion is clicked
+    Private Sub LbSuggestions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbSuggestions.SelectedIndexChanged
+        Dim selectedTag = CStr(LbSuggestions.SelectedItem)
+
+        ' Find the matching panel by its tag
+        Dim panelToMove = allPanels.FirstOrDefault(Function(p) CType(p.Tag, Order).OrderName = selectedTag)
+        If panelToMove IsNot Nothing Then
+            ' Move the panel to the top of the FlowLayoutPanel
+            fPanelOrders.Controls.SetChildIndex(panelToMove, 0)
+        End If
+
+        ' Hide the suggestions after selection
+        txtSearch.Clear()
+        LbSuggestions.Visible = False
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If ValidateFieds() = True Then
+
+            If SelectedOrder IsNot Nothing Then
+                Dim SelectedPanel = fPanelOrders.Controls(selectedPanelIndex)
+                SaveEdit(SelectedOrder, SelectedPanel)
+                UnselectMethod(SelectedPanel)
+
+            Else
+                AddOrder()
+
+            End If
+            ReloadForm()
+        End If
+
+
+    End Sub
+
+    Private Sub btnRemoveImage_Click_1(sender As Object, e As EventArgs) Handles btnRemoveImage.Click
+        OrderPicturebox.Image = My.Resources.noImageIcon
+
+    End Sub
+
+    Private Sub DeleteSelectedPanels() Handles btnDelete.Click
+        ' Iterate in reverse handling index shift when deleting
+        For Each index In selectedPanels.OrderByDescending(Function(i) i)
+            If index >= 0 AndAlso index < fPanelOrders.Controls.Count Then
+                fPanelOrders.Controls.RemoveAt(index)
+            End If
+        Next
+        selectedPanels.Clear()
+    End Sub
 End Class

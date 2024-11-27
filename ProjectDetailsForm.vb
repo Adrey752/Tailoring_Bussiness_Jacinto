@@ -9,12 +9,13 @@ Public Class ProjectDetailsForm
     Dim clientId As Integer
     Dim client As Client
     Dim _HomeForm As Home
+    Dim _login As login
     Dim balance
     Private isDragging As Boolean = False
     Private dragStartPoint As Point
 
 
-    Public Sub New(id As Integer, _home As Home)
+    Public Sub New(id As Integer, _home As Home, _login As login)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -22,6 +23,7 @@ Public Class ProjectDetailsForm
         ' Add any initialization after the InitializeComponent() call.
         Me.clientId = id
         Me._HomeForm = _home
+        Me._login = _login
         LoadClient(clientId)
 
     End Sub
@@ -305,7 +307,7 @@ Public Class ProjectDetailsForm
     End Function
 
     Private Sub btnAddOrder_Click(sender As Object, e As EventArgs) Handles btnAddOrder.Click
-        Dim AddNewOrderForm As New AddNewOrder(client, Me)
+        Dim AddNewOrderForm As New AddNewOrder(client, Me, _HomeForm, _login)
         Me.Hide()
         AddNewOrderForm.Show()
     End Sub
@@ -436,7 +438,19 @@ Public Class ProjectDetailsForm
         Return orderNames
     End Function
 
-    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        Me.Close()
+        _HomeForm.Show()
+    End Sub
+
+    Private Sub btnSetting_Click(sender As Object, e As EventArgs) Handles btnSetting.Click
+
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        Me.Close()
+        _HomeForm.Hide()
+        _login.Show()
 
     End Sub
 End Class

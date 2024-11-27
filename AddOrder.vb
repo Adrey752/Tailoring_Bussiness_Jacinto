@@ -10,6 +10,8 @@ Public Class AddOrder
     Dim client As Client
     Dim order As Order
     Dim _addClientForm As AddClientForm
+    Dim _home As Home
+    Dim _login As login
     Dim SelectedOrder As Order
     Private selectedPanelIndex As Integer
     Private selectedPanels As New List(Of Integer)()
@@ -56,7 +58,7 @@ Public Class AddOrder
     End Property
 
 
-    Public Sub New(client As Client, orderForm As AddClientForm)
+    Public Sub New(login As login, home As Home, client As Client, orderForm As AddClientForm)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -65,6 +67,8 @@ Public Class AddOrder
         Me.client = client
         Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
         Me._addClientForm = orderForm
+        Me._home = home
+        Me._login = login
         LoadMeasurementsType()
         Dim ClothingSizes = GetSizesInDb()
         cbSizes.Items.AddRange(ClothingSizes.ToArray)
@@ -453,9 +457,27 @@ Public Class AddOrder
         Return True
     End Function
 
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+
+    End Sub
+
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        Me.Close()
+        _addClientForm.Close()
+        _home.Show()
 
 
+    End Sub
 
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
 
+    End Sub
 
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        Me.Close()
+        _addClientForm.Close()
+        _home.Hide()
+        _login.Show()
+
+    End Sub
 End Class
