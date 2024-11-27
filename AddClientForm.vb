@@ -6,6 +6,7 @@ Public Class AddClientForm
     Dim _home As Home
     Dim _client As Client
     Dim _login As login
+    Public Property _Forward As AddOrder
     Private ReadOnly Property Client_Orders As List(Of Order)
         Get
             Return _client.Orders
@@ -271,4 +272,27 @@ Public Class AddClientForm
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim settings As New Settings(Me, _login, _home)
+        Me.Hide()
+        settings.Show()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnForward.Click
+        If _Forward Is Nothing Then
+            btnAddTask.PerformClick()
+        Else
+            _Forward.Show()
+
+        End If
+
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs)
+        Close()
+
+    End Sub
+
+
 End Class

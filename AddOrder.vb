@@ -230,6 +230,7 @@ Public Class AddOrder
         For Each order In ListOrders
             client.addOrder(order)
         Next
+        _addClientForm._Forward = Nothing
         Me.Close()
     End Sub
 
@@ -469,15 +470,24 @@ Public Class AddOrder
 
     End Sub
 
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
-
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        Dim settings As New Settings(Me, _login, _home)
+        Me.Hide()
+        settings.Show()
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        Me.Close()
+        Close()
         _addClientForm.Close()
         _home.Hide()
         _login.Show()
+
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        _addClientForm._Forward = Me
+        Me.Hide()
+        _addClientForm.Show()
 
     End Sub
 End Class

@@ -393,6 +393,11 @@ Public Class Home
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        Dim setting As New Settings(Me, login, Me)
+
+        Me.Hide()
+
+        setting.Show()
 
     End Sub
 

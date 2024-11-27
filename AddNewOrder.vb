@@ -526,4 +526,19 @@ Public Class AddNewOrder
         Next
         selectedPanels.Clear()
     End Sub
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        Dim settings As New Settings(Me, _login, _home)
+        Hide()
+        settings.Show()
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        _ProjectDetailsForm._ForwardForm = Me
+        Me.Hide()
+        _ProjectDetailsForm.Show()
+
+
+    End Sub
 End Class

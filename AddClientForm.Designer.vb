@@ -28,6 +28,8 @@ Partial Class AddClientForm
         PictureBox5 = New PictureBox()
         PictureBox4 = New PictureBox()
         pnNavigation = New Panel()
+        PictureBox7 = New PictureBox()
+        btnForward = New Button()
         PictureBox3 = New PictureBox()
         PictureBox1 = New PictureBox()
         PictureBox2 = New PictureBox()
@@ -55,6 +57,7 @@ Partial Class AddClientForm
         CType(PictureBox5, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         pnNavigation.SuspendLayout()
+        CType(PictureBox7, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
@@ -129,6 +132,8 @@ Partial Class AddClientForm
         ' 
         pnNavigation.Anchor = AnchorStyles.None
         pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(PictureBox7)
+        pnNavigation.Controls.Add(btnForward)
         pnNavigation.Controls.Add(PictureBox3)
         pnNavigation.Controls.Add(PictureBox1)
         pnNavigation.Controls.Add(PictureBox2)
@@ -141,12 +146,39 @@ Partial Class AddClientForm
         pnNavigation.Size = New Size(78, 700)
         pnNavigation.TabIndex = 14
         ' 
+        ' PictureBox7
+        ' 
+        PictureBox7.Anchor = AnchorStyles.None
+        PictureBox7.Enabled = False
+        PictureBox7.Image = My.Resources.Resources.right_arrow
+        PictureBox7.Location = New Point(19, 163)
+        PictureBox7.Name = "PictureBox7"
+        PictureBox7.Size = New Size(31, 29)
+        PictureBox7.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox7.TabIndex = 23
+        PictureBox7.TabStop = False
+        ' 
+        ' btnForward
+        ' 
+        btnForward.Anchor = AnchorStyles.None
+        btnForward.BackColor = Color.Bisque
+        btnForward.FlatStyle = FlatStyle.Flat
+        btnForward.ForeColor = Color.Black
+        btnForward.Location = New Point(0, 160)
+        btnForward.Margin = New Padding(0)
+        btnForward.Name = "btnForward"
+        btnForward.Padding = New Padding(30, 0, 0, 0)
+        btnForward.Size = New Size(81, 45)
+        btnForward.TabIndex = 20
+        btnForward.TextAlign = ContentAlignment.MiddleLeft
+        btnForward.UseVisualStyleBackColor = False
+        ' 
         ' PictureBox3
         ' 
         PictureBox3.Anchor = AnchorStyles.None
         PictureBox3.Enabled = False
         PictureBox3.Image = My.Resources.Resources.logout
-        PictureBox3.Location = New Point(19, 169)
+        PictureBox3.Location = New Point(19, 218)
         PictureBox3.Margin = New Padding(0)
         PictureBox3.Name = "PictureBox3"
         PictureBox3.Size = New Size(31, 29)
@@ -196,7 +228,7 @@ Partial Class AddClientForm
         btnSettings.BackColor = Color.BurlyWood
         btnSettings.FlatStyle = FlatStyle.Flat
         btnSettings.ForeColor = Color.BurlyWood
-        btnSettings.Location = New Point(-3, 163)
+        btnSettings.Location = New Point(-3, 202)
         btnSettings.Name = "btnSettings"
         btnSettings.Padding = New Padding(30, 0, 0, 0)
         btnSettings.Size = New Size(81, 45)
@@ -249,9 +281,9 @@ Partial Class AddClientForm
         lblCustomerDetails.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblCustomerDetails.Location = New Point(26, 18)
         lblCustomerDetails.Name = "lblCustomerDetails"
-        lblCustomerDetails.Size = New Size(260, 36)
+        lblCustomerDetails.Size = New Size(165, 36)
         lblCustomerDetails.TabIndex = 0
-        lblCustomerDetails.Text = " Customer Details"
+        lblCustomerDetails.Text = "Add Client"
         ' 
         ' tbNumber
         ' 
@@ -436,6 +468,7 @@ Partial Class AddClientForm
         CType(PictureBox5, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         pnNavigation.ResumeLayout(False)
+        CType(PictureBox7, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
@@ -473,4 +506,6 @@ Partial Class AddClientForm
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnSettings As Button
     Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents btnForward As Button
+    Friend WithEvents PictureBox7 As PictureBox
 End Class

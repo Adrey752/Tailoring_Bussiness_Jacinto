@@ -67,6 +67,8 @@ Partial Class AddNewOrder
         btnSettings = New Button()
         btnHome = New Button()
         btnDelete = New PictureBox()
+        PictureBox4 = New PictureBox()
+        Button1 = New Button()
         CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
@@ -81,6 +83,7 @@ Partial Class AddNewOrder
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(btnDelete, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnOrderSave
@@ -468,6 +471,8 @@ Partial Class AddNewOrder
         ' 
         pnNavigation.Anchor = AnchorStyles.None
         pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(PictureBox4)
+        pnNavigation.Controls.Add(Button1)
         pnNavigation.Controls.Add(pbTailoringJacinto)
         pnNavigation.Controls.Add(PictureBox3)
         pnNavigation.Controls.Add(PictureBox1)
@@ -496,7 +501,7 @@ Partial Class AddNewOrder
         PictureBox3.Anchor = AnchorStyles.None
         PictureBox3.Enabled = False
         PictureBox3.Image = My.Resources.Resources.logout
-        PictureBox3.Location = New Point(24, 160)
+        PictureBox3.Location = New Point(24, 203)
         PictureBox3.Margin = New Padding(0)
         PictureBox3.Name = "PictureBox3"
         PictureBox3.Size = New Size(31, 29)
@@ -534,7 +539,7 @@ Partial Class AddNewOrder
         btnLogout.BackColor = Color.BurlyWood
         btnLogout.FlatStyle = FlatStyle.Flat
         btnLogout.ForeColor = Color.BurlyWood
-        btnLogout.Location = New Point(0, 155)
+        btnLogout.Location = New Point(0, 196)
         btnLogout.Name = "btnLogout"
         btnLogout.Padding = New Padding(30, 0, 0, 0)
         btnLogout.Size = New Size(81, 45)
@@ -581,6 +586,32 @@ Partial Class AddNewOrder
         btnDelete.TabIndex = 30
         btnDelete.TabStop = False
         ' 
+        ' PictureBox4
+        ' 
+        PictureBox4.Anchor = AnchorStyles.None
+        PictureBox4.Enabled = False
+        PictureBox4.Image = My.Resources.Resources.arrow__1_
+        PictureBox4.Location = New Point(24, 160)
+        PictureBox4.Name = "PictureBox4"
+        PictureBox4.Size = New Size(31, 29)
+        PictureBox4.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox4.TabIndex = 46
+        PictureBox4.TabStop = False
+        ' 
+        ' Button1
+        ' 
+        Button1.Anchor = AnchorStyles.None
+        Button1.BackColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        Button1.FlatStyle = FlatStyle.Flat
+        Button1.ForeColor = Color.FromArgb(CByte(217), CByte(185), CByte(155))
+        Button1.Location = New Point(0, 155)
+        Button1.Name = "Button1"
+        Button1.Padding = New Padding(30, 0, 0, 0)
+        Button1.Size = New Size(81, 45)
+        Button1.TabIndex = 47
+        Button1.TextAlign = ContentAlignment.MiddleLeft
+        Button1.UseVisualStyleBackColor = False
+        ' 
         ' AddNewOrder
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -618,6 +649,7 @@ Partial Class AddNewOrder
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         CType(btnDelete, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -665,4 +697,6 @@ Partial Class AddNewOrder
     Friend WithEvents btnHome As Button
     Friend WithEvents pbTailoringJacinto As PictureBox
     Friend WithEvents btnDelete As PictureBox
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents Button1 As Button
 End Class

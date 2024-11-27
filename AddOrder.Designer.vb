@@ -42,6 +42,7 @@ Partial Class AddOrder
         Label3 = New Label()
         nudPrice = New NumericUpDown()
         pnAddOrders = New Panel()
+        PictureBox4 = New PictureBox()
         OrderPicturebox = New PictureBox()
         Label5 = New Label()
         Panel3 = New Panel()
@@ -60,6 +61,7 @@ Partial Class AddOrder
         txtSearch = New TextBox()
         btnDelete = New PictureBox()
         pnNavigation = New Panel()
+        Button1 = New Button()
         PictureBox3 = New PictureBox()
         PictureBox1 = New PictureBox()
         PictureBox2 = New PictureBox()
@@ -71,6 +73,7 @@ Partial Class AddOrder
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         pnAddOrders.SuspendLayout()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).BeginInit()
         Panel3.SuspendLayout()
         Panel2.SuspendLayout()
@@ -206,7 +209,7 @@ Partial Class AddOrder
         ' 
         lblSize.Anchor = AnchorStyles.None
         lblSize.AutoSize = True
-        lblSize.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblSize.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblSize.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblSize.Location = New Point(30, 468)
         lblSize.Name = "lblSize"
@@ -251,7 +254,7 @@ Partial Class AddOrder
         ' 
         Label3.Anchor = AnchorStyles.None
         Label3.AutoSize = True
-        Label3.Font = New Font("Segoe UI Semilight", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label3.Font = New Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label3.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label3.Location = New Point(12, 18)
         Label3.Name = "Label3"
@@ -262,7 +265,7 @@ Partial Class AddOrder
         ' nudPrice
         ' 
         nudPrice.Anchor = AnchorStyles.None
-        nudPrice.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        nudPrice.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         nudPrice.Location = New Point(108, 16)
         nudPrice.Maximum = New Decimal(New Integer() {276447232, 23283, 0, 0})
         nudPrice.Name = "nudPrice"
@@ -298,6 +301,18 @@ Partial Class AddOrder
         pnAddOrders.Size = New Size(879, 653)
         pnAddOrders.TabIndex = 2
         ' 
+        ' PictureBox4
+        ' 
+        PictureBox4.Anchor = AnchorStyles.None
+        PictureBox4.Enabled = False
+        PictureBox4.Image = My.Resources.Resources.arrow__1_
+        PictureBox4.Location = New Point(24, 160)
+        PictureBox4.Name = "PictureBox4"
+        PictureBox4.Size = New Size(31, 29)
+        PictureBox4.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox4.TabIndex = 20
+        PictureBox4.TabStop = False
+        ' 
         ' OrderPicturebox
         ' 
         OrderPicturebox.Anchor = AnchorStyles.None
@@ -313,7 +328,7 @@ Partial Class AddOrder
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Font = New Font("Segoe UI", 24.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label5.Location = New Point(30, 22)
         Label5.Name = "Label5"
@@ -479,6 +494,8 @@ Partial Class AddOrder
         ' 
         pnNavigation.Anchor = AnchorStyles.None
         pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(PictureBox4)
+        pnNavigation.Controls.Add(Button1)
         pnNavigation.Controls.Add(PictureBox3)
         pnNavigation.Controls.Add(PictureBox1)
         pnNavigation.Controls.Add(PictureBox2)
@@ -491,12 +508,27 @@ Partial Class AddOrder
         pnNavigation.Size = New Size(79, 700)
         pnNavigation.TabIndex = 29
         ' 
+        ' Button1
+        ' 
+        Button1.Anchor = AnchorStyles.None
+        Button1.BackColor = Color.BurlyWood
+        Button1.FlatStyle = FlatStyle.Flat
+        Button1.ForeColor = Color.BurlyWood
+        Button1.Location = New Point(0, 157)
+        Button1.Margin = New Padding(0)
+        Button1.Name = "Button1"
+        Button1.Padding = New Padding(30, 0, 0, 0)
+        Button1.Size = New Size(81, 45)
+        Button1.TabIndex = 20
+        Button1.TextAlign = ContentAlignment.MiddleLeft
+        Button1.UseVisualStyleBackColor = False
+        ' 
         ' PictureBox3
         ' 
         PictureBox3.Anchor = AnchorStyles.None
         PictureBox3.Enabled = False
         PictureBox3.Image = My.Resources.Resources.logout
-        PictureBox3.Location = New Point(24, 160)
+        PictureBox3.Location = New Point(24, 207)
         PictureBox3.Margin = New Padding(0)
         PictureBox3.Name = "PictureBox3"
         PictureBox3.Size = New Size(31, 29)
@@ -545,7 +577,7 @@ Partial Class AddOrder
         btnLogout.BackColor = Color.BurlyWood
         btnLogout.FlatStyle = FlatStyle.Flat
         btnLogout.ForeColor = Color.BurlyWood
-        btnLogout.Location = New Point(0, 155)
+        btnLogout.Location = New Point(0, 207)
         btnLogout.Name = "btnLogout"
         btnLogout.Padding = New Padding(30, 0, 0, 0)
         btnLogout.Size = New Size(81, 45)
@@ -605,6 +637,7 @@ Partial Class AddOrder
         CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         pnAddOrders.ResumeLayout(False)
         pnAddOrders.PerformLayout()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).EndInit()
         Panel3.ResumeLayout(False)
         Panel3.PerformLayout()
@@ -665,4 +698,6 @@ Partial Class AddOrder
     Friend WithEvents btnLogout As Button
     Friend WithEvents btnSettings As Button
     Friend WithEvents btnHome As Button
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents Button1 As Button
 End Class

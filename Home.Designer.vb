@@ -288,7 +288,7 @@ Partial Class Home
         ' 
         PictureBox3.Enabled = False
         PictureBox3.Image = My.Resources.Resources.logout
-        PictureBox3.Location = New Point(12, 305)
+        PictureBox3.Location = New Point(12, 291)
         PictureBox3.Margin = New Padding(0)
         PictureBox3.Name = "PictureBox3"
         PictureBox3.Size = New Size(31, 29)

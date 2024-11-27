@@ -13,6 +13,7 @@ Public Class ProjectDetailsForm
     Dim balance
     Private isDragging As Boolean = False
     Private dragStartPoint As Point
+    Public Property _ForwardForm As AddNewOrder
 
 
     Public Sub New(id As Integer, _home As Home, _login As login)
@@ -444,13 +445,25 @@ Public Class ProjectDetailsForm
     End Sub
 
     Private Sub btnSetting_Click(sender As Object, e As EventArgs) Handles btnSetting.Click
-
+        Dim settings As New Settings(Me, _login, _HomeForm)
+        Me.Hide()
+        settings.Show()
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        Me.Close()
+        Close()
         _HomeForm.Hide()
         _login.Show()
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If _ForwardForm Is Nothing Then
+            btnAddOrder.PerformClick()
+        Else
+            _ForwardForm.Show()
+        End If
+    End Sub
+
+
 End Class

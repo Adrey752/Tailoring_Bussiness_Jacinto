@@ -22,9 +22,9 @@ Partial Class ProjectDetailsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProjectDetailsForm))
         lblTask = New Label()
         tbNumber = New TextBox()
@@ -61,6 +61,8 @@ Partial Class ProjectDetailsForm
         Panel4 = New Panel()
         Panel5 = New Panel()
         pnNavigation = New Panel()
+        PictureBox7 = New PictureBox()
+        Button1 = New Button()
         PictureBox3 = New PictureBox()
         PictureBox2 = New PictureBox()
         PictureBox1 = New PictureBox()
@@ -81,6 +83,7 @@ Partial Class ProjectDetailsForm
         Panel4.SuspendLayout()
         Panel5.SuspendLayout()
         pnNavigation.SuspendLayout()
+        CType(PictureBox7, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -176,8 +179,8 @@ Partial Class ProjectDetailsForm
         ' 
         pending.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         pending.DataPropertyName = "pending"
-        DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft
-        pending.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        pending.DefaultCellStyle = DataGridViewCellStyle1
         pending.HeaderText = "Pending Orders"
         pending.Name = "pending"
         pending.ReadOnly = True
@@ -196,8 +199,8 @@ Partial Class ProjectDetailsForm
         ' 
         finished.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         finished.DataPropertyName = "finished"
-        DataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft
-        finished.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        finished.DefaultCellStyle = DataGridViewCellStyle2
         finished.HeaderText = "Finished"
         finished.Name = "finished"
         finished.ReadOnly = True
@@ -311,8 +314,8 @@ Partial Class ProjectDetailsForm
         ' 
         DataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         DataGridViewTextBoxColumn2.DataPropertyName = "finished"
-        DataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle3
         DataGridViewTextBoxColumn2.HeaderText = "Date"
         DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         DataGridViewTextBoxColumn2.ReadOnly = True
@@ -481,6 +484,8 @@ Partial Class ProjectDetailsForm
         ' 
         pnNavigation.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
         pnNavigation.BackColor = Color.FromArgb(CByte(255), CByte(254), CByte(254))
+        pnNavigation.Controls.Add(PictureBox7)
+        pnNavigation.Controls.Add(Button1)
         pnNavigation.Controls.Add(PictureBox3)
         pnNavigation.Controls.Add(PictureBox2)
         pnNavigation.Controls.Add(PictureBox1)
@@ -493,12 +498,37 @@ Partial Class ProjectDetailsForm
         pnNavigation.Size = New Size(78, 732)
         pnNavigation.TabIndex = 43
         ' 
+        ' PictureBox7
+        ' 
+        PictureBox7.Anchor = AnchorStyles.None
+        PictureBox7.Enabled = False
+        PictureBox7.Image = My.Resources.Resources.right_arrow
+        PictureBox7.Location = New Point(23, 211)
+        PictureBox7.Name = "PictureBox7"
+        PictureBox7.Size = New Size(31, 29)
+        PictureBox7.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox7.TabIndex = 24
+        PictureBox7.TabStop = False
+        ' 
+        ' Button1
+        ' 
+        Button1.BackColor = Color.BurlyWood
+        Button1.FlatStyle = FlatStyle.Flat
+        Button1.ForeColor = Color.BurlyWood
+        Button1.Location = New Point(-3, 205)
+        Button1.Name = "Button1"
+        Button1.Padding = New Padding(30, 0, 0, 0)
+        Button1.Size = New Size(81, 45)
+        Button1.TabIndex = 18
+        Button1.TextAlign = ContentAlignment.MiddleLeft
+        Button1.UseVisualStyleBackColor = False
+        ' 
         ' PictureBox3
         ' 
         PictureBox3.BackColor = Color.BurlyWood
         PictureBox3.Enabled = False
         PictureBox3.Image = My.Resources.Resources.logout
-        PictureBox3.Location = New Point(13, 211)
+        PictureBox3.Location = New Point(13, 256)
         PictureBox3.Name = "PictureBox3"
         PictureBox3.Size = New Size(50, 26)
         PictureBox3.SizeMode = PictureBoxSizeMode.Zoom
@@ -544,7 +574,7 @@ Partial Class ProjectDetailsForm
         btnLogout.BackColor = Color.BurlyWood
         btnLogout.FlatStyle = FlatStyle.Flat
         btnLogout.ForeColor = Color.BurlyWood
-        btnLogout.Location = New Point(-3, 202)
+        btnLogout.Location = New Point(-3, 253)
         btnLogout.Name = "btnLogout"
         btnLogout.Padding = New Padding(30, 0, 0, 0)
         btnLogout.Size = New Size(81, 45)
@@ -659,6 +689,7 @@ Partial Class ProjectDetailsForm
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
         pnNavigation.ResumeLayout(False)
+        CType(PictureBox7, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
@@ -715,4 +746,6 @@ Partial Class ProjectDetailsForm
     Friend WithEvents lblCustomerDetails As Label
     Friend WithEvents Panel7 As Panel
     Friend WithEvents lblHeaderPayment As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents PictureBox7 As PictureBox
 End Class
