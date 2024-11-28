@@ -69,16 +69,82 @@ Public Class AddNewOrder
         Me._ProjectDetailsForm = _ProjectForm
         Me._home = _home
         Me._login = _login
-        cbSizes.SelectedIndex = 0
         Dim selectSize As ClothingSize = TryCast(cbSizes.SelectedItem, ClothingSize)
         Me.order = New Order(1, "", "", "", 1, My.Resources.noImageIcon, Date.Now, "Pending", -1, selectSize)
+        Dim sizes = GetSizesInDb()
+        cbSizes.Items.AddRange(sizes.ToArray())
+        cbSizes.SelectedIndex = 0
 
     End Sub
-    Private Sub AddNewOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadSizes()
-    End Sub
 
 
+    Private Function GetSizesInDb() As List(Of ClothingSize)
+        Dim list As New List(Of ClothingSize)
+
+        Dim query = "SELECT * FROM clothing_size"
+        Dim parameter As New Dictionary(Of String, Object)
+
+        Dim datatable = MySQLModule.ExecuteQuery(query, parameter)
+
+        For Each row As DataRow In datatable.Rows
+            Dim id As Integer = row.Field(Of Integer)("clothing_id")
+            Dim name As String = row.Field(Of String)("name")
+
+            Dim newClothingSize As New ClothingSize(name)
+            newClothingSize.Id = id
+            list.Add(newClothingSize)
+
+        Next
+        Return list
+    End Function
+
+    Private Shared Function GetGarmentType(garment_id As Integer) As String
+        Dim query = "SELECT (garment_type) FROM garment_types WHERE garment_id = @garment_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"garment_id", garment_id}
+        }
+
+        Dim result = MySQLModule.ExecuteScalar(query, parameter).ToString
+
+        If result IsNot Nothing Then
+            Return result
+        Else
+            Throw New Exception("garment_id doesn't exist ")
+        End If
+    End Function
+    Private Shared Function GetBodyPart(type_id As Integer) As String
+        Dim query = "SELECT (types) FROM size_types WHERE type_id = @type_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"type_id", type_id}
+        }
+        Dim bodypart = MySQLModule.ExecuteScalar(query, parameter)
+        If bodypart IsNot Nothing Then
+            Return bodypart.ToString
+        Else
+            Throw New Exception("type_id doesn't exist brooooo")
+        End If
+    End Function
+    Private Shared Function GetSize(cloathing_id As Integer) As List(Of Measurement)
+        Dim sizes As New List(Of Measurement)
+
+        Dim query = "SELECT * FROM size_values WHERE clothing_id = @clothing_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+            {"clothing_id", cloathing_id}
+        }
+
+        Dim datatable = MySQLModule.ExecuteQuery(query, parameter)
+        For Each row As DataRow In datatable.Rows
+            Dim bodyPart = GetBodyPart(row.Field(Of Integer)("type_id"))
+            Dim value = row.Field(Of Decimal)("size_value")
+            Dim unit = row.Field(Of String)("size_unit")
+            Dim garment = GetGarmentType(row.Field(Of Integer)("garment_id"))
+
+            sizes.Add(New Measurement(bodyPart, value, unit, garment))
+        Next
+
+        Return sizes
+
+    End Function
 
 
 
@@ -223,28 +289,11 @@ Public Class AddNewOrder
     End Function
 
 
-    Private Sub LoadSizes()
-        Dim query = "SELECT * FROM clothing_size"
-        Dim parameter As New Dictionary(Of String, Object)
 
-        Dim resultable = MySQLModule.ExecuteQuery(query, parameter)
-
-        For Each row As DataRow In resultable.Rows
-
-            Dim id As Integer = row.Field(Of Integer)("clothing_id")
-            Dim name As String = row.Field(Of String)("name")
-            Dim clothingsize As New ClothingSize(name)
-            clothingsize.Id = id
-            clothingsize.Measurements = listOfMeasurements(id)
-
-            cbSizes.Items.Add(clothingsize)
-        Next
-
-    End Sub
 
     Private Function listOfMeasurements(clothing_id As Integer) As List(Of Measurement)
         Dim ListOfMeasurement As New List(Of Measurement)
-        Dim query = "SELECT t.types, s.size_value, s.size_unit, g.garment_type, s.size_valueId FROM size_values As s WHERE clothing_id = @clothing_id INNER JOIN clothing_size As c ON s.clothing_id = c.clothing_id INNNER JOIN size_types As t ON t.type_id = s.type_id INNER JOIN garment_types As g ON g.garment_id = s.garment_id"
+        Dim query = "SELECT t.types, s.size_value, s.size_unit, g.garment_type, s.size_valueId FROM size_values As s  INNER JOIN clothing_size As c ON s.clothing_id = c.clothing_id INNER JOIN size_types As t ON t.type_id = s.type_id INNER JOIN garment_types As g ON g.garment_id = s.garment_id WHERE s.clothing_id = @clothing_id"
         Dim parameter As New Dictionary(Of String, Object) From {
             {"@clothing_id", clothing_id}
         }
@@ -511,6 +560,7 @@ Public Class AddNewOrder
     End Sub
     Private Sub LoadMeasurmentsToDg()
         Dim clothingsize As ClothingSize = TryCast(cbSizes.SelectedItem, ClothingSize)
+        clothingsize.Measurements = GetSize(clothingsize.Id)
         For Each measurement As Measurement In clothingsize.Measurements
             Dim rowIndex = dgMeasurements.Rows.Add(measurement.BodyPart, (measurement.Value & measurement.Unit), measurement.garment)
             dgMeasurements.Rows(rowIndex).Tag = measurement

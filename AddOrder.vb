@@ -71,8 +71,10 @@ Public Class AddOrder
         Me._home = home
         Me._login = login
 
-        Dim ClothingSizes = GetSizesInDb()
-        cbSizes.Items.AddRange(ClothingSizes.ToArray)
+        Dim sizes = GetSizesInDb()
+        cbSizes.Items.AddRange(sizes.ToArray())
+        cbSizes.SelectedIndex = 0
+
 
     End Sub
     Private Function GetSizesInDb() As List(Of ClothingSize)
@@ -84,7 +86,7 @@ Public Class AddOrder
         Dim datatable = MySQLModule.ExecuteQuery(query, parameter)
 
         For Each row As DataRow In datatable.Rows
-            Dim id As Integer = row.Field(Of Integer)("id")
+            Dim id As Integer = row.Field(Of Integer)("clothing_id")
             Dim name As String = row.Field(Of String)("name")
 
             Dim newClothingSize As New ClothingSize(name)
@@ -94,6 +96,70 @@ Public Class AddOrder
         Next
         Return list
     End Function
+    Private Shared Function GetBodyPart(type_id As Integer) As String
+        Dim query = "SELECT (types) FROM size_types WHERE type_id = @type_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"type_id", type_id}
+        }
+        Dim bodypart = MySQLModule.ExecuteScalar(query, parameter)
+        If bodypart IsNot Nothing Then
+            Return bodypart.ToString
+        Else
+            Throw New Exception("type_id doesn't exist brooooo")
+        End If
+    End Function
+    Private Shared Function GetSize(cloathing_id As Integer) As List(Of Measurement)
+        Dim sizes As New List(Of Measurement)
+
+        Dim query = "SELECT * FROM size_values WHERE clothing_id = @clothing_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+            {"clothing_id", cloathing_id}
+        }
+
+        Dim datatable = MySQLModule.ExecuteQuery(query, parameter)
+        For Each row As DataRow In datatable.Rows
+            Dim bodyPart = GetBodyPart(row.Field(Of Integer)("type_id"))
+            Dim value = row.Field(Of Decimal)("size_value")
+            Dim unit = row.Field(Of String)("size_unit")
+            Dim garment = GetGarmentType(row.Field(Of Integer)("garment_id"))
+
+            sizes.Add(New Measurement(bodyPart, value, unit, garment))
+        Next
+
+        Return sizes
+
+    End Function
+
+    Private Shared Function GetGarmentType(garment_id As Integer) As String
+        Dim query = "SELECT (garment_type) FROM garment_types WHERE garment_id = @garment_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+        {"garment_id", garment_id}
+        }
+
+        Dim result = MySQLModule.ExecuteScalar(query, parameter).ToString
+
+        If result IsNot Nothing Then
+            Return result
+        Else
+            Throw New Exception("garment_id doesn't exist ")
+        End If
+    End Function
+    Private Sub LoadMeasurmentsToDg()
+        Dim clothingsize As ClothingSize = TryCast(cbSizes.SelectedItem, ClothingSize)
+        If clothingsize Is Nothing Then
+            MessageBox.Show("clothing nothing broo")
+        End If
+        clothingsize.Measurements = GetSize(clothingsize.Id)
+        If clothingsize.Measurements Is Nothing Then
+            MessageBox.Show("I'm nothing broo")
+        End If
+        'If clothingsize.Measurements.Count > 0 Then
+        '    For Each measurement As Measurement In clothingsize.Measurements
+        '        Dim rowIndex = dgMeasurements.Rows.Add(measurement.BodyPart, (measurement.Value & measurement.Unit), measurement.garment)
+        '        dgMeasurements.Rows(rowIndex).Tag = measurement
+        '    Next
+        'End If
+    End Sub
     ' ****** Buttons or Input Handlers  ********
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -364,13 +430,6 @@ Public Class AddOrder
     Private Sub cbSizes_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbSizes.SelectedValueChanged
         LoadMeasurmentsToDg()
     End Sub
-    Private Sub LoadMeasurmentsToDg()
-        Dim clothingsize As ClothingSize = TryCast(cbSizes.SelectedItem, ClothingSize)
-        For Each measurement As Measurement In clothingsize.Measurements
-            Dim rowIndex = dgMeasurements.Rows.Add(measurement.BodyPart, (measurement.Value & measurement.Unit), measurement.garment)
-            dgMeasurements.Rows(rowIndex).Tag = measurement
-        Next
-    End Sub
     '   ****** Setting Up Functions *******
 
     Private Sub AddMeasurementsToDatagrid(sizes As List(Of Measurement))
@@ -456,6 +515,10 @@ Public Class AddOrder
         _addClientForm._Forward = Me
         Me.Hide()
         _addClientForm.Show()
+
+    End Sub
+
+    Private Sub AddOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

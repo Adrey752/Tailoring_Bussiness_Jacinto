@@ -43,6 +43,7 @@ Partial Class AddNewOrder
         dtpOrderDate = New DateTimePicker()
         btnAddImage = New Button()
         btnRemoveImage = New Button()
+        cbSizes = New ComboBox()
         rbDescription = New RichTextBox()
         Panel2 = New Panel()
         Panel1 = New Panel()
@@ -62,7 +63,6 @@ Partial Class AddNewOrder
         btnSettings = New Button()
         btnHome = New Button()
         btnDelete = New PictureBox()
-        cbSizes = New ComboBox()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         pnAddOrders.SuspendLayout()
@@ -299,6 +299,16 @@ Partial Class AddNewOrder
         btnRemoveImage.Text = "Remove "
         btnRemoveImage.UseVisualStyleBackColor = False
         ' 
+        ' cbSizes
+        ' 
+        cbSizes.Anchor = AnchorStyles.None
+        cbSizes.FormattingEnabled = True
+        cbSizes.Location = New Point(127, 352)
+        cbSizes.Name = "cbSizes"
+        cbSizes.Size = New Size(183, 23)
+        cbSizes.TabIndex = 3
+        cbSizes.Text = "None"
+        ' 
         ' rbDescription
         ' 
         rbDescription.Anchor = AnchorStyles.None
@@ -528,16 +538,6 @@ Partial Class AddNewOrder
         btnDelete.TabIndex = 30
         btnDelete.TabStop = False
         ' 
-        ' cbSizes
-        ' 
-        cbSizes.Anchor = AnchorStyles.None
-        cbSizes.FormattingEnabled = True
-        cbSizes.Location = New Point(127, 352)
-        cbSizes.Name = "cbSizes"
-        cbSizes.Size = New Size(183, 23)
-        cbSizes.TabIndex = 3
-        cbSizes.Text = "None"
-        ' 
         ' AddNewOrder
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -556,7 +556,7 @@ Partial Class AddNewOrder
         ForeColor = Color.Black
         Name = "AddNewOrder"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "AddOrder"
+        Text = "AddNewOrder"
         CType(dgMeasurements, ComponentModel.ISupportInitialize).EndInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         pnAddOrders.ResumeLayout(False)

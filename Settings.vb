@@ -79,6 +79,7 @@ Public Class Settings
     End Sub
 
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        Me.Hide()
 
         If TypeOf _back_form IsNot Home Then
             _back_form.Close()
@@ -88,8 +89,10 @@ Public Class Settings
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        _back_form.Close()
-        _home.Hide()
+        If TypeOf _back_form IsNot Home Then
+            _back_form.Close()
+        End If
+        Me.Hide()
         _login.Show()
 
 
@@ -146,7 +149,7 @@ Public Class Settings
         Dim resultTable = MySQLModule.ExecuteQuery(query, parameter)
 
         For Each row As DataRow In resultTable.Rows
-            Dim id = row.Field(Of Integer)("id")
+            Dim id = row.Field(Of Integer)("clothing_id")
             Dim sizename = row.Field(Of String)("name")
 
             Dim rowindex = dgSizes.Rows.Add(sizename)
@@ -179,5 +182,6 @@ Public Class Settings
 
         Next
     End Sub
+
 
 End Class

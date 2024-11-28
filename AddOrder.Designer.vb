@@ -43,6 +43,7 @@ Partial Class AddOrder
         dtpOrderDate = New DateTimePicker()
         btnAddImage = New Button()
         btnRemoveImage = New Button()
+        cbSizes = New ComboBox()
         rbDescription = New RichTextBox()
         Panel2 = New Panel()
         Panel1 = New Panel()
@@ -62,7 +63,6 @@ Partial Class AddOrder
         btnLogout = New Button()
         btnSettings = New Button()
         btnHome = New Button()
-        cbSizes = New ComboBox()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         pnAddOrders.SuspendLayout()
@@ -299,6 +299,16 @@ Partial Class AddOrder
         btnRemoveImage.Text = "Remove "
         btnRemoveImage.UseVisualStyleBackColor = False
         ' 
+        ' cbSizes
+        ' 
+        cbSizes.Anchor = AnchorStyles.None
+        cbSizes.FormattingEnabled = True
+        cbSizes.Location = New Point(121, 316)
+        cbSizes.Name = "cbSizes"
+        cbSizes.Size = New Size(202, 23)
+        cbSizes.TabIndex = 3
+        cbSizes.Text = "None"
+        ' 
         ' rbDescription
         ' 
         rbDescription.Anchor = AnchorStyles.None
@@ -528,16 +538,6 @@ Partial Class AddOrder
         btnHome.TabIndex = 9
         btnHome.TextAlign = ContentAlignment.MiddleLeft
         btnHome.UseVisualStyleBackColor = False
-        ' 
-        ' cbSizes
-        ' 
-        cbSizes.Anchor = AnchorStyles.None
-        cbSizes.FormattingEnabled = True
-        cbSizes.Location = New Point(121, 316)
-        cbSizes.Name = "cbSizes"
-        cbSizes.Size = New Size(202, 23)
-        cbSizes.TabIndex = 3
-        cbSizes.Text = "None"
         ' 
         ' AddOrder
         ' 

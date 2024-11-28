@@ -335,7 +335,7 @@ Partial Class Settings
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label7.Location = New Point(52, 135)
         Label7.Name = "Label7"
@@ -354,7 +354,7 @@ Partial Class Settings
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label6.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label6.Location = New Point(52, 170)
         Label6.Name = "Label6"
@@ -390,7 +390,7 @@ Partial Class Settings
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label5.Location = New Point(52, 314)
         Label5.Name = "Label5"
@@ -418,7 +418,7 @@ Partial Class Settings
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label4.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label4.Location = New Point(52, 267)
         Label4.Name = "Label4"
@@ -430,7 +430,7 @@ Partial Class Settings
         ' 
         Label3.AutoSize = True
         Label3.BackColor = Color.Transparent
-        Label3.Font = New Font("Baskerville Old Face", 24.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Font = New Font("Baskerville Old Face", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label3.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label3.Location = New Point(177, 212)
         Label3.Name = "Label3"
@@ -448,7 +448,7 @@ Partial Class Settings
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label2.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         Label2.Location = New Point(52, 86)
         Label2.Name = "Label2"
@@ -473,7 +473,7 @@ Partial Class Settings
         ' lblorderName
         ' 
         lblorderName.AutoSize = True
-        lblorderName.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblorderName.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblorderName.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
         lblorderName.Location = New Point(52, 48)
         lblorderName.Name = "lblorderName"
@@ -583,7 +583,7 @@ Partial Class Settings
         ' 
         ' Settings
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(226), CByte(217), CByte(185))
         ClientSize = New Size(1276, 654)
