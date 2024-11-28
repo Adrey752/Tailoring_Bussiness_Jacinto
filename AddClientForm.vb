@@ -30,21 +30,11 @@ Public Class AddClientForm
             _client.Name = tbName.Text
             _client.Address = tbAddress.Text
             _client.Contact = tbNumber.Text
-
-
-
-            ' Step 1: Insert Client into the database and retrieve client_id
             Dim clientId As Integer = InsertClientToDB(_client)
 
-
-            ' Step 2: Insert each Order for the client and retrieve order_id
             For Each order As Order In Client_Orders
-                Dim orderId As Integer = InsertOrder(order, clientId)
+                Dim orderId As Integer = InsertOrder(order, clientId, order.CloatheSize.Id)
 
-                ' Step 3: Insert each DressMeasurement (Size) for the order
-                For Each size As Measurement In order.Sizes
-                    InsertSize(size, orderId)
-                Next
             Next
 
 
@@ -218,8 +208,9 @@ Public Class AddClientForm
         Return Convert.ToInt32(MySQLModule.ExecuteScalar(clientQuery, clientParams))
 
     End Function
-    Public Function InsertOrder(order As Order, clientId As Integer) As Integer
-        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, image, date) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @image, @date); SELECT LAST_INSERT_ID();"
+
+    Public Function InsertOrder(order As Order, clientId As Integer, cloathe_id As Integer) As Integer
+        Dim orderQuery As String = "INSERT INTO client_order (client_id, order_name, type, description, price, image, date,clothing_id) VALUES (@ClientId, @OrderName, @Type, @Description, @Price, @image, @date, @clothing_id); SELECT LAST_INSERT_ID();"
         Dim orderParams As New Dictionary(Of String, Object) From {
     {"@ClientId", clientId},
     {"@OrderName", order.OrderName},
@@ -227,30 +218,20 @@ Public Class AddClientForm
     {"@Description", order.Description},
     {"@Price", order.Price},
     {"@image", ImageToBinary(order.OrderImage)},
-    {"@date", order.DateOrdered}
+    {"@date", order.DateOrdered},
+    {"@clothing_id", cloathe_id}
 }
 
+        ' Return the newly inserted order_id
         Return Convert.ToInt32(MySQLModule.ExecuteScalar(orderQuery, orderParams))
     End Function
-
     Private Function ImageToBinary(image As Image) As Byte()
         Using ms As New MemoryStream
             image.Save(ms, image.RawFormat)
             Return ms.ToArray()
         End Using
     End Function
-    Public Sub InsertSize(size As Measurement, orderId As Integer)
-        Dim sizeQuery As String = "INSERT INTO size_values (order_id, type_id, size_value, size_unit, garment_id) VALUES (@OrderId, @TypeId, @SizeValue, @SizeUnit, @garment_id)"
-        Dim sizeParams As New Dictionary(Of String, Object) From {
-        {"@OrderId", orderId},
-        {"@TypeId", GetTypeId(size.BodyPart)}, ' Get type_id for the measurement type
-        {"@garment_id", GetGarmentId(size.garment)},
-        {"@SizeValue", size.Value},
-        {"@SizeUnit", size.Unit}
-    }
 
-        MySQLModule.ExecuteNonQuery(sizeQuery, sizeParams)
-    End Sub
 
     Private Sub AddClientForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

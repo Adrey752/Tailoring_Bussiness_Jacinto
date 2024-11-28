@@ -222,7 +222,7 @@ Public Class ProjectDetailsForm
 
 
 
-    Private Shared Function GetClientOrdersFromDatabase(client_id As Integer) As List(Of Order)
+    Private Function GetClientOrdersFromDatabase(client_id As Integer) As List(Of Order)
         Dim OrderList As New List(Of Order)
         Dim query As String = "SELECT * FROM client_order WHERE client_id = @client_id"
         Dim parameter As New Dictionary(Of String, Object) From {
@@ -243,11 +243,14 @@ Public Class ProjectDetailsForm
             Dim imageByte As Byte() = row.Field(Of Byte())("image")
             Dim image As Image = ByteArrayToImage(imageByte)
             Dim OrderDate As DateTime = row.Field(Of DateTime)("date")
-            Dim sizes As List(Of Measurement) = GetSize(row.Field(Of Integer)("order_id"))
+            Dim clothing_id As Integer = If(row.Field(Of Integer?)("clothing_id"), 0)
+            Dim cloathSize As ClothingSize = GetCloatheSize(clothing_id)
+            Dim measurement As List(Of Measurement) = GetSize(clothing_id)
+            cloathSize.Measurements = measurement
             Dim status As String = row.Field(Of String)("status")
             Dim payment_id As Integer = If(row.IsNull("payment_id"), -1, row.Field(Of Integer)("payment_id"))
 
-            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, sizes, status, payment_id))
+            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, status, payment_id, cloathSize))
         Next
         Return OrderList
     End Function
@@ -258,12 +261,12 @@ Public Class ProjectDetailsForm
         End Using
     End Function
 
-    Private Shared Function GetSize(order_id As Integer) As List(Of Measurement)
+    Private Shared Function GetSize(cloathing_id As Integer) As List(Of Measurement)
         Dim sizes As New List(Of Measurement)
 
-        Dim query = "SELECT * FROM size_values WHERE order_id = @order_id"
+        Dim query = "SELECT * FROM size_values WHERE clothing_id = @clothing_id"
         Dim parameter As New Dictionary(Of String, Object) From {
-            {"order_id", order_id}
+            {"clothing_id", cloathing_id}
         }
 
         Dim datatable = MySQLModule.ExecuteQuery(query, parameter)
@@ -393,7 +396,7 @@ Public Class ProjectDetailsForm
         Next
     End Sub
 
-    Private Shared Function GetPaidOrdersFromDatabase(payment_id As Integer) As List(Of Order)
+    Private Function GetPaidOrdersFromDatabase(payment_id As Integer) As List(Of Order)
         Dim OrderList As New List(Of Order)
         Dim query As String = "SELECT * FROM client_order WHERE payment_id = @payment_id"
         Dim parameter As New Dictionary(Of String, Object) From {
@@ -414,13 +417,33 @@ Public Class ProjectDetailsForm
             Dim imageByte As Byte() = row.Field(Of Byte())("image")
             Dim image As Image = ByteArrayToImage(imageByte)
             Dim OrderDate As DateTime = row.Field(Of DateTime)("date")
-            Dim sizes As List(Of Measurement) = GetSize(row.Field(Of Integer)("order_id"))
+            Dim clothing_id As Integer = If(row.Field(Of Integer?)("clothing_id"), 0)
+            Dim cloathSize As ClothingSize = GetCloatheSize(clothing_id)
+            Dim measurement As List(Of Measurement) = GetSize(clothing_id)
+            cloathSize.Measurements = measurement
             Dim status As String = row.Field(Of String)("status")
             Dim paymentId As Integer = row.Field(Of Integer)("payment_id")
 
-            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, sizes, status, payment_id))
+            OrderList.Add(New Order(OrderId, OrderName, OrderType, description, price, image, OrderDate, status, payment_id, cloathSize))
         Next
         Return OrderList
+    End Function
+
+    Private Function GetCloatheSize(cloathing_id As Integer)
+        Dim cloathe_size As ClothingSize
+        Dim query = "SELECT * FROM clothing_size WHERE clothing_id = @clothing_id"
+        Dim parameter As New Dictionary(Of String, Object) From {
+            {"@clothing_id", cloathing_id}
+        }
+        Dim resultable = MySQLModule.ExecuteQuery(query, parameter)
+        For Each row As DataRow In resultable.Rows
+            Dim name = row.Field(Of String)("name")
+            Dim id = row.Field(Of Integer)("clothing_id")
+            cloathe_size = New ClothingSize(name)
+            cloathe_size.Id = id
+        Next
+        Return cloathe_size
+
     End Function
     Private Sub MarkOrderAsPaid(orderCell As DataGridViewCell)
         ' Check if the orderCell is valid and not already marked

@@ -24,13 +24,8 @@ Partial Class AddOrder
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddOrder))
         btnOrderSave = New Button()
-        nudValue = New NumericUpDown()
-        btnaddMeasurement = New Button()
-        cbUnit = New ComboBox()
-        sbMType = New ComboBox()
         Label1 = New Label()
         cbStype = New ComboBox()
-        cbGarment = New ComboBox()
         tbOrderName = New TextBox()
         lblorderName = New Label()
         lblDesc = New Label()
@@ -42,18 +37,16 @@ Partial Class AddOrder
         Label3 = New Label()
         nudPrice = New NumericUpDown()
         pnAddOrders = New Panel()
-        PictureBox4 = New PictureBox()
         OrderPicturebox = New PictureBox()
         Label5 = New Label()
         Panel3 = New Panel()
         dtpOrderDate = New DateTimePicker()
         btnAddImage = New Button()
         btnRemoveImage = New Button()
-        cbSizes = New ComboBox()
-        Label2 = New Label()
         rbDescription = New RichTextBox()
         Panel2 = New Panel()
         Panel1 = New Panel()
+        PictureBox4 = New PictureBox()
         btnAdd = New Button()
         LbSuggestions = New ListBox()
         fPanelOrders = New FlowLayoutPanel()
@@ -69,15 +62,15 @@ Partial Class AddOrder
         btnLogout = New Button()
         btnSettings = New Button()
         btnHome = New Button()
-        CType(nudValue, ComponentModel.ISupportInitialize).BeginInit()
+        cbSizes = New ComboBox()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).BeginInit()
         pnAddOrders.SuspendLayout()
-        CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).BeginInit()
         Panel3.SuspendLayout()
         Panel2.SuspendLayout()
         Panel1.SuspendLayout()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         CType(btnDelete, ComponentModel.ISupportInitialize).BeginInit()
         pnNavigation.SuspendLayout()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
@@ -96,47 +89,6 @@ Partial Class AddOrder
         btnOrderSave.TabIndex = 11
         btnOrderSave.Text = "Save"
         btnOrderSave.UseVisualStyleBackColor = False
-        ' 
-        ' nudValue
-        ' 
-        nudValue.Anchor = AnchorStyles.None
-        nudValue.Location = New Point(127, 522)
-        nudValue.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
-        nudValue.Name = "nudValue"
-        nudValue.Size = New Size(102, 23)
-        nudValue.TabIndex = 5
-        ' 
-        ' btnaddMeasurement
-        ' 
-        btnaddMeasurement.Anchor = AnchorStyles.None
-        btnaddMeasurement.BackColor = Color.White
-        btnaddMeasurement.Location = New Point(321, 564)
-        btnaddMeasurement.Name = "btnaddMeasurement"
-        btnaddMeasurement.Size = New Size(104, 44)
-        btnaddMeasurement.TabIndex = 8
-        btnaddMeasurement.Text = "Add Size"
-        btnaddMeasurement.UseVisualStyleBackColor = False
-        ' 
-        ' cbUnit
-        ' 
-        cbUnit.Anchor = AnchorStyles.None
-        cbUnit.FormattingEnabled = True
-        cbUnit.Items.AddRange(New Object() {"cm", "inches", "meters"})
-        cbUnit.Location = New Point(244, 521)
-        cbUnit.Name = "cbUnit"
-        cbUnit.Size = New Size(77, 23)
-        cbUnit.TabIndex = 6
-        cbUnit.Text = "inches"
-        ' 
-        ' sbMType
-        ' 
-        sbMType.Anchor = AnchorStyles.None
-        sbMType.FormattingEnabled = True
-        sbMType.Location = New Point(19, 522)
-        sbMType.Name = "sbMType"
-        sbMType.Size = New Size(102, 23)
-        sbMType.TabIndex = 4
-        sbMType.Text = "Waist"
         ' 
         ' Label1
         ' 
@@ -160,16 +112,6 @@ Partial Class AddOrder
         cbStype.Size = New Size(346, 29)
         cbStype.TabIndex = 1
         cbStype.Text = "Custom Tailoring"
-        ' 
-        ' cbGarment
-        ' 
-        cbGarment.FormattingEnabled = True
-        cbGarment.Items.AddRange(New Object() {"Cotton", "Silk", "Leather"})
-        cbGarment.Location = New Point(392, 521)
-        cbGarment.Name = "cbGarment"
-        cbGarment.Size = New Size(66, 23)
-        cbGarment.TabIndex = 7
-        cbGarment.Text = "Cotton"
         ' 
         ' tbOrderName
         ' 
@@ -199,7 +141,7 @@ Partial Class AddOrder
         lblDesc.BackColor = Color.Transparent
         lblDesc.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDesc.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblDesc.Location = New Point(30, 295)
+        lblDesc.Location = New Point(535, 374)
         lblDesc.Name = "lblDesc"
         lblDesc.Size = New Size(137, 32)
         lblDesc.TabIndex = 7
@@ -211,7 +153,7 @@ Partial Class AddOrder
         lblSize.AutoSize = True
         lblSize.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblSize.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        lblSize.Location = New Point(30, 468)
+        lblSize.Location = New Point(28, 307)
         lblSize.Name = "lblSize"
         lblSize.Size = New Size(57, 32)
         lblSize.TabIndex = 9
@@ -224,7 +166,7 @@ Partial Class AddOrder
         dgMeasurements.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgMeasurements.Columns.AddRange(New DataGridViewColumn() {size_type, measurement, GarmentType})
         dgMeasurements.GridColor = Color.White
-        dgMeasurements.Location = New Point(459, 451)
+        dgMeasurements.Location = New Point(28, 388)
         dgMeasurements.Name = "dgMeasurements"
         dgMeasurements.Size = New Size(466, 165)
         dgMeasurements.TabIndex = 10
@@ -284,16 +226,10 @@ Partial Class AddOrder
         pnAddOrders.Controls.Add(btnAddImage)
         pnAddOrders.Controls.Add(btnRemoveImage)
         pnAddOrders.Controls.Add(cbSizes)
-        pnAddOrders.Controls.Add(Label2)
-        pnAddOrders.Controls.Add(btnaddMeasurement)
-        pnAddOrders.Controls.Add(nudValue)
         pnAddOrders.Controls.Add(dgMeasurements)
-        pnAddOrders.Controls.Add(cbUnit)
         pnAddOrders.Controls.Add(rbDescription)
         pnAddOrders.Controls.Add(lblSize)
         pnAddOrders.Controls.Add(lblDesc)
-        pnAddOrders.Controls.Add(sbMType)
-        pnAddOrders.Controls.Add(cbGarment)
         pnAddOrders.Controls.Add(Panel2)
         pnAddOrders.Controls.Add(Panel1)
         pnAddOrders.Location = New Point(110, 1)
@@ -301,26 +237,14 @@ Partial Class AddOrder
         pnAddOrders.Size = New Size(879, 653)
         pnAddOrders.TabIndex = 2
         ' 
-        ' PictureBox4
-        ' 
-        PictureBox4.Anchor = AnchorStyles.None
-        PictureBox4.Enabled = False
-        PictureBox4.Image = My.Resources.Resources.arrow__1_
-        PictureBox4.Location = New Point(24, 160)
-        PictureBox4.Name = "PictureBox4"
-        PictureBox4.Size = New Size(31, 29)
-        PictureBox4.SizeMode = PictureBoxSizeMode.StretchImage
-        PictureBox4.TabIndex = 20
-        PictureBox4.TabStop = False
-        ' 
         ' OrderPicturebox
         ' 
         OrderPicturebox.Anchor = AnchorStyles.None
         OrderPicturebox.BackColor = Color.Transparent
         OrderPicturebox.Image = My.Resources.Resources.noImageIcon
-        OrderPicturebox.Location = New Point(459, 56)
+        OrderPicturebox.Location = New Point(535, 56)
         OrderPicturebox.Name = "OrderPicturebox"
-        OrderPicturebox.Size = New Size(449, 255)
+        OrderPicturebox.Size = New Size(336, 255)
         OrderPicturebox.SizeMode = PictureBoxSizeMode.Zoom
         OrderPicturebox.TabIndex = 12
         OrderPicturebox.TabStop = False
@@ -375,35 +299,15 @@ Partial Class AddOrder
         btnRemoveImage.Text = "Remove "
         btnRemoveImage.UseVisualStyleBackColor = False
         ' 
-        ' cbSizes
-        ' 
-        cbSizes.Anchor = AnchorStyles.None
-        cbSizes.FormattingEnabled = True
-        cbSizes.Location = New Point(323, 494)
-        cbSizes.Name = "cbSizes"
-        cbSizes.Size = New Size(109, 23)
-        cbSizes.TabIndex = 3
-        ' 
-        ' Label2
-        ' 
-        Label2.Anchor = AnchorStyles.None
-        Label2.AutoSize = True
-        Label2.ForeColor = Color.FromArgb(CByte(143), CByte(77), CByte(30))
-        Label2.Location = New Point(176, 497)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(130, 15)
-        Label2.TabIndex = 3
-        Label2.Text = "Custom Measurements"
-        ' 
         ' rbDescription
         ' 
         rbDescription.Anchor = AnchorStyles.None
         rbDescription.BackColor = Color.White
-        rbDescription.Location = New Point(28, 360)
+        rbDescription.Location = New Point(544, 423)
         rbDescription.MaxLength = 20000
         rbDescription.Name = "rbDescription"
         rbDescription.ScrollBars = RichTextBoxScrollBars.Vertical
-        rbDescription.Size = New Size(456, 72)
+        rbDescription.Size = New Size(316, 72)
         rbDescription.TabIndex = 9
         rbDescription.Text = ""
         ' 
@@ -426,6 +330,18 @@ Partial Class AddOrder
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(461, 51)
         Panel1.TabIndex = 43
+        ' 
+        ' PictureBox4
+        ' 
+        PictureBox4.Anchor = AnchorStyles.None
+        PictureBox4.Enabled = False
+        PictureBox4.Image = My.Resources.Resources.arrow__1_
+        PictureBox4.Location = New Point(24, 160)
+        PictureBox4.Name = "PictureBox4"
+        PictureBox4.Size = New Size(31, 29)
+        PictureBox4.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox4.TabIndex = 20
+        PictureBox4.TabStop = False
         ' 
         ' btnAdd
         ' 
@@ -613,6 +529,16 @@ Partial Class AddOrder
         btnHome.TextAlign = ContentAlignment.MiddleLeft
         btnHome.UseVisualStyleBackColor = False
         ' 
+        ' cbSizes
+        ' 
+        cbSizes.Anchor = AnchorStyles.None
+        cbSizes.FormattingEnabled = True
+        cbSizes.Location = New Point(121, 316)
+        cbSizes.Name = "cbSizes"
+        cbSizes.Size = New Size(202, 23)
+        cbSizes.TabIndex = 3
+        cbSizes.Text = "None"
+        ' 
         ' AddOrder
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -632,12 +558,10 @@ Partial Class AddOrder
         Name = "AddOrder"
         StartPosition = FormStartPosition.CenterScreen
         Text = "AddOrder"
-        CType(nudValue, ComponentModel.ISupportInitialize).EndInit()
         CType(dgMeasurements, ComponentModel.ISupportInitialize).EndInit()
         CType(nudPrice, ComponentModel.ISupportInitialize).EndInit()
         pnAddOrders.ResumeLayout(False)
         pnAddOrders.PerformLayout()
-        CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         CType(OrderPicturebox, ComponentModel.ISupportInitialize).EndInit()
         Panel3.ResumeLayout(False)
         Panel3.PerformLayout()
@@ -645,6 +569,7 @@ Partial Class AddOrder
         Panel2.PerformLayout()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         CType(btnDelete, ComponentModel.ISupportInitialize).EndInit()
         pnNavigation.ResumeLayout(False)
         CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
@@ -654,11 +579,7 @@ Partial Class AddOrder
         ResumeLayout(False)
         PerformLayout()
     End Sub
-    Friend WithEvents sbMType As ComboBox
-    Friend WithEvents cbUnit As ComboBox
-    Friend WithEvents btnaddMeasurement As Button
     Friend WithEvents btnOrderSave As Button
-    Friend WithEvents nudValue As NumericUpDown
     Friend WithEvents pnAddOrders As Panel
     Friend WithEvents nudPrice As NumericUpDown
     Friend WithEvents Label3 As Label
@@ -667,7 +588,6 @@ Partial Class AddOrder
     Friend WithEvents lblDesc As Label
     Friend WithEvents lblorderName As Label
     Friend WithEvents tbOrderName As TextBox
-    Friend WithEvents cbGarment As ComboBox
     Friend WithEvents cbStype As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents OrderPicturebox As PictureBox
@@ -676,8 +596,6 @@ Partial Class AddOrder
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents LbSuggestions As ListBox
     Friend WithEvents btnAdd As Button
-    Friend WithEvents cbSizes As ComboBox
-    Friend WithEvents Label2 As Label
     Friend WithEvents size_type As DataGridViewTextBoxColumn
     Friend WithEvents measurement As DataGridViewTextBoxColumn
     Friend WithEvents GarmentType As DataGridViewTextBoxColumn
@@ -700,4 +618,5 @@ Partial Class AddOrder
     Friend WithEvents btnHome As Button
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents cbSizes As ComboBox
 End Class

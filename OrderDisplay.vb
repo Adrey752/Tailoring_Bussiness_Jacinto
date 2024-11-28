@@ -13,7 +13,7 @@
         rbDescription.Text = order.Description
         OrderPicturebox.Image = order.OrderImage
         dtpOrderDate.Value = order.DateOrdered
-        SetOrderMeausurements(order.Sizes)
+        SetOrderMeausurements(order.CloatheSize.Measurements)
 
         ' Add any initialization after the InitializeComponent() call.
 

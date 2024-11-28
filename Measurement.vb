@@ -1,5 +1,5 @@
 ﻿Public Class Measurement
-
+    Public Property measurement_id As Integer
     Public Property BodyPart As String
     Public Property Value As Decimal
     Public Property Unit As String

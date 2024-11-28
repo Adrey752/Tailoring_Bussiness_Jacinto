@@ -65,11 +65,12 @@ Public Class AddOrder
 
         ' Add any initialization after the InitializeComponent() call.
         Me.client = client
-        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
+        Dim selectedSize = TryCast(cbSizes.SelectedItem, ClothingSize)
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, "Pending", -1, selectedSize)
         Me._addClientForm = orderForm
         Me._home = home
         Me._login = login
-        LoadMeasurementsType()
+
         Dim ClothingSizes = GetSizesInDb()
         cbSizes.Items.AddRange(ClothingSizes.ToArray)
 
@@ -171,14 +172,8 @@ Public Class AddOrder
         order.Description = rbDescription.Text
         order.OrderImage = OrderPicturebox.Image
         order.DateOrdered = dtpOrderDate.Value
+        order.CloatheSize = TryCast(cbSizes.SelectedItem, ClothingSize)
 
-        order.Sizes.Clear()
-        For Each row As DataGridViewRow In dgMeasurements.Rows
-            If row.Tag IsNot Nothing Then
-                Dim size As Measurement = CType(row.Tag, Measurement)
-                order.Sizes.Add(size)
-            End If
-        Next
 
         Dim OrderPanel = New OrderPanel(order)
         AddHandler OrderPanel.Click, AddressOf Order_Panel_Click
@@ -189,21 +184,12 @@ Public Class AddOrder
 
 
     Private Sub ReloadForm()
-        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, New List(Of Measurement), "Pending", -1)
+        Dim selectedSize = TryCast(cbSizes.SelectedItem, ClothingSize)
+        Me.order = New Order(0, "", "", "", 0, My.Resources.noImageIcon, Date.Now, "Pending", -1, selectedSize)
         tbOrderName.Text = HandleSameName(tbOrderName.Text)
 
     End Sub
-    Private Sub addMeasurement_Click(sender As Object, e As EventArgs) Handles btnaddMeasurement.Click
-        Dim measurementType = sbMType.Text
-        Dim value = nudValue.Value
-        Dim unit = cbUnit.Text
-        Dim garment = cbGarment.Text
-        Dim measurement = New Measurement(measurementType, value, unit, garment)
 
-        ' Add row to DataGridView with Size Tag 
-        Dim rowIndex = dgMeasurements.Rows.Add(measurementType, value & " " & unit, garment)
-        dgMeasurements.Rows(rowIndex).Tag = measurement
-    End Sub
     Private Sub SaveEdit(OrderToEdit As Order, PanelToEdit As OrderPanel)
         OrderToEdit.OrderName = tbOrderName.Text
         OrderToEdit.Type = cbStype.Text
@@ -211,15 +197,7 @@ Public Class AddOrder
         OrderToEdit.Description = rbDescription.Text
         OrderToEdit.OrderImage = OrderPicturebox.Image
         OrderToEdit.DateOrdered = dtpOrderDate.Value
-
-        OrderToEdit.Sizes.Clear()
-        For Each row As DataGridViewRow In dgMeasurements.Rows
-            If row.Tag IsNot Nothing Then
-                Dim size As Measurement = CType(row.Tag, Measurement)
-                OrderToEdit.Sizes.Add(size)
-
-            End If
-        Next
+        OrderToEdit.CloatheSize = TryCast(cbSizes.SelectedItem, ClothingSize)
         PanelToEdit.UpdateUI()
     End Sub
 
@@ -351,7 +329,6 @@ Public Class AddOrder
         tbOrderName.Clear()
         nudPrice.Value = 0
         rbDescription.Clear()
-        nudValue.Value = 0
         dgMeasurements.Rows.Clear()
         OrderPicturebox.Image = My.Resources.noImageIcon
     End Sub
@@ -380,13 +357,20 @@ Public Class AddOrder
         cbStype.Text = order.Type
         nudPrice.Value = order.Price
         rbDescription.Text = order.Description
-        OrderPicturebox.Image = order.OrderImage
-        AddMeasurementsToDatagrid(order.Sizes)
-
+        LoadMeasurmentsToDg()
 
     End Sub
 
-
+    Private Sub cbSizes_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbSizes.SelectedValueChanged
+        LoadMeasurmentsToDg()
+    End Sub
+    Private Sub LoadMeasurmentsToDg()
+        Dim clothingsize As ClothingSize = TryCast(cbSizes.SelectedItem, ClothingSize)
+        For Each measurement As Measurement In clothingsize.Measurements
+            Dim rowIndex = dgMeasurements.Rows.Add(measurement.BodyPart, (measurement.Value & measurement.Unit), measurement.garment)
+            dgMeasurements.Rows(rowIndex).Tag = measurement
+        Next
+    End Sub
     '   ****** Setting Up Functions *******
 
     Private Sub AddMeasurementsToDatagrid(sizes As List(Of Measurement))
@@ -402,25 +386,9 @@ Public Class AddOrder
 
     '********** SQl FUNCTIONS NI Adrial ***********
 
-    Private Sub LoadMeasurementsType()
-        Dim query = "SELECT types FROM size_types"
-        Dim dataTable = MySQLModule.ExecuteQuery(query, New Dictionary(Of String, Object))
 
-        For Each row As DataRow In dataTable.Rows
-            sbMType.Items.Add(row("types").ToString())
-        Next
-    End Sub
     ' easter egg
-    Private Sub LoadGarmentTypes()
-        Dim query As String = "SELECT garment_type FROM garment_types"
-        Dim parameter As New Dictionary(Of String, Object)
-        Dim datatable As DataTable = MySQLModule.ExecuteQuery(query, parameter)
 
-        For Each row As DataRow In datatable.Rows
-            cbGarment.Items.Add(row("garment_type").ToString())
-        Next
-
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnAddImage.Click
         Dim openFileDialog = New OpenFileDialog
