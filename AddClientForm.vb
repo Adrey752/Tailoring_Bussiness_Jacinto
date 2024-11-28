@@ -257,15 +257,15 @@ Public Class AddClientForm
     End Sub
 
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
-        _home.Show()
-        Me.Close()
+        _home.Show
+        Close
 
     End Sub
 
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
-        Me.Close()
-        _home.Hide()
-        _login.Show()
+        Close
+        _home.Hide
+        _login.Show
 
     End Sub
 
@@ -275,8 +275,8 @@ Public Class AddClientForm
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Dim settings As New Settings(Me, _login, _home)
-        Me.Hide()
-        settings.Show()
+        Hide
+        settings.Show
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnForward.Click
@@ -294,5 +294,63 @@ Public Class AddClientForm
 
     End Sub
 
+    Private Sub fpTask_Paint(sender As Object, e As PaintEventArgs)
 
+    End Sub
+
+    Private Sub pbTailoringJacinto_Click(sender As Object, e As EventArgs) Handles pbTailoringJacinto.Click
+
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+
+    End Sub
+
+    Private Sub lblCustomerDetails_Click(sender As Object, e As EventArgs) Handles lblCustomerDetails.Click
+
+    End Sub
+
+    Private Sub FlowLayoutPanel1_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub pnNavigation_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub LblName_Click(sender As Object, e As EventArgs) Handles LblName.Click
+
+    End Sub
+
+    Private Sub lblAddress_Click(sender As Object, e As EventArgs) Handles lblAddress.Click
+
+    End Sub
+
+    Private Sub fpTask_Paint_1(sender As Object, e As PaintEventArgs) Handles fpTask.Paint
+
+    End Sub
+
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub Panel2_Paint_1(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
+    End Sub
+
+    Private Sub tbAddress_TextChanged(sender As Object, e As EventArgs) Handles tbAddress.TextChanged
+
+    End Sub
 End Class

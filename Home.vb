@@ -404,4 +404,40 @@ Public Class Home
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
 
     End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+
+    End Sub
+
+    Private Sub lblProjects_Click(sender As Object, e As EventArgs) Handles lblProjects.Click
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+    End Sub
+
+    Private Sub PictureBox5_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub PictureBox7_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub lbSuggestions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbSuggestions.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub pnSort_Paint(sender As Object, e As PaintEventArgs) Handles pnSort.Paint
+
+    End Sub
 End Class

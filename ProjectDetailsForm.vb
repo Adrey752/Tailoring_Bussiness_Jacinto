@@ -465,5 +465,18 @@ Public Class ProjectDetailsForm
         End If
     End Sub
 
+    Private Sub ProjectDetailsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private Sub pbTailoringJacinto_Click(sender As Object, e As EventArgs)
+    End Sub
+
+    Private Sub PictureBox7_Click(sender As Object, e As EventArgs) Handles PictureBox7.Click
+
+    End Sub
+
+    Private Sub Panel6_Paint(sender As Object, e As PaintEventArgs) Handles Panel6.Paint
+
+    End Sub
 End Class
